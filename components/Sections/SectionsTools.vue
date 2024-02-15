@@ -127,14 +127,6 @@ const tools = reactive([
 const moreTools = computed(() => {
   return tools.length - maxShow.value;
 });
-
-const pathName = computed(() => {
-  try {
-    return window.location.pathname;
-  } catch (error) {
-    return "/";
-  }
-});
 </script>
 <template>
   <section class="ftco-section" id="tools-section">
@@ -163,7 +155,7 @@ const pathName = computed(() => {
           >
             <span class="icon">
               <img
-                :src="`${pathName}icons/${tool.icon}`"
+                :src="`/me/icons/${tool.icon}`"
                 :alt="tool.name"
                 :class="{ 'add-bg': tool.addBg || false }"
               />
