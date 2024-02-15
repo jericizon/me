@@ -148,7 +148,11 @@ const moreTools = computed(() => {
           v-for="(tool, key) in tools"
           :key="key"
         >
-          <a :href="tool.url || '#'" class="services-1" v-if="key < maxShow">
+          <a
+            :href="tool.url || '#tools-section'"
+            class="services-1"
+            v-if="key < maxShow"
+          >
             <span class="icon">
               <img
                 :src="`/icons/${tool.icon}`"
