@@ -1,5 +1,5 @@
 <script setup>
-const maxShow = ref(12);
+const maxShow = ref(100);
 const tools = reactive([
   {
     name: "LARAVEL",
