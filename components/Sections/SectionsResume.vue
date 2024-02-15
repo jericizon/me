@@ -39,7 +39,6 @@ const experiences = reactive([
     ],
   },
   {
-    date: "April 2018 - PRESENT",
     start: "2018-04",
     end: null,
     company: "OFFEO, Singapore",
@@ -79,7 +78,7 @@ const experiences = reactive([
   },
   {
     start: "2016-01",
-    end: "2018-01",
+    end: "2018-03",
     company: "Skubbs Inc., Philippines",
     position: "Senior Developer / Team Lead",
     description:
@@ -111,8 +110,8 @@ const experiences = reactive([
     ],
   },
   {
-    start: "2016-01",
-    end: "2018-01",
+    start: "2014-05",
+    end: "2016-01",
     company: "Open Access BPO, Philippines",
     position: "Web Developer",
     description:
