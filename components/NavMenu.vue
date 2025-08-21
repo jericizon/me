@@ -27,8 +27,9 @@ const navLinks = [
 <template>
   <nav
     :class="[
-      'glass-nav sticky top-0 z-50 transition-all duration-300',
-      { 'py-2 shadow-glass-sm': hasScrolled, 'py-4': !hasScrolled }
+      // Mobile: transparent, no shadow/border; Desktop (md+): glass style
+      'z-50 w-full transition-all duration-300 md:glass-nav bg-transparent shadow-none border-0 backdrop-blur-0',
+      hasScrolled ? 'py-2 md:shadow-glass-sm' : 'py-4'
     ]"
   >
     <div class="w-full px-4 sm:px-6 lg:px-8">
@@ -46,8 +47,8 @@ const navLinks = [
           </a>
         </div>
 
-        <!-- Mobile menu button (right aligned) -->
-        <div class="md:hidden absolute right-0">
+        <!-- Mobile menu button (fixed to top-right on mobile) -->
+        <div class="md:hidden fixed top-3 right-4 z-[110]">
           <button 
             @click="toggleMenu" 
             class="inline-flex items-center justify-center p-2 text-secondary-900 hover:text-accent-500 focus:outline-none"
@@ -84,7 +85,7 @@ const navLinks = [
     <!-- Mobile menu -->
     <div 
       v-show="isMenuOpen" 
-      class="md:hidden glass-card m-4 mt-2 overflow-hidden transition-all duration-300 ease-in-out bg-white/40 border border-secondary-200"
+      class="md:hidden fixed top-14 left-4 right-4 z-[105] overflow-hidden max-h-[70vh] overflow-y-auto transition-all duration-300 ease-in-out bg-white border border-secondary-200 shadow-lg rounded-xl"
     >
       <div class="px-2 pt-2 pb-3 space-y-1">
         <a 

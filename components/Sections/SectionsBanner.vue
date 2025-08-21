@@ -70,7 +70,7 @@ onBeforeUnmount(() => {
               </h2>
               <!-- Brief bio -->
               <p class="text-secondary-700 text-base md:text-lg mb-8 leading-relaxed reveal" style="animation-delay: .16s;">
-                I craft secure, scalable, and maintainable web apps using Vue, React, Node, and Laravel. I love building clean UIs and performant APIs that solve real problems.
+                I craft secure, scalable, and maintainable web apps using Vue, Node, and Laravel. I love building clean UIs and performant APIs that solve real problems.
               </p>
 
               <!-- Highlights -->
