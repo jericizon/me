@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive, onMounted } from 'vue';
+import { reactive, ref, onMounted, onUnmounted } from 'vue';
 
 // Experience data
 const experiences = reactive([
@@ -166,11 +166,26 @@ const convertToMonthYear = (dateString: string | null): string => {
   }
 };
 
-// Calculate duration between dates
-const calculateMonthDifference = (startDate: string, endDate: string | null = null): string => {
+// Reactive "now" that updates on client to keep durations fresh
+const now = ref<Date>(new Date());
+let _nowTimer: number | undefined;
+
+onMounted(() => {
+  // Update roughly every hour; cheap and keeps durations accurate without SSR issues
+  _nowTimer = window.setInterval(() => {
+    now.value = new Date();
+  }, 60 * 60 * 1000);
+});
+
+onUnmounted(() => {
+  if (_nowTimer) window.clearInterval(_nowTimer);
+});
+
+// Calculate duration between dates (accepts optional currentTime for reactivity)
+const calculateMonthDifference = (startDate: string, endDate: string | null = null, currentTime?: Date): string => {
   try {
     const start = new Date(startDate);
-    const end = endDate === null ? new Date() : new Date(endDate);
+    const end = endDate === null ? (currentTime ?? new Date()) : new Date(endDate);
     const months =
       (end.getFullYear() - start.getFullYear()) * 12 +
       (end.getMonth() - start.getMonth());
@@ -193,116 +208,103 @@ const calculateMonthDifference = (startDate: string, endDate: string | null = nu
   }
 };
 
-// Animation refs
-const titleRef = ref<HTMLElement | null>(null);
-const timelineRef = ref<HTMLElement | null>(null);
-const experienceRefs = ref<HTMLElement[]>([]);
+// Expanded items state for Show more/less
+const expandedKeys = ref<Set<number>>(new Set());
 
-// Initialize animation refs
-onMounted(() => {
-  // Animate title
-  setTimeout(() => {
-    if (titleRef.value) {
-      titleRef.value.style.opacity = '1';
-      titleRef.value.style.transform = 'translateY(0)';
-    }
-  }, 200);
-  
-  // Animate timeline
-  setTimeout(() => {
-    if (timelineRef.value) {
-      timelineRef.value.style.opacity = '1';
-      timelineRef.value.style.height = '100%';
-    }
-  }, 500);
-  
-  // Animate experience cards with staggered delay
-  experienceRefs.value.forEach((el, index) => {
-    setTimeout(() => {
-      if (el) {
-        el.style.opacity = '1';
-        el.style.transform = 'translateX(0)';
-      }
-    }, 700 + (index * 200));
-  });
-});
+const toggleExpand = (key: number) => {
+  if (expandedKeys.value.has(key)) {
+    expandedKeys.value.delete(key);
+  } else {
+    expandedKeys.value.add(key);
+  }
+  // Force reactivity on Set
+  expandedKeys.value = new Set(expandedKeys.value);
+};
+
 </script>
 
 <template>
   <section id="resume-section" class="py-20 md:py-24">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Section Title -->
-      <div ref="titleRef" class="text-center mb-16 opacity-0 translate-y-3 transition duration-700 ease-out">
-        <h2 class="section-title">Resume</h2>
-        <div class="section-subtitle">My Professional Journey</div>
-        <p class="mt-4 max-w-2xl mx-auto text-lg">
-          Over the past decade, I've gained valuable experience through my work,
-          consistently meeting goals and overcoming challenges.
+      <div class="text-center mb-12 md:mb-16">
+        <h2 class="section-title text-secondary-900">Resume</h2>
+        <div class="section-subtitle text-primary-600 font-medium">My Professional Journey</div>
+        <p class="mt-4 max-w-2xl mx-auto text-lg text-secondary-700">
+          Highlights of my experience, responsibilities, and impact.
         </p>
       </div>
-      
-      <!-- Timeline -->
+
+      <!-- Timeline (left-aligned) -->
       <div class="relative max-w-4xl mx-auto">
-        <!-- Timeline line -->
-        <div ref="timelineRef" class="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-primary-500/30 transform -translate-x-1/2 opacity-0 h-0 transition-all duration-1500 ease-out"></div>
-        
-        <!-- Experience Cards -->
-        <div class="space-y-12">
-          <div 
-            v-for="(experience, key) in experiences" 
+        <div class="border-l-2 border-primary-400 pl-6 md:pl-8">
+          <div
+            v-for="(experience, key) in experiences"
             :key="key"
-            :ref="el => { if (el) experienceRefs[key] = el as HTMLElement }"
-            class="relative opacity-0 transition duration-800 ease-out"
-            :class="[
-              key % 2 !== 0 ? 'ml-auto md:ml-0 -translate-x-6 md:translate-x-0' : 'mr-auto md:mr-0 translate-x-6 md:translate-x-0'
-            ]"
-            :style="{ transitionDelay: `${key * 140}ms` }"
+            class="relative mb-10 last:mb-0"
           >
             <!-- Timeline dot -->
-            <div class="hidden md:block absolute top-8 left-0 md:left-1/2 w-4 h-4 rounded-full bg-primary-400 shadow-glow-sm transform -translate-x-1/2 z-10"></div>
-            
+            <div class="absolute -left-[10px] top-2 w-5 h-5 rounded-full bg-primary-500 border-2 border-white shadow-lg shadow-primary-500/30"></div>
+
             <!-- Card -->
-            <div 
-              class="p-6 md:p-8 backdrop-blur-md w-full md:w-[calc(50%-2rem)] bg-white/10 border border-white/10 shadow-lg rounded-xl"
-              :class="{'md:ml-auto': key % 2 !== 0, 'md:mr-auto': key % 2 === 0}"
-              
-            >
-              <!-- Date -->
-              <div class="flex justify-between items-center mb-4">
-                <span class="text-primary-300 font-medium">
-                  {{ convertToMonthYear(experience.start) }} - {{ convertToMonthYear(experience.end) }}
-                </span>
-                <span class="text-sm text-slate-400">
-                  ({{ calculateMonthDifference(experience.start, experience.end) }})
+            <div class="glass-card rounded-2xl p-6 md:p-7 border border-secondary-200 bg-white/90 backdrop-blur-md shadow-xl hover:shadow-2xl transition-shadow duration-300">
+              <!-- Header: Dates and Duration -->
+              <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                <div class="inline-flex items-center gap-2 text-primary-600">
+                  <Icon name="tabler:calendar" class="w-5 h-5 text-primary-600" />
+                  <span class="font-medium">
+                    {{ convertToMonthYear(experience.start) }} - {{ convertToMonthYear(experience.end) }}
+                  </span>
+                </div>
+                <ClientOnly>
+                  <span class="px-3 py-1.5 rounded-full text-xs font-semibold bg-primary-100 text-primary-700 border border-primary-200 shadow-sm">
+                    {{ calculateMonthDifference(experience.start, experience.end, now) }}
+                  </span>
+                </ClientOnly>
+              </div>
+
+              <!-- Company, Link, and Position -->
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                <h3 class="text-xl md:text-2xl font-bold text-secondary-900 flex items-center gap-2">
+                  {{ experience.company }}
+                  <a
+                    v-if="experience.url"
+                    :href="experience.url"
+                    target="_blank"
+                    rel="noopener"
+                    aria-label="Open company website"
+                    class="text-primary-600 hover:text-primary-700 transition-colors"
+                  >
+                    <Icon name="tabler:external-link" class="w-5 h-5" />
+                  </a>
+                </h3>
+                <span class="px-4 py-1.5 rounded-full text-sm font-medium bg-secondary-100 text-secondary-800 border border-secondary-200 shadow-sm self-start sm:self-auto">
+                  {{ experience.position }}
                 </span>
               </div>
-              
-              <!-- Company & Position -->
-              <h3 class="text-xl md:text-2xl font-bold mb-1 flex items-center gap-2">
-                {{ experience.company }}
-                <a 
-                  v-if="experience.url" 
-                  :href="experience.url" 
-                  target="_blank"
-                  class="text-primary-400 hover:text-primary-300 transition-colors"
-                >
-                  <Icon name="tabler:external-link" class="w-5 h-5" />
-                </a>
-              </h3>
-              
-              <div class="text-lg text-primary-200 font-medium mb-4">{{ experience.position }}</div>
-              
+
               <!-- Description -->
-              <p class="mb-6 text-slate-300 leading-relaxed">
-                {{ experience.description }}
+              <p class="mb-4 text-secondary-700 leading-relaxed">
+                {{ expandedKeys.has(key) ? experience.description : (experience.description.length > 220 ? experience.description.slice(0, 220) + '…' : experience.description) }}
               </p>
-              
+
+              <button
+                v-if="experience.description.length > 220"
+                class="inline-flex items-center gap-1.5 text-sm font-medium text-primary-600 hover:text-primary-700 transition-colors mb-4"
+                type="button"
+                @click="toggleExpand(key)"
+                :aria-expanded="expandedKeys.has(key) ? 'true' : 'false'"
+              >
+                <Icon :name="expandedKeys.has(key) ? 'tabler:chevron-up' : 'tabler:chevron-down'" class="w-4 h-4" />
+                {{ expandedKeys.has(key) ? 'Show less' : 'Show more' }}
+              </button>
+
               <!-- Tools -->
-              <div class="flex flex-wrap gap-2">
-                <span 
-                  v-for="(tool, toolKey) in experience.tools" 
+              <div class="flex flex-wrap gap-2 mt-2">
+                <span
+                  v-for="(tool, toolKey) in experience.tools"
                   :key="toolKey"
-                  class="skill-badge"
+                  class="px-3 py-1.5 rounded-lg text-xs font-medium bg-primary-50 text-primary-700 border border-primary-200 hover:bg-primary-100 transition-colors duration-200"
                 >
                   {{ tool.toLowerCase() }}
                 </span>
@@ -311,10 +313,10 @@ onMounted(() => {
           </div>
         </div>
       </div>
-      
+
       <!-- Download CV -->
-      <div class="text-center mt-16">
-        <DownloadCV class="px-6 py-3 rounded-full font-medium inline-flex items-center bg-primary-500/20 border border-primary-500/30 shadow-md backdrop-blur-md hover:scale-105 transition-transform" />
+      <div class="text-center mt-14 md:mt-16">
+        <DownloadCV class="px-6 py-3 rounded-full font-medium inline-flex items-center bg-primary-100 text-primary-700 border border-primary-200 shadow-lg backdrop-blur-md hover:scale-105 hover:bg-primary-200 transition-all duration-300" />
       </div>
     </div>
   </section>
