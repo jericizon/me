@@ -1,4 +1,7 @@
-<script setup>
+<script setup lang="ts">
+import { ref, reactive, onMounted } from 'vue';
+
+// Experience data
 const experiences = reactive([
   {
     start: "2023-12",
@@ -82,7 +85,7 @@ const experiences = reactive([
     company: "Skubbs Inc., Philippines",
     position: "Senior Developer / Team Lead",
     description:
-      "Our team specializes in creating custom website applications, ranging from simple dashboards to complex e-commerce websites. We take web design mockups and turn them into real, functional websites, ensuring that our clients' visions come to life online. Managing multiple projects from different clients is our forte, as we excel in communication to gather project requirements and scope directly from clients. Delegating tasks and maintaining a balanced workload among team members is crucial for us to deliver projects efficiently. We meticulously plan and structure websites and applications to ensure optimal functionality and user experience. Additionally, we handle the deployment of projects to the cloud, making sure they are seamlessly integrated and accessible. Supporting our team members by analyzing and simplifying required functions is part of our collaborative approach to achieving success in every project we undertake.",
+      "Our team specializes in creating custom website applications, ranging from simple dashboards to complex e-commerce websites. We take web design mockups and turn them into real, functional websites, ensuring that our clients' visions come to life online. Managing multiple projects from different clients is our forte, as we excel in communication to gather project requirements and scope directly from clients. Delegating tasks and maintaining a balanced workload among team members is crucial for us to deliver projects efficiently.",
     tools: [
       "LARAVEL",
       "VUEJS",
@@ -133,7 +136,7 @@ const experiences = reactive([
     company: "AGR Operations Manila, Philippines",
     position: "Web Developer",
     description:
-      "Creating a website starts with envisioning its layout and aesthetics, often accomplished by crafting a design template using tools like Photoshop. This initial stage involves conceptualizing the site's structure, color scheme, and graphical elements. Once the design is finalized, the next step is to translate those visual concepts into a functional website. This implementation phase requires coding expertise in HTML and CSS to bring the static images to life on the web. By meticulously transforming design elements into code, the website gains interactivity and responsiveness, ensuring a seamless user experience across different devices and browsers.",
+      "Creating a website starts with envisioning its layout and aesthetics, often accomplished by crafting a design template using tools like Photoshop. This initial stage involves conceptualizing the site's structure, color scheme, and graphical elements. Once the design is finalized, the next step is to translate those visual concepts into a functional website.",
     tools: [
       "HTML",
       "CSS",
@@ -147,7 +150,8 @@ const experiences = reactive([
   },
 ]);
 
-const convertToMonthYear = (dateString) => {
+// Format date to Month Year format
+const convertToMonthYear = (dateString: string | null): string => {
   try {
     if (dateString === null) {
       return "Present";
@@ -162,7 +166,8 @@ const convertToMonthYear = (dateString) => {
   }
 };
 
-const calculateMonthDifference = (startDate, endDate = null) => {
+// Calculate duration between dates
+const calculateMonthDifference = (startDate: string, endDate: string | null = null): string => {
   try {
     const start = new Date(startDate);
     const end = endDate === null ? new Date() : new Date(endDate);
@@ -187,85 +192,151 @@ const calculateMonthDifference = (startDate, endDate = null) => {
     return "";
   }
 };
+
+// Animation refs
+const titleRef = ref<HTMLElement | null>(null);
+const timelineRef = ref<HTMLElement | null>(null);
+const experienceRefs = ref<HTMLElement[]>([]);
+
+// Initialize animation refs
+onMounted(() => {
+  // Animate title
+  setTimeout(() => {
+    if (titleRef.value) {
+      titleRef.value.style.opacity = '1';
+      titleRef.value.style.transform = 'translateY(0)';
+    }
+  }, 200);
+  
+  // Animate timeline
+  setTimeout(() => {
+    if (timelineRef.value) {
+      timelineRef.value.style.opacity = '1';
+      timelineRef.value.style.height = '100%';
+    }
+  }, 500);
+  
+  // Animate experience cards with staggered delay
+  experienceRefs.value.forEach((el, index) => {
+    setTimeout(() => {
+      if (el) {
+        el.style.opacity = '1';
+        el.style.transform = 'translateX(0)';
+      }
+    }, 700 + (index * 200));
+  });
+});
 </script>
 
 <template>
-  <section class="ftco-section ftco-no-pb" id="resume-section">
-    <div class="container">
-      <div class="row justify-content-center pb-5">
-        <div class="col-md-10 heading-section text-center">
-          <h1 class="big big-2">Resume</h1>
-          <h2 class="mb-4">Resume</h2>
-          <p>
-            Over the past decade, I've achieved and gained valuable experience
-            through my work, consistently meeting goals and overcoming
-            challenges.
-          </p>
-        </div>
+  <section id="resume-section" class="py-20 md:py-24">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section Title -->
+      <div ref="titleRef" class="text-center mb-16 animate-item">
+        <h2 class="section-title">Resume</h2>
+        <div class="section-subtitle">My Professional Journey</div>
+        <p class="mt-4 max-w-2xl mx-auto text-lg">
+          Over the past decade, I've gained valuable experience through my work,
+          consistently meeting goals and overcoming challenges.
+        </p>
       </div>
-      <div class="row justify-content-center pt-2">
-        <div
-          v-for="(experience, key) in experiences"
-          class="col-md-8"
-          :key="key"
-        >
-          <div
-            class="resume-wrap"
-            :class="{ 'is-present': experience.end === null }"
+      
+      <!-- Timeline -->
+      <div class="relative max-w-4xl mx-auto">
+        <!-- Timeline line -->
+        <div ref="timelineRef" class="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-primary-500/30 transform -translate-x-1/2 timeline-line"></div>
+        
+        <!-- Experience Cards -->
+        <div class="space-y-12">
+          <div 
+            v-for="(experience, key) in experiences" 
+            :key="key"
+            :ref="el => { if (el) experienceRefs[key] = el as HTMLElement }"
+            class="relative experience-card"
+            :class="{'ml-auto md:ml-0': key % 2 !== 0, 'mr-auto md:mr-0': key % 2 === 0}"
           >
-            <span class="date"
-              >{{ convertToMonthYear(experience.start) }} -
-              {{ convertToMonthYear(experience.end) }}
-              <span class="total-years-months">
-                ({{
-                  calculateMonthDifference(experience.start, experience.end)
-                }})
-              </span>
-            </span>
-            <h2>
-              {{ experience.company }}
-              <a v-if="experience.url" :href="experience.url" target="_blank"
-                ><i class="icon icon-open_in_new"></i
-              ></a>
-            </h2>
-
-            <span class="position">{{ experience.position }}</span>
-            <p class="mt-4">
-              {{ experience.description }}
-            </p>
-
-            <div class="tools">
-              <div
-                class="badge badge-light mx-1"
-                v-for="(tools, toolKey) in experience.tools"
-                :key="toolKey"
-              >
-                <span>{{ tools }}</span>
+            <!-- Timeline dot -->
+            <div class="hidden md:block absolute top-8 left-0 md:left-1/2 w-4 h-4 rounded-full bg-primary-400 shadow-glow-sm transform -translate-x-1/2 z-10"></div>
+            
+            <!-- Card -->
+            <div 
+              class="glass-card p-6 md:p-8 backdrop-blur-md w-full md:w-[calc(50%-2rem)]"
+              :class="{'md:ml-auto': key % 2 !== 0, 'md:mr-auto': key % 2 === 0}"
+              :style="{'--delay': `${key * 0.2}s`}"
+            >
+              <!-- Date -->
+              <div class="flex justify-between items-center mb-4">
+                <span class="text-primary-300 font-medium">
+                  {{ convertToMonthYear(experience.start) }} - {{ convertToMonthYear(experience.end) }}
+                </span>
+                <span class="text-sm text-slate-400">
+                  ({{ calculateMonthDifference(experience.start, experience.end) }})
+                </span>
+              </div>
+              
+              <!-- Company & Position -->
+              <h3 class="text-xl md:text-2xl font-bold mb-1 flex items-center gap-2">
+                {{ experience.company }}
+                <a 
+                  v-if="experience.url" 
+                  :href="experience.url" 
+                  target="_blank"
+                  class="text-primary-400 hover:text-primary-300 transition-colors"
+                >
+                  <Icon name="heroicons:arrow-top-right-on-square" class="w-5 h-5" />
+                </a>
+              </h3>
+              
+              <div class="text-lg text-primary-200 font-medium mb-4">{{ experience.position }}</div>
+              
+              <!-- Description -->
+              <p class="mb-6 text-slate-300 leading-relaxed">
+                {{ experience.description }}
+              </p>
+              
+              <!-- Tools -->
+              <div class="flex flex-wrap gap-2">
+                <span 
+                  v-for="(tool, toolKey) in experience.tools" 
+                  :key="toolKey"
+                  class="skill-badge"
+                >
+                  {{ tool.toLowerCase() }}
+                </span>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="row justify-content-center mt-5">
-        <div class="col-md-6 text-center">
-          <p>
-            <DownloadCV />
-          </p>
-        </div>
+      
+      <!-- Download CV -->
+      <div class="text-center mt-16">
+        <DownloadCV class="glass-button primary px-6 py-3 rounded-full font-medium inline-flex items-center" />
       </div>
     </div>
   </section>
 </template>
-<style lang="scss" scoped>
-.total-years-months {
-  color: #999999;
-  font-size: 14px;
-  font-weight: normal;
+
+<style scoped>
+.timeline-line {
+  opacity: 0;
+  height: 0;
+  transition: opacity 1s ease, height 2s ease;
 }
-.resume-wrap {
-  transform: scale(0.9);
-  &.is-present {
-    transform: scale(1);
-  }
+
+.experience-card {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.experience-card:nth-child(even) {
+  transform: translateX(-40px);
+}
+
+.animate-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 </style>

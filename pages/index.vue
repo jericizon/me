@@ -1,6 +1,5 @@
 <template>
   <div>
-    <NavMenu />
     <SectionsBanner />
     <SectionsAboutMe />
     <SectionsResume />
