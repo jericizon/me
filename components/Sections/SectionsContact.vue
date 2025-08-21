@@ -8,21 +8,21 @@ const contactMethods = [
     title: 'Email Address',
     value: 'im.jericizon@gmail.com',
     link: 'mailto:im.jericizon@gmail.com',
-    icon: 'heroicons:envelope'
+    icon: 'tabler:mail'
   },
   {
     id: 2,
     title: 'LinkedIn',
     value: 'linkedin.com/in/jericizon',
     link: 'https://www.linkedin.com/in/jericizon',
-    icon: 'mdi:linkedin'
+    icon: 'tabler:brand-linkedin'
   },
   {
     id: 3,
     title: 'GitHub',
     value: 'github.com/jericizon',
     link: 'https://github.com/jericizon',
-    icon: 'mdi:github'
+    icon: 'tabler:brand-github'
   }
 ];
 
@@ -60,7 +60,7 @@ onMounted(() => {
     
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <!-- Section Title -->
-      <div ref="titleRef" class="text-center mb-16 animate-item">
+      <div ref="titleRef" class="text-center mb-16 opacity-0 translate-y-3 transition duration-700 ease-out">
         <h2 class="section-title">Contact</h2>
         <div class="section-subtitle">Get In Touch</div>
         <p class="mt-4 max-w-2xl mx-auto text-lg">
@@ -75,9 +75,10 @@ onMounted(() => {
           v-for="(contact, index) in contactMethods" 
           :key="contact.id"
           :ref="el => { if (el) contactRefs[index] = el as HTMLElement }"
-          class="contact-card"
+          class="opacity-0 translate-y-8 transition duration-700 ease-out"
+          :style="{ transitionDelay: `${index * 120}ms` }"
         >
-          <div class="glass-card p-6 rounded-xl h-full flex flex-col items-center justify-center text-center">
+          <div class="p-6 rounded-xl h-full flex flex-col items-center justify-center text-center bg-white/10 border border-white/10 shadow-lg backdrop-blur-md">
             <!-- Icon -->
             <div class="contact-icon mb-5 p-4 rounded-full bg-primary-500/10">
               <Icon :name="contact.icon" class="w-8 h-8 text-primary-300" />
@@ -95,7 +96,7 @@ onMounted(() => {
               {{ contact.value }}
               <Icon 
                 v-if="contact.link.startsWith('http')" 
-                name="heroicons:arrow-top-right-on-square" 
+                name="tabler:external-link" 
                 class="w-4 h-4" 
               />
             </a>
@@ -105,43 +106,3 @@ onMounted(() => {
     </div>
   </section>
 </template>
-
-<style scoped>
-.animate-item {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.contact-card {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.glass-card {
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
-}
-
-.social-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--color-primary-300);
-  transition: all 0.3s ease;
-}
-
-.social-icon:hover {
-  background: rgba(var(--color-primary-500), 0.2);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-</style>

@@ -232,7 +232,7 @@ onMounted(() => {
   <section id="resume-section" class="py-20 md:py-24">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Section Title -->
-      <div ref="titleRef" class="text-center mb-16 animate-item">
+      <div ref="titleRef" class="text-center mb-16 opacity-0 translate-y-3 transition duration-700 ease-out">
         <h2 class="section-title">Resume</h2>
         <div class="section-subtitle">My Professional Journey</div>
         <p class="mt-4 max-w-2xl mx-auto text-lg">
@@ -244,7 +244,7 @@ onMounted(() => {
       <!-- Timeline -->
       <div class="relative max-w-4xl mx-auto">
         <!-- Timeline line -->
-        <div ref="timelineRef" class="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-primary-500/30 transform -translate-x-1/2 timeline-line"></div>
+        <div ref="timelineRef" class="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-primary-500/30 transform -translate-x-1/2 opacity-0 h-0 transition-all duration-1500 ease-out"></div>
         
         <!-- Experience Cards -->
         <div class="space-y-12">
@@ -252,17 +252,20 @@ onMounted(() => {
             v-for="(experience, key) in experiences" 
             :key="key"
             :ref="el => { if (el) experienceRefs[key] = el as HTMLElement }"
-            class="relative experience-card"
-            :class="{'ml-auto md:ml-0': key % 2 !== 0, 'mr-auto md:mr-0': key % 2 === 0}"
+            class="relative opacity-0 transition duration-800 ease-out"
+            :class="[
+              key % 2 !== 0 ? 'ml-auto md:ml-0 -translate-x-6 md:translate-x-0' : 'mr-auto md:mr-0 translate-x-6 md:translate-x-0'
+            ]"
+            :style="{ transitionDelay: `${key * 140}ms` }"
           >
             <!-- Timeline dot -->
             <div class="hidden md:block absolute top-8 left-0 md:left-1/2 w-4 h-4 rounded-full bg-primary-400 shadow-glow-sm transform -translate-x-1/2 z-10"></div>
             
             <!-- Card -->
             <div 
-              class="glass-card p-6 md:p-8 backdrop-blur-md w-full md:w-[calc(50%-2rem)]"
+              class="p-6 md:p-8 backdrop-blur-md w-full md:w-[calc(50%-2rem)] bg-white/10 border border-white/10 shadow-lg rounded-xl"
               :class="{'md:ml-auto': key % 2 !== 0, 'md:mr-auto': key % 2 === 0}"
-              :style="{'--delay': `${key * 0.2}s`}"
+              
             >
               <!-- Date -->
               <div class="flex justify-between items-center mb-4">
@@ -283,7 +286,7 @@ onMounted(() => {
                   target="_blank"
                   class="text-primary-400 hover:text-primary-300 transition-colors"
                 >
-                  <Icon name="heroicons:arrow-top-right-on-square" class="w-5 h-5" />
+                  <Icon name="tabler:external-link" class="w-5 h-5" />
                 </a>
               </h3>
               
@@ -311,32 +314,8 @@ onMounted(() => {
       
       <!-- Download CV -->
       <div class="text-center mt-16">
-        <DownloadCV class="glass-button primary px-6 py-3 rounded-full font-medium inline-flex items-center" />
+        <DownloadCV class="px-6 py-3 rounded-full font-medium inline-flex items-center bg-primary-500/20 border border-primary-500/30 shadow-md backdrop-blur-md hover:scale-105 transition-transform" />
       </div>
     </div>
   </section>
 </template>
-
-<style scoped>
-.timeline-line {
-  opacity: 0;
-  height: 0;
-  transition: opacity 1s ease, height 2s ease;
-}
-
-.experience-card {
-  opacity: 0;
-  transform: translateX(40px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.experience-card:nth-child(even) {
-  transform: translateX(-40px);
-}
-
-.animate-item {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-</style>

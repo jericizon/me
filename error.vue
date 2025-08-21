@@ -21,7 +21,7 @@
           class="glass-button primary flex items-center justify-center gap-2"
           @click="handleError"
         >
-          <Icon name="heroicons:arrow-path" class="w-5 h-5" />
+          <Icon name="tabler:refresh" class="w-5 h-5" />
           {{ error.statusCode === 404 ? 'Go Home' : 'Try Again' }}
         </button>
         
@@ -29,7 +29,7 @@
           class="glass-button flex items-center justify-center gap-2"
           @click="navigateTo('/')"
         >
-          <Icon name="heroicons:home" class="w-5 h-5" />
+          <Icon name="tabler:home-2" class="w-5 h-5" />
           Back to Home
         </button>
       </div>

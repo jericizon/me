@@ -222,7 +222,7 @@ onMounted(() => {
     
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <!-- Section Title -->
-      <div ref="titleRef" class="text-center mb-16 animate-item">
+      <div ref="titleRef" class="text-center mb-16 opacity-0 translate-y-3 transition duration-700 ease-out">
         <h2 class="section-title">Tools & Technologies</h2>
         <div class="section-subtitle">My Technical Arsenal</div>
         <p class="mt-4 max-w-2xl mx-auto text-lg">
@@ -238,10 +238,9 @@ onMounted(() => {
           v-for="category in categories" 
           :key="category"
           @click="activeFilter = category"
-          class="glass-button px-4 py-2 rounded-full text-sm font-medium transition-all duration-300"
+          class="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-white/10 border border-white/10 backdrop-blur-md hover:scale-105"
           :class="{
-            'active': activeFilter === category,
-            'hover:scale-105': activeFilter !== category
+            'bg-primary-500/20 border-primary-500/30 scale-105': activeFilter === category
           }"
         >
           {{ category.charAt(0).toUpperCase() + category.slice(1) }}
@@ -251,16 +250,16 @@ onMounted(() => {
       <!-- Tools Grid -->
       <div 
         ref="toolsContainerRef"
-        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6 tools-container"
+        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6 opacity-0 transition-opacity duration-700"
       >
         <div 
           v-for="(tool, key) in filteredTools.slice(0, maxShow)" 
           :key="key"
           :ref="el => { if (el) toolRefs[key] = el as HTMLElement }"
-          class="tool-card"
+          class="opacity-0 translate-y-5 scale-95 transition duration-500 ease-out"
         >
-          <div class="glass-card tool-inner h-full flex flex-col items-center justify-center p-4 text-center transition-all duration-300 hover:scale-105">
-            <div class="tool-icon-wrapper mb-3 p-3 rounded-full">
+          <div class="h-full flex flex-col items-center justify-center p-4 text-center transition-all duration-300 hover:scale-105 bg-white/10 border border-white/10 shadow-md backdrop-blur-md rounded-xl">
+            <div class="mb-3 p-3 rounded-full bg-white/10 border border-white/10 backdrop-blur-sm">
               <img 
                 :src="`/icons/${tool.icon}`" 
                 :alt="tool.name"
@@ -277,51 +276,14 @@ onMounted(() => {
       <div class="text-center mt-10" v-if="moreTools > 0">
         <button 
           @click="showAllTools"
-          class="glass-button primary px-6 py-3 rounded-full font-medium inline-flex items-center gap-2"
+          class="px-6 py-3 rounded-full font-medium inline-flex items-center gap-2 bg-primary-500/20 border border-primary-500/30 shadow-md backdrop-blur-md hover:scale-105 transition-transform"
         >
           <span>Show more</span>
           <span class="text-sm">({{ moreTools }})</span>
-          <Icon name="heroicons:chevron-down" class="w-5 h-5" />
+          <Icon name="tabler:chevron-down" class="w-5 h-5" />
         </button>
       </div>
     </div>
   </section>
 </template>
-
-<style scoped>
-.animate-item {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.tools-container {
-  opacity: 0;
-  transition: opacity 0.8s ease;
-}
-
-.tool-card {
-  opacity: 0;
-  transform: translateY(20px) scale(0.95);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.tool-icon-wrapper {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.glass-button {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
-}
-
-.glass-button.active {
-  background: rgba(var(--color-primary-500), 0.2);
-  border-color: rgba(var(--color-primary-500), 0.3);
-  transform: scale(1.05);
-}
-</style>
+ 

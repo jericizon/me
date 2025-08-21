@@ -14,7 +14,7 @@ const hasScrolled = computed(() => scrollY.value > 50)
 </script>
 
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+  <div class="min-h-screen bg-gradient-to-br from-secondary-50 via-secondary-50 to-secondary-100 text-secondary-900">
     <!-- Decorative glasmorphic background elements -->
     <div class="pointer-events-none select-none fixed inset-0 overflow-hidden" aria-hidden="true">
       <!-- Primary blob -->

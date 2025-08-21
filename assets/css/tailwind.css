@@ -5,15 +5,15 @@
 /* Glasmorphic utility components */
 @layer components {
   .glass-card {
-    @apply bg-white/10 dark:bg-white/5 backdrop-blur-md border border-white/20 rounded-2xl shadow-lg shadow-black/10;
+    @apply bg-secondary-50/90 backdrop-blur-md border border-secondary-200 shadow-lg shadow-secondary-900/5;
   }
   .glass-nav {
-    @apply bg-white/20 dark:bg-white/10 backdrop-blur-xl border border-white/30 rounded-xl shadow-md shadow-black/10;
+    @apply bg-secondary-50/80 backdrop-blur-xl border-b border-secondary-200 shadow-md shadow-secondary-900/5;
   }
   .glass-btn {
-    @apply inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/20 hover:bg-white/30 active:bg-white/40 text-gray-900 dark:text-white backdrop-blur-md border border-white/30 transition-colors;
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-accent-500 hover:bg-accent-600 active:bg-accent-700 text-white backdrop-blur-md border border-accent-600 transition-colors;
   }
   .glass-input {
-    @apply w-full px-4 py-2 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-gray-900 dark:text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/40;
+    @apply w-full px-4 py-2 rounded-xl bg-secondary-50/90 backdrop-blur-md border border-secondary-200 text-secondary-900 placeholder-secondary-500 focus:outline-none focus:ring-2 focus:ring-primary-600;
   }
 }

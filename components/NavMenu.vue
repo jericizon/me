@@ -36,7 +36,7 @@ const navLinks = [
         <!-- Logo/Brand -->
         <NuxtLink 
           to="/" 
-          class="text-2xl font-bold font-display text-white hover:text-primary-300 transition-colors"
+          class="text-2xl font-bold font-display text-secondary-900 hover:text-primary-600 transition-colors"
         >
           Jeric
         </NuxtLink>
@@ -47,7 +47,7 @@ const navLinks = [
             v-for="link in navLinks" 
             :key="link.name"
             :href="link.href"
-            class="text-sm font-medium text-white hover:text-primary-300 transition-colors"
+            class="text-sm font-medium text-secondary-900 hover:text-accent-500 transition-colors"
             @click="closeMenu"
           >
             {{ link.name }}
@@ -58,7 +58,7 @@ const navLinks = [
         <div class="md:hidden">
           <button 
             @click="toggleMenu" 
-            class="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-primary-300 focus:outline-none"
+            class="inline-flex items-center justify-center p-2 text-secondary-900 hover:text-accent-500 focus:outline-none"
             aria-expanded="false"
           >
             <span class="sr-only">Open main menu</span>
@@ -92,14 +92,14 @@ const navLinks = [
     <!-- Mobile menu -->
     <div 
       v-show="isMenuOpen" 
-      class="md:hidden glass-card m-4 mt-2 rounded-xl overflow-hidden transition-all duration-300 ease-in-out"
+      class="md:hidden glass-card m-4 mt-2 overflow-hidden transition-all duration-300 ease-in-out bg-white/40 border border-secondary-200"
     >
       <div class="px-2 pt-2 pb-3 space-y-1">
         <a 
           v-for="link in navLinks" 
           :key="link.name"
           :href="link.href"
-          class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-primary-500/20 transition-colors"
+          class="block px-3 py-2 text-base font-medium text-secondary-900 hover:bg-accent-500/10 transition-colors"
           @click="closeMenu"
         >
           {{ link.name }}

@@ -87,7 +87,7 @@ onMounted(() => {
     
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <!-- Section Title -->
-      <div ref="titleRef" class="text-center mb-16 animate-item">
+      <div ref="titleRef" class="text-center mb-16 opacity-0 translate-y-3 transition duration-700 ease-out">
         <h2 class="section-title">Projects</h2>
         <div class="section-subtitle">My Recent Work</div>
         <p class="mt-4 max-w-3xl mx-auto text-lg">
@@ -107,10 +107,10 @@ onMounted(() => {
           :class="{
             'md:col-span-2': project.size === 'large',
             'md:col-span-1': project.size === 'medium' || project.size === 'small',
-            'row-span-2': project.size === 'medium-tall',
+            'row-span-2 md:h-[606px]': project.size === 'medium-tall',
             'row-span-1': project.size === 'small'
           }"
-          class="project-card relative group overflow-hidden rounded-xl"
+          class="relative group overflow-hidden rounded-xl opacity-0 translate-y-8 transition duration-700 ease-out h-[300px]"
         >
           <!-- Project Image -->
           <div 
@@ -123,11 +123,11 @@ onMounted(() => {
           
           <!-- Project Info -->
           <div class="absolute inset-0 flex flex-col justify-end p-6 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-            <div class="glass-card backdrop-blur-md p-6 rounded-xl">
+            <div class="backdrop-blur-md p-6 rounded-xl bg-white/20 border border-white/10 shadow-lg">
               <h3 class="text-xl md:text-2xl font-bold mb-2">
                 <a :href="project.url" target="_blank" class="hover:text-primary-300 transition-colors flex items-center gap-2">
                   {{ project.name }}
-                  <Icon name="heroicons:arrow-top-right-on-square" class="w-5 h-5" />
+                  <Icon name="tabler:external-link" class="w-5 h-5" />
                 </a>
               </h3>
               <p class="text-primary-200">{{ project.category }}</p>
@@ -138,27 +138,3 @@ onMounted(() => {
     </div>
   </section>
 </template>
-
-<style scoped>
-.animate-item {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.project-card {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-  height: 300px;
-}
-
-.project-card.row-span-2 {
-  height: 606px; /* 300px * 2 + 6px gap */
-}
-
-.glass-card {
-  background: rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-</style>

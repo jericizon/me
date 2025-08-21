@@ -64,8 +64,8 @@ onMounted(() => {
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
         <!-- Image Column -->
-        <div ref="imageRef" class="animate-item-x">
-          <div class="glass-card p-3 rounded-2xl shadow-glass-lg overflow-hidden">
+        <div ref="imageRef" class="opacity-0 -translate-x-5 transition duration-700 ease-out">
+          <div class="p-3 rounded-2xl overflow-hidden bg-white/10 border border-white/10 backdrop-blur-md shadow-lg">
             <div class="relative rounded-xl overflow-hidden aspect-square">
               <img 
                 src="/images/about.jpg" 
@@ -82,7 +82,7 @@ onMounted(() => {
         <!-- Content Column -->
         <div class="space-y-8">
           <!-- Bio Content -->
-          <div ref="contentRef" class="glass-card p-6 md:p-8 backdrop-blur-md animate-item">
+          <div ref="contentRef" class="p-6 md:p-8 backdrop-blur-md bg-white/10 border border-white/10 shadow-lg rounded-2xl opacity-0 translate-y-5 transition duration-700 ease-out">
             <p class="text-lg leading-relaxed">
               With over a decade of experience as a full stack web developer,
               I specialize in Laravel and Vue.js frameworks, crafting
@@ -96,7 +96,7 @@ onMounted(() => {
           </div>
           
           <!-- Personal Info -->
-          <div ref="infoRef" class="glass-card p-6 md:p-8 backdrop-blur-md animate-item">
+          <div ref="infoRef" class="p-6 md:p-8 backdrop-blur-md bg-white/10 border border-white/10 shadow-lg rounded-2xl opacity-0 translate-y-5 transition duration-700 ease-out">
             <h3 class="text-xl font-semibold mb-4 text-primary-300">Personal Information</h3>
             <ul class="space-y-3">
               <li class="flex flex-wrap">
@@ -121,25 +121,11 @@ onMounted(() => {
           </div>
           
           <!-- Download CV Button -->
-          <div ref="buttonRef" class="animate-item">
-            <DownloadCV class="glass-button primary px-6 py-3 rounded-full font-medium inline-flex items-center" />
+          <div ref="buttonRef" class="opacity-0 translate-y-5 transition duration-700 ease-out">
+            <DownloadCV class="px-6 py-3 rounded-full font-medium inline-flex items-center bg-primary-500/20 border border-primary-500/30 shadow-md backdrop-blur-md hover:scale-105 transition-transform" />
           </div>
         </div>
       </div>
     </div>
   </section>
 </template>
-
-<style scoped>
-.animate-item {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.animate-item-x {
-  opacity: 0;
-  transform: translateX(-20px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-</style>

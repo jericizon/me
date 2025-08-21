@@ -34,10 +34,10 @@ interface StatItem {
 }
 
 const stats: StatItem[] = [
-  { value: () => totalDaysInIndustry.value, label: 'In Industry', icon: 'heroicons:briefcase' },
-  { value: '300+', label: 'Projects Completed', icon: 'heroicons:document-check' },
-  { value: '200+', label: 'Happy Clients', icon: 'heroicons:face-smile' },
-  { value: '500+', label: 'Cups of Coffee', icon: 'heroicons:beaker' }
+  { value: () => totalDaysInIndustry.value, label: 'In Industry', icon: 'tabler:briefcase' },
+  { value: '300+', label: 'Projects Completed', icon: 'tabler:file-check' },
+  { value: '200+', label: 'Happy Clients', icon: 'tabler:mood-smile' },
+  { value: '500+', label: 'Cups of Coffee', icon: 'tabler:flask' }
 ];
 
 // Animation refs
@@ -91,16 +91,17 @@ onMounted(() => {
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <div 
         ref="statsRef"
-        class="stats-container"
+        class="opacity-0 translate-y-8 transition-all duration-700 ease-out"
       >
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
           <div 
             v-for="(stat, index) in stats" 
             :key="index"
             :ref="el => { if (el) statItemRefs[index] = el as HTMLElement }"
-            class="stat-item"
+            class="opacity-0 translate-y-5 scale-95 transition-all duration-600 ease-out"
+            :style="{ transitionDelay: `${index * 100}ms` }"
           >
-            <div class="glass-card p-6 md:p-8 text-center rounded-xl h-full flex flex-col items-center justify-center">
+            <div class="p-6 md:p-8 text-center rounded-xl h-full flex flex-col items-center justify-center bg-white/10 border border-white/10 shadow-lg backdrop-blur-md">
               <div class="stat-icon mb-4 p-3 rounded-full bg-primary-500/10">
                 <Icon :name="stat.icon" class="w-8 h-8 text-primary-300" />
               </div>
@@ -118,7 +119,7 @@ onMounted(() => {
   <!-- CTA Section -->
   <section 
     ref="ctaRef"
-    class="py-20 md:py-24 relative overflow-hidden cta-section"
+    class="py-20 md:py-24 relative overflow-hidden opacity-0 transition-all duration-1000 ease-out"
     style="background-image: url(/images/cta-bg.jpg); background-size: cover; background-position: center;"
   >
     <!-- Overlay with blur -->
@@ -130,9 +131,9 @@ onMounted(() => {
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <div 
         ref="ctaContentRef"
-        class="max-w-3xl mx-auto text-center cta-content"
+        class="max-w-3xl mx-auto text-center opacity-0 translate-y-8 transition-all duration-800 ease-out"
       >
-        <div class="glass-card p-8 md:p-12 rounded-2xl backdrop-blur-md">
+        <div class="p-8 md:p-12 rounded-2xl backdrop-blur-md bg-white/10 border border-white/10 shadow-lg">
           <h2 class="text-3xl md:text-4xl font-bold mb-6">
             I'm <span class="text-primary-300">Available</span> for Freelancing
           </h2>
@@ -144,57 +145,14 @@ onMounted(() => {
           
           <a
             href="mailto:im.jericizon@gmail.com?subject=Hiring%20Full%20stack%20developer%20ref(portfolio)"
-            class="glass-button primary px-8 py-4 rounded-full text-lg font-medium inline-flex items-center gap-2 hover:scale-105 transition-transform"
+            class="px-8 py-4 rounded-full text-lg font-medium inline-flex items-center gap-2 hover:scale-105 transition-transform bg-primary-500/20 border border-primary-500/30 shadow-md backdrop-blur-md"
           >
             <span>Hire Me</span>
-            <Icon name="heroicons:paper-airplane" class="w-5 h-5" />
+            <Icon name="tabler:send" class="w-5 h-5" />
           </a>
         </div>
       </div>
     </div>
   </section>
 </template>
-
-<style scoped>
-.stats-container {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.stat-item {
-  opacity: 0;
-  transform: translateY(20px) scale(0.95);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.cta-section {
-  opacity: 0;
-  transition: opacity 1s ease;
-}
-
-.cta-content {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.glass-card {
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-}
-
-.glass-button {
-  background: rgba(var(--color-primary-500), 0.2);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(var(--color-primary-500), 0.3);
-  box-shadow: 0 4px 16px rgba(var(--color-primary-500), 0.15);
-  transition: all 0.3s ease;
-}
-
-.glass-button:hover {
-  background: rgba(var(--color-primary-500), 0.3);
-  border-color: rgba(var(--color-primary-500), 0.5);
-}
-</style>
+ 

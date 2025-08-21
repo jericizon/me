@@ -67,7 +67,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
+  <div class="min-h-screen bg-secondary-50">
     <!-- Main content -->
     <NuxtLayout>
       <main id="main-content">
@@ -83,7 +83,7 @@ onMounted(() => {
   position: absolute;
   top: -40px;
   left: 0;
-  background: var(--color-primary-500);
+  background: #2563eb; /* Primary blue */
   color: white;
   padding: 8px;
   z-index: 100;
@@ -96,12 +96,17 @@ onMounted(() => {
 
 /* Ensure focus styles are visible for accessibility */
 :focus {
-  outline: 2px solid var(--color-primary-500);
+  outline: 2px solid #2563eb; /* Primary blue */
   outline-offset: 2px;
 }
 
 /* Ensure proper contrast for text */
 :root {
   --min-text-contrast: 4.5;
+  --color-primary: #2563eb; /* Primary blue */
+  --color-secondary: #1E293B; /* Secondary slate */
+  --color-accent: #F59E0B; /* Accent amber */
+  --color-background: #F8FAFC; /* Background light gray */
+  --color-text: #0F172A; /* Text deep navy */
 }
 </style>
