@@ -316,7 +316,7 @@ const toggleExpand = (key: number) => {
 
       <!-- Download CV -->
       <div class="text-center mt-14 md:mt-16">
-        <DownloadCV class="px-6 py-3 rounded-full font-medium inline-flex items-center bg-primary-100 text-primary-700 border border-primary-200 shadow-lg backdrop-blur-md hover:scale-105 hover:bg-primary-200 transition-all duration-300" />
+        <DownloadCV class="glass-btn" />
       </div>
     </div>
   </section>
