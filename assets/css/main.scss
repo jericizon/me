@@ -65,12 +65,12 @@ body {
     
     &::after {
       content: '';
-      @apply block w-20 h-1 bg-primary-500 mt-4;
+      @apply block w-20 h-1 bg-primary-500 mt-4 mx-auto rounded-full;
     }
   }
   
   &-subtitle {
-    @apply text-xl md:text-2xl text-slate-300 mb-12;
+    @apply text-sm md:text-base text-secondary-900 mb-12;
   }
 }
 
