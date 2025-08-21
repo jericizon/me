@@ -27,21 +27,13 @@ const navLinks = [
 <template>
   <nav
     :class="[
-      'glass-nav fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+      'glass-nav sticky top-0 z-50 transition-all duration-300',
       { 'py-2 shadow-glass-sm': hasScrolled, 'py-4': !hasScrolled }
     ]"
   >
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        <!-- Logo/Brand -->
-        <NuxtLink 
-          to="/" 
-          class="text-2xl font-bold font-display text-secondary-900 hover:text-primary-600 transition-colors"
-        >
-          Jeric
-        </NuxtLink>
-
-        <!-- Desktop Navigation -->
+    <div class="w-full px-4 sm:px-6 lg:px-8">
+      <div class="relative flex items-center justify-center h-16">
+        <!-- Desktop Navigation (centered) -->
         <div class="hidden md:flex space-x-8">
           <a 
             v-for="link in navLinks" 
@@ -54,8 +46,8 @@ const navLinks = [
           </a>
         </div>
 
-        <!-- Mobile menu button -->
-        <div class="md:hidden">
+        <!-- Mobile menu button (right aligned) -->
+        <div class="md:hidden absolute right-0">
           <button 
             @click="toggleMenu" 
             class="inline-flex items-center justify-center p-2 text-secondary-900 hover:text-accent-500 focus:outline-none"

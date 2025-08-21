@@ -14,7 +14,7 @@ const hasScrolled = computed(() => scrollY.value > 50)
 </script>
 
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-secondary-50 via-secondary-50 to-secondary-100 text-secondary-900">
+  <div class="min-h-screen bg-secondary-50 text-secondary-900">
     <!-- Decorative glasmorphic background elements -->
     <div class="pointer-events-none select-none fixed inset-0 overflow-hidden" aria-hidden="true">
       <!-- Primary blob -->
@@ -35,9 +35,6 @@ const hasScrolled = computed(() => scrollY.value > 50)
         :style="{ transform: `translateY(${scrollY * 0.015}px)` }"
       ></div>
     </div>
-
-    <!-- Navigation component -->
-    <NavMenu :has-scrolled="hasScrolled" />
 
     <!-- Main content -->
     <main class="relative mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">

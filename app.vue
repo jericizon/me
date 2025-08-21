@@ -109,4 +109,9 @@ onMounted(() => {
   --color-background: #F8FAFC; /* Background light gray */
   --color-text: #0F172A; /* Text deep navy */
 }
+
+/* Prevent horizontal overflow from full-bleed sections (avoids rightmost color strip) */
+html, body {
+  overflow-x: hidden;
+}
 </style>
