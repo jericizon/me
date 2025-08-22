@@ -40,9 +40,9 @@ export default defineNuxtPlugin((nuxtApp) => {
       
       // Preload critical resources
       const preloadLinks = [
-        { rel: 'preload', href: '/icons/vue.svg', as: 'image' },
-        { rel: 'preload', href: '/icons/nuxt.svg', as: 'image' },
-        { rel: 'preload', href: '/icons/tailwind.svg', as: 'image' }
+        { rel: 'preload', href: 'icons/vue.svg', as: 'image' },
+        { rel: 'preload', href: 'icons/nuxt.svg', as: 'image' },
+        { rel: 'preload', href: 'icons/tailwind.svg', as: 'image' }
       ]
       
       preloadLinks.forEach(link => {

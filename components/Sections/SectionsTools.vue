@@ -243,7 +243,7 @@ onMounted(() => {
           <div class="h-full flex flex-col items-center justify-center p-4 text-center transition-all duration-300 hover:scale-105 bg-white/10 border border-white/10 shadow-md backdrop-blur-md rounded-xl">
             <div class="mb-3 p-3 rounded-full bg-white/10 border border-white/10 backdrop-blur-sm">
               <img 
-                :src="`/icons/${tool.icon}`" 
+                :src="`icons/${tool.icon}`" 
                 :alt="tool.name"
                 :class="{ 'bg-white rounded': tool.addBg || false }"
                 class="w-12 h-12 object-contain"

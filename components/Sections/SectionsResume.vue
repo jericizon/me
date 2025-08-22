@@ -192,17 +192,21 @@ const calculateMonthDifference = (startDate: string, endDate: string | null = nu
     const years = Math.floor(months / 12);
     const remainingMonths = months % 12;
 
-    let _return = "";
+    const parts: string[] = [];
 
     if (years) {
-      _return += `${years}yrs. `;
+      parts.push(`${years}${years === 1 ? ' yr.' : ' yrs.'}`);
     }
 
     if (remainingMonths) {
-      _return += `${remainingMonths}mos.`;
+      parts.push(`${remainingMonths}${remainingMonths === 1 ? ' mo.' : ' mos.'}`);
     }
 
-    return _return;
+    if (parts.length === 0) {
+      return '0 mo.';
+    }
+
+    return parts.join(' ').trim();
   } catch (error) {
     return "";
   }
