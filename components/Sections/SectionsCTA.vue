@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from 'vue';
+import { useContactForm } from '@/composables/useContactForm';
 
 // Calculate total time in industry (reactive even in static builds)
 // `now` updates on client to keep the value fresh after hydration
@@ -82,6 +83,8 @@ onMounted(() => {
 onUnmounted(() => {
   if (nowTimer) window.clearInterval(nowTimer);
 });
+
+const { openContactForm } = useContactForm();
 </script>
 
 <template>
@@ -143,7 +146,8 @@ onUnmounted(() => {
           </p>
           
           <a
-            href="mailto:im.jericizon@gmail.com?subject=Hiring%20Full%20stack%20developer%20ref(portfolio)"
+            href="#contact-section"
+            @click.prevent="openContactForm"
             class="btn btn-primary btn-lg"
           >
             <span>Hire Me</span>

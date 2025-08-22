@@ -9,7 +9,7 @@
           <a href="https://github.com/jericizon" target="_blank" rel="noopener" class="hover:text-secondary-900 transition-colors inline-flex items-center gap-2">
             <Icon name="tabler:brand-github" class="w-5 h-5" /> GitHub
           </a>
-          <a href="mailto:im.jericizon@gmail.com" class="hover:text-secondary-900 transition-colors inline-flex items-center gap-2">
+          <a href="#contact-section" @click.prevent="openContactForm" class="hover:text-secondary-900 transition-colors inline-flex items-center gap-2">
             <Icon name="tabler:mail" class="w-5 h-5" /> Contact
           </a>
         </nav>
@@ -17,3 +17,8 @@
     </div>
   </footer>
 </template>
+
+<script setup lang="ts">
+import { useContactForm } from '@/composables/useContactForm'
+const { openContactForm } = useContactForm()
+</script>

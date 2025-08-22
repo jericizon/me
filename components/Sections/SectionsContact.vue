@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watchEffect } from 'vue';
+import { useContactForm } from '@/composables/useContactForm';
 
 // Animation refs
 const titleRef = ref<HTMLElement | null>(null);
 const formCardRef = ref<HTMLElement | null>(null);
 
-// UI state
-const showForm = ref(false);
+// UI state from global composable
+const { contactFormOpen } = useContactForm();
 
 // Initialize animations
 onMounted(() => {
@@ -23,6 +24,13 @@ onMounted(() => {
       formCardRef.value.style.transform = 'translateY(0)';
     }
   }, 350);
+});
+
+// Ensure form section is visible when open state becomes true
+watchEffect(() => {
+  if (contactFormOpen.value) {
+    // no-op here; actual scrolling is triggered in composable
+  }
 });
 </script>
 
@@ -46,8 +54,8 @@ onMounted(() => {
           <button
             type="button"
             class="btn btn-primary btn-lg"
-            @click="showForm = true"
-            v-if="!showForm"
+            @click="contactFormOpen = true"
+            v-if="!contactFormOpen"
           >
             <span>Open Contact Form</span>
             <Icon name="tabler:send" class="w-5 h-5" />
@@ -56,7 +64,7 @@ onMounted(() => {
       </div>
       
       <!-- Contact form only -->
-      <div class="max-w-3xl mx-auto" v-if="showForm">
+      <div class="max-w-3xl mx-auto" v-if="contactFormOpen">
         <!-- Google Form Embed -->
         <div ref="formCardRef" class="transition duration-700 ease-out">
           <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe0E5mceDIGOL7A3terd0T5QU_qQ-1bn0UiUvQM6NFebSx1dA/viewform?embedded=true" width="640" height="950" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>

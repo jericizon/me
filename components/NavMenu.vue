@@ -22,6 +22,17 @@ const navLinks = [
   { name: 'Projects', href: '#projects-section' },
   { name: 'Contact', href: '#contact-section' },
 ]
+
+import { useContactForm } from '@/composables/useContactForm'
+const { openContactForm } = useContactForm()
+
+const handleNavClick = (link: { name: string; href: string }, e: Event) => {
+  if (link.name === 'Contact') {
+    e.preventDefault()
+    openContactForm()
+  }
+  closeMenu()
+}
 </script>
 
 <template>
@@ -41,7 +52,7 @@ const navLinks = [
             :key="link.name"
             :href="link.href"
             class="text-sm font-medium text-secondary-900 hover:text-accent-500 transition-colors"
-            @click="closeMenu"
+            @click="(e) => handleNavClick(link, e)"
           >
             {{ link.name }}
           </a>
@@ -93,7 +104,7 @@ const navLinks = [
           :key="link.name"
           :href="link.href"
           class="block px-3 py-2 text-base font-medium text-secondary-900 hover:bg-accent-500/10 transition-colors"
-          @click="closeMenu"
+          @click="(e) => handleNavClick(link, e)"
         >
           {{ link.name }}
         </a>
