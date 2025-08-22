@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import { withBase } from 'ufo'
+import { useRuntimeConfig } from '#imports'
+
+const baseURL = useRuntimeConfig().app.baseURL
+const iconSrc = (file: string) => withBase(`/icons/${file}`, baseURL)
 const phrases = [
   'Custom Dashboards & Systems That Drive Efficiency',
   'Building Reliable Systems That Grow With You',
@@ -28,23 +33,23 @@ onBeforeUnmount(() => {
     <!-- Floating developer icons (viewport-relative positions, avoid center) -->
     <div class="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
       <!-- Laravel (top-right, outside center) -->
-      <img src="icons/laravel.svg" alt="Laravel" class="block absolute top-[10vh] right-[4vw] w-10 h-10 md:w-12 md:h-12 opacity-40 drop-shadow-sm animate-float motion-reduce:animate-none" />
+      <img :src="iconSrc('laravel.svg')" alt="Laravel" class="block absolute top-[10vh] right-[4vw] w-10 h-10 md:w-12 md:h-12 opacity-40 drop-shadow-sm animate-float motion-reduce:animate-none" />
       <!-- Vue.js (top-left, outside center) -->
-      <img src="icons/vuejs.svg" alt="Vue.js" class="block absolute top-[8vh] left-[4vw] w-9 h-9 md:w-11 md:h-11 opacity-40 drop-shadow-sm animate-float-slow motion-reduce:animate-none" />
+      <img :src="iconSrc('vuejs.svg')" alt="Vue.js" class="block absolute top-[8vh] left-[4vw] w-9 h-9 md:w-11 md:h-11 opacity-40 drop-shadow-sm animate-float-slow motion-reduce:animate-none" />
       <!-- Nuxt.js (bottom-left, outside center) -->
-      <img src="icons/nuxtjs.svg" alt="Nuxt.js" class="block absolute bottom-[10vh] left-[6vw] w-10 h-10 md:w-12 md:h-12 opacity-40 drop-shadow-sm animate-float motion-reduce:animate-none" />
+      <img :src="iconSrc('nuxtjs.svg')" alt="Nuxt.js" class="block absolute bottom-[10vh] left-[6vw] w-10 h-10 md:w-12 md:h-12 opacity-40 drop-shadow-sm animate-float motion-reduce:animate-none" />
       <!-- NestJS (bottom-right, outside center) -->
-      <img src="icons/nestjs.svg" alt="NestJS" class="block absolute bottom-[12vh] right-[6vw] w-10 h-10 md:w-12 md:h-12 opacity-40 drop-shadow-sm animate-float-slow motion-reduce:animate-none" />
+      <img :src="iconSrc('nestjs.svg')" alt="NestJS" class="block absolute bottom-[12vh] right-[6vw] w-10 h-10 md:w-12 md:h-12 opacity-40 drop-shadow-sm animate-float-slow motion-reduce:animate-none" />
 
       <!-- Small fundamentals (viewport-relative) -->
       <!-- HTML -->
-      <img src="icons/html.svg" alt="HTML" class="hidden md:block absolute top-[20vh] left-[12vw] w-6 h-6 opacity-20 animate-float motion-reduce:animate-none" />
+      <img :src="iconSrc('html.svg')" alt="HTML" class="hidden md:block absolute top-[20vh] left-[12vw] w-6 h-6 opacity-20 animate-float motion-reduce:animate-none" />
       <!-- CSS -->
-      <img src="icons/css.svg" alt="CSS" class="hidden lg:block absolute top-[22vh] right-[12vw] w-6 h-6 opacity-20 animate-float-slow motion-reduce:animate-none" />
+      <img :src="iconSrc('css.svg')" alt="CSS" class="hidden lg:block absolute top-[22vh] right-[12vw] w-6 h-6 opacity-20 animate-float-slow motion-reduce:animate-none" />
       <!-- JavaScript -->
-      <img src="icons/javascript.svg" alt="JavaScript" class="hidden md:block absolute bottom-[18vh] left-[14vw] w-6 h-6 opacity-20 animate-float motion-reduce:animate-none" />
+      <img :src="iconSrc('javascript.svg')" alt="JavaScript" class="hidden md:block absolute bottom-[18vh] left-[14vw] w-6 h-6 opacity-20 animate-float motion-reduce:animate-none" />
       <!-- Node.js -->
-      <img src="icons/nodejs.svg" alt="Node.js" class="hidden lg:block absolute bottom-[16vh] right-[14vw] w-6 h-6 opacity-20 animate-float-slow motion-reduce:animate-none" />
+      <img :src="iconSrc('nodejs.svg')" alt="Node.js" class="hidden lg:block absolute bottom-[16vh] right-[14vw] w-6 h-6 opacity-20 animate-float-slow motion-reduce:animate-none" />
     </div>
     <div class="w-full">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 gap-8 items-center justify-items-center">

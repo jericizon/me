@@ -1,4 +1,6 @@
 import { defineNuxtPlugin } from '#app'
+import { withBase } from 'ufo'
+import { useRuntimeConfig } from '#imports'
 
 export default defineNuxtPlugin((nuxtApp) => {
   // Only run on client-side
@@ -38,11 +40,12 @@ export default defineNuxtPlugin((nuxtApp) => {
         })
       }
       
-      // Preload critical resources
+      // Preload critical resources (respect baseURL)
+      const baseURL = useRuntimeConfig().app.baseURL
       const preloadLinks = [
-        { rel: 'preload', href: 'icons/vue.svg', as: 'image' },
-        { rel: 'preload', href: 'icons/nuxt.svg', as: 'image' },
-        { rel: 'preload', href: 'icons/tailwind.svg', as: 'image' }
+        { rel: 'preload', href: withBase('/icons/vue.svg', baseURL), as: 'image' },
+        { rel: 'preload', href: withBase('/icons/nuxt.svg', baseURL), as: 'image' },
+        { rel: 'preload', href: withBase('/icons/tailwind.svg', baseURL), as: 'image' }
       ]
       
       preloadLinks.forEach(link => {
