@@ -98,13 +98,14 @@ onBeforeUnmount(() => {
             <div class="flex flex-wrap justify-center gap-4 reveal" style="animation-delay: .4s;">
               <a
                 href="mailto:im.jericizon@gmail.com?subject=Hiring%20Full%20stack%20developer%20ref(portfolio)"
-                class="px-7 py-3.5 rounded-full font-semibold bg-primary-600 text-white border border-primary-700 shadow-md hover:bg-primary-700 hover:scale-105 transition-all duration-300"
+                class="btn btn-primary btn-lg"
               >
-                Hire me
+                <span>Hire me</span>
+                <Icon name="tabler:send" class="w-5 h-5" />
               </a>
               <a
                 href="#projects-section"
-                class="px-7 py-3.5 rounded-full font-semibold bg-accent-500 text-white border border-accent-600 shadow-md hover:bg-accent-600 hover:scale-105 transition-all duration-300"
+                class="btn btn-secondary btn-lg"
               >
                 My works
               </a>

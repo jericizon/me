@@ -35,4 +35,31 @@
   .section-subtitle {
     @apply mt-4 text-sm md:text-base text-secondary-900;
   }
+
+  /* Standardized Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full font-medium transition-all select-none
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary-500
+           disabled:opacity-60 disabled:cursor-not-allowed;
+  }
+  .btn-sm { @apply px-3 py-2 text-sm; }
+  .btn-md { @apply px-4 py-2 text-base; }
+  .btn-lg { @apply px-6 py-3 text-lg; }
+
+  .btn-primary {
+    /* Yellow solid background using accent palette */
+    @apply bg-accent-500 text-secondary-900 border border-accent-600 shadow-md
+           hover:bg-accent-600 hover:border-accent-700 active:scale-95;
+  }
+  .btn-secondary {
+    @apply bg-secondary-900/10 text-secondary-900 border border-secondary-300 backdrop-blur-md shadow
+           hover:bg-secondary-900/15 hover:border-secondary-400 active:scale-95;
+  }
+  .btn-outline {
+    @apply bg-transparent text-white border border-white/30 backdrop-blur-md
+           hover:bg-white/10 hover:border-white/50 active:scale-95;
+  }
+  .btn-ghost {
+    @apply bg-transparent text-white/90 border border-transparent hover:bg-white/5 active:scale-95;
+  }
 }

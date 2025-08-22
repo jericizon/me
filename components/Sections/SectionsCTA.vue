@@ -1,17 +1,19 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, onUnmounted, computed } from 'vue';
 
-// Calculate total time in industry
+// Calculate total time in industry (reactive even in static builds)
+// `now` updates on client to keep the value fresh after hydration
+const now = ref<Date | null>(null);
+let nowTimer: number | undefined;
+
 const totalDaysInIndustry = computed(() => {
   const startDate = new Date(2013, 11, 1); // December 1, 2013
-  const currentDate = new Date();
+  const currentDate = now.value ?? new Date();
 
-  // Calculate the difference in years, months, and days
   let yearsDiff = currentDate.getFullYear() - startDate.getFullYear();
   let monthsDiff = currentDate.getMonth() - startDate.getMonth();
   let daysDiff = currentDate.getDate() - startDate.getDate();
 
-  // Adjust for negative differences
   if (monthsDiff < 0 || (monthsDiff === 0 && daysDiff < 0)) {
     yearsDiff--;
     monthsDiff += 12;
@@ -19,7 +21,7 @@ const totalDaysInIndustry = computed(() => {
   if (daysDiff < 0) {
     monthsDiff--;
     const tempDate = new Date(startDate);
-    tempDate.setMonth(tempDate.getMonth() + 1, 0); // Get the last day of the previous month
+    tempDate.setMonth(tempDate.getMonth() + 1, 0);
     daysDiff = tempDate.getDate() - startDate.getDate() + currentDate.getDate();
   }
 
@@ -40,14 +42,19 @@ const stats: StatItem[] = [
   { value: '500+', label: 'Cups of Coffee', icon: 'tabler:flask' }
 ];
 
-// Animation refs
+// Animation refs (container-level only)
 const statsRef = ref<HTMLElement | null>(null);
-const statItemRefs = ref<HTMLElement[]>([]);
 const ctaRef = ref<HTMLElement | null>(null);
 const ctaContentRef = ref<HTMLElement | null>(null);
 
 // Initialize animations
 onMounted(() => {
+  // keep `now` updated hourly on client to ensure reactivity post-hydration
+  now.value = new Date();
+  nowTimer = window.setInterval(() => {
+    now.value = new Date();
+  }, 60 * 60 * 1000);
+
   // Animate stats section
   setTimeout(() => {
     if (statsRef.value) {
@@ -55,16 +62,6 @@ onMounted(() => {
       statsRef.value.style.transform = 'translateY(0)';
     }
   }, 200);
-  
-  // Animate stat items with staggered delay
-  statItemRefs.value.forEach((el, index) => {
-    setTimeout(() => {
-      if (el) {
-        el.style.opacity = '1';
-        el.style.transform = 'translateY(0) scale(1)';
-      }
-    }, 400 + (index * 150));
-  });
   
   // Animate CTA section
   setTimeout(() => {
@@ -81,12 +78,16 @@ onMounted(() => {
     }
   }, 800);
 });
+
+onUnmounted(() => {
+  if (nowTimer) window.clearInterval(nowTimer);
+});
 </script>
 
 <template>
   <!-- Stats Section -->
   <section id="stats-section" class="py-16 md:py-20 relative overflow-hidden">
-    <div class="absolute top-0 left-1/4 w-64 h-64 bg-primary-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute -top-10 -left-10 w-72 h-72 bg-gradient-to-br from-primary-500/20 to-secondary-500/10 rounded-full blur-3xl"></div>
     
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <div 
@@ -95,20 +96,18 @@ onMounted(() => {
       >
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
           <div 
-            v-for="(stat, index) in stats" 
-            :key="index"
-            :ref="el => { if (el) statItemRefs[index] = el as HTMLElement }"
-            class="opacity-0 translate-y-5 scale-95 transition-all duration-600 ease-out"
-            :style="{ transitionDelay: `${index * 100}ms` }"
+            v-for="stat in stats" 
+            :key="stat.label"
+            class="transition-all duration-500 ease-out"
           >
-            <div class="p-6 md:p-8 text-center rounded-xl h-full flex flex-col items-center justify-center bg-white/10 border border-white/10 shadow-lg backdrop-blur-md">
-              <div class="stat-icon mb-4 p-3 rounded-full bg-primary-500/10">
-                <Icon :name="stat.icon" class="w-8 h-8 text-primary-300" />
+            <div class="p-6 md:p-8 text-center rounded-2xl h-full flex flex-col items-center justify-center bg-white/10/50 border border-white/10 shadow-xl backdrop-blur-xl hover:bg-white/10 hover:border-white/20">
+              <div class="stat-icon mb-4 p-3 rounded-full bg-gradient-to-br from-primary-500/15 to-secondary-500/10 ring-1 ring-white/10">
+                <Icon :name="stat.icon" class="w-8 h-8 text-primary-600" />
               </div>
-              <div class="stat-value text-2xl md:text-3xl font-bold mb-2">
+              <div class="stat-value text-2xl md:text-3xl font-extrabold tracking-tight mb-1">
                 {{ typeof stat.value === 'function' ? stat.value() : stat.value }}
               </div>
-              <div class="stat-label text-sm text-slate-300">{{ stat.label }}</div>
+              <div class="stat-label text-xs md:text-sm">{{ stat.label }}</div>
             </div>
           </div>
         </div>
@@ -123,7 +122,7 @@ onMounted(() => {
     style="background-image: url(/images/cta-bg.jpg); background-size: cover; background-position: center;"
   >
     <!-- Overlay with blur -->
-    <div class="absolute inset-0 backdrop-blur-sm bg-black/40"></div>
+    <div class="absolute inset-0 backdrop-blur-sm bg-gradient-to-b from-black/50 via-black/40 to-black/60"></div>
     
     <!-- Decorative elements -->
     <div class="absolute bottom-0 right-0 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl"></div>
@@ -133,19 +132,19 @@ onMounted(() => {
         ref="ctaContentRef"
         class="max-w-3xl mx-auto text-center opacity-0 translate-y-8 transition-all duration-800 ease-out"
       >
-        <div class="p-8 md:p-12 rounded-2xl backdrop-blur-md bg-white/10 border border-white/10 shadow-lg">
-          <h2 class="text-3xl md:text-4xl font-bold mb-6">
+        <div class="p-8 md:p-12 rounded-2xl backdrop-blur-xl bg-white/10 border border-white/15 shadow-2xl">
+          <h2 class="text-3xl md:text-4xl font-extrabold mb-6 tracking-tight text-white">
             I'm <span class="text-primary-300">Available</span> for Freelancing
           </h2>
           
-          <p class="text-lg mb-8 max-w-xl mx-auto">
+          <p class="text-base md:text-lg mb-8 max-w-xl mx-auto text-white/90">
             Embrace the opportunity to turn ideas into reality. Let's embark on
             this freelance journey together and create something extraordinary.
           </p>
           
           <a
             href="mailto:im.jericizon@gmail.com?subject=Hiring%20Full%20stack%20developer%20ref(portfolio)"
-            class="px-8 py-4 rounded-full text-lg font-medium inline-flex items-center gap-2 hover:scale-105 transition-transform bg-primary-500/20 border border-primary-500/30 shadow-md backdrop-blur-md"
+            class="btn btn-primary btn-lg"
           >
             <span>Hire Me</span>
             <Icon name="tabler:send" class="w-5 h-5" />

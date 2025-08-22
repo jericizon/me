@@ -221,9 +221,9 @@ onMounted(() => {
           v-for="category in categories" 
           :key="category"
           @click="activeFilter = category"
-          class="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-white/10 border border-white/10 backdrop-blur-md hover:scale-105"
+          class="btn btn-outline btn-sm"
           :class="{
-            'bg-primary-500/20 border-primary-500/30 scale-105': activeFilter === category
+            'bg-primary-500/20 border-primary-500/30': activeFilter === category
           }"
         >
           {{ category.charAt(0).toUpperCase() + category.slice(1) }}

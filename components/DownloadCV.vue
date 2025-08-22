@@ -4,11 +4,11 @@
     target="_blank"
     rel="noopener"
     :download="props.download ? '' : null"
-    class="glass-btn"
+    class="btn btn-primary btn-lg"
     aria-label="Download CV"
   >
+    <span>{{ props.label }}</span>
     <Icon name="tabler:download" class="w-5 h-5" />
-    {{ props.label }}
   </a>
 </template>
 
