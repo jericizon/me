@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted } from 'vue';
 
-// Initial number of tools to show
-const maxShow = ref(12);
+// No pagination: show all tools
 
 // Tools data with icons
 const tools = reactive([
@@ -155,15 +154,11 @@ const tools = reactive([
   },
 ]);
 
-// Compute remaining tools count
-const moreTools = computed(() => {
-  return tools.length - maxShow.value;
-});
+// No remaining tools computation needed
 
-// Animation refs
+// Animation refs (container/title only)
 const titleRef = ref<HTMLElement | null>(null);
 const toolsContainerRef = ref<HTMLElement | null>(null);
-const toolRefs = ref<HTMLElement[]>([]);
 
 // Filter state
 const activeFilter = ref('all');
@@ -180,10 +175,6 @@ const filteredTools = computed(() => {
   return tools.filter(tool => tool.category === activeFilter.value);
 });
 
-// Show all tools
-const showAllTools = () => {
-  maxShow.value = tools.length;
-};
 
 // Initialize animations
 onMounted(() => {
@@ -202,15 +193,7 @@ onMounted(() => {
     }
   }, 400);
   
-  // Animate tool cards with staggered delay
-  toolRefs.value.forEach((el, index) => {
-    setTimeout(() => {
-      if (el) {
-        el.style.opacity = '1';
-        el.style.transform = 'translateY(0) scale(1)';
-      }
-    }, 600 + (index * 100));
-  });
+  // Removed per-item animations to avoid conflicts on filter changes
 });
 </script>
 
@@ -253,10 +236,9 @@ onMounted(() => {
         class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6 opacity-0 transition-opacity duration-700"
       >
         <div 
-          v-for="(tool, key) in filteredTools.slice(0, maxShow)" 
-          :key="key"
-          :ref="el => { if (el) toolRefs[key] = el as HTMLElement }"
-          class="opacity-0 translate-y-5 scale-95 transition duration-500 ease-out"
+          v-for="tool in filteredTools" 
+          :key="tool.name"
+          class="transition duration-300 ease-out"
         >
           <div class="h-full flex flex-col items-center justify-center p-4 text-center transition-all duration-300 hover:scale-105 bg-white/10 border border-white/10 shadow-md backdrop-blur-md rounded-xl">
             <div class="mb-3 p-3 rounded-full bg-white/10 border border-white/10 backdrop-blur-sm">
@@ -272,17 +254,7 @@ onMounted(() => {
         </div>
       </div>
       
-      <!-- Show More Button -->
-      <div class="text-center mt-10" v-if="moreTools > 0">
-        <button 
-          @click="showAllTools"
-          class="px-6 py-3 rounded-full font-medium inline-flex items-center gap-2 bg-primary-500/20 border border-primary-500/30 shadow-md backdrop-blur-md hover:scale-105 transition-transform"
-        >
-          <span>Show more</span>
-          <span class="text-sm">({{ moreTools }})</span>
-          <Icon name="tabler:chevron-down" class="w-5 h-5" />
-        </button>
-      </div>
+      
     </div>
   </section>
 </template>
