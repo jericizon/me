@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
+import { withBase } from 'ufo';
 
 // Project data
 const projects = [
@@ -56,6 +57,11 @@ const projects = [
 // Animation refs
 const titleRef = ref<HTMLElement | null>(null);
 const projectRefs = ref<HTMLElement[]>([]);
+
+// Base-aware asset helper
+const config = useRuntimeConfig();
+const baseURL = config.app.baseURL || '/';
+const withBasePath = (p: string) => withBase(p, baseURL);
 
 // Initialize animations
 onMounted(() => {
@@ -115,7 +121,7 @@ onMounted(() => {
           <!-- Project Image -->
           <div 
             class="project-image w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-            :style="{ backgroundImage: `url(${project.image})` }"
+            :style="{ backgroundImage: `url(${withBasePath(project.image)})` }"
           ></div>
           
           <!-- Glass Overlay -->
