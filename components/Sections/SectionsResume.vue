@@ -1,4 +1,7 @@
-<script setup>
+<script setup lang="ts">
+import { reactive, ref, onMounted, onUnmounted } from 'vue';
+
+// Experience data
 const experiences = reactive([
   {
     start: "2023-12",
@@ -82,7 +85,7 @@ const experiences = reactive([
     company: "Skubbs Inc., Philippines",
     position: "Senior Developer / Team Lead",
     description:
-      "Our team specializes in creating custom website applications, ranging from simple dashboards to complex e-commerce websites. We take web design mockups and turn them into real, functional websites, ensuring that our clients' visions come to life online. Managing multiple projects from different clients is our forte, as we excel in communication to gather project requirements and scope directly from clients. Delegating tasks and maintaining a balanced workload among team members is crucial for us to deliver projects efficiently. We meticulously plan and structure websites and applications to ensure optimal functionality and user experience. Additionally, we handle the deployment of projects to the cloud, making sure they are seamlessly integrated and accessible. Supporting our team members by analyzing and simplifying required functions is part of our collaborative approach to achieving success in every project we undertake.",
+      "Our team specializes in creating custom website applications, ranging from simple dashboards to complex e-commerce websites. We take web design mockups and turn them into real, functional websites, ensuring that our clients' visions come to life online. Managing multiple projects from different clients is our forte, as we excel in communication to gather project requirements and scope directly from clients. Delegating tasks and maintaining a balanced workload among team members is crucial for us to deliver projects efficiently.",
     tools: [
       "LARAVEL",
       "VUEJS",
@@ -133,7 +136,7 @@ const experiences = reactive([
     company: "AGR Operations Manila, Philippines",
     position: "Web Developer",
     description:
-      "Creating a website starts with envisioning its layout and aesthetics, often accomplished by crafting a design template using tools like Photoshop. This initial stage involves conceptualizing the site's structure, color scheme, and graphical elements. Once the design is finalized, the next step is to translate those visual concepts into a functional website. This implementation phase requires coding expertise in HTML and CSS to bring the static images to life on the web. By meticulously transforming design elements into code, the website gains interactivity and responsiveness, ensuring a seamless user experience across different devices and browsers.",
+      "Creating a website starts with envisioning its layout and aesthetics, often accomplished by crafting a design template using tools like Photoshop. This initial stage involves conceptualizing the site's structure, color scheme, and graphical elements. Once the design is finalized, the next step is to translate those visual concepts into a functional website.",
     tools: [
       "HTML",
       "CSS",
@@ -147,7 +150,8 @@ const experiences = reactive([
   },
 ]);
 
-const convertToMonthYear = (dateString) => {
+// Format date to Month Year format
+const convertToMonthYear = (dateString: string | null): string => {
   try {
     if (dateString === null) {
       return "Present";
@@ -162,10 +166,26 @@ const convertToMonthYear = (dateString) => {
   }
 };
 
-const calculateMonthDifference = (startDate, endDate = null) => {
+// Reactive "now" that updates on client to keep durations fresh
+const now = ref<Date>(new Date());
+let _nowTimer: number | undefined;
+
+onMounted(() => {
+  // Update roughly every hour; cheap and keeps durations accurate without SSR issues
+  _nowTimer = window.setInterval(() => {
+    now.value = new Date();
+  }, 60 * 60 * 1000);
+});
+
+onUnmounted(() => {
+  if (_nowTimer) window.clearInterval(_nowTimer);
+});
+
+// Calculate duration between dates (accepts optional currentTime for reactivity)
+const calculateMonthDifference = (startDate: string, endDate: string | null = null, currentTime?: Date): string => {
   try {
     const start = new Date(startDate);
-    const end = endDate === null ? new Date() : new Date(endDate);
+    const end = endDate === null ? (currentTime ?? new Date()) : new Date(endDate);
     const months =
       (end.getFullYear() - start.getFullYear()) * 12 +
       (end.getMonth() - start.getMonth());
@@ -187,85 +207,117 @@ const calculateMonthDifference = (startDate, endDate = null) => {
     return "";
   }
 };
+
+// Expanded items state for Show more/less
+const expandedKeys = ref<Set<number>>(new Set());
+
+const toggleExpand = (key: number) => {
+  if (expandedKeys.value.has(key)) {
+    expandedKeys.value.delete(key);
+  } else {
+    expandedKeys.value.add(key);
+  }
+  // Force reactivity on Set
+  expandedKeys.value = new Set(expandedKeys.value);
+};
+
 </script>
 
 <template>
-  <section class="ftco-section ftco-no-pb" id="resume-section">
-    <div class="container">
-      <div class="row justify-content-center pb-5">
-        <div class="col-md-10 heading-section text-center">
-          <h1 class="big big-2">Resume</h1>
-          <h2 class="mb-4">Resume</h2>
-          <p>
-            Over the past decade, I've achieved and gained valuable experience
-            through my work, consistently meeting goals and overcoming
-            challenges.
-          </p>
-        </div>
+  <section id="resume-section" class="py-20 md:py-24">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section Title -->
+      <div class="text-center mb-12 md:mb-16">
+        <h2 class="section-title text-secondary-900">Resume</h2>
+        <div class="section-subtitle text-primary-600 font-medium">My Professional Journey</div>
+        <p class="mt-4 max-w-2xl mx-auto text-lg text-secondary-700">
+          Highlights of my experience, responsibilities, and impact.
+        </p>
       </div>
-      <div class="row justify-content-center pt-2">
-        <div
-          v-for="(experience, key) in experiences"
-          class="col-md-8"
-          :key="key"
-        >
+
+      <!-- Timeline (left-aligned) -->
+      <div class="relative max-w-4xl mx-auto">
+        <div class="border-l-2 border-primary-400 pl-6 md:pl-8">
           <div
-            class="resume-wrap"
-            :class="{ 'is-present': experience.end === null }"
+            v-for="(experience, key) in experiences"
+            :key="key"
+            class="relative mb-10 last:mb-0"
           >
-            <span class="date"
-              >{{ convertToMonthYear(experience.start) }} -
-              {{ convertToMonthYear(experience.end) }}
-              <span class="total-years-months">
-                ({{
-                  calculateMonthDifference(experience.start, experience.end)
-                }})
-              </span>
-            </span>
-            <h2>
-              {{ experience.company }}
-              <a v-if="experience.url" :href="experience.url" target="_blank"
-                ><i class="icon icon-open_in_new"></i
-              ></a>
-            </h2>
+            <!-- Timeline dot -->
+            <div class="absolute -left-[10px] top-2 w-5 h-5 rounded-full bg-primary-500 border-2 border-white shadow-lg shadow-primary-500/30"></div>
 
-            <span class="position">{{ experience.position }}</span>
-            <p class="mt-4">
-              {{ experience.description }}
-            </p>
+            <!-- Card -->
+            <div class="glass-card rounded-2xl p-6 md:p-7 border border-secondary-200 bg-white/90 backdrop-blur-md shadow-xl hover:shadow-2xl transition-shadow duration-300">
+              <!-- Header: Dates and Duration -->
+              <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                <div class="inline-flex items-center gap-2 text-primary-600">
+                  <Icon name="tabler:calendar" class="w-5 h-5 text-primary-600" />
+                  <span class="font-medium">
+                    {{ convertToMonthYear(experience.start) }} - {{ convertToMonthYear(experience.end) }}
+                  </span>
+                </div>
+                <ClientOnly>
+                  <span class="px-3 py-1.5 rounded-full text-xs font-semibold bg-primary-100 text-primary-700 border border-primary-200 shadow-sm">
+                    {{ calculateMonthDifference(experience.start, experience.end, now) }}
+                  </span>
+                </ClientOnly>
+              </div>
 
-            <div class="tools">
-              <div
-                class="badge badge-light mx-1"
-                v-for="(tools, toolKey) in experience.tools"
-                :key="toolKey"
+              <!-- Company, Link, and Position -->
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                <h3 class="text-xl md:text-2xl font-bold text-secondary-900 flex items-center gap-2">
+                  {{ experience.company }}
+                  <a
+                    v-if="experience.url"
+                    :href="experience.url"
+                    target="_blank"
+                    rel="noopener"
+                    aria-label="Open company website"
+                    class="text-primary-600 hover:text-primary-700 transition-colors"
+                  >
+                    <Icon name="tabler:external-link" class="w-5 h-5" />
+                  </a>
+                </h3>
+                <span class="px-4 py-1.5 rounded-full text-sm font-medium bg-secondary-100 text-secondary-800 border border-secondary-200 shadow-sm self-start sm:self-auto">
+                  {{ experience.position }}
+                </span>
+              </div>
+
+              <!-- Description -->
+              <p class="mb-4 text-secondary-700 leading-relaxed">
+                {{ expandedKeys.has(key) ? experience.description : (experience.description.length > 220 ? experience.description.slice(0, 220) + '…' : experience.description) }}
+              </p>
+
+              <button
+                v-if="experience.description.length > 220"
+                class="inline-flex items-center gap-1.5 text-sm font-medium text-primary-600 hover:text-primary-700 transition-colors mb-4"
+                type="button"
+                @click="toggleExpand(key)"
+                :aria-expanded="expandedKeys.has(key) ? 'true' : 'false'"
               >
-                <span>{{ tools }}</span>
+                <Icon :name="expandedKeys.has(key) ? 'tabler:chevron-up' : 'tabler:chevron-down'" class="w-4 h-4" />
+                {{ expandedKeys.has(key) ? 'Show less' : 'Show more' }}
+              </button>
+
+              <!-- Tools -->
+              <div class="flex flex-wrap gap-2 mt-2">
+                <span
+                  v-for="(tool, toolKey) in experience.tools"
+                  :key="toolKey"
+                  class="px-3 py-1.5 rounded-lg text-xs font-medium bg-primary-50 text-primary-700 border border-primary-200 hover:bg-primary-100 transition-colors duration-200"
+                >
+                  {{ tool.toLowerCase() }}
+                </span>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="row justify-content-center mt-5">
-        <div class="col-md-6 text-center">
-          <p>
-            <DownloadCV />
-          </p>
-        </div>
+
+      <!-- Download CV -->
+      <div class="text-center mt-14 md:mt-16">
+        <DownloadCV class="glass-btn" />
       </div>
     </div>
   </section>
 </template>
-<style lang="scss" scoped>
-.total-years-months {
-  color: #999999;
-  font-size: 14px;
-  font-weight: normal;
-}
-.resume-wrap {
-  transform: scale(0.9);
-  &.is-present {
-    transform: scale(1);
-  }
-}
-</style>

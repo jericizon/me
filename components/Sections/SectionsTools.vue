@@ -1,203 +1,261 @@
-<script setup>
-const maxShow = ref(100);
+<script setup lang="ts">
+import { ref, reactive, computed, onMounted } from 'vue';
+
+// No pagination: show all tools
+
+// Tools data with icons
 const tools = reactive([
   {
-    name: "LARAVEL",
+    name: "Laravel",
     icon: "laravel.svg",
+    category: "backend"
   },
   {
-    name: "VUEJS",
+    name: "Vue.js",
     icon: "vuejs.svg",
+    category: "frontend"
   },
   {
-    name: "NESTJS",
+    name: "NestJS",
     icon: "nestjs.svg",
+    category: "backend"
   },
   {
-    name: "NUXTJS",
+    name: "Nuxt.js",
     icon: "nuxtjs.svg",
+    category: "frontend"
   },
   {
-    name: "DOCKER",
+    name: "Docker",
     icon: "docker.svg",
+    category: "devops"
   },
   {
     name: "PHP",
     icon: "php.svg",
+    category: "backend"
   },
   {
-    name: "wordpress",
+    name: "WordPress",
     icon: "wordpress.svg",
+    category: "cms"
   },
   {
-    name: "MYSQL",
+    name: "MySQL",
     icon: "mysql.svg",
+    category: "database"
   },
   {
-    name: "MARIADB",
+    name: "MariaDB",
     icon: "mariadb.svg",
+    category: "database"
   },
   {
-    name: "FIGMA",
+    name: "Figma",
     icon: "figma.svg",
+    category: "design"
   },
   {
-    name: "GIT",
+    name: "Git",
     icon: "git.svg",
+    category: "devops"
   },
   {
-    name: "GITHUB",
+    name: "GitHub",
     icon: "github.svg",
     addBg: true,
+    category: "devops"
   },
   {
-    name: "BITBUCKET",
+    name: "Bitbucket",
     icon: "bitbucket.svg",
+    category: "devops"
   },
   {
-    name: "GITLAB",
+    name: "GitLab",
     icon: "gitlab.svg",
+    category: "devops"
   },
   {
-    name: "AWS SERVICES",
+    name: "AWS Services",
     icon: "aws.svg",
+    category: "cloud"
   },
-
   {
-    name: "terraform",
+    name: "Terraform",
     icon: "terraform.svg",
+    category: "devops"
   },
   {
-    name: "NODEJS",
+    name: "Node.js",
     icon: "nodejs.svg",
+    category: "backend"
   },
-
   {
-    name: "STRAPI",
+    name: "Strapi",
     icon: "strapi.svg",
+    category: "cms"
   },
   {
     name: "NPM",
     icon: "npm.svg",
     addBg: true,
+    category: "devops"
   },
   {
-    name: "YARN",
+    name: "Yarn",
     icon: "yarn.svg",
     addBg: true,
+    category: "devops"
   },
   {
-    name: "JAVASCRIPT",
+    name: "JavaScript",
     icon: "javascript.svg",
+    category: "frontend"
   },
   {
-    name: "ELECTRON JS",
+    name: "Electron JS",
     icon: "electronjs.svg",
+    category: "frontend"
   },
   {
     name: "HTML",
     icon: "html.svg",
+    category: "frontend"
   },
   {
     name: "CSS",
     icon: "css.svg",
+    category: "frontend"
   },
   {
     name: "SCSS",
     icon: "scss.svg",
     addBg: true,
+    category: "frontend"
   },
   {
-    name: "EXPRESS JS",
+    name: "Express JS",
     icon: "expressjs.svg",
     addBg: true,
+    category: "backend"
   },
   {
-    name: "REDIS",
+    name: "Redis",
     icon: "redis.svg",
     addBg: true,
+    category: "database"
   },
   {
     name: "JSON",
     icon: "json.svg",
     addBg: true,
+    category: "frontend"
   },
 ]);
 
-const moreTools = computed(() => {
-  return tools.length - maxShow.value;
+// No remaining tools computation needed
+
+// Animation refs (container/title only)
+const titleRef = ref<HTMLElement | null>(null);
+const toolsContainerRef = ref<HTMLElement | null>(null);
+
+// Filter state
+const activeFilter = ref('all');
+const categories = computed(() => {
+  const uniqueCategories = new Set(tools.map(tool => tool.category));
+  return ['all', ...Array.from(uniqueCategories)];
+});
+
+// Filtered tools based on active category
+const filteredTools = computed(() => {
+  if (activeFilter.value === 'all') {
+    return tools;
+  }
+  return tools.filter(tool => tool.category === activeFilter.value);
+});
+
+
+// Initialize animations
+onMounted(() => {
+  // Animate title
+  setTimeout(() => {
+    if (titleRef.value) {
+      titleRef.value.style.opacity = '1';
+      titleRef.value.style.transform = 'translateY(0)';
+    }
+  }, 200);
+  
+  // Animate tools container
+  setTimeout(() => {
+    if (toolsContainerRef.value) {
+      toolsContainerRef.value.style.opacity = '1';
+    }
+  }, 400);
+  
+  // Removed per-item animations to avoid conflicts on filter changes
 });
 </script>
+
 <template>
-  <section class="ftco-section" id="tools-section">
-    <div class="container">
-      <div class="row justify-content-center py-5 mt-5">
-        <div class="col-md-12 heading-section text-center">
-          <h1 class="big big-2">Tools</h1>
-          <h2 class="mb-4">Tools</h2>
-          <p>
-            Throughout my decade-long journey as a web developer, I've honed my
-            skills using a diverse array of tools, empowering me to design,
-            develop, and deploy robust and user-friendly web applications
-          </p>
-        </div>
+  <section id="tools-section" class="py-20 md:py-24 relative overflow-hidden">
+    <!-- Decorative elements -->
+    <div class="absolute top-20 left-10 w-64 h-64 bg-primary-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-20 right-10 w-80 h-80 bg-secondary-500/10 rounded-full blur-3xl"></div>
+    
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <!-- Section Title -->
+      <div ref="titleRef" class="text-center mb-16 opacity-0 translate-y-3 transition duration-700 ease-out">
+        <h2 class="section-title">Tools & Technologies</h2>
+        <div class="section-subtitle">My Technical Arsenal</div>
+        <p class="mt-4 max-w-2xl mx-auto text-lg">
+          Throughout my decade-long journey as a web developer, I've honed my
+          skills using a diverse array of tools, empowering me to design,
+          develop, and deploy robust and user-friendly web applications.
+        </p>
       </div>
-      <div class="row">
-        <div
-          class="col-md-3 text-center d-flex"
-          v-for="(tool, key) in tools"
-          :key="key"
+      
+      <!-- Category Filters -->
+      <div class="flex flex-wrap justify-center gap-2 mb-12">
+        <button 
+          v-for="category in categories" 
+          :key="category"
+          @click="activeFilter = category"
+          class="btn btn-outline btn-sm text-secondary-900"
+          :class="{
+            'bg-primary-500/20 border-primary-500/30': activeFilter === category
+          }"
         >
-          <a
-            :href="tool.url || '#tools-section'"
-            class="services-1"
-            v-if="key < maxShow"
-          >
-            <span class="icon">
-              <img
-                :src="`/me/icons/${tool.icon}`"
+          {{ category.charAt(0).toUpperCase() + category.slice(1) }}
+        </button>
+      </div>
+      
+      <!-- Tools Grid -->
+      <div 
+        ref="toolsContainerRef"
+        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6 opacity-0 transition-opacity duration-700"
+      >
+        <div 
+          v-for="tool in filteredTools" 
+          :key="tool.name"
+          class="transition duration-300 ease-out"
+        >
+          <div class="h-full flex flex-col items-center justify-center p-4 text-center transition-all duration-300 hover:scale-105 bg-white/10 border border-white/10 shadow-md backdrop-blur-md rounded-xl">
+            <div class="mb-3 p-3 rounded-full bg-white/10 border border-white/10 backdrop-blur-sm">
+              <img 
+                :src="`/icons/${tool.icon}`" 
                 :alt="tool.name"
-                :class="{ 'add-bg': tool.addBg || false }"
+                :class="{ 'bg-white rounded': tool.addBg || false }"
+                class="w-12 h-12 object-contain"
               />
-            </span>
-            <div class="desc">
-              <h3 class="mb-5">{{ tool.name }}</h3>
             </div>
-          </a>
+            <h3 class="text-sm font-medium">{{ tool.name }}</h3>
+          </div>
         </div>
       </div>
-      <div class="row justify-content-center" v-if="moreTools > 1">
-        <div class="col-auto">
-          <button
-            class="btn btn-primary py-4 px-5"
-            @click="maxShow = tools.length"
-          >
-            Show more ({{ moreTools }})
-          </button>
-        </div>
-      </div>
+      
+      
     </div>
   </section>
 </template>
-
-<style lang="scss" scoped>
-.services-1 {
-  &:hover {
-    .icon {
-      img {
-        background: none !important;
-      }
-    }
-  }
-  .icon {
-    img {
-      width: 80px;
-      transition: 0.3s ease-in-out;
-
-      &.add-bg {
-        background: #fff;
-      }
-    }
-  }
-}
-</style>
+ 
