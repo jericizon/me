@@ -1,54 +1,28 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 
-// Contact data (without phone)
-const contactMethods = [
-  {
-    id: 1,
-    title: 'Email Address',
-    value: 'im.jericizon@gmail.com',
-    link: 'mailto:im.jericizon@gmail.com',
-    icon: 'tabler:mail'
-  },
-  {
-    id: 2,
-    title: 'LinkedIn',
-    value: 'linkedin.com/in/jericizon',
-    link: 'https://www.linkedin.com/in/jericizon',
-    icon: 'tabler:brand-linkedin'
-  },
-  {
-    id: 3,
-    title: 'GitHub',
-    value: 'github.com/jericizon',
-    link: 'https://github.com/jericizon',
-    icon: 'tabler:brand-github'
-  }
-];
-
 // Animation refs
 const titleRef = ref<HTMLElement | null>(null);
-const contactRefs = ref<HTMLElement[]>([]);
+const formCardRef = ref<HTMLElement | null>(null);
+
+// UI state
+const showForm = ref(false);
 
 // Initialize animations
 onMounted(() => {
-  // Animate title
   setTimeout(() => {
     if (titleRef.value) {
       titleRef.value.style.opacity = '1';
       titleRef.value.style.transform = 'translateY(0)';
     }
-  }, 200);
-  
-  // Animate contact cards with staggered delay
-  contactRefs.value.forEach((el, index) => {
-    setTimeout(() => {
-      if (el) {
-        el.style.opacity = '1';
-        el.style.transform = 'translateY(0)';
-      }
-    }, 500 + (index * 150));
-  });
+  }, 150);
+
+  setTimeout(() => {
+    if (formCardRef.value) {
+      formCardRef.value.style.opacity = '1';
+      formCardRef.value.style.transform = 'translateY(0)';
+    }
+  }, 350);
 });
 </script>
 
@@ -67,40 +41,25 @@ onMounted(() => {
           Got an idea you're itching to bring to life? I'm all ears and ready
           to help you execute it flawlessly. Let's chat soon! 🚀
         </p>
+        <!-- Reveal Form Button -->
+        <div class="mt-8">
+          <button
+            type="button"
+            class="btn btn-primary btn-lg"
+            @click="showForm = true"
+            v-if="!showForm"
+          >
+            <span>Open Contact Form</span>
+            <Icon name="tabler:send" class="w-5 h-5" />
+          </button>
+        </div>
       </div>
       
-      <!-- Contact Cards -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-        <div 
-          v-for="(contact, index) in contactMethods" 
-          :key="contact.id"
-          :ref="el => { if (el) contactRefs[index] = el as HTMLElement }"
-          class="opacity-0 translate-y-8 transition duration-700 ease-out"
-          :style="{ transitionDelay: `${index * 120}ms` }"
-        >
-          <div class="p-6 rounded-xl h-full flex flex-col items-center justify-center text-center bg-white/10 border border-white/10 shadow-lg backdrop-blur-md">
-            <!-- Icon -->
-            <div class="contact-icon mb-5 p-4 rounded-full bg-primary-500/10">
-              <Icon :name="contact.icon" class="w-8 h-8 text-primary-300" />
-            </div>
-            
-            <!-- Title -->
-            <h3 class="text-xl font-bold mb-3">{{ contact.title }}</h3>
-            
-            <!-- Value with link -->
-            <a 
-              :href="contact.link" 
-              target="_blank" 
-              class="text-primary-200 hover:text-primary-300 transition-colors flex items-center gap-1"
-            >
-              {{ contact.value }}
-              <Icon 
-                v-if="contact.link.startsWith('http')" 
-                name="tabler:external-link" 
-                class="w-4 h-4" 
-              />
-            </a>
-          </div>
+      <!-- Contact form only -->
+      <div class="max-w-3xl mx-auto" v-if="showForm">
+        <!-- Google Form Embed -->
+        <div ref="formCardRef" class="transition duration-700 ease-out">
+          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe0E5mceDIGOL7A3terd0T5QU_qQ-1bn0UiUvQM6NFebSx1dA/viewform?embedded=true" width="640" height="950" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
         </div>
       </div>
     </div>

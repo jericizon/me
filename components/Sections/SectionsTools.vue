@@ -221,7 +221,7 @@ onMounted(() => {
           v-for="category in categories" 
           :key="category"
           @click="activeFilter = category"
-          class="btn btn-outline btn-sm"
+          class="btn btn-outline btn-sm text-secondary-900"
           :class="{
             'bg-primary-500/20 border-primary-500/30': activeFilter === category
           }"
