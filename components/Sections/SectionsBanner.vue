@@ -36,23 +36,23 @@ onBeforeUnmount(() => {
     <!-- Floating developer icons (viewport-relative positions, avoid center) -->
     <div class="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
       <!-- Laravel (top-right, outside center) -->
-      <img :src="iconSrc('laravel.svg')" alt="Laravel" class="block absolute top-[10vh] right-[4vw] w-14 h-14 md:w-20 md:h-20 opacity-40 drop-shadow-sm animate-float motion-reduce:animate-none" :style="{ animationDelay: '0.1s' }" />
+      <img :src="iconSrc('laravel.svg')" alt="Laravel" class="block absolute top-[10vh] right-[4vw] w-14 h-14 md:w-20 md:h-20 opacity-40 will-change-transform animate-float motion-reduce:animate-none" :style="{ animationDelay: '0.1s', filter: 'drop-shadow(10px 12px 10px rgba(0,0,0,0.18))' }" />
       <!-- Vue.js (top-left, outside center) -->
-      <img :src="iconSrc('vuejs.svg')" alt="Vue.js" class="block absolute top-[8vh] left-[4vw] w-14 h-14 md:w-20 md:h-20 opacity-40 drop-shadow-sm animate-float-slow motion-reduce:animate-none" :style="{ animationDelay: '0.6s' }" />
+      <img :src="iconSrc('vuejs.svg')" alt="Vue.js" class="block absolute top-[8vh] left-[4vw] w-14 h-14 md:w-20 md:h-20 opacity-40 will-change-transform animate-float-slow motion-reduce:animate-none" :style="{ animationDelay: '0.6s', filter: 'drop-shadow(-8px 10px 8px rgba(0,0,0,0.16))' }" />
       <!-- Nuxt.js (bottom-left, outside center) -->
-      <img :src="iconSrc('nuxtjs.svg')" alt="Nuxt.js" class="block absolute bottom-[10vh] left-[6vw] w-14 h-14 md:w-20 md:h-20 opacity-40 drop-shadow-sm animate-float motion-reduce:animate-none" :style="{ animationDelay: '1.2s' }" />
+      <img :src="iconSrc('nuxtjs.svg')" alt="Nuxt.js" class="block absolute bottom-[10vh] left-[6vw] w-14 h-14 md:w-20 md:h-20 opacity-40 will-change-transform animate-float motion-reduce:animate-none" :style="{ animationDelay: '1.2s', filter: 'drop-shadow(6px -6px 8px rgba(0,0,0,0.14))' }" />
       <!-- NestJS (bottom-right, outside center) -->
-      <img :src="iconSrc('nestjs.svg')" alt="NestJS" class="block absolute bottom-[12vh] right-[6vw] w-14 h-14 md:w-20 md:h-20 opacity-40 drop-shadow-sm animate-float-slow motion-reduce:animate-none" :style="{ animationDelay: '1.8s' }" />
+      <img :src="iconSrc('nestjs.svg')" alt="NestJS" class="block absolute bottom-[12vh] right-[6vw] w-14 h-14 md:w-20 md:h-20 opacity-40 will-change-transform animate-float-slow motion-reduce:animate-none" :style="{ animationDelay: '1.8s', filter: 'drop-shadow(-10px -8px 10px rgba(0,0,0,0.17))' }" />
 
       <!-- Small fundamentals (viewport-relative) -->
       <!-- HTML -->
-      <img :src="iconSrc('html.svg')" alt="HTML" class="hidden md:block absolute top-[20vh] left-[12vw] w-10 h-10 opacity-20 animate-float motion-reduce:animate-none" :style="{ animationDelay: '0.3s' }" />
+      <img :src="iconSrc('html.svg')" alt="HTML" class="hidden md:block absolute top-[20vh] left-[12vw] w-10 h-10 opacity-20 will-change-transform animate-float motion-reduce:animate-none" :style="{ animationDelay: '0.3s', filter: 'drop-shadow(6px 8px 8px rgba(0,0,0,0.14))' }" />
       <!-- CSS -->
-      <img :src="iconSrc('css.svg')" alt="CSS" class="hidden lg:block absolute top-[22vh] right-[12vw] w-10 h-10 opacity-20 animate-float-slow motion-reduce:animate-none" :style="{ animationDelay: '0.9s' }" />
+      <img :src="iconSrc('css.svg')" alt="CSS" class="hidden lg:block absolute top-[22vh] right-[12vw] w-10 h-10 opacity-20 will-change-transform animate-float-slow motion-reduce:animate-none" :style="{ animationDelay: '0.9s', filter: 'drop-shadow(-6px 6px 8px rgba(0,0,0,0.14))' }" />
       <!-- JavaScript -->
-      <img :src="iconSrc('javascript.svg')" alt="JavaScript" class="hidden md:block absolute bottom-[18vh] left-[14vw] w-10 h-10 opacity-20 animate-float motion-reduce:animate-none" :style="{ animationDelay: '1.5s' }" />
+      <img :src="iconSrc('javascript.svg')" alt="JavaScript" class="hidden md:block absolute bottom-[18vh] left-[14vw] w-10 h-10 opacity-20 will-change-transform animate-float motion-reduce:animate-none" :style="{ animationDelay: '1.5s', filter: 'drop-shadow(5px -5px 7px rgba(0,0,0,0.13))' }" />
       <!-- Node.js -->
-      <img :src="iconSrc('nodejs.svg')" alt="Node.js" class="hidden lg:block absolute bottom-[16vh] right-[14vw] w-10 h-10 opacity-20 animate-float-slow motion-reduce:animate-none" :style="{ animationDelay: '2.1s' }" />
+      <img :src="iconSrc('nodejs.svg')" alt="Node.js" class="hidden lg:block absolute bottom-[16vh] right-[14vw] w-10 h-10 opacity-20 will-change-transform animate-float-slow motion-reduce:animate-none" :style="{ animationDelay: '2.1s', filter: 'drop-shadow(-5px -7px 7px rgba(0,0,0,0.13))' }" />
     </div>
     <div class="w-full">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 gap-8 items-center justify-items-center">
