@@ -43,7 +43,7 @@ const experiences = reactive([
   },
   {
     start: "2018-04",
-    end: null,
+    end: "2025-04",
     company: "OFFEO, Singapore",
     url: "https://offeo.com",
     position: "Senior Backend Developer",
