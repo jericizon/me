@@ -85,6 +85,9 @@ onUnmounted(() => {
 });
 
 const { openContactForm } = useContactForm();
+
+// Ensure asset URLs respect the app base URL (e.g., GitHub Pages subpath)
+const baseURL = useRuntimeConfig().app.baseURL;
 </script>
 
 <template>
@@ -121,8 +124,8 @@ const { openContactForm } = useContactForm();
   <!-- CTA Section -->
   <section 
     ref="ctaRef"
-    class="py-20 md:py-24 relative overflow-hidden opacity-0 transition-all duration-1000 ease-out"
-    style="background-image: url(/images/cta-bg.jpg); background-size: cover; background-position: center;"
+    class="py-20 md:py-24 relative overflow-hidden opacity-0 transition-all duration-1000 ease-out bg-cover bg-center"
+    :style="{ backgroundImage: `url(${baseURL}images/cta-bg.jpg)` }"
   >
     <!-- Overlay with blur -->
     <div class="absolute inset-0 backdrop-blur-sm bg-gradient-to-b from-black/50 via-black/40 to-black/60"></div>
