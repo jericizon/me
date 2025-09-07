@@ -11,57 +11,75 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Poppins', 'sans-serif'],
-        display: ['Space Grotesk', 'sans-serif']
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Cal Sans', 'Inter', 'system-ui', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace']
       },
       colors: {
         primary: {
-          50: '#eff6ff',
-          100: '#dbeafe',
-          200: '#bfdbfe',
-          300: '#93c5fd',
-          400: '#60a5fa',
-          500: '#3b82f6',
-          600: '#2563eb',  // Primary color
-          700: '#1d4ed8',
-          800: '#1e40af',
-          900: '#1e3a8a',
-          950: '#172554',
+          50: '#f0fdfa',
+          100: '#ccfbf1',
+          200: '#99f6e4',
+          300: '#5eead4',
+          400: '#2dd4bf',
+          500: '#14b8a6',  // Fresh teal primary
+          600: '#0d9488',
+          700: '#0f766e',
+          800: '#115e59',
+          900: '#134e4a',
+          950: '#042f2e',
         },
         secondary: {
-          50: '#f8fafc',
-          100: '#f1f5f9',
-          200: '#e2e8f0',
-          300: '#cbd5e1',
-          400: '#94a3b8',
-          500: '#64748b',
-          600: '#475569',
-          700: '#334155',
-          800: '#1e293b',  // Secondary color
-          900: '#0f172a',  // Text color
-          950: '#020617',
+          50: '#fdf4ff',
+          100: '#fae8ff',
+          200: '#f5d0fe',
+          300: '#f0abfc',
+          400: '#e879f9',
+          500: '#d946ef',  // Vibrant purple secondary
+          600: '#c026d3',
+          700: '#a21caf',
+          800: '#86198f',
+          900: '#701a75',
+          950: '#4c0d4b',
         },
         accent: {
-          50: '#fffbeb',
-          100: '#fef3c7',
-          200: '#fde68a',
-          300: '#fcd34d',
-          400: '#fbbf24',
-          500: '#f59e0b',  // Accent color
-          600: '#d97706',
-          700: '#b45309',
-          800: '#92400e',
-          900: '#78350f',
-          950: '#451a03',
+          50: '#fff7ed',
+          100: '#ffedd5',
+          200: '#fed7aa',
+          300: '#fdba74',
+          400: '#fb923c',
+          500: '#f97316',  // Warm orange accent
+          600: '#ea580c',
+          700: '#c2410c',
+          800: '#9a3412',
+          900: '#7c2d12',
+          950: '#431407',
         },
-        background: '#f8fafc',  // Background color
+        neutral: {
+          50: '#fafafa',
+          100: '#f5f5f5',
+          200: '#e5e5e5',
+          300: '#d4d4d4',
+          400: '#a3a3a3',
+          500: '#737373',
+          600: '#525252',
+          700: '#404040',
+          800: '#262626',
+          900: '#171717',
+          950: '#0a0a0a',
+        },
+        background: {
+          primary: '#ffffff',
+          secondary: '#fafafa',
+          dark: '#0a0a0a'
+        },
         glass: {
-          light: 'rgba(248, 250, 252, 0.15)',
-          DEFAULT: 'rgba(248, 250, 252, 0.25)',
-          dark: 'rgba(15, 23, 42, 0.3)',
-          darker: 'rgba(15, 23, 42, 0.4)',
-          border: 'rgba(248, 250, 252, 0.18)',
-          'border-dark': 'rgba(15, 23, 42, 0.08)',
+          light: 'rgba(255, 255, 255, 0.25)',
+          DEFAULT: 'rgba(255, 255, 255, 0.15)',
+          dark: 'rgba(0, 0, 0, 0.25)',
+          darker: 'rgba(0, 0, 0, 0.35)',
+          border: 'rgba(255, 255, 255, 0.2)',
+          'border-dark': 'rgba(0, 0, 0, 0.1)',
         },
       },
       boxShadow: {
@@ -70,6 +88,9 @@ export default {
         'glass-lg': '0 12px 48px 0 rgba(31, 38, 135, 0.45)',
         'glass-inner': 'inset 0 8px 32px 0 rgba(31, 38, 135, 0.15)',
         'glass-card': '0 8px 32px 0 rgba(31, 38, 135, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.08)',
+        'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
+        'medium': '0 4px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+        'large': '0 10px 40px -10px rgba(0, 0, 0, 0.1)',
       },
       backdropBlur: {
         xs: '2px',
@@ -88,6 +109,10 @@ export default {
         'slide-in-right': 'slideInRight 0.8s ease-out forwards',
         'slide-in-left': 'slideInLeft 0.8s ease-out forwards',
         'zoom-in': 'zoomIn 0.8s ease-out forwards',
+        'bounce-in': 'bounceIn 0.6s ease-out forwards',
+        'scale-in': 'scaleIn 0.5s ease-out forwards',
+        'wiggle': 'wiggle 1s ease-in-out infinite',
+        'glow': 'glow 2s ease-in-out infinite alternate',
       },
       keyframes: {
         float: {
@@ -114,11 +139,41 @@ export default {
           '0%': { transform: 'scale(0.95)', opacity: '0' },
           '100%': { transform: 'scale(1)', opacity: '1' },
         },
+        bounceIn: {
+          '0%': { transform: 'scale(0.3)', opacity: '0' },
+          '50%': { transform: 'scale(1.05)' },
+          '70%': { transform: 'scale(0.9)' },
+          '100%': { transform: 'scale(1)', opacity: '1' },
+        },
+        scaleIn: {
+          '0%': { transform: 'scale(0)', opacity: '0' },
+          '100%': { transform: 'scale(1)', opacity: '1' },
+        },
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(-3deg)' },
+          '50%': { transform: 'rotate(3deg)' },
+        },
+        glow: {
+          '0%': { boxShadow: '0 0 20px rgba(20, 184, 166, 0.4)' },
+          '100%': { boxShadow: '0 0 30px rgba(20, 184, 166, 0.6)' },
+        },
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'glass-gradient': 'linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05))',
-        'glass-gradient-dark': 'linear-gradient(to bottom right, rgba(15, 23, 42, 0.3), rgba(15, 23, 42, 0.1))',
+        'glass-gradient-dark': 'linear-gradient(to bottom right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1))',
+        'hero-gradient': 'linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 50%, #99f6e4 100%)',
+        'card-gradient': 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
+        'accent-gradient': 'linear-gradient(135deg, #14b8a6 0%, #d946ef 50%, #f97316 100%)',
+      },
+      spacing: {
+        '18': '4.5rem',
+        '88': '22rem',
+        '112': '28rem',
+        '128': '32rem',
+      },
+      borderRadius: {
+        '4xl': '2rem',
       },
     },
   },

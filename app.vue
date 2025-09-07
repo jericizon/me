@@ -67,10 +67,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-secondary-50">
+  <div class="min-h-screen bg-gradient-to-br from-primary-50/30 via-white to-secondary-50/30">
     <!-- Main content -->
     <NuxtLayout>
-      <main id="main-content">
+      <main id="main-content" class="relative">
         <NuxtPage />
       </main>
     </NuxtLayout>
@@ -78,40 +78,89 @@ onMounted(() => {
 </template>
 
 <style>
-/* Accessibility: Skip to content link */
-.skip-to-content {
-  position: absolute;
-  top: -40px;
-  left: 0;
-  background: #2563eb; /* Primary blue */
-  color: white;
-  padding: 8px;
-  z-index: 100;
-  transition: top 0.3s;
-}
-
-.skip-to-content:focus {
-  top: 0;
-}
-
-/* Ensure focus styles are visible for accessibility */
-:focus {
-  outline: 2px solid #2563eb; /* Primary blue */
-  outline-offset: 2px;
-}
-
-/* Ensure proper contrast for text */
+/* Fresh and modern global styles */
 :root {
+  /* Fresh color palette */
+  --color-primary: #14b8a6; /* Teal */
+  --color-secondary: #d946ef; /* Purple */
+  --color-accent: #f97316; /* Orange */
+  --color-background: #ffffff;
+  --color-neutral: #171717;
+
+  /* Enhanced accessibility */
   --min-text-contrast: 4.5;
-  --color-primary: #2563eb; /* Primary blue */
-  --color-secondary: #1E293B; /* Secondary slate */
-  --color-accent: #F59E0B; /* Accent amber */
-  --color-background: #F8FAFC; /* Background light gray */
-  --color-text: #0F172A; /* Text deep navy */
 }
 
-/* Prevent horizontal overflow from full-bleed sections (avoids rightmost color strip) */
-html, body {
-  overflow-x: hidden;
+/* Modern scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #14b8a6, #d946ef);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #0d9488, #c026d3);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Enhanced focus styles */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(20, 184, 166, 0.2);
+  color: var(--color-neutral);
+}
+
+/* Custom animations */
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes glow-soft {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(20, 184, 166, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(20, 184, 166, 0.5);
+  }
+}
+
+.animate-float-gentle {
+  animation: float-gentle 4s ease-in-out infinite;
+}
+
+.animate-glow-soft {
+  animation: glow-soft 3s ease-in-out infinite;
+}
+
+/* Glass morphism utilities */
+.glass-card {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.glass-card-dark {
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.18);
 }
 </style>

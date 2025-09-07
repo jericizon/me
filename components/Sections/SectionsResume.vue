@@ -46,7 +46,7 @@ const experiences = reactive([
     end: "2025-04",
     company: "OFFEO, Singapore",
     url: "https://offeo.com",
-    position: "Senior Backend Developer",
+    position: "Senior Full Stack Developer",
     description:
       "I created REST APIs using Laravel, optimized backend queries to improve frontend-database communication. I structured backend logic and MariaDB database schemas, managing table relationships for web applications. I managed export servers, combining NODEJS for rendering previews, FFMPEG for video/audio compilation, and Laravel for AWS S3 storage. I set up LAMP stack in Ubuntu, contributed to frontend development with VueJs and NuxtJs, and built a project dashboard. I managed repositories, conducted code reviews, automated deployments, compiled web apps with NodeJs, utilized websockets for exporting progress, and developed desktop apps using ElectronJs.",
     tools: [
@@ -228,89 +228,112 @@ const toggleExpand = (key: number) => {
 </script>
 
 <template>
-  <section id="resume-section" class="py-20 md:py-24">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <!-- Section Title -->
-      <div class="text-center mb-12 md:mb-16">
-        <h2 class="section-title text-secondary-900">Resume</h2>
-        <div class="section-subtitle text-primary-600 font-medium">My Professional Journey</div>
-        <p class="mt-4 max-w-2xl mx-auto text-lg text-secondary-700">
-          Highlights of my experience, responsibilities, and impact.
+  <section id="resume-section" class="py-24 md:py-32 relative overflow-hidden">
+    <!-- Background decoration -->
+    <div class="absolute inset-0 bg-gradient-to-br from-secondary-50/20 via-white to-primary-50/20" aria-hidden="true"></div>
+    <div class="absolute top-10 left-10 w-72 h-72 bg-gradient-to-br from-accent-300/5 to-primary-300/5 rounded-full blur-3xl" aria-hidden="true"></div>
+    <div class="absolute bottom-10 right-10 w-96 h-96 bg-gradient-to-br from-secondary-300/5 to-accent-300/5 rounded-full blur-3xl" aria-hidden="true"></div>
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <!-- Section Header -->
+      <div class="text-center mb-16 md:mb-20 animate-fade-in">
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur-sm rounded-full border border-white/20 shadow-soft mb-6 animate-bounce-in" style="animation-delay: 0.1s">
+          <Icon name="tabler:file-text" class="w-4 h-4 text-primary-600" />
+          <span class="text-sm font-medium text-neutral-700">Experience</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-neutral-900 mb-4 animate-slide-up" style="animation-delay: 0.2s">
+          My <span class="bg-gradient-to-r from-primary-600 via-secondary-600 to-accent-600 bg-clip-text text-transparent">Professional Journey</span>
+        </h2>
+        <p class="text-lg sm:text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed animate-fade-in" style="animation-delay: 0.3s">
+          A timeline of experiences that shaped my expertise in full-stack development
         </p>
       </div>
 
-      <!-- Timeline (left-aligned) -->
-      <div class="relative max-w-4xl mx-auto">
-        <div class="border-l-2 border-primary-400 pl-6 md:pl-8">
-          <div
-            v-for="(experience, key) in experiences"
-            :key="key"
-            class="relative mb-10 last:mb-0"
-          >
-            <!-- Timeline dot -->
-            <div class="absolute -left-[10px] top-2 w-5 h-5 rounded-full bg-primary-500 border-2 border-white shadow-lg shadow-primary-500/30"></div>
+      <!-- Timeline -->
+      <div class="relative max-w-5xl mx-auto">
+        <!-- Timeline line -->
+        <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-500 via-secondary-500 to-accent-500" aria-hidden="true"></div>
 
-            <!-- Card -->
-            <div class="glass-card rounded-2xl p-6 md:p-7 border border-secondary-200 bg-white/90 backdrop-blur-md shadow-xl hover:shadow-2xl transition-shadow duration-300">
-              <!-- Header: Dates and Duration -->
-              <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
-                <div class="inline-flex items-center gap-2 text-primary-600">
-                  <Icon name="tabler:calendar" class="w-5 h-5 text-primary-600" />
-                  <span class="font-medium">
-                    {{ convertToMonthYear(experience.start) }} - {{ convertToMonthYear(experience.end) }}
-                  </span>
-                </div>
-                <ClientOnly>
-                  <span class="px-3 py-1.5 rounded-full text-xs font-semibold bg-primary-100 text-primary-700 border border-primary-200 shadow-sm">
-                    {{ calculateMonthDifference(experience.start, experience.end, now) }}
-                  </span>
-                </ClientOnly>
-              </div>
+        <div
+          v-for="(experience, key) in experiences"
+          :key="key"
+          class="relative mb-12 last:mb-0 animate-fade-in"
+          :style="{ animationDelay: `${0.4 + key * 0.1}s` }"
+        >
+          <!-- Timeline dot -->
+          <div class="absolute left-4 top-8 w-8 h-8 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-full border-4 border-white shadow-large flex items-center justify-center z-10">
+            <Icon name="tabler:briefcase" class="w-4 h-4 text-white" />
+          </div>
 
-              <!-- Company, Link, and Position -->
-              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
-                <h3 class="text-xl md:text-2xl font-bold text-secondary-900 flex items-center gap-2">
-                  {{ experience.company }}
+          <!-- Experience card -->
+          <div class="ml-20 bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-large border border-white/20 hover:shadow-xl transition-all duration-500 hover:scale-[1.02] group">
+            <!-- Header -->
+            <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-6 mb-6">
+              <div>
+                <div class="flex flex-wrap items-center gap-3 mb-3">
+                  <h3 class="text-2xl font-display font-bold text-neutral-900 group-hover:text-primary-600 transition-colors">{{ experience.company }}</h3>
                   <a
                     v-if="experience.url"
                     :href="experience.url"
                     target="_blank"
                     rel="noopener"
-                    aria-label="Open company website"
-                    class="text-primary-600 hover:text-primary-700 transition-colors"
+                    class="inline-flex items-center gap-2 px-3 py-1 bg-primary-50 text-primary-700 rounded-full text-sm font-medium hover:bg-primary-100 transition-colors border border-primary-100"
                   >
-                    <Icon name="tabler:external-link" class="w-5 h-5" />
+                    <Icon name="tabler:external-link" class="w-4 h-4" />
+                    <span>Visit</span>
                   </a>
-                </h3>
-                <span class="px-4 py-1.5 rounded-full text-sm font-medium bg-secondary-100 text-secondary-800 border border-secondary-200 shadow-sm self-start sm:self-auto">
-                  {{ experience.position }}
-                </span>
+                </div>
+                <p class="text-lg text-secondary-600 font-medium">{{ experience.position }}</p>
               </div>
 
-              <!-- Description -->
-              <p class="mb-4 text-secondary-700 leading-relaxed">
-                {{ expandedKeys.has(key) ? experience.description : (experience.description.length > 220 ? experience.description.slice(0, 220) + '…' : experience.description) }}
-              </p>
+              <!-- Date and duration -->
+              <div class="flex flex-col items-start lg:items-end gap-2">
+                <div class="inline-flex items-center gap-2 text-neutral-600 bg-neutral-50 px-3 py-1 rounded-full border border-neutral-100">
+                  <Icon name="tabler:calendar" class="w-4 h-4" />
+                  <span class="text-sm font-medium">{{ convertToMonthYear(experience.start) }} - {{ convertToMonthYear(experience.end) }}</span>
+                </div>
+                <ClientOnly>
+                  <span class="px-3 py-1 bg-gradient-to-r from-primary-100 to-secondary-100 text-primary-700 rounded-full text-sm font-semibold border border-primary-200 shadow-soft">
+                    {{ calculateMonthDifference(experience.start, experience.end, now) }}
+                  </span>
+                </ClientOnly>
+              </div>
+            </div>
 
+            <!-- Description -->
+            <div class="mb-6">
+              <p class="text-neutral-600 leading-relaxed group-hover:text-neutral-700 transition-colors">
+                {{ expandedKeys.has(key) ? experience.description : (experience.description.length > 200 ? experience.description.slice(0, 200) + '…' : experience.description) }}
+              </p>
               <button
-                v-if="experience.description.length > 220"
-                class="inline-flex items-center gap-1.5 text-sm font-medium text-primary-600 hover:text-primary-700 transition-colors mb-4"
+                v-if="experience.description.length > 200"
+                class="inline-flex items-center gap-2 mt-3 text-primary-600 hover:text-primary-700 font-medium transition-colors group"
                 type="button"
                 @click="toggleExpand(key)"
                 :aria-expanded="expandedKeys.has(key) ? 'true' : 'false'"
               >
-                <Icon :name="expandedKeys.has(key) ? 'tabler:chevron-up' : 'tabler:chevron-down'" class="w-4 h-4" />
-                {{ expandedKeys.has(key) ? 'Show less' : 'Show more' }}
+                <Icon :name="expandedKeys.has(key) ? 'tabler:chevron-up' : 'tabler:chevron-down'" class="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
+                <span>{{ expandedKeys.has(key) ? 'Show less' : 'Read more' }}</span>
               </button>
+            </div>
 
-              <!-- Tools -->
-              <div class="flex flex-wrap gap-2 mt-2">
+            <!-- Tech stack -->
+            <div>
+              <h4 class="text-sm font-semibold text-neutral-700 mb-3 uppercase tracking-wide">Technologies Used</h4>
+              <div class="flex flex-wrap gap-2">
                 <span
-                  v-for="(tool, toolKey) in experience.tools"
+                  v-for="(tool, toolKey) in experience.tools.slice(0, expandedKeys.has(key) ? experience.tools.length : 8)"
                   :key="toolKey"
-                  class="px-3 py-1.5 rounded-lg text-xs font-medium bg-primary-50 text-primary-700 border border-primary-200 hover:bg-primary-100 transition-colors duration-200"
+                  class="px-3 py-1.5 bg-gradient-to-r from-primary-50 to-secondary-50 text-primary-700 rounded-xl text-sm font-medium border border-primary-100 hover:scale-105 transition-transform duration-200 hover:shadow-soft"
                 >
                   {{ tool.toLowerCase() }}
+                </span>
+                <span
+                  v-if="!expandedKeys.has(key) && experience.tools.length > 8"
+                  class="px-3 py-1.5 bg-neutral-100 text-neutral-600 rounded-xl text-sm font-medium border border-neutral-200 cursor-pointer hover:bg-neutral-200 transition-colors"
+                  @click="toggleExpand(key)"
+                >
+                  +{{ experience.tools.length - 8 }} more
                 </span>
               </div>
             </div>
@@ -318,9 +341,15 @@ const toggleExpand = (key: number) => {
         </div>
       </div>
 
-      <!-- Download CV -->
-      <div class="text-center mt-14 md:mt-16">
-        <DownloadCV class="glass-btn" />
+      <!-- CTA Section -->
+      <div class="text-center mt-16 animate-fade-in" style="animation-delay: 0.8s">
+        <div class="flex flex-wrap justify-center gap-4">
+          <DownloadCV />
+          <a href="#contact-section" class="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-semibold rounded-xl shadow-medium hover:shadow-large transition-all duration-300 transform hover:scale-105">
+            <Icon name="tabler:arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <span>Let's Work Together</span>
+          </a>
+        </div>
       </div>
     </div>
   </section>

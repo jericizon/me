@@ -38,8 +38,8 @@ interface StatItem {
 
 const stats: StatItem[] = [
   { value: () => totalDaysInIndustry.value, label: 'In Industry', icon: 'tabler:briefcase' },
-  { value: '300+', label: 'Projects Completed', icon: 'tabler:file-check' },
-  { value: '200+', label: 'Happy Clients', icon: 'tabler:mood-smile' },
+  { value: '100+', label: 'Projects Completed', icon: 'tabler:file-check' },
+  { value: '100+', label: 'Happy Clients', icon: 'tabler:mood-smile' },
   { value: '500+', label: 'Cups of Coffee', icon: 'tabler:coffee' }
 ];
 
