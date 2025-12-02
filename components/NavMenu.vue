@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { useContactForm } from '@/composables/useContactForm'
+import { useAnalytics } from '@/composables/useAnalytics'
+
 const props = defineProps<{
   hasScrolled?: boolean
 }>()
@@ -35,9 +38,8 @@ const getNavIcon = (name: string) => {
   }
   return icons[name as keyof typeof icons] || 'tabler:circle'
 }
-
-import { useContactForm } from '@/composables/useContactForm'
 const { openContactForm } = useContactForm()
+const { trackEvent } = useAnalytics()
 
 const handleNavClick = (link: { name: string; href: string }, e: Event) => {
   if (link.name === 'Contact') {
@@ -86,7 +88,7 @@ const handleNavClick = (link: { name: string; href: string }, e: Event) => {
         <div class="hidden lg:flex items-center gap-3">
           <a
             href="#contact-section"
-            @click.prevent="openContactForm"
+            @click.prevent="() => { trackEvent('cta_click', { section: 'nav', label: 'hire_me' }); openContactForm(); }"
             class="group inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-medium rounded-xl shadow-medium hover:shadow-large transition-all duration-300 transform hover:scale-105"
           >
             <span>Hire Me</span>

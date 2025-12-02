@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from 'vue';
 import { useContactForm } from '@/composables/useContactForm';
+import { useAnalytics } from '@/composables/useAnalytics';
 
 // Calculate total time in industry (reactive even in static builds)
 // `now` updates on client to keep the value fresh after hydration
@@ -86,6 +87,8 @@ onUnmounted(() => {
 
 const { openContactForm } = useContactForm();
 
+const { trackEvent } = useAnalytics();
+
 // Ensure asset URLs respect the app base URL (e.g., GitHub Pages subpath)
 const baseURL = useRuntimeConfig().app.baseURL;
 </script>
@@ -150,7 +153,7 @@ const baseURL = useRuntimeConfig().app.baseURL;
           
           <a
             href="#contact-section"
-            @click.prevent="openContactForm"
+            @click.prevent="() => { trackEvent('cta_click', { section: 'sections_cta', label: 'hire_me' }); openContactForm(); }"
             class="btn btn-primary btn-lg"
           >
             <span>Hire Me</span>

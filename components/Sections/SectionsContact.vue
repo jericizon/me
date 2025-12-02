@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, watchEffect } from 'vue';
 import { useContactForm } from '@/composables/useContactForm';
+import { useAnalytics } from '@/composables/useAnalytics';
 
 // Animation refs
 const titleRef = ref<HTMLElement | null>(null);
@@ -8,6 +9,8 @@ const formCardRef = ref<HTMLElement | null>(null);
 
 // UI state from global composable
 const { contactFormOpen } = useContactForm();
+
+const { trackEvent } = useAnalytics();
 
 // Initialize animations
 onMounted(() => {
@@ -54,7 +57,7 @@ watchEffect(() => {
           <button
             type="button"
             class="btn btn-primary btn-lg"
-            @click="contactFormOpen = true"
+            @click="() => { contactFormOpen = true; trackEvent('contact_form_open', { section: 'contact_section', label: 'open_contact_form' }); }"
             v-if="!contactFormOpen"
           >
             <span>Open Contact Form</span>

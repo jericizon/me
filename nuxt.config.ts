@@ -42,6 +42,12 @@ export default defineNuxtConfig({
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
         { rel: 'canonical', href: 'https://jericizon.github.io/me/' }
+      ],
+      script: [
+        {
+          src: 'https://www.googletagmanager.com/gtag/js?id=G-TZV9SR0KHH',
+          async: true
+        }
       ]
     }
   },

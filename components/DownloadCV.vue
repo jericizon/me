@@ -5,6 +5,7 @@
     rel="noopener"
     :download="props.download ? '' : null"
     class="btn btn-primary btn-lg"
+    @click="trackEvent('download_cv', { section: 'download_cv', label: props.label, href: props.href })"
     aria-label="Download CV"
   >
     <span>{{ props.label }}</span>
@@ -13,6 +14,10 @@
 </template>
 
 <script setup lang="ts">
+import { useAnalytics } from '@/composables/useAnalytics'
+
+const { trackEvent } = useAnalytics()
+
 const props = withDefaults(defineProps<{
   href?: string
   label?: string
