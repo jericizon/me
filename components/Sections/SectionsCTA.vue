@@ -95,8 +95,8 @@ const baseURL = useRuntimeConfig().app.baseURL;
 
 <template>
   <!-- Stats Section -->
-  <section id="stats-section" class="py-16 md:py-20 relative overflow-hidden">
-    <div class="absolute -top-10 -left-10 w-72 h-72 bg-gradient-to-br from-primary-500/20 to-secondary-500/10 rounded-full blur-3xl"></div>
+  <section id="stats-section" class="py-16 md:py-20 relative overflow-hidden" aria-label="Career statistics">
+    <div class="absolute -top-10 -left-10 w-72 h-72 bg-gradient-to-br from-primary-500/20 to-secondary-500/10 rounded-full blur-3xl" aria-hidden="true"></div>
     
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <div 
@@ -111,7 +111,7 @@ const baseURL = useRuntimeConfig().app.baseURL;
           >
             <div class="p-6 md:p-8 text-center rounded-2xl h-full flex flex-col items-center justify-center bg-white/10/50 border border-white/10 shadow-xl backdrop-blur-xl hover:bg-white/10 hover:border-white/20">
               <div class="stat-icon mb-4 p-3 rounded-full bg-gradient-to-br from-primary-500/15 to-secondary-500/10 ring-1 ring-white/10">
-                <Icon :name="stat.icon" class="w-8 h-8 text-primary-600" />
+                <Icon :name="stat.icon" class="w-8 h-8 text-primary-600" aria-hidden="true" />
               </div>
               <div class="stat-value text-2xl md:text-3xl font-extrabold tracking-tight mb-1">
                 {{ typeof stat.value === 'function' ? stat.value() : stat.value }}
@@ -134,7 +134,7 @@ const baseURL = useRuntimeConfig().app.baseURL;
     <div class="absolute inset-0 backdrop-blur-sm bg-gradient-to-b from-black/50 via-black/40 to-black/60"></div>
     
     <!-- Decorative elements -->
-    <div class="absolute bottom-0 right-0 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl" aria-hidden="true"></div>
     
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <div 
@@ -155,9 +155,10 @@ const baseURL = useRuntimeConfig().app.baseURL;
             href="#contact-section"
             @click.prevent="() => { trackEvent('cta_click', { section: 'sections_cta', label: 'hire_me' }); openContactForm(); }"
             class="btn btn-primary btn-lg"
+            aria-label="Hire me - Open contact form"
           >
             <span>Hire Me</span>
-            <Icon name="tabler:send" class="w-5 h-5" />
+            <Icon name="tabler:send" class="w-5 h-5" aria-hidden="true" />
           </a>
         </div>
       </div>

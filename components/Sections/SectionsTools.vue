@@ -223,17 +223,24 @@ onMounted(() => {
 </script>
 
 <template>
-  <section id="tools-section" class="py-20 md:py-24 relative overflow-hidden">
+  <section id="tools-section" class="py-24 md:py-32 relative overflow-hidden">
     <!-- Decorative elements -->
-    <div class="absolute top-20 left-10 w-64 h-64 bg-primary-500/10 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-20 right-10 w-80 h-80 bg-secondary-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute inset-0" aria-hidden="true">
+      <div class="absolute top-20 left-10 w-64 h-64 bg-primary-500/10 dark:bg-primary-500/5 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-20 right-10 w-80 h-80 bg-secondary-500/10 dark:bg-secondary-500/5 rounded-full blur-3xl"></div>
+    </div>
     
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <!-- Section Title -->
       <div ref="titleRef" class="text-center mb-16 opacity-0 translate-y-3 transition duration-700 ease-out">
-        <h2 class="section-title">Tools & Technologies</h2>
-        <div class="section-subtitle">My Technical Arsenal</div>
-        <p class="mt-4 max-w-2xl mx-auto text-lg">
+        <div class="inline-flex items-center gap-2 glass-badge mb-6">
+          <Icon name="tabler:tools" class="w-4 h-4 text-primary-600 dark:text-primary-400" aria-hidden="true" />
+          <span class="text-sm font-medium">Tech Stack</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-neutral-900 dark:text-white mb-4">
+          Tools & <span class="text-gradient">Technologies</span>
+        </h2>
+        <p class="mt-4 max-w-2xl mx-auto text-lg text-neutral-600 dark:text-neutral-400">
           Throughout my decade-long journey as a web developer, I've honed my
           skills using a diverse array of tools, empowering me to design,
           develop, and deploy robust and user-friendly web applications.
@@ -241,15 +248,20 @@ onMounted(() => {
       </div>
       
       <!-- Category Filters -->
-      <div class="flex flex-wrap justify-center gap-2 mb-12">
+      <div class="flex flex-wrap justify-center gap-2 mb-12" role="tablist" aria-label="Filter tools by category">
         <button 
           v-for="category in categories" 
           :key="category"
           @click="activeFilter = category"
-          class="btn btn-outline btn-sm text-secondary-900"
-          :class="{
-            'bg-primary-500/20 border-primary-500/30': activeFilter === category
-          }"
+          class="px-4 py-2 text-sm font-medium rounded-xl transition-all duration-300"
+          :class="[
+            activeFilter === category
+              ? 'bg-primary-500 text-white shadow-glow-primary'
+              : 'glass-card-subtle text-neutral-700 dark:text-neutral-300 hover:bg-white/80 dark:hover:bg-neutral-800/80'
+          ]"
+          role="tab"
+          :aria-selected="activeFilter === category"
+          :aria-controls="'tools-grid'"
         >
           {{ category.charAt(0).toUpperCase() + category.slice(1) }}
         </button>
@@ -258,26 +270,28 @@ onMounted(() => {
       <!-- Tools Grid -->
       <div 
         ref="toolsContainerRef"
-        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6 opacity-0 transition-opacity duration-700"
+        id="tools-grid"
+        role="tabpanel"
+        aria-label="Tools and technologies grid"
+        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-5 opacity-0 transition-opacity duration-700"
       >
         <div 
           v-for="tool in filteredTools" 
           :key="tool.name"
           class="transition duration-300 ease-out"
         >
-          <div class="h-full flex flex-col items-center justify-center p-4 text-center transition-all duration-300 hover:scale-105 bg-white/10 border border-white/10 shadow-md backdrop-blur-md rounded-xl">
-            <div class="mb-3 p-3 rounded-full bg-white/5 border border-white/20 flex items-center justify-center">
+          <div class="glass-card h-full flex flex-col items-center justify-center p-5 text-center hover:scale-105 rounded-2xl group">
+            <div class="mb-3 p-3 rounded-xl bg-gradient-to-br from-primary-500/10 to-secondary-500/10 dark:from-primary-500/20 dark:to-secondary-500/20 border border-white/10 dark:border-white/5 flex items-center justify-center group-hover:shadow-glow-primary transition-shadow duration-300">
               <Icon
                 :name="tool.icon"
-                class="w-7 h-7 md:w-8 md:h-8 text-primary-600"
+                class="w-7 h-7 md:w-8 md:h-8 text-primary-600 dark:text-primary-400"
+                aria-hidden="true"
               />
             </div>
-            <h3 class="text-sm font-medium">{{ tool.name }}</h3>
+            <h3 class="text-sm font-medium text-neutral-800 dark:text-neutral-200">{{ tool.name }}</h3>
           </div>
         </div>
       </div>
-      
-      
     </div>
   </section>
 </template>

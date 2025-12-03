@@ -1,97 +1,247 @@
-// Main SCSS file for glassmorphism portfolio
+// Main SCSS file for modern glassmorphic portfolio
+// Supports light/dark mode with system preference detection
 
-// Base styles
+// ============================================
+// BASE STYLES
+// ============================================
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
 }
 
 body {
-  @apply bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white min-h-screen;
-  font-family: 'Poppins', sans-serif;
+  @apply min-h-screen antialiased;
+  @apply text-neutral-900 dark:text-neutral-100;
+  @apply bg-surface-light dark:bg-surface-dark;
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-// Glassmorphism utility classes
-.glass {
-  @apply bg-glass backdrop-blur-md border border-glass-border rounded-xl;
+// ============================================
+// DECORATIVE BLOB ELEMENTS
+// ============================================
+.blob {
+  @apply absolute rounded-full pointer-events-none;
+  filter: blur(80px);
   
-  &.dark {
-    @apply bg-glass-dark border-glass-border-dark;
+  &-primary {
+    @apply bg-primary-500/25 dark:bg-primary-500/15;
   }
   
-  &-card {
-    @apply bg-glass backdrop-blur shadow-glass-card border border-glass-border rounded-xl transition-all duration-300;
-    
-    &:hover {
-      @apply shadow-glass-lg transform -translate-y-1;
-    }
-    
-    &.dark {
-      @apply bg-glass-dark border-glass-border-dark;
-    }
+  &-secondary {
+    @apply bg-secondary-500/25 dark:bg-secondary-500/15;
   }
   
-  &-nav {
-    @apply bg-glass/80 backdrop-blur-lg border-b border-glass-border sticky top-0 z-50;
-    
-    &.dark {
-      @apply bg-glass-dark/80 border-glass-border-dark;
-    }
-  }
-  
-  &-button {
-    @apply bg-glass backdrop-blur px-6 py-2 rounded-full border border-glass-border transition-all duration-300;
-    
-    &:hover {
-      @apply bg-primary-500 border-primary-400 shadow-md;
-    }
-    
-    &.primary {
-      @apply bg-primary-500 border-primary-400 text-white;
-      
-      &:hover {
-        @apply bg-primary-600 border-primary-500;
-      }
-    }
+  &-accent {
+    @apply bg-accent-500/20 dark:bg-accent-500/10;
   }
 }
 
-// Section styles
+// ============================================
+// SECTION STYLES
+// ============================================
 .section {
-  @apply py-16 md:py-24;
+  @apply py-20 md:py-28 lg:py-32 relative;
   
-  &-title {
-    @apply text-3xl md:text-4xl lg:text-5xl font-bold mb-6 font-display;
+  &-header {
+    @apply text-center mb-16 md:mb-20;
+  }
+}
+
+// ============================================
+// GLASSMORPHIC CARD VARIANTS
+// ============================================
+.glass-panel {
+  @apply relative overflow-hidden;
+  @apply bg-white/60 dark:bg-neutral-900/40;
+  @apply backdrop-blur-xl;
+  @apply border border-white/30 dark:border-white/10;
+  @apply rounded-2xl;
+  @apply shadow-glass dark:shadow-glass-dark;
+  
+  &::before {
+    content: '';
+    @apply absolute inset-0 -z-10;
+    @apply bg-gradient-to-br from-white/50 to-transparent dark:from-white/5;
+    @apply rounded-2xl;
+  }
+}
+
+// Stat card with gradient border
+.stat-card {
+  @apply relative p-6 rounded-2xl overflow-hidden;
+  @apply bg-white/50 dark:bg-neutral-900/30;
+  @apply backdrop-blur-lg;
+  
+  &::before {
+    content: '';
+    @apply absolute inset-0 rounded-2xl;
+    @apply bg-gradient-to-br from-primary-500/20 via-transparent to-secondary-500/20;
+    @apply dark:from-primary-500/10 dark:to-secondary-500/10;
+    z-index: -1;
+  }
+  
+  &::after {
+    content: '';
+    @apply absolute inset-[1px] rounded-2xl;
+    @apply bg-white/70 dark:bg-neutral-900/50;
+    z-index: -1;
+  }
+}
+
+// ============================================
+// PROJECT CARD STYLES
+// ============================================
+.project-card {
+  @apply relative overflow-hidden rounded-2xl;
+  @apply bg-white/60 dark:bg-neutral-900/40;
+  @apply backdrop-blur-lg;
+  @apply border border-white/20 dark:border-white/10;
+  @apply shadow-glass dark:shadow-glass-dark;
+  @apply transition-all duration-500 ease-out;
+  
+  &:hover {
+    @apply -translate-y-2;
+    @apply shadow-glass-lg dark:shadow-glass-dark-lg;
+  }
+  
+  &-image {
+    @apply relative overflow-hidden aspect-video;
+    
+    img {
+      @apply w-full h-full object-cover transition-transform duration-700 ease-out;
+    }
     
     &::after {
       content: '';
-      @apply block w-20 h-1 bg-primary-500 mt-4 mx-auto rounded-full;
+      @apply absolute inset-0;
+      @apply bg-gradient-to-t from-black/50 to-transparent;
+      @apply opacity-0 transition-opacity duration-300;
     }
   }
   
-  &-subtitle {
-    @apply text-sm md:text-base text-secondary-900 mb-12;
+  &:hover &-image {
+    img {
+      @apply scale-110;
+    }
+    
+    &::after {
+      @apply opacity-100;
+    }
+  }
+  
+  &-content {
+    @apply p-6;
+  }
+  
+  &-title {
+    @apply text-xl font-bold mb-2;
+    @apply text-neutral-900 dark:text-white;
+  }
+  
+  &-description {
+    @apply text-neutral-600 dark:text-neutral-400 mb-4 line-clamp-2;
+  }
+  
+  &-tags {
+    @apply flex flex-wrap gap-2;
+  }
+  
+  &-tag {
+    @apply text-xs px-3 py-1 rounded-full font-medium;
+    @apply bg-primary-100/80 dark:bg-primary-900/30;
+    @apply text-primary-700 dark:text-primary-300;
+    @apply border border-primary-200/50 dark:border-primary-700/30;
   }
 }
 
-// Decorative elements
-.blob {
-  @apply absolute rounded-full opacity-20 blur-3xl;
+// ============================================
+// SKILL/TOOL BADGE
+// ============================================
+.skill-badge {
+  @apply flex items-center gap-3 px-4 py-3;
+  @apply rounded-xl;
+  @apply bg-white/50 dark:bg-neutral-900/30;
+  @apply backdrop-blur-md;
+  @apply border border-white/20 dark:border-white/10;
+  @apply transition-all duration-300;
   
-  &-primary {
-    @apply bg-primary-500/30;
+  &:hover {
+    @apply scale-105;
+    @apply bg-white/70 dark:bg-neutral-900/50;
+    @apply shadow-soft;
   }
   
-  &-cyan {
-    @apply bg-cyan-500/20;
+  &-icon {
+    @apply w-6 h-6;
+    @apply text-primary-600 dark:text-primary-400;
   }
   
-  &-purple {
-    @apply bg-purple-500/20;
+  &-name {
+    @apply text-sm font-medium;
+    @apply text-neutral-700 dark:text-neutral-300;
   }
 }
 
-// Animations
+// ============================================
+// TIMELINE STYLES
+// ============================================
+.timeline {
+  @apply relative;
+  
+  &-line {
+    @apply absolute left-8 top-0 bottom-0 w-0.5;
+    @apply bg-gradient-to-b from-primary-500 via-secondary-500 to-accent-500;
+  }
+  
+  &-dot {
+    @apply absolute left-4 w-8 h-8;
+    @apply bg-gradient-to-br from-primary-500 to-secondary-500;
+    @apply rounded-full;
+    @apply border-4 border-white dark:border-neutral-900;
+    @apply shadow-medium;
+    @apply flex items-center justify-center;
+    @apply z-10;
+  }
+  
+  &-card {
+    @apply ml-20;
+    @apply glass-card p-6 md:p-8;
+    @apply mb-8 last:mb-0;
+  }
+}
+
+// ============================================
+// CONTACT FORM STYLES
+// ============================================
+.form-group {
+  @apply mb-6;
+  
+  label {
+    @apply block mb-2 text-sm font-medium;
+    @apply text-neutral-700 dark:text-neutral-300;
+  }
+  
+  input, textarea {
+    @apply w-full px-4 py-3 rounded-xl;
+    @apply bg-white/60 dark:bg-neutral-800/60;
+    @apply backdrop-blur-md;
+    @apply border border-neutral-200/50 dark:border-neutral-700/50;
+    @apply text-neutral-900 dark:text-neutral-100;
+    @apply placeholder-neutral-500 dark:placeholder-neutral-400;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500/50;
+    @apply focus:border-primary-500/50;
+    @apply transition-all duration-200;
+  }
+  
+  textarea {
+    @apply min-h-[150px] resize-none;
+  }
+}
+
+// ============================================
+// ANIMATION UTILITIES
+// ============================================
 .animate {
   &-float {
     animation: float 6s ease-in-out infinite;
@@ -101,8 +251,12 @@ body {
     animation: float 8s ease-in-out infinite;
   }
   
+  &-float-delayed {
+    animation: float 6s ease-in-out infinite 2s;
+  }
+  
   &-pulse-slow {
-    animation: pulse 4s ease-in-out infinite;
+    animation: pulse-glow 4s ease-in-out infinite;
   }
   
   &-fade-in {
@@ -112,33 +266,40 @@ body {
   &-slide-up {
     animation: slideUp 0.8s ease-out forwards;
   }
+  
+  &-slide-in-left {
+    animation: slideInLeft 0.8s ease-out forwards;
+  }
+  
+  &-slide-in-right {
+    animation: slideInRight 0.8s ease-out forwards;
+  }
+  
+  &-bounce-in {
+    animation: bounceIn 0.6s ease-out forwards;
+  }
 }
 
-// Animation keyframes
+// ============================================
+// KEYFRAME ANIMATIONS
+// ============================================
 @keyframes float {
-  0% {
+  0%, 100% {
     transform: translateY(0px);
   }
   50% {
     transform: translateY(-20px);
   }
-  100% {
-    transform: translateY(0px);
-  }
 }
 
-@keyframes pulse {
-  0% {
+@keyframes pulse-glow {
+  0%, 100% {
     opacity: 0.6;
     transform: scale(1);
   }
   50% {
-    opacity: 0.8;
-    transform: scale(1.05);
-  }
-  100% {
-    opacity: 0.6;
-    transform: scale(1);
+    opacity: 0.9;
+    transform: scale(1.02);
   }
 }
 
@@ -154,7 +315,7 @@ body {
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(40px);
   }
   to {
     opacity: 1;
@@ -162,50 +323,50 @@ body {
   }
 }
 
-// Project card styles
-.project-card {
-  @apply glass-card overflow-hidden;
-  
-  &-image {
-    @apply relative overflow-hidden aspect-video;
-    
-    img {
-      @apply w-full h-full object-cover transition-transform duration-500;
-    }
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
   }
-  
-  &:hover &-image img {
-    @apply transform scale-105;
-  }
-  
-  &-content {
-    @apply p-6;
-  }
-  
-  &-title {
-    @apply text-xl font-bold mb-2;
-  }
-  
-  &-description {
-    @apply text-slate-300 mb-4;
-  }
-  
-  &-tags {
-    @apply flex flex-wrap gap-2;
-  }
-  
-  &-tag {
-    @apply text-xs px-3 py-1 rounded-full bg-primary-500/20 text-primary-300;
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
-// Skill badge
-.skill-badge {
-  @apply flex items-center gap-2 px-4 py-2 rounded-full bg-glass backdrop-blur-sm border border-glass-border;
-  
-  &-icon {
-    @apply w-5 h-5;
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
-/* Removed custom scrollbar styling to use default browser scrollbar */
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// ============================================
+// RESPONSIVE HELPERS
+// ============================================
+@media (max-width: 768px) {
+  .glass-card, .glass-panel, .project-card {
+    @apply backdrop-blur-lg;
+  }
+}

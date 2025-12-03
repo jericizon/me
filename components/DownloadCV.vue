@@ -9,7 +9,7 @@
     aria-label="Download CV"
   >
     <span>{{ props.label }}</span>
-    <Icon name="tabler:download" class="w-5 h-5" />
+    <Icon name="tabler:download" class="w-5 h-5" aria-hidden="true" />
   </a>
 </template>
 

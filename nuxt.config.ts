@@ -66,8 +66,9 @@ export default defineNuxtConfig({
   // @ts-ignore - colorMode module configuration
   colorMode: {
     classSuffix: '',
-    preference: 'light',
-    fallback: 'light'
+    preference: 'system',  // Adapts to device preference
+    fallback: 'light',
+    storageKey: 'nuxt-color-mode'
   },
   googleFonts: {
     families: {

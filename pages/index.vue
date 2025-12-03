@@ -8,7 +8,7 @@
       <div
         ref="navInnerRef"
         :class="[
-          'left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen',
+          'w-full left-0 right-0',
           isMobile ? 'fixed top-0 z-[100]' : (isNavFixed ? 'fixed top-0 z-[100]' : 'relative z-20')
         ]"
       >

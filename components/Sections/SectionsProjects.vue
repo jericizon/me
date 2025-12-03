@@ -6,51 +6,66 @@ import { withBase } from 'ufo';
 const projects = [
   {
     id: 1,
-    name: "IMAGINARY ONES",
-    category: "Custom Website",
-    image: "/images/projects/imaginaryones.png",
-    url: "https://imaginaryones.com",
-    size: "medium" // medium = 1/3 width on desktop
+    name: "Expressway PH",
+    category: "Custom Platform",
+    image: "/images/projects/expresswayph.png",
+    url: "https://expresswayph.com"
   },
   {
     id: 2,
-    name: "OFFEO",
-    category: "Custom Website",
-    image: "/images/projects/offeo.png",
-    url: "https://offeo.com",
-    size: "large" // large = 2/3 width on desktop
+    name: "ALAGA Now",
+    category: "Custom Web App",
+    image: "/images/projects/alaganow.png",
+    url: "https://alaganow.pages.dev"
   },
   {
     id: 3,
-    name: "Hey Socials",
-    category: "WordPress Website",
-    image: "/images/projects/heysocials.png",
-    url: "https://heysocial.co",
-    size: "medium-tall" // medium-tall = 1/2 width, taller height
+    name: "Bubio AI",
+    category: "AI Platform",
+    image: "/images/projects/bubio.png",
+    url: "https://bubio.ai/"
   },
   {
     id: 4,
-    name: "Lunch On Line Admin",
-    category: "Custom Admin Dashboard",
-    image: "/images/projects/lunchonline-admin.png",
-    url: "https://lunchonline.us",
-    size: "medium-tall" // medium-tall = 1/2 width, taller height
+    name: "IMAGINARY ONES",
+    category: "Custom Website",
+    image: "/images/projects/imaginaryones.png",
+    url: "https://imaginaryones.com"
   },
   {
     id: 5,
-    name: "Kreston Menon",
-    category: "WordPress Website",
-    image: "/images/projects/krestonmenon.png",
-    url: "https://krestonmenon.com",
-    size: "small" // small = 1/3 width, shorter height
+    name: "OFFEO",
+    category: "Custom Website",
+    image: "/images/projects/offeo.png",
+    url: "https://offeo.com"
   },
   {
     id: 6,
+    name: "Hey Socials",
+    category: "WordPress Website",
+    image: "/images/projects/heysocials.png",
+    url: "https://heysocials.co"
+  },
+  {
+    id: 7,
     name: "Lunch On Line",
     category: "Custom E-Commerce",
     image: "/images/projects/lunchonline.png",
-    url: "https://lunchonline.us",
-    size: "small" // small = 1/3 width, shorter height
+    url: "https://lunchonline.us"
+  },
+  {
+    id: 8,
+    name: "Lunch On Line Admin",
+    category: "Custom Admin Dashboard",
+    image: "/images/projects/lunchonline-admin.png",
+    url: "https://lunchonline.us"
+  },
+  {
+    id: 9,
+    name: "Kreston Menon",
+    category: "WordPress Website",
+    image: "/images/projects/krestonmenon.png",
+    url: "https://krestonmenon.com"
   }
 ];
 
@@ -86,15 +101,15 @@ onMounted(() => {
 </script>
 
 <template>
-  <section id="projects-section" class="py-20 md:py-24 relative overflow-hidden">
+  <section id="projects-section" class="py-20 md:py-24 relative overflow-hidden" aria-labelledby="projects-title">
     <!-- Decorative elements -->
-    <div class="absolute top-40 right-10 w-72 h-72 bg-primary-500/10 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-40 left-10 w-96 h-96 bg-secondary-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute top-40 right-10 w-72 h-72 bg-primary-500/10 rounded-full blur-3xl" aria-hidden="true"></div>
+    <div class="absolute bottom-40 left-10 w-96 h-96 bg-secondary-500/10 rounded-full blur-3xl" aria-hidden="true"></div>
     
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <!-- Section Title -->
       <div ref="titleRef" class="text-center mb-16 opacity-0 translate-y-3 transition duration-700 ease-out">
-        <h2 class="section-title">Projects</h2>
+        <h2 id="projects-title" class="section-title">Projects</h2>
         <div class="section-subtitle">My Recent Work</div>
         <p class="mt-4 max-w-3xl mx-auto text-lg">
           Over a decade in web development, I've crafted a diverse portfolio
@@ -104,43 +119,46 @@ onMounted(() => {
         </p>
       </div>
       
-      <!-- Projects Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div 
+      <!-- Projects Grid - Clean 3-column layout -->
+      <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" role="list" aria-label="Portfolio projects">
+        <li 
           v-for="(project, index) in projects" 
           :key="project.id"
           :ref="el => { if (el) projectRefs[index] = el as HTMLElement }"
-          :class="{
-            'md:col-span-2': project.size === 'large',
-            'md:col-span-1': project.size === 'medium' || project.size === 'small',
-            'row-span-2 md:h-[606px]': project.size === 'medium-tall',
-            'row-span-1': project.size === 'small'
-          }"
-          class="relative group overflow-hidden rounded-xl opacity-0 translate-y-8 transition duration-700 ease-out h-[300px]"
+          class="relative group overflow-hidden rounded-2xl opacity-0 translate-y-8 transition duration-700 ease-out h-[260px] sm:h-[280px] lg:h-[320px] bg-dark-800"
         >
           <!-- Project Image -->
           <div 
-            class="project-image w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+            class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-500 scale-110 group-hover:scale-125"
             :style="{ backgroundImage: `url(${withBasePath(project.image)})` }"
           ></div>
           
-          <!-- Glass Overlay -->
-          <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <!-- Gradient Overlay - stronger for better text contrast -->
+          <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-black/10 transition-opacity duration-500"></div>
           
           <!-- Project Info -->
-          <div class="absolute inset-0 flex flex-col justify-end p-6 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-            <div class="backdrop-blur-md p-6 rounded-xl bg-white/20 border border-white/10 shadow-lg">
-              <h3 class="text-xl md:text-2xl font-bold mb-2">
-                <a :href="project.url" target="_blank" class="hover:text-primary-300 transition-colors flex items-center gap-2">
-                  {{ project.name }}
-                  <Icon name="tabler:external-link" class="w-5 h-5" />
-                </a>
+          <div class="absolute inset-0 flex flex-col justify-end p-5">
+            <div class="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+              <span class="inline-block px-3 py-1 text-xs font-semibold bg-primary-500/30 text-primary-200 rounded-full mb-3 backdrop-blur-md border border-primary-400/40 shadow-lg">
+                {{ project.category }}
+              </span>
+              <h3 class="text-lg md:text-xl font-bold text-white mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                {{ project.name }}
               </h3>
-              <p class="text-primary-200">{{ project.category }}</p>
+              <a 
+                :href="project.url" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 text-sm text-primary-300 hover:text-primary-200 transition-colors opacity-0 group-hover:opacity-100 duration-500"
+                :aria-label="`View ${project.name} project (opens in new tab)`"
+              >
+                View Project
+                <Icon name="tabler:arrow-up-right" class="w-4 h-4" aria-hidden="true" />
+              </a>
             </div>
           </div>
-        </div>
-      </div>
+        </li>
+      </ul>
     </div>
   </section>
 </template>

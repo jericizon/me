@@ -10,7 +10,7 @@ const experiences = reactive([
     start: "2025-04",
     end: "2025-12",
     company: "BUBIO, Singapore",
-    position: "Backend Developer",
+    position: "Senior Backend Developer",
     description:
       "Responsible for database security, REST API backend development, and admin dashboard features. Implemented Supabase Edge Functions for backend processes and configured Row Level Security (RLS) policies to ensure data protection and access control.",
     tools: [
@@ -328,21 +328,22 @@ const toggleExpand = (key: number) => {
 <template>
   <section id="resume-section" class="py-24 md:py-32 relative overflow-hidden">
     <!-- Background decoration -->
-    <div class="absolute inset-0 bg-gradient-to-br from-secondary-50/20 via-white to-primary-50/20" aria-hidden="true"></div>
-    <div class="absolute top-10 left-10 w-72 h-72 bg-gradient-to-br from-accent-300/5 to-primary-300/5 rounded-full blur-3xl" aria-hidden="true"></div>
-    <div class="absolute bottom-10 right-10 w-96 h-96 bg-gradient-to-br from-secondary-300/5 to-accent-300/5 rounded-full blur-3xl" aria-hidden="true"></div>
+    <div class="absolute inset-0" aria-hidden="true">
+      <div class="absolute top-10 left-10 w-72 h-72 bg-secondary-500/10 dark:bg-secondary-500/5 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-10 right-10 w-96 h-96 bg-primary-500/10 dark:bg-primary-500/5 rounded-full blur-3xl"></div>
+    </div>
 
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <!-- Section Header -->
-      <div class="text-center mb-16 md:mb-20 animate-fade-in">
-        <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur-sm rounded-full border border-white/20 shadow-soft mb-6 animate-bounce-in" style="animation-delay: 0.1s">
-          <Icon name="tabler:file-text" class="w-4 h-4 text-primary-600" />
-          <span class="text-sm font-medium text-neutral-700">Experience</span>
+      <div class="text-center mb-16 md:mb-20">
+        <div class="inline-flex items-center gap-2 glass-badge mb-6 animate-fade-in-up">
+          <Icon name="tabler:file-text" class="w-4 h-4 text-primary-600 dark:text-primary-400" />
+          <span class="text-sm font-medium">Experience</span>
         </div>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-neutral-900 mb-4 animate-slide-up" style="animation-delay: 0.2s">
-          My <span class="bg-gradient-to-r from-primary-600 via-secondary-600 to-accent-600 bg-clip-text text-transparent">Professional Journey</span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-neutral-900 dark:text-white mb-4 animate-fade-in-up" style="animation-delay: 0.1s">
+          My <span class="text-gradient">Professional Journey</span>
         </h2>
-        <p class="text-lg sm:text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed animate-fade-in" style="animation-delay: 0.3s">
+        <p class="text-lg sm:text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto leading-relaxed animate-fade-in-up" style="animation-delay: 0.2s">
           A timeline of experiences that shaped my expertise in full-stack development
         </p>
       </div>
@@ -355,38 +356,38 @@ const toggleExpand = (key: number) => {
         <div
           v-for="(group, groupIndex) in groupedExperiences"
           :key="group.id"
-          class="relative mb-12 last:mb-0 animate-fade-in"
-          :style="{ animationDelay: `${0.4 + groupIndex * 0.1}s` }"
+          class="relative mb-12 last:mb-0 animate-fade-in-up"
+          :style="{ animationDelay: `${0.3 + groupIndex * 0.1}s` }"
         >
           <!-- Timeline dot -->
-          <div class="absolute left-4 top-8 w-8 h-8 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-full border-4 border-white shadow-large flex items-center justify-center z-10">
+          <div class="absolute left-4 top-8 w-8 h-8 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-full border-4 border-white dark:border-neutral-900 shadow-large flex items-center justify-center z-10">
             <Icon name="tabler:briefcase" class="w-4 h-4 text-white" />
           </div>
 
           <!-- Experience card -->
-          <div class="ml-20 bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-large border border-white/20 hover:shadow-xl transition-all duration-500 hover:scale-[1.02] group">
+          <div class="ml-20 glass-card p-8 rounded-3xl group">
             <!-- Header -->
             <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-6 mb-6">
               <div>
                 <div class="flex flex-wrap items-center gap-3 mb-3">
-                  <h3 class="text-2xl font-display font-bold text-neutral-900 group-hover:text-primary-600 transition-colors">{{ group.items.length > 1 ? 'Singaporean Company' : group.label }}</h3>
+                  <h3 class="text-2xl font-display font-bold text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">{{ group.items.length > 1 ? 'Singaporean Company' : group.label }}</h3>
                 </div>
-                <p class="text-sm text-secondary-600 font-medium" v-if="group.items.length > 1">
+                <p class="text-sm text-secondary-600 dark:text-secondary-400 font-medium" v-if="group.items.length > 1">
                   Multiple roles across the same company group
                 </p>
-                <p class="text-lg text-secondary-600 font-medium" v-else>
+                <p class="text-lg text-secondary-600 dark:text-secondary-400 font-medium" v-else>
                   {{ group.items[0].position }}
                 </p>
               </div>
 
               <!-- Date and duration (overall company group span) -->
               <div class="flex flex-col items-start lg:items-end gap-2">
-                <div class="inline-flex items-center gap-2 text-neutral-600 bg-neutral-50 px-3 py-1 rounded-full border border-neutral-100">
+                <div class="inline-flex items-center gap-2 text-neutral-600 dark:text-neutral-400 glass-card-subtle px-3 py-1 rounded-full">
                   <Icon name="tabler:calendar" class="w-4 h-4" />
                   <span class="text-sm font-medium">{{ convertToMonthYear(group.start) }} - {{ convertToMonthYear(group.end) }}</span>
                 </div>
                 <ClientOnly>
-                  <span class="px-3 py-1 bg-gradient-to-r from-primary-100 to-secondary-100 text-primary-700 rounded-full text-sm font-semibold border border-primary-200 shadow-soft">
+                  <span class="tag tag-primary text-sm font-semibold">
                     {{ calculateMonthDifference(group.start, group.end, now) }}
                   </span>
                 </ClientOnly>
@@ -397,35 +398,35 @@ const toggleExpand = (key: number) => {
             <div v-if="group.items.length === 1">
               <!-- Description -->
               <div class="mb-6">
-                <p class="text-neutral-600 leading-relaxed group-hover:text-neutral-700 transition-colors">
+                <p class="text-neutral-600 dark:text-neutral-400 leading-relaxed">
                   {{ expandedKeys.has(group.items[0].originalIndex as number) ? group.items[0].description : (group.items[0].description.length > 200 ? group.items[0].description.slice(0, 200) + '…' : group.items[0].description) }}
                 </p>
                 <button
                   v-if="group.items[0].description.length > 200"
-                  class="inline-flex items-center gap-2 mt-3 text-primary-600 hover:text-primary-700 font-medium transition-colors group"
+                  class="inline-flex items-center gap-2 mt-3 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium transition-colors"
                   type="button"
                   @click="toggleExpand(group.items[0].originalIndex as number)"
                   :aria-expanded="expandedKeys.has(group.items[0].originalIndex as number) ? 'true' : 'false'"
                 >
-                  <Icon :name="expandedKeys.has(group.items[0].originalIndex as number) ? 'tabler:chevron-up' : 'tabler:chevron-down'" class="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
+                  <Icon :name="expandedKeys.has(group.items[0].originalIndex as number) ? 'tabler:chevron-up' : 'tabler:chevron-down'" class="w-4 h-4" />
                   <span>{{ expandedKeys.has(group.items[0].originalIndex as number) ? 'Show less' : 'Read more' }}</span>
                 </button>
               </div>
 
               <!-- Tech stack -->
               <div>
-                <h4 class="text-sm font-semibold text-neutral-700 mb-3 uppercase tracking-wide">Technologies Used</h4>
+                <h4 class="text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-3 uppercase tracking-wide">Technologies Used</h4>
                 <div class="flex flex-wrap gap-2">
                   <span
                     v-for="(tool, toolKey) in group.items[0].tools.slice(0, expandedKeys.has(group.items[0].originalIndex as number) ? group.items[0].tools.length : 8)"
                     :key="toolKey"
-                    class="px-3 py-1.5 bg-gradient-to-r from-primary-50 to-secondary-50 text-primary-700 rounded-xl text-sm font-medium border border-primary-100 hover:scale-105 transition-transform duration-200 hover:shadow-soft"
+                    class="tag tag-primary hover:scale-105 transition-transform duration-200"
                   >
                     {{ tool.toLowerCase() }}
                   </span>
                   <span
                     v-if="!expandedKeys.has(group.items[0].originalIndex as number) && group.items[0].tools.length > 8"
-                    class="px-3 py-1.5 bg-neutral-100 text-neutral-600 rounded-xl text-sm font-medium border border-neutral-200 cursor-pointer hover:bg-neutral-200 transition-colors"
+                    class="tag tag-neutral cursor-pointer hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors"
                     @click="toggleExpand(group.items[0].originalIndex as number)"
                   >
                     +{{ group.items[0].tools.length - 8 }} more
@@ -439,25 +440,25 @@ const toggleExpand = (key: number) => {
               <div
                 v-for="item in group.items"
                 :key="item.originalIndex"
-                class="rounded-2xl border border-neutral-100 bg-neutral-50/60 p-5 hover:bg-neutral-50 transition-colors"
+                class="glass-card-subtle rounded-2xl p-5"
               >
                 <div class="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-3">
                   <div>
-                    <p class="text-sm font-semibold text-primary-600 mb-1">
+                    <p class="text-sm font-semibold text-primary-600 dark:text-primary-400 mb-1">
                       {{ (item as any).branchLabel ?? item.company }}
                     </p>
-                    <p class="text-base md:text-lg text-secondary-700 font-medium">
+                    <p class="text-base md:text-lg text-secondary-700 dark:text-secondary-300 font-medium">
                       {{ item.position }}
                     </p>
                   </div>
 
                   <div class="flex flex-col items-start md:items-end gap-1">
-                    <div class="inline-flex items-center gap-2 text-neutral-600 bg-white px-3 py-1 rounded-full border border-neutral-200">
+                    <div class="inline-flex items-center gap-2 text-neutral-600 dark:text-neutral-400 glass-card-subtle px-3 py-1 rounded-full">
                       <Icon name="tabler:calendar" class="w-4 h-4" />
                       <span class="text-[8px] md:text-xs font-medium">{{ convertToMonthYear(item.start) }} - {{ convertToMonthYear((item as any).end ?? null) }}</span>
                     </div>
                     <ClientOnly>
-                      <span class="text-[8px] px-3 py-1 bg-gradient-to-r from-primary-50 to-secondary-50 text-primary-700 rounded-full text-xs md:text-sm font-semibold border border-primary-100">
+                      <span class="tag tag-primary text-xs md:text-sm font-semibold">
                         {{ calculateMonthDifference(item.start, (item as any).end ?? null, now) }}
                       </span>
                     </ClientOnly>
@@ -466,12 +467,12 @@ const toggleExpand = (key: number) => {
 
                 <!-- Description -->
                 <div class="mb-4">
-                  <p class="text-sm md:text-base text-neutral-600 leading-relaxed">
+                  <p class="text-sm md:text-base text-neutral-600 dark:text-neutral-400 leading-relaxed">
                     {{ expandedKeys.has(item.originalIndex as number) ? item.description : (item.description.length > 200 ? item.description.slice(0, 200) + '…' : item.description) }}
                   </p>
                   <button
                     v-if="item.description.length > 200"
-                    class="inline-flex items-center gap-2 mt-2 text-primary-600 hover:text-primary-700 font-medium transition-colors"
+                    class="inline-flex items-center gap-2 mt-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium transition-colors"
                     type="button"
                     @click="toggleExpand(item.originalIndex as number)"
                     :aria-expanded="expandedKeys.has(item.originalIndex as number) ? 'true' : 'false'"
@@ -483,18 +484,18 @@ const toggleExpand = (key: number) => {
 
                 <!-- Tech stack -->
                 <div>
-                  <h4 class="text-xs md:text-sm font-semibold text-neutral-700 mb-2 uppercase tracking-wide">Technologies Used</h4>
+                  <h4 class="text-xs md:text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-2 uppercase tracking-wide">Technologies Used</h4>
                   <div class="flex flex-wrap gap-2">
                     <span
                       v-for="(tool, toolKey) in item.tools.slice(0, expandedKeys.has(item.originalIndex as number) ? item.tools.length : 8)"
                       :key="toolKey"
-                      class="px-3 py-1.5 bg-gradient-to-r from-primary-50 to-secondary-50 text-primary-700 rounded-xl text-xs md:text-sm font-medium border border-primary-100 hover:scale-105 transition-transform duration-200 hover:shadow-soft"
+                      class="tag tag-primary text-xs md:text-sm hover:scale-105 transition-transform duration-200"
                     >
                       {{ tool.toLowerCase() }}
                     </span>
                     <span
                       v-if="!expandedKeys.has(item.originalIndex as number) && item.tools.length > 8"
-                      class="px-3 py-1.5 bg-neutral-100 text-neutral-600 rounded-xl text-xs md:text-sm font-medium border border-neutral-200 cursor-pointer hover:bg-neutral-200 transition-colors"
+                      class="tag tag-neutral text-xs md:text-sm cursor-pointer hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors"
                       @click="toggleExpand(item.originalIndex as number)"
                     >
                       +{{ item.tools.length - 8 }} more
@@ -508,10 +509,10 @@ const toggleExpand = (key: number) => {
       </div>
 
       <!-- CTA Section -->
-      <div class="text-center mt-16 animate-fade-in" style="animation-delay: 0.8s">
+      <div class="text-center mt-16 animate-fade-in-up" style="animation-delay: 0.5s">
         <div class="flex flex-wrap justify-center gap-4">
           <DownloadCV />
-          <a href="#contact-section" class="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-semibold rounded-xl shadow-medium hover:shadow-large transition-all duration-300 transform hover:scale-105">
+          <a href="#contact-section" class="btn btn-lg btn-primary group">
             <Icon name="tabler:arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             <span>Let's Work Together</span>
           </a>

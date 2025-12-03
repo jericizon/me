@@ -53,72 +53,92 @@ const handleNavClick = (link: { name: string; href: string }, e: Event) => {
 <template>
   <nav
     :class="[
-      // Modern glass navigation
+      // Modern glassmorphic navigation
       'fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500',
-      hasScrolled ? 'bg-white/90 backdrop-blur-xl shadow-soft border-b border-white/20' : 'bg-white/80 backdrop-blur-lg shadow-soft border-b border-white/10'
+      hasScrolled 
+        ? 'bg-white/80 dark:bg-neutral-900/80 backdrop-blur-2xl shadow-glass dark:shadow-glass-dark border-b border-white/20 dark:border-white/10' 
+        : 'bg-white/60 dark:bg-neutral-900/60 backdrop-blur-xl border-b border-white/10 dark:border-white/5'
     ]"
+    role="navigation"
+    aria-label="Main navigation"
   >
     <div class="w-full px-4 sm:px-6 lg:px-8">
       <div class="relative flex items-center justify-between h-16 lg:h-18">
         <!-- Logo/Brand -->
         <div class="flex-shrink-0">
-          <a href="#home-section" class="group inline-flex items-center gap-3 font-display font-bold text-xl lg:text-2xl text-neutral-900 hover:text-primary-600 transition-colors duration-300">
-            <div class="w-8 h-8 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-lg flex items-center justify-center shadow-medium group-hover:shadow-large transition-shadow duration-300">
+          <a href="#home-section" class="group inline-flex items-center gap-3 font-display font-bold text-xl lg:text-2xl text-neutral-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300">
+            <div class="relative w-10 h-10 bg-gradient-to-br from-primary-500 via-secondary-500 to-accent-500 rounded-xl flex items-center justify-center shadow-medium group-hover:shadow-glow-primary transition-all duration-300 group-hover:scale-105">
               <span class="text-white font-bold text-sm">JI</span>
+              <!-- Animated ring on hover -->
+              <span class="absolute inset-0 rounded-xl border-2 border-white/30 group-hover:border-white/50 transition-colors"></span>
             </div>
             <span class="hidden sm:block">Jeric Izon</span>
           </a>
         </div>
 
         <!-- Desktop Navigation -->
-        <div class="hidden lg:flex items-center space-x-1">
+        <div class="hidden lg:flex items-center space-x-1" role="menubar">
           <a
             v-for="link in navLinks"
             :key="link.name"
             :href="link.href"
-            class="group relative px-4 py-2 text-sm font-medium text-neutral-700 hover:text-primary-600 transition-all duration-300 rounded-lg hover:bg-primary-50/50"
+            class="group relative px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:text-primary-600 dark:hover:text-primary-400 transition-all duration-300 rounded-xl"
+            role="menuitem"
             @click="(e) => handleNavClick(link, e)"
           >
             <span class="relative z-10">{{ link.name }}</span>
-            <div class="absolute inset-0 bg-gradient-to-r from-primary-500/10 to-secondary-500/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <!-- Hover background -->
+            <div class="absolute inset-0 bg-primary-500/10 dark:bg-primary-500/20 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 scale-90 group-hover:scale-100"></div>
           </a>
         </div>
 
-        <!-- CTA Button -->
+        <!-- Right side actions -->
         <div class="hidden lg:flex items-center gap-3">
+          <!-- Theme Toggle -->
+          <ThemeToggle />
+          
+          <!-- CTA Button -->
           <a
             href="#contact-section"
             @click.prevent="() => { trackEvent('cta_click', { section: 'nav', label: 'hire_me' }); openContactForm(); }"
-            class="group inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-medium rounded-xl shadow-medium hover:shadow-large transition-all duration-300 transform hover:scale-105"
+            class="group inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-semibold rounded-xl shadow-medium hover:shadow-glow-primary transition-all duration-300 transform hover:scale-105"
+            aria-label="Hire me - Open contact form"
           >
             <span>Hire Me</span>
-            <Icon name="tabler:arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            <Icon name="tabler:arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
           </a>
         </div>
 
-        <!-- Mobile menu button -->
-        <div class="lg:hidden flex items-center gap-3">
+        <!-- Mobile menu buttons -->
+        <div class="lg:hidden flex items-center gap-2">
+          <!-- Theme Toggle (Mobile) -->
+          <ThemeToggle />
+          
           <!-- Mobile CTA -->
           <a
             href="#contact-section"
             @click.prevent="openContactForm"
-            class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-medium rounded-lg shadow-medium hover:shadow-large transition-all duration-300"
+            class="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold rounded-xl shadow-medium hover:shadow-glow-primary transition-all duration-300"
+            aria-label="Hire me - Open contact form"
           >
             <span class="hidden sm:inline">Hire Me</span>
-            <Icon name="tabler:mail" class="w-4 h-4" />
+            <Icon name="tabler:mail" class="w-4 h-4" aria-hidden="true" />
           </a>
 
           <!-- Mobile menu toggle -->
           <button
             @click="toggleMenu"
-            class="inline-flex items-center justify-center p-2 text-neutral-700 hover:text-primary-600 hover:bg-primary-50/50 rounded-lg transition-all duration-300"
-            aria-expanded="false"
+            class="inline-flex items-center justify-center w-10 h-10 text-neutral-700 dark:text-neutral-300 hover:text-primary-600 dark:hover:text-primary-400 bg-white/60 dark:bg-neutral-800/60 backdrop-blur-md border border-white/20 dark:border-white/10 rounded-xl transition-all duration-300 hover:scale-105"
+            :aria-expanded="isMenuOpen"
+            aria-controls="mobile-menu"
+            aria-label="Toggle navigation menu"
           >
-            <span class="sr-only">Open main menu</span>
+            <span class="sr-only">{{ isMenuOpen ? 'Close' : 'Open' }} main menu</span>
             <Icon
               :name="isMenuOpen ? 'tabler:x' : 'tabler:menu-2'"
-              class="block w-6 h-6 transition-transform duration-300"
+              class="block w-5 h-5 transition-transform duration-300"
               :class="{ 'rotate-180': isMenuOpen }"
+              aria-hidden="true"
             />
           </button>
         </div>
@@ -126,23 +146,38 @@ const handleNavClick = (link: { name: string; href: string }, e: Event) => {
     </div>
 
     <!-- Mobile menu -->
-    <div
-      v-show="isMenuOpen"
-      class="lg:hidden fixed top-16 left-0 right-0 bg-white/95 backdrop-blur-xl border-b border-white/20 shadow-large overflow-hidden transition-all duration-300 ease-in-out"
-      :class="{ 'max-h-96 opacity-100': isMenuOpen, 'max-h-0 opacity-0': !isMenuOpen }"
+    <Transition
+      enter-active-class="transition-all duration-300 ease-out"
+      enter-from-class="opacity-0 -translate-y-4"
+      enter-to-class="opacity-100 translate-y-0"
+      leave-active-class="transition-all duration-200 ease-in"
+      leave-from-class="opacity-100 translate-y-0"
+      leave-to-class="opacity-0 -translate-y-4"
     >
-      <div class="px-4 py-6 space-y-2">
-        <a
-          v-for="link in navLinks"
-          :key="link.name"
-          :href="link.href"
-          class="group flex items-center gap-3 px-4 py-3 text-base font-medium text-neutral-700 hover:text-primary-600 hover:bg-primary-50/50 rounded-xl transition-all duration-300"
-          @click="(e) => handleNavClick(link, e)"
-        >
-          <Icon :name="getNavIcon(link.name)" class="w-5 h-5 text-neutral-500 group-hover:text-primary-600 transition-colors" />
-          <span>{{ link.name }}</span>
-        </a>
+      <div
+        v-show="isMenuOpen"
+        id="mobile-menu"
+        class="lg:hidden absolute top-full left-0 right-0 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-2xl border-b border-white/20 dark:border-white/10 shadow-glass-lg dark:shadow-glass-dark-lg"
+        role="menu"
+        aria-label="Mobile navigation menu"
+      >
+        <div class="px-4 py-6 space-y-2">
+          <a
+            v-for="link in navLinks"
+            :key="link.name"
+            :href="link.href"
+            class="group flex items-center gap-4 px-4 py-3 text-base font-medium text-neutral-700 dark:text-neutral-300 hover:text-primary-600 dark:hover:text-primary-400 rounded-xl transition-all duration-300"
+            :class="{ 'bg-primary-500/10 dark:bg-primary-500/20': false }"
+            role="menuitem"
+            @click="(e) => handleNavClick(link, e)"
+          >
+            <span class="flex items-center justify-center w-10 h-10 rounded-xl bg-white/50 dark:bg-neutral-800/50 border border-white/20 dark:border-white/10 group-hover:bg-primary-500/20 dark:group-hover:bg-primary-500/30 transition-colors">
+              <Icon :name="getNavIcon(link.name)" class="w-5 h-5 text-neutral-500 dark:text-neutral-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors" aria-hidden="true" />
+            </span>
+            <span>{{ link.name }}</span>
+          </a>
+        </div>
       </div>
-    </div>
+    </Transition>
   </nav>
 </template>
