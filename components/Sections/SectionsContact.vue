@@ -49,8 +49,9 @@ watchEffect(() => {
         <h2 class="section-title">Contact</h2>
         <div class="section-subtitle">Get In Touch</div>
         <p class="mt-4 max-w-2xl mx-auto text-lg">
-          Got an idea you're itching to bring to life? I'm all ears and ready
-          to help you execute it flawlessly. Let's chat soon! 🚀
+          Got an idea you're itching to bring to life? I'm a full-stack web developer based in the Philippines,
+          working remotely with clients in Singapore and worldwide. I'm currently available for part-time,
+          freelance, and remote roles—let's chat about your project or team needs. 🚀
         </p>
         <!-- Reveal Form Button -->
         <div class="mt-8">

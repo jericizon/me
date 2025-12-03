@@ -10,30 +10,31 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: 'en'
       },
-      title: 'Jeric Izon - Full Stack Web Developer',
+      title: 'Jeric Izon - Full Stack Web Developer | Available for Work',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'format-detection', content: 'telephone=no' },
         
         // Primary Meta Tags
-        { name: 'title', content: 'Jeric Izon - Full Stack Web Developer' },
-        { name: 'description', content: 'Portfolio of Jeric Izon, a Full Stack Web Developer with over 10 years of experience in creating modern web applications and websites.' },
+        { name: 'title', content: 'Jeric Izon - Full Stack Web Developer | Available for Work' },
+        { name: 'description', content: 'Portfolio of Jeric Izon, a Full Stack Web Developer available for work with over 10 years of experience creating modern web applications using Vue.js, React, Node.js, PHP, and Laravel.' },
         { name: 'author', content: 'Jeric Izon' },
-        { name: 'keywords', content: 'web developer, full stack developer, frontend developer, backend developer, vue.js, react.js, node.js, php, laravel, portfolio' },
+        { name: 'keywords', content: 'full stack developer available for hire, full stack web developer available for work, remote full stack developer, web developer, frontend developer, backend developer, vue.js, react.js, node.js, php, laravel, portfolio' },
+        { name: 'google-site-verification', content: 'kmTBng2HLaFg6QEQSMBmOAhOa8Ger8VtzcQsgLhURPU' },
         
         // Open Graph / Facebook
         { property: 'og:type', content: 'website' },
         { property: 'og:url', content: 'https://jericizon.github.io/me/' },
-        { property: 'og:title', content: 'Jeric Izon - Full Stack Web Developer' },
-        { property: 'og:description', content: 'Portfolio of Jeric Izon, a Full Stack Web Developer with over 10 years of experience in creating modern web applications and websites.' },
+        { property: 'og:title', content: 'Jeric Izon - Full Stack Web Developer | Available for Work' },
+        { property: 'og:description', content: 'Portfolio of Jeric Izon, a Full Stack Web Developer available for work with over 10 years of experience creating modern web applications using Vue.js, React, Node.js, PHP, and Laravel.' },
         { property: 'og:image', content: 'https://jericizon.github.io/me/images/banner.png' },
         
         // Twitter
         { property: 'twitter:card', content: 'summary_large_image' },
         { property: 'twitter:url', content: 'https://jericizon.github.io/me/' },
-        { property: 'twitter:title', content: 'Jeric Izon - Full Stack Web Developer' },
-        { property: 'twitter:description', content: 'Portfolio of Jeric Izon, a Full Stack Web Developer with over 10 years of experience in creating modern web applications and websites.' },
+        { property: 'twitter:title', content: 'Jeric Izon - Full Stack Web Developer | Available for Work' },
+        { property: 'twitter:description', content: 'Portfolio of Jeric Izon, a Full Stack Web Developer available for work with over 10 years of experience creating modern web applications using Vue.js, React, Node.js, PHP, and Laravel.' },
         { property: 'twitter:image', content: 'https://jericizon.github.io/me/images/banner.png' },
         
         // Theme color

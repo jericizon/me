@@ -1,13 +1,54 @@
 <script setup lang="ts">
-import { reactive, ref, onMounted, onUnmounted } from 'vue';
+import { reactive, ref, onMounted, onUnmounted, computed } from 'vue';
 
 // Experience data
 const experiences = reactive([
   {
+    groupId: "bubio-imaginary-offeo",
+    groupLabel: "BUBIO / IMAGINARY ONES / OFFEO, Singapore",
+    branchLabel: "BUBIO",
+    start: "2025-04",
+    end: "2025-12",
+    company: "BUBIO, Singapore",
+    position: "Backend Developer",
+    description:
+      "Responsible for database security, REST API backend development, and admin dashboard features. Implemented Supabase Edge Functions for backend processes and configured Row Level Security (RLS) policies to ensure data protection and access control.",
+    tools: [
+      "SUPABASE",
+      "REACTJS",
+      "NESTJS",
+      "NODEJS",
+      "DOCKER",
+      "TERRAFORM",
+      "POSTGRESQL",
+      "HTML",
+      "CSS",
+      "SCSS",
+      "GIT",
+      "BITBUCKET",
+      "NPM",
+      "YARN",
+      "JAVASCRIPT",
+      "TYPESCRIPT",
+      "FIGMA",
+      "JSON",
+      "REST API",
+      "AWS S3",
+      "AWS EC2",
+      "AWS RDS",
+      "AWS LAMBDA",
+      "AWS ECR",
+      "AWS AUTOSCALE",
+      "AWS SECURITY GROUP",
+    ],
+  },
+  {
+    groupId: "bubio-imaginary-offeo",
+    groupLabel: "BUBIO / IMAGINARY ONES / OFFEO, Singapore",
+    branchLabel: "IMAGINARY ONES",
     start: "2023-12",
-    end: null,
+    end: "2025-04",
     company: "IMAGINARY ONES, Singapore",
-    url: "https://imaginaryones.com",
     position: "Senior Backend Developer",
     description:
       "Responsible for creating REST APIs using NESTJS and creating and optimizing backend queries to make the communication between front-end and database faster and smoothly.",
@@ -42,10 +83,12 @@ const experiences = reactive([
     ],
   },
   {
+    groupId: "bubio-imaginary-offeo",
+    groupLabel: "BUBIO / IMAGINARY ONES / OFFEO, Singapore",
+    branchLabel: "OFFEO",
     start: "2018-04",
-    end: "2025-04",
+    end: "2023-12",
     company: "OFFEO, Singapore",
-    url: "https://offeo.com",
     position: "Senior Full Stack Developer",
     description:
       "I created REST APIs using Laravel, optimized backend queries to improve frontend-database communication. I structured backend logic and MariaDB database schemas, managing table relationships for web applications. I managed export servers, combining NODEJS for rendering previews, FFMPEG for video/audio compilation, and Laravel for AWS S3 storage. I set up LAMP stack in Ubuntu, contributed to frontend development with VueJs and NuxtJs, and built a project dashboard. I managed repositories, conducted code reviews, automated deployments, compiled web apps with NodeJs, utilized websockets for exporting progress, and developed desktop apps using ElectronJs.",
@@ -149,6 +192,61 @@ const experiences = reactive([
     ],
   },
 ]);
+
+// Group experiences by company/branch where applicable
+type ExperienceItem = any;
+
+type ExperienceGroup = {
+  id: string;
+  label: string;
+  start: string;
+  end: string | null;
+  items: ExperienceItem[];
+};
+
+const groupedExperiences = computed<ExperienceGroup[]>(() => {
+  const groups: Record<string, ExperienceGroup> = {};
+
+  experiences.forEach((exp, index) => {
+    const anyExp = exp as any;
+    const groupId: string = anyExp.groupId ?? exp.company;
+    const groupLabel: string = anyExp.groupLabel ?? exp.company;
+
+    if (!groups[groupId]) {
+      groups[groupId] = {
+        id: groupId,
+        label: groupLabel,
+        start: exp.start,
+        end: (exp as any).end ?? null,
+        items: [],
+      };
+    } else {
+      if (exp.start < groups[groupId].start) {
+        groups[groupId].start = exp.start;
+      }
+
+      const groupEnd = groups[groupId].end;
+      const expEnd = (exp as any).end ?? null;
+
+      if (groupEnd === null) {
+        groups[groupId].end = null;
+      } else if (expEnd === null) {
+        groups[groupId].end = null;
+      } else if (expEnd > groupEnd) {
+        groups[groupId].end = expEnd;
+      }
+    }
+
+    const withIndex: ExperienceItem = {
+      ...(exp as any),
+      originalIndex: index,
+    };
+
+    groups[groupId].items.push(withIndex);
+  });
+
+  return Object.values(groups);
+});
 
 // Format date to Month Year format
 const convertToMonthYear = (dateString: string | null): string => {
@@ -255,10 +353,10 @@ const toggleExpand = (key: number) => {
         <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-500 via-secondary-500 to-accent-500" aria-hidden="true"></div>
 
         <div
-          v-for="(experience, key) in experiences"
-          :key="key"
+          v-for="(group, groupIndex) in groupedExperiences"
+          :key="group.id"
           class="relative mb-12 last:mb-0 animate-fade-in"
-          :style="{ animationDelay: `${0.4 + key * 0.1}s` }"
+          :style="{ animationDelay: `${0.4 + groupIndex * 0.1}s` }"
         >
           <!-- Timeline dot -->
           <div class="absolute left-4 top-8 w-8 h-8 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-full border-4 border-white shadow-large flex items-center justify-center z-10">
@@ -271,70 +369,138 @@ const toggleExpand = (key: number) => {
             <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-6 mb-6">
               <div>
                 <div class="flex flex-wrap items-center gap-3 mb-3">
-                  <h3 class="text-2xl font-display font-bold text-neutral-900 group-hover:text-primary-600 transition-colors">{{ experience.company }}</h3>
-                  <a
-                    v-if="experience.url"
-                    :href="experience.url"
-                    target="_blank"
-                    rel="noopener"
-                    class="inline-flex items-center gap-2 px-3 py-1 bg-primary-50 text-primary-700 rounded-full text-sm font-medium hover:bg-primary-100 transition-colors border border-primary-100"
-                  >
-                    <Icon name="tabler:external-link" class="w-4 h-4" />
-                    <span>Visit</span>
-                  </a>
+                  <h3 class="text-2xl font-display font-bold text-neutral-900 group-hover:text-primary-600 transition-colors">{{ group.items.length > 1 ? 'Singaporean Company' : group.label }}</h3>
                 </div>
-                <p class="text-lg text-secondary-600 font-medium">{{ experience.position }}</p>
+                <p class="text-sm text-secondary-600 font-medium" v-if="group.items.length > 1">
+                  Multiple roles across the same company group
+                </p>
+                <p class="text-lg text-secondary-600 font-medium" v-else>
+                  {{ group.items[0].position }}
+                </p>
               </div>
 
-              <!-- Date and duration -->
+              <!-- Date and duration (overall company group span) -->
               <div class="flex flex-col items-start lg:items-end gap-2">
                 <div class="inline-flex items-center gap-2 text-neutral-600 bg-neutral-50 px-3 py-1 rounded-full border border-neutral-100">
                   <Icon name="tabler:calendar" class="w-4 h-4" />
-                  <span class="text-sm font-medium">{{ convertToMonthYear(experience.start) }} - {{ convertToMonthYear(experience.end) }}</span>
+                  <span class="text-sm font-medium">{{ convertToMonthYear(group.start) }} - {{ convertToMonthYear(group.end) }}</span>
                 </div>
                 <ClientOnly>
                   <span class="px-3 py-1 bg-gradient-to-r from-primary-100 to-secondary-100 text-primary-700 rounded-full text-sm font-semibold border border-primary-200 shadow-soft">
-                    {{ calculateMonthDifference(experience.start, experience.end, now) }}
+                    {{ calculateMonthDifference(group.start, group.end, now) }}
                   </span>
                 </ClientOnly>
               </div>
             </div>
 
-            <!-- Description -->
-            <div class="mb-6">
-              <p class="text-neutral-600 leading-relaxed group-hover:text-neutral-700 transition-colors">
-                {{ expandedKeys.has(key) ? experience.description : (experience.description.length > 200 ? experience.description.slice(0, 200) + '…' : experience.description) }}
-              </p>
-              <button
-                v-if="experience.description.length > 200"
-                class="inline-flex items-center gap-2 mt-3 text-primary-600 hover:text-primary-700 font-medium transition-colors group"
-                type="button"
-                @click="toggleExpand(key)"
-                :aria-expanded="expandedKeys.has(key) ? 'true' : 'false'"
-              >
-                <Icon :name="expandedKeys.has(key) ? 'tabler:chevron-up' : 'tabler:chevron-down'" class="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
-                <span>{{ expandedKeys.has(key) ? 'Show less' : 'Read more' }}</span>
-              </button>
+            <!-- Single experience behaves like original card -->
+            <div v-if="group.items.length === 1">
+              <!-- Description -->
+              <div class="mb-6">
+                <p class="text-neutral-600 leading-relaxed group-hover:text-neutral-700 transition-colors">
+                  {{ expandedKeys.has(group.items[0].originalIndex as number) ? group.items[0].description : (group.items[0].description.length > 200 ? group.items[0].description.slice(0, 200) + '…' : group.items[0].description) }}
+                </p>
+                <button
+                  v-if="group.items[0].description.length > 200"
+                  class="inline-flex items-center gap-2 mt-3 text-primary-600 hover:text-primary-700 font-medium transition-colors group"
+                  type="button"
+                  @click="toggleExpand(group.items[0].originalIndex as number)"
+                  :aria-expanded="expandedKeys.has(group.items[0].originalIndex as number) ? 'true' : 'false'"
+                >
+                  <Icon :name="expandedKeys.has(group.items[0].originalIndex as number) ? 'tabler:chevron-up' : 'tabler:chevron-down'" class="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
+                  <span>{{ expandedKeys.has(group.items[0].originalIndex as number) ? 'Show less' : 'Read more' }}</span>
+                </button>
+              </div>
+
+              <!-- Tech stack -->
+              <div>
+                <h4 class="text-sm font-semibold text-neutral-700 mb-3 uppercase tracking-wide">Technologies Used</h4>
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    v-for="(tool, toolKey) in group.items[0].tools.slice(0, expandedKeys.has(group.items[0].originalIndex as number) ? group.items[0].tools.length : 8)"
+                    :key="toolKey"
+                    class="px-3 py-1.5 bg-gradient-to-r from-primary-50 to-secondary-50 text-primary-700 rounded-xl text-sm font-medium border border-primary-100 hover:scale-105 transition-transform duration-200 hover:shadow-soft"
+                  >
+                    {{ tool.toLowerCase() }}
+                  </span>
+                  <span
+                    v-if="!expandedKeys.has(group.items[0].originalIndex as number) && group.items[0].tools.length > 8"
+                    class="px-3 py-1.5 bg-neutral-100 text-neutral-600 rounded-xl text-sm font-medium border border-neutral-200 cursor-pointer hover:bg-neutral-200 transition-colors"
+                    @click="toggleExpand(group.items[0].originalIndex as number)"
+                  >
+                    +{{ group.items[0].tools.length - 8 }} more
+                  </span>
+                </div>
+              </div>
             </div>
 
-            <!-- Tech stack -->
-            <div>
-              <h4 class="text-sm font-semibold text-neutral-700 mb-3 uppercase tracking-wide">Technologies Used</h4>
-              <div class="flex flex-wrap gap-2">
-                <span
-                  v-for="(tool, toolKey) in experience.tools.slice(0, expandedKeys.has(key) ? experience.tools.length : 8)"
-                  :key="toolKey"
-                  class="px-3 py-1.5 bg-gradient-to-r from-primary-50 to-secondary-50 text-primary-700 rounded-xl text-sm font-medium border border-primary-100 hover:scale-105 transition-transform duration-200 hover:shadow-soft"
-                >
-                  {{ tool.toLowerCase() }}
-                </span>
-                <span
-                  v-if="!expandedKeys.has(key) && experience.tools.length > 8"
-                  class="px-3 py-1.5 bg-neutral-100 text-neutral-600 rounded-xl text-sm font-medium border border-neutral-200 cursor-pointer hover:bg-neutral-200 transition-colors"
-                  @click="toggleExpand(key)"
-                >
-                  +{{ experience.tools.length - 8 }} more
-                </span>
+            <!-- Grouped experiences (multiple roles/branches) -->
+            <div v-else class="space-y-6">
+              <div
+                v-for="item in group.items"
+                :key="item.originalIndex"
+                class="rounded-2xl border border-neutral-100 bg-neutral-50/60 p-5 hover:bg-neutral-50 transition-colors"
+              >
+                <div class="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-3">
+                  <div>
+                    <p class="text-sm font-semibold text-primary-600 mb-1">
+                      {{ (item as any).branchLabel ?? item.company }}
+                    </p>
+                    <p class="text-base md:text-lg text-secondary-700 font-medium">
+                      {{ item.position }}
+                    </p>
+                  </div>
+
+                  <div class="flex flex-col items-start md:items-end gap-1">
+                    <div class="inline-flex items-center gap-2 text-neutral-600 bg-white px-3 py-1 rounded-full border border-neutral-200">
+                      <Icon name="tabler:calendar" class="w-4 h-4" />
+                      <span class="text-[8px] md:text-xs font-medium">{{ convertToMonthYear(item.start) }} - {{ convertToMonthYear((item as any).end ?? null) }}</span>
+                    </div>
+                    <ClientOnly>
+                      <span class="text-[8px] px-3 py-1 bg-gradient-to-r from-primary-50 to-secondary-50 text-primary-700 rounded-full text-xs md:text-sm font-semibold border border-primary-100">
+                        {{ calculateMonthDifference(item.start, (item as any).end ?? null, now) }}
+                      </span>
+                    </ClientOnly>
+                  </div>
+                </div>
+
+                <!-- Description -->
+                <div class="mb-4">
+                  <p class="text-sm md:text-base text-neutral-600 leading-relaxed">
+                    {{ expandedKeys.has(item.originalIndex as number) ? item.description : (item.description.length > 200 ? item.description.slice(0, 200) + '…' : item.description) }}
+                  </p>
+                  <button
+                    v-if="item.description.length > 200"
+                    class="inline-flex items-center gap-2 mt-2 text-primary-600 hover:text-primary-700 font-medium transition-colors"
+                    type="button"
+                    @click="toggleExpand(item.originalIndex as number)"
+                    :aria-expanded="expandedKeys.has(item.originalIndex as number) ? 'true' : 'false'"
+                  >
+                    <Icon :name="expandedKeys.has(item.originalIndex as number) ? 'tabler:chevron-up' : 'tabler:chevron-down'" class="w-4 h-4" />
+                    <span>{{ expandedKeys.has(item.originalIndex as number) ? 'Show less' : 'Read more' }}</span>
+                  </button>
+                </div>
+
+                <!-- Tech stack -->
+                <div>
+                  <h4 class="text-xs md:text-sm font-semibold text-neutral-700 mb-2 uppercase tracking-wide">Technologies Used</h4>
+                  <div class="flex flex-wrap gap-2">
+                    <span
+                      v-for="(tool, toolKey) in item.tools.slice(0, expandedKeys.has(item.originalIndex as number) ? item.tools.length : 8)"
+                      :key="toolKey"
+                      class="px-3 py-1.5 bg-gradient-to-r from-primary-50 to-secondary-50 text-primary-700 rounded-xl text-xs md:text-sm font-medium border border-primary-100 hover:scale-105 transition-transform duration-200 hover:shadow-soft"
+                    >
+                      {{ tool.toLowerCase() }}
+                    </span>
+                    <span
+                      v-if="!expandedKeys.has(item.originalIndex as number) && item.tools.length > 8"
+                      class="px-3 py-1.5 bg-neutral-100 text-neutral-600 rounded-xl text-xs md:text-sm font-medium border border-neutral-200 cursor-pointer hover:bg-neutral-200 transition-colors"
+                      @click="toggleExpand(item.originalIndex as number)"
+                    >
+                      +{{ item.tools.length - 8 }} more
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

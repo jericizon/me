@@ -61,7 +61,7 @@ const { openContactForm } = useContactForm()
           <!-- Greeting badge -->
           <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur-sm rounded-full border border-white/20 shadow-soft animate-bounce-in" style="animation-delay: 0.1s">
             <div class="w-2 h-2 bg-primary-500 rounded-full animate-pulse"></div>
-            <span class="text-sm font-medium text-neutral-700">Available for new projects</span>
+            <span class="text-sm font-medium text-neutral-700">Available for part-time, freelance & remote work</span>
           </div>
 
           <!-- Main heading -->
@@ -80,8 +80,8 @@ const { openContactForm } = useContactForm()
 
           <!-- Description -->
           <p class="text-lg sm:text-xl text-neutral-600 leading-relaxed max-w-2xl animate-fade-in" style="animation-delay: 0.3s">
-            I craft beautiful, scalable web applications with modern technologies.
-            Passionate about clean code, great UX, and turning ideas into reality.
+            I'm a full-stack web developer available for work, building modern web applications with Vue.js, React, Node.js, PHP, Laravel, and Supabase.
+            I focus on clean, scalable code, secure APIs, and great UX for startups and growing businesses.
           </p>
 
           <!-- Stats -->

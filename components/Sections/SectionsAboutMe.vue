@@ -32,11 +32,11 @@ const myAge = computed(() => {
           <span class="text-sm font-medium text-neutral-700">About Me</span>
         </div>
         <h2 class="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-neutral-900 mb-4 animate-slide-up" style="animation-delay: 0.2s">
-          Passionate about creating
-          <span class="bg-gradient-to-r from-primary-600 via-secondary-600 to-accent-600 bg-clip-text text-transparent">digital experiences</span>
+          Full-stack developer
+          <span class="bg-gradient-to-r from-primary-600 via-secondary-600 to-accent-600 bg-clip-text text-transparent">available for new opportunities</span>
         </h2>
         <p class="text-lg sm:text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed animate-fade-in" style="animation-delay: 0.3s">
-          I'm a full-stack developer who loves turning complex problems into beautiful, functional solutions
+          I'm a full-stack web developer, currently open to new roles, who loves turning complex problems into fast, secure, and user-friendly web applications.
         </p>
       </div>
 
@@ -52,7 +52,7 @@ const myAge = computed(() => {
               <div>
                 <h3 class="text-2xl font-display font-bold text-neutral-900 mb-2">My Journey</h3>
                 <p class="text-neutral-600 leading-relaxed">
-                  Started coding {{ myAge }} years ago, and I've been hooked ever since. What began as curiosity has evolved into a passion for crafting digital solutions that make a real difference.
+                  Started coding {{ myAge }} years ago, and I've been hooked ever since. What began as curiosity has evolved into a career as a full-stack web developer crafting digital solutions that make a real difference for clients and teams.
                 </p>
               </div>
             </div>
@@ -127,7 +127,7 @@ const myAge = computed(() => {
                 <!-- Name and title -->
                 <div>
                   <h3 class="text-2xl font-display font-bold text-neutral-900 mb-2">Jeric Izon</h3>
-                  <p class="text-lg text-neutral-600">Full Stack Developer</p>
+                  <p class="text-lg text-neutral-600">Full Stack Web Developer</p>
                 </div>
 
                 <!-- Tech stack badges -->

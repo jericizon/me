@@ -1,160 +1,180 @@
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted } from 'vue';
-import { withBase } from 'ufo';
-import { useRuntimeConfig } from '#imports'
-
-const baseURL = useRuntimeConfig().app.baseURL;
-const iconSrc = (file: string) => withBase(`/icons/${file}`, baseURL);
 
 // No pagination: show all tools
 
-// Tools data with icons
+// Tools data with icon names for the global Icon component (Iconify)
 const tools = reactive([
   {
     name: "Laravel",
-    icon: "laravel.svg",
+    icon: "simple-icons:laravel",
     category: "backend"
   },
   {
     name: "Vue.js",
-    icon: "vuejs.svg",
+    icon: "simple-icons:vuedotjs",
     category: "frontend"
   },
   {
     name: "NestJS",
-    icon: "nestjs.svg",
+    icon: "simple-icons:nestjs",
     category: "backend"
   },
   {
     name: "Nuxt.js",
-    icon: "nuxtjs.svg",
+    icon: "simple-icons:nuxtdotjs",
     category: "frontend"
   },
   {
     name: "Docker",
-    icon: "docker.svg",
+    icon: "simple-icons:docker",
     category: "devops"
   },
   {
     name: "PHP",
-    icon: "php.svg",
+    icon: "simple-icons:php",
     category: "backend"
   },
   {
     name: "WordPress",
-    icon: "wordpress.svg",
+    icon: "simple-icons:wordpress",
     category: "cms"
   },
   {
     name: "MySQL",
-    icon: "mysql.svg",
+    icon: "simple-icons:mysql",
     category: "database"
   },
   {
     name: "MariaDB",
-    icon: "mariadb.svg",
+    icon: "simple-icons:mariadb",
     category: "database"
   },
   {
     name: "Figma",
-    icon: "figma.svg",
+    icon: "simple-icons:figma",
     category: "design"
   },
   {
     name: "Git",
-    icon: "git.svg",
+    icon: "simple-icons:git",
     category: "devops"
   },
   {
     name: "GitHub",
-    icon: "github.svg",
+    icon: "simple-icons:github",
     addBg: true,
     category: "devops"
   },
   {
     name: "Bitbucket",
-    icon: "bitbucket.svg",
+    icon: "simple-icons:bitbucket",
     category: "devops"
   },
   {
     name: "GitLab",
-    icon: "gitlab.svg",
+    icon: "simple-icons:gitlab",
     category: "devops"
   },
   {
     name: "AWS Services",
-    icon: "aws.svg",
+    icon: "simple-icons:amazonaws",
     category: "cloud"
   },
   {
     name: "Terraform",
-    icon: "terraform.svg",
+    icon: "simple-icons:terraform",
     category: "devops"
   },
   {
     name: "Node.js",
-    icon: "nodejs.svg",
+    icon: "simple-icons:nodedotjs",
     category: "backend"
   },
   {
     name: "Strapi",
-    icon: "strapi.svg",
+    icon: "simple-icons:strapi",
     category: "cms"
   },
   {
     name: "NPM",
-    icon: "npm.svg",
+    icon: "simple-icons:npm",
     addBg: true,
     category: "devops"
   },
   {
     name: "Yarn",
-    icon: "yarn.svg",
+    icon: "simple-icons:yarn",
     addBg: true,
     category: "devops"
   },
   {
     name: "JavaScript",
-    icon: "javascript.svg",
+    icon: "simple-icons:javascript",
     category: "frontend"
   },
   {
     name: "Electron JS",
-    icon: "electronjs.svg",
+    icon: "simple-icons:electron",
     category: "frontend"
   },
   {
     name: "HTML",
-    icon: "html.svg",
+    icon: "simple-icons:html5",
     category: "frontend"
   },
   {
     name: "CSS",
-    icon: "css.svg",
+    icon: "simple-icons:css3",
     category: "frontend"
   },
   {
     name: "SCSS",
-    icon: "scss.svg",
+    icon: "simple-icons:sass",
     addBg: true,
     category: "frontend"
   },
   {
     name: "Express JS",
-    icon: "expressjs.svg",
+    icon: "simple-icons:express",
     addBg: true,
     category: "backend"
   },
   {
     name: "Redis",
-    icon: "redis.svg",
+    icon: "simple-icons:redis",
     addBg: true,
     category: "database"
   },
   {
     name: "JSON",
-    icon: "json.svg",
+    icon: "mdi:code-json",
     addBg: true,
+    category: "frontend"
+  },
+  {
+    name: "OpenAI",
+    icon: "simple-icons:openai",
+    category: "ai"
+  },
+  {
+    name: "Claude Code",
+    icon: "simple-icons:anthropic",
+    category: "ai"
+  },
+  {
+    name: "Gemini",
+    icon: "logos:google-gemini",
+    category: "ai"
+  },
+  {
+    name: "Supabase",
+    icon: "simple-icons:supabase",
+    category: "database"
+  },
+  {
+    name: "ReactJS",
+    icon: "simple-icons:react",
     category: "frontend"
   },
 ]);
@@ -246,12 +266,10 @@ onMounted(() => {
           class="transition duration-300 ease-out"
         >
           <div class="h-full flex flex-col items-center justify-center p-4 text-center transition-all duration-300 hover:scale-105 bg-white/10 border border-white/10 shadow-md backdrop-blur-md rounded-xl">
-            <div class="mb-3 p-3 rounded-full bg-white/10 border border-white/10 backdrop-blur-sm">
-              <img 
-                :src="iconSrc(tool.icon)" 
-                :alt="tool.name"
-                :class="{ 'bg-white rounded': tool.addBg || false }"
-                class="w-12 h-12 object-contain"
+            <div class="mb-3 p-3 rounded-full bg-white/5 border border-white/20 flex items-center justify-center">
+              <Icon
+                :name="tool.icon"
+                class="w-7 h-7 md:w-8 md:h-8 text-primary-600"
               />
             </div>
             <h3 class="text-sm font-medium">{{ tool.name }}</h3>

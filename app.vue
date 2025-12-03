@@ -3,10 +3,10 @@ import { ref, onMounted } from 'vue';
 
 // Define SEO metadata
 useSeoMeta({
-  title: 'Jeric Izon - Full Stack Web Developer',
-  ogTitle: 'Jeric Izon - Full Stack Web Developer',
-  description: 'Portfolio of Jeric Izon, a Full Stack Web Developer with over 10 years of experience in creating modern web applications and websites.',
-  ogDescription: 'Portfolio of Jeric Izon, a Full Stack Web Developer with over 10 years of experience in creating modern web applications and websites.',
+  title: 'Jeric Izon - Full Stack Web Developer | Available for Work',
+  ogTitle: 'Jeric Izon - Full Stack Web Developer | Available for Work',
+  description: 'Portfolio of Jeric Izon, a Full Stack Web Developer available for work with over 10 years of experience creating modern web applications using Vue.js, React, Node.js, PHP, and Laravel.',
+  ogDescription: 'Portfolio of Jeric Izon, a Full Stack Web Developer available for work with over 10 years of experience creating modern web applications using Vue.js, React, Node.js, PHP, and Laravel.',
   ogImage: 'https://jericizon.github.io/me/images/banner.png',
   ogType: 'website',
   ogUrl: 'https://jericizon.github.io/me/',
@@ -22,7 +22,7 @@ const jsonLd = {
   jobTitle: 'Full Stack Web Developer',
   url: 'https://jericizon.github.io/me/',
   image: 'https://jericizon.github.io/me/images/about.jpg',
-  description: 'Full Stack Web Developer with over 10 years of experience in creating modern web applications and websites.',
+  description: 'Full Stack Web Developer available for work with over 10 years of experience in creating modern web applications and websites.',
   sameAs: [
     'https://github.com/jericizon',
     'https://www.linkedin.com/in/jericizon',
