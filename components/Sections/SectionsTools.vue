@@ -1,298 +1,252 @@
 <script setup lang="ts">
-import { ref, reactive, computed, onMounted } from 'vue';
+import { ref, reactive, computed, onMounted } from 'vue'
 
-// No pagination: show all tools
-
-// Tools data with icon names for the global Icon component (Iconify)
-const tools = reactive([
+// Organized tools by category with skill levels
+const skillCategories = [
   {
-    name: "Laravel",
-    icon: "simple-icons:laravel",
-    category: "backend"
+    id: 'frontend',
+    name: 'Frontend',
+    icon: 'tabler:layout',
+    color: 'gold',
+    skills: [
+      { name: 'Vue.js', level: 95, icon: 'simple-icons:vuedotjs' },
+      { name: 'Nuxt.js', level: 90, icon: 'simple-icons:nuxtdotjs' },
+      { name: 'React', level: 85, icon: 'simple-icons:react' },
+      { name: 'TypeScript', level: 90, icon: 'simple-icons:typescript' },
+      { name: 'TailwindCSS', level: 95, icon: 'simple-icons:tailwindcss' },
+      { name: 'Electron', level: 80, icon: 'simple-icons:electron' },
+    ]
   },
   {
-    name: "Vue.js",
-    icon: "simple-icons:vuedotjs",
-    category: "frontend"
+    id: 'backend',
+    name: 'Backend',
+    icon: 'tabler:server',
+    color: 'violet',
+    skills: [
+      { name: 'Node.js', level: 90, icon: 'simple-icons:nodedotjs' },
+      { name: 'NestJS', level: 88, icon: 'simple-icons:nestjs' },
+      { name: 'Laravel', level: 92, icon: 'simple-icons:laravel' },
+      { name: 'PHP', level: 90, icon: 'simple-icons:php' },
+      { name: 'Express', level: 85, icon: 'simple-icons:express' },
+      { name: 'WebSockets', level: 80, icon: 'simple-icons:socketdotio' },
+    ]
   },
   {
-    name: "NestJS",
-    icon: "simple-icons:nestjs",
-    category: "backend"
+    id: 'database',
+    name: 'Database',
+    icon: 'tabler:database',
+    color: 'teal',
+    skills: [
+      { name: 'PostgreSQL', level: 88, icon: 'simple-icons:postgresql' },
+      { name: 'MySQL', level: 90, icon: 'simple-icons:mysql' },
+      { name: 'Supabase', level: 92, icon: 'simple-icons:supabase' },
+      { name: 'Redis', level: 85, icon: 'simple-icons:redis' },
+      { name: 'MongoDB', level: 75, icon: 'simple-icons:mongodb' },
+    ]
   },
   {
-    name: "Nuxt.js",
-    icon: "simple-icons:nuxtdotjs",
-    category: "frontend"
+    id: 'cloud',
+    name: 'Cloud & DevOps',
+    icon: 'tabler:cloud',
+    color: 'rose',
+    skills: [
+      { name: 'AWS', level: 88, icon: 'simple-icons:amazonaws' },
+      { name: 'Docker', level: 85, icon: 'simple-icons:docker' },
+      { name: 'Terraform', level: 80, icon: 'simple-icons:terraform' },
+      { name: 'GitHub Actions', level: 82, icon: 'simple-icons:githubactions' },
+      { name: 'Vercel', level: 90, icon: 'simple-icons:vercel' },
+    ]
   },
   {
-    name: "Docker",
-    icon: "simple-icons:docker",
-    category: "devops"
-  },
-  {
-    name: "PHP",
-    icon: "simple-icons:php",
-    category: "backend"
-  },
-  {
-    name: "WordPress",
-    icon: "simple-icons:wordpress",
-    category: "cms"
-  },
-  {
-    name: "MySQL",
-    icon: "simple-icons:mysql",
-    category: "database"
-  },
-  {
-    name: "MariaDB",
-    icon: "simple-icons:mariadb",
-    category: "database"
-  },
-  {
-    name: "Figma",
-    icon: "simple-icons:figma",
-    category: "design"
-  },
-  {
-    name: "Git",
-    icon: "simple-icons:git",
-    category: "devops"
-  },
-  {
-    name: "GitHub",
-    icon: "simple-icons:github",
-    addBg: true,
-    category: "devops"
-  },
-  {
-    name: "Bitbucket",
-    icon: "simple-icons:bitbucket",
-    category: "devops"
-  },
-  {
-    name: "GitLab",
-    icon: "simple-icons:gitlab",
-    category: "devops"
-  },
-  {
-    name: "AWS Services",
-    icon: "simple-icons:amazonaws",
-    category: "cloud"
-  },
-  {
-    name: "Terraform",
-    icon: "simple-icons:terraform",
-    category: "devops"
-  },
-  {
-    name: "Node.js",
-    icon: "simple-icons:nodedotjs",
-    category: "backend"
-  },
-  {
-    name: "Strapi",
-    icon: "simple-icons:strapi",
-    category: "cms"
-  },
-  {
-    name: "NPM",
-    icon: "simple-icons:npm",
-    addBg: true,
-    category: "devops"
-  },
-  {
-    name: "Yarn",
-    icon: "simple-icons:yarn",
-    addBg: true,
-    category: "devops"
-  },
-  {
-    name: "JavaScript",
-    icon: "simple-icons:javascript",
-    category: "frontend"
-  },
-  {
-    name: "Electron JS",
-    icon: "simple-icons:electron",
-    category: "frontend"
-  },
-  {
-    name: "HTML",
-    icon: "simple-icons:html5",
-    category: "frontend"
-  },
-  {
-    name: "CSS",
-    icon: "simple-icons:css3",
-    category: "frontend"
-  },
-  {
-    name: "SCSS",
-    icon: "simple-icons:sass",
-    addBg: true,
-    category: "frontend"
-  },
-  {
-    name: "Express JS",
-    icon: "simple-icons:express",
-    addBg: true,
-    category: "backend"
-  },
-  {
-    name: "Redis",
-    icon: "simple-icons:redis",
-    addBg: true,
-    category: "database"
-  },
-  {
-    name: "JSON",
-    icon: "mdi:code-json",
-    addBg: true,
-    category: "frontend"
-  },
-  {
-    name: "OpenAI",
-    icon: "simple-icons:openai",
-    category: "ai"
-  },
-  {
-    name: "Claude Code",
-    icon: "simple-icons:anthropic",
-    category: "ai"
-  },
-  {
-    name: "Gemini",
-    icon: "logos:google-gemini",
-    category: "ai"
-  },
-  {
-    name: "Supabase",
-    icon: "simple-icons:supabase",
-    category: "database"
-  },
-  {
-    name: "ReactJS",
-    icon: "simple-icons:react",
-    category: "frontend"
-  },
-]);
-
-// No remaining tools computation needed
-
-// Animation refs (container/title only)
-const titleRef = ref<HTMLElement | null>(null);
-const toolsContainerRef = ref<HTMLElement | null>(null);
-
-// Filter state
-const activeFilter = ref('all');
-const categories = computed(() => {
-  const uniqueCategories = new Set(tools.map(tool => tool.category));
-  return ['all', ...Array.from(uniqueCategories)];
-});
-
-// Filtered tools based on active category
-const filteredTools = computed(() => {
-  if (activeFilter.value === 'all') {
-    return tools;
+    id: 'ai',
+    name: 'AI & Modern Tools',
+    icon: 'tabler:sparkles',
+    color: 'gold',
+    skills: [
+      { name: 'OpenAI API', level: 88, icon: 'simple-icons:openai' },
+      { name: 'Claude', level: 90, icon: 'simple-icons:anthropic' },
+      { name: 'Figma', level: 85, icon: 'simple-icons:figma' },
+      { name: 'Git', level: 92, icon: 'simple-icons:git' },
+    ]
   }
-  return tools.filter(tool => tool.category === activeFilter.value);
-});
+]
 
+// Other tools for the marquee
+const otherTools = [
+  'WordPress', 'Strapi', 'MariaDB', 'Sass', 'Redis', 
+  'WebSocket', 'FFmpeg', 'Electron', 'NPM', 'Yarn'
+]
 
-// Initialize animations
+const sectionRef = ref<HTMLElement | null>(null)
+const isVisible = ref(false)
+const activeCategory = ref('frontend')
+
 onMounted(() => {
-  // Animate title
-  setTimeout(() => {
-    if (titleRef.value) {
-      titleRef.value.style.opacity = '1';
-      titleRef.value.style.transform = 'translateY(0)';
-    }
-  }, 200);
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          isVisible.value = true
+          observer.unobserve(entry.target)
+        }
+      })
+    },
+    { threshold: 0.2 }
+  )
   
-  // Animate tools container
-  setTimeout(() => {
-    if (toolsContainerRef.value) {
-      toolsContainerRef.value.style.opacity = '1';
-    }
-  }, 400);
-  
-  // Removed per-item animations to avoid conflicts on filter changes
-});
+  if (sectionRef.value) {
+    observer.observe(sectionRef.value)
+  }
+})
+
+const activeSkills = computed(() => {
+  return skillCategories.find(cat => cat.id === activeCategory.value)?.skills || []
+})
+
+const getColorClass = (color: string) => {
+  const colors: Record<string, string> = {
+    gold: 'bg-accent-gold',
+    violet: 'bg-accent-violet',
+    teal: 'bg-accent-teal',
+    rose: 'bg-accent-rose'
+  }
+  return colors[color] || colors.gold
+}
 </script>
 
 <template>
-  <section id="tools-section" class="py-24 md:py-32 relative overflow-hidden">
-    <!-- Decorative elements -->
+  <section 
+    ref="sectionRef"
+    id="tools-section" 
+    class="relative py-24 lg:py-32 overflow-hidden"
+  >
+    <!-- Background -->
     <div class="absolute inset-0" aria-hidden="true">
-      <div class="absolute top-20 left-10 w-64 h-64 bg-primary-500/10 dark:bg-primary-500/5 rounded-full blur-3xl"></div>
-      <div class="absolute bottom-20 right-10 w-80 h-80 bg-secondary-500/10 dark:bg-secondary-500/5 rounded-full blur-3xl"></div>
+      <div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-accent-violet/5 rounded-full blur-[150px]"></div>
+      <div class="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-accent-gold/5 rounded-full blur-[120px]"></div>
     </div>
-    
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <!-- Section Title -->
-      <div ref="titleRef" class="text-center mb-16 opacity-0 translate-y-3 transition duration-700 ease-out">
-        <div class="inline-flex items-center gap-2 glass-badge mb-6">
-          <Icon name="tabler:tools" class="w-4 h-4 text-primary-600 dark:text-primary-400" aria-hidden="true" />
-          <span class="text-sm font-medium">Tech Stack</span>
-        </div>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-neutral-900 dark:text-white mb-4">
-          Tools & <span class="text-gradient">Technologies</span>
+
+    <div class="relative z-10 max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12">
+      <!-- Section header -->
+      <div 
+        class="max-w-3xl mb-16 transition-all duration-1000"
+        :class="{ 'opacity-0 translate-y-8': !isVisible, 'opacity-100 translate-y-0': isVisible }"
+      >
+        <span class="section-label">Tech Stack</span>
+        <h2 class="section-title mb-6">
+          Tools I use to<br />
+          <span class="gradient-text-gold">bring ideas to life</span>
         </h2>
-        <p class="mt-4 max-w-2xl mx-auto text-lg text-neutral-600 dark:text-neutral-400">
-          Throughout my decade-long journey as a web developer, I've honed my
-          skills using a diverse array of tools, empowering me to design,
-          develop, and deploy robust and user-friendly web applications.
+        <p class="text-xl text-text-secondary leading-relaxed">
+          A decade of experience has given me deep expertise across the modern web stack. 
+          I choose the right tools for each unique challenge.
         </p>
       </div>
-      
-      <!-- Category Filters -->
-      <div class="flex flex-wrap justify-center gap-2 mb-12" role="tablist" aria-label="Filter tools by category">
-        <button 
-          v-for="category in categories" 
-          :key="category"
-          @click="activeFilter = category"
-          class="px-4 py-2 text-sm font-medium rounded-xl transition-all duration-300"
-          :class="[
-            activeFilter === category
-              ? 'bg-primary-500 text-white shadow-glow-primary'
-              : 'glass-card-subtle text-neutral-700 dark:text-neutral-300 hover:bg-white/80 dark:hover:bg-neutral-800/80'
-          ]"
-          role="tab"
-          :aria-selected="activeFilter === category"
-          :aria-controls="'tools-grid'"
-        >
-          {{ category.charAt(0).toUpperCase() + category.slice(1) }}
-        </button>
-      </div>
-      
-      <!-- Tools Grid -->
-      <div 
-        ref="toolsContainerRef"
-        id="tools-grid"
-        role="tabpanel"
-        aria-label="Tools and technologies grid"
-        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-5 opacity-0 transition-opacity duration-700"
-      >
+
+      <!-- Skills visualization -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- Category navigation -->
         <div 
-          v-for="tool in filteredTools" 
-          :key="tool.name"
-          class="transition duration-300 ease-out"
+          class="lg:col-span-4 space-y-3 transition-all duration-1000 delay-200"
+          :class="{ 'opacity-0 translate-x-[-20px]': !isVisible, 'opacity-100 translate-x-0': isVisible }"
         >
-          <div class="glass-card h-full flex flex-col items-center justify-center p-5 text-center hover:scale-105 rounded-2xl group">
-            <div class="mb-3 p-3 rounded-xl bg-gradient-to-br from-primary-500/10 to-secondary-500/10 dark:from-primary-500/20 dark:to-secondary-500/20 border border-white/10 dark:border-white/5 flex items-center justify-center group-hover:shadow-glow-primary transition-shadow duration-300">
-              <Icon
-                :name="tool.icon"
-                class="w-7 h-7 md:w-8 md:h-8 text-primary-600 dark:text-primary-400"
-                aria-hidden="true"
+          <button
+            v-for="category in skillCategories"
+            :key="category.id"
+            @click="activeCategory = category.id"
+            class="w-full card p-4 flex items-center gap-4 text-left transition-all duration-300"
+            :class="activeCategory === category.id ? 'border-accent-gold/50 bg-surface-higher' : 'hover:border-border-strong'"
+          >
+            <div 
+              class="w-12 h-12 rounded-xl flex items-center justify-center transition-colors"
+              :class="activeCategory === category.id ? `bg-${category.color === 'gold' ? 'accent-gold' : category.color === 'violet' ? 'accent-violet' : category.color === 'teal' ? 'accent-teal' : 'accent-rose'}/20` : 'bg-surface-highest'"
+            >
+              <Icon 
+                :name="category.icon" 
+                class="w-6 h-6"
+                :class="activeCategory === category.id ? `text-${category.color === 'gold' ? 'accent-gold' : category.color === 'violet' ? 'accent-violet' : category.color === 'teal' ? 'accent-teal' : 'accent-rose'}` : 'text-text-secondary'"
               />
             </div>
-            <h3 class="text-sm font-medium text-neutral-800 dark:text-neutral-200">{{ tool.name }}</h3>
+            <div class="flex-1">
+              <h3 
+                class="font-medium transition-colors"
+                :class="activeCategory === category.id ? 'text-text-primary' : 'text-text-secondary'"
+              >
+                {{ category.name }}
+              </h3>
+              <p class="text-sm text-text-tertiary">{{ category.skills.length }} technologies</p>
+            </div>
+            <Icon 
+              name="tabler:chevron-right" 
+              class="w-5 h-5 transition-all"
+              :class="activeCategory === category.id ? 'text-accent-gold translate-x-1' : 'text-text-muted'"
+            />
+          </button>
+        </div>
+
+        <!-- Skills display -->
+        <div 
+          class="lg:col-span-8 transition-all duration-1000 delay-300"
+          :class="{ 'opacity-0 translate-y-8': !isVisible, 'opacity-100 translate-y-0': isVisible }"
+        >
+          <div class="card p-8 h-full">
+            <h3 class="font-display text-2xl font-semibold text-text-primary mb-8">
+              {{ skillCategories.find(c => c.id === activeCategory)?.name }}
+            </h3>
+
+            <div class="space-y-6">
+              <div 
+                v-for="skill in activeSkills" 
+                :key="skill.name"
+                class="group"
+              >
+                <div class="flex items-center gap-4 mb-2">
+                  <Icon :name="skill.icon" class="w-6 h-6 text-text-secondary" />
+                  <span class="font-medium text-text-primary flex-1">{{ skill.name }}</span>
+                  <span class="text-sm text-text-tertiary font-mono">{{ skill.level }}%</span>
+                </div>
+                <div class="h-2 bg-surface-highest rounded-full overflow-hidden">
+                  <div 
+                    class="h-full rounded-full transition-all duration-1000 ease-out group-hover:brightness-110"
+                    :class="getColorClass(skillCategories.find(c => c.id === activeCategory)?.color || 'gold')"
+                    :style="{ width: isVisible ? `${skill.level}%` : '0%' }"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tools marquee -->
+      <div 
+        class="mt-16 transition-all duration-1000 delay-500"
+        :class="{ 'opacity-0': !isVisible, 'opacity-100': isVisible }"
+      >
+        <p class="text-center text-text-tertiary text-sm mb-6">Also experienced with</p>
+        <div class="relative overflow-hidden">
+          <div class="flex gap-4 animate-marquee">
+            <span 
+              v-for="tool in [...otherTools, ...otherTools]" 
+              :key="tool"
+              class="tag whitespace-nowrap"
+            >
+              {{ tool }}
+            </span>
           </div>
         </div>
       </div>
     </div>
   </section>
 </template>
- 
+
+<style scoped>
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+</style>

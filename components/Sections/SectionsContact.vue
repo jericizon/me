@@ -1,85 +1,117 @@
 <script setup lang="ts">
-import { ref, onMounted, watchEffect } from 'vue';
-import { useContactForm } from '@/composables/useContactForm';
-import { useAnalytics } from '@/composables/useAnalytics';
+import { ref, onMounted } from 'vue'
+import { useContactForm } from '@/composables/useContactForm'
 
-// Animation refs
-const titleRef = ref<HTMLElement | null>(null);
-const formCardRef = ref<HTMLElement | null>(null);
+const { contactFormOpen, openContactForm } = useContactForm()
 
-// UI state from global composable
-const { contactFormOpen } = useContactForm();
+const sectionRef = ref<HTMLElement | null>(null)
+const isVisible = ref(false)
 
-const { trackEvent } = useAnalytics();
-
-// Initialize animations
 onMounted(() => {
-  setTimeout(() => {
-    if (titleRef.value) {
-      titleRef.value.style.opacity = '1';
-      titleRef.value.style.transform = 'translateY(0)';
-    }
-  }, 150);
-
-  setTimeout(() => {
-    if (formCardRef.value) {
-      formCardRef.value.style.opacity = '1';
-      formCardRef.value.style.transform = 'translateY(0)';
-    }
-  }, 350);
-});
-
-// Ensure form section is visible when open state becomes true
-watchEffect(() => {
-  if (contactFormOpen.value) {
-    // no-op here; actual scrolling is triggered in composable
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          isVisible.value = true
+          observer.unobserve(entry.target)
+        }
+      })
+    },
+    { threshold: 0.2 }
+  )
+  
+  if (sectionRef.value) {
+    observer.observe(sectionRef.value)
   }
-});
+})
 </script>
 
 <template>
-  <section id="contact-section" class="py-20 md:py-24 relative overflow-hidden" aria-labelledby="contact-title">
-    <!-- Decorative elements -->
-    <div class="absolute top-20 left-10 w-72 h-72 bg-primary-500/10 rounded-full blur-3xl" aria-hidden="true"></div>
-    <div class="absolute bottom-20 right-10 w-96 h-96 bg-secondary-500/10 rounded-full blur-3xl" aria-hidden="true"></div>
-    
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <!-- Section Title -->
-      <div ref="titleRef" class="text-center mb-16 opacity-0 translate-y-3 transition duration-700 ease-out">
-        <h2 id="contact-title" class="section-title">Contact</h2>
-        <div class="section-subtitle">Get In Touch</div>
-        <p class="mt-4 max-w-2xl mx-auto text-lg">
-          Got an idea you're itching to bring to life? I'm a full-stack web developer based in the Philippines,
-          working remotely with clients in Singapore and worldwide. I'm currently available for part-time,
-          freelance, and remote roles—let's chat about your project or team needs. 🚀
+  <section 
+    ref="sectionRef"
+    id="contact-section" 
+    class="relative py-24 lg:py-32 overflow-hidden"
+  >
+    <!-- Background -->
+    <div class="absolute inset-0" aria-hidden="true">
+      <div class="absolute top-0 left-1/4 w-[600px] h-[600px] bg-accent-gold/5 rounded-full blur-[150px]"></div>
+      <div class="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-accent-violet/5 rounded-full blur-[120px]"></div>
+    </div>
+
+    <div class="relative z-10 max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12">
+      <!-- Section header -->
+      <div 
+        class="max-w-3xl mx-auto text-center mb-12 transition-all duration-1000"
+        :class="{ 'opacity-0 translate-y-8': !isVisible, 'opacity-100 translate-y-0': isVisible }"
+      >
+        <span class="section-label">Contact</span>
+        <h2 class="section-title mb-6">
+          Let's create<br />
+          <span class="gradient-text-gold">something together</span>
+        </h2>
+        <p class="text-xl text-text-secondary leading-relaxed">
+          Have a project in mind? I'm always open to discussing new opportunities 
+          and creative collaborations.
         </p>
-        <!-- Reveal Form Button -->
-        <div class="mt-8">
-          <button
-            type="button"
-            class="btn btn-primary btn-lg"
-            @click="() => { contactFormOpen = true; trackEvent('contact_form_open', { section: 'contact_section', label: 'open_contact_form' }); }"
-            v-if="!contactFormOpen"
-          >
-            <span>Open Contact Form</span>
-            <Icon name="tabler:send" class="w-5 h-5" aria-hidden="true" />
-          </button>
-        </div>
       </div>
-      
-      <!-- Contact form only -->
-      <div class="max-w-3xl mx-auto" v-if="contactFormOpen">
-        <!-- Google Form Embed -->
-        <div ref="formCardRef" class="transition duration-700 ease-out">
+
+      <!-- Contact options -->
+      <div 
+        class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12 transition-all duration-1000 delay-200"
+        :class="{ 'opacity-0 translate-y-8': !isVisible, 'opacity-100 translate-y-0': isVisible }"
+      >
+        <a 
+          href="mailto:hey@jericizon.com"
+          class="card p-6 text-center group hover:border-accent-gold/30"
+        >
+          <div class="w-14 h-14 rounded-2xl bg-accent-gold/10 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+            <Icon name="tabler:mail" class="w-7 h-7 text-accent-gold" />
+          </div>
+          <h3 class="font-medium text-text-primary mb-1">Email</h3>
+          <p class="text-sm text-text-tertiary">hey@jericizon.com</p>
+        </a>
+
+        <a 
+          href="https://calendly.com/jericizon"
+          target="_blank"
+          rel="noopener"
+          class="card p-6 text-center group hover:border-accent-violet/30"
+        >
+          <div class="w-14 h-14 rounded-2xl bg-accent-violet/10 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+            <Icon name="tabler:calendar" class="w-7 h-7 text-accent-violet" />
+          </div>
+          <h3 class="font-medium text-text-primary mb-1">Schedule</h3>
+          <p class="text-sm text-text-tertiary">Book a call</p>
+        </a>
+
+        <button 
+          @click="openContactForm"
+          class="card p-6 text-center group hover:border-accent-teal/30 text-left w-full"
+        >
+          <div class="w-14 h-14 rounded-2xl bg-accent-teal/10 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+            <Icon name="tabler:message" class="w-7 h-7 text-accent-teal" />
+          </div>
+          <h3 class="font-medium text-text-primary mb-1">Form</h3>
+          <p class="text-sm text-text-tertiary">Send a message</p>
+        </button>
+      </div>
+
+      <!-- Contact form embed -->
+      <div 
+        v-if="contactFormOpen"
+        class="max-w-2xl mx-auto transition-all duration-700"
+        :class="{ 'opacity-0 translate-y-8': !isVisible, 'opacity-100 translate-y-0': isVisible }"
+      >
+        <div class="card overflow-hidden">
           <iframe 
             src="https://docs.google.com/forms/d/e/1FAIpQLSdb9dnAFUolvGaSHco4QziKWRqojD8UfO5luLh6sMWKXPZO1w/viewform?embedded=true" 
-            width="640" 
-            height="950" 
+            width="100%" 
+            height="800" 
             frameborder="0" 
             marginheight="0" 
             marginwidth="0"
             title="Contact Form"
-            aria-label="Contact form to get in touch with Jeric Izon"
+            class="w-full"
           >Loading…</iframe>
         </div>
       </div>

@@ -11,9 +11,8 @@ html {
 
 body {
   @apply min-h-screen antialiased;
-  @apply text-neutral-900 dark:text-neutral-100;
-  @apply bg-surface-light dark:bg-surface-dark;
-  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  @apply bg-surface text-text-primary;
+  font-family: 'Inter', system-ui, sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -25,15 +24,15 @@ body {
   filter: blur(80px);
   
   &-primary {
-    @apply bg-primary-500/25 dark:bg-primary-500/15;
+    @apply bg-accent-gold/25 dark:bg-accent-gold/15;
   }
   
   &-secondary {
-    @apply bg-secondary-500/25 dark:bg-secondary-500/15;
+    @apply bg-accent-violet/25 dark:bg-accent-violet/15;
   }
   
   &-accent {
-    @apply bg-accent-500/20 dark:bg-accent-500/10;
+    @apply bg-accent-teal/20 dark:bg-accent-teal/10;
   }
 }
 
@@ -57,7 +56,7 @@ body {
   @apply backdrop-blur-xl;
   @apply border border-white/30 dark:border-white/10;
   @apply rounded-2xl;
-  @apply shadow-glass dark:shadow-glass-dark;
+  @apply shadow-medium;
   
   &::before {
     content: '';
@@ -76,8 +75,8 @@ body {
   &::before {
     content: '';
     @apply absolute inset-0 rounded-2xl;
-    @apply bg-gradient-to-br from-primary-500/20 via-transparent to-secondary-500/20;
-    @apply dark:from-primary-500/10 dark:to-secondary-500/10;
+    @apply bg-gradient-to-br from-accent-gold/20 via-transparent to-accent-violet/20;
+    @apply dark:from-accent-gold/10 dark:to-accent-violet/10;
     z-index: -1;
   }
   
@@ -97,12 +96,12 @@ body {
   @apply bg-white/60 dark:bg-neutral-900/40;
   @apply backdrop-blur-lg;
   @apply border border-white/20 dark:border-white/10;
-  @apply shadow-glass dark:shadow-glass-dark;
+  @apply shadow-medium;
   @apply transition-all duration-500 ease-out;
   
   &:hover {
     @apply -translate-y-2;
-    @apply shadow-glass-lg dark:shadow-glass-dark-lg;
+    @apply shadow-large;
   }
   
   &-image {
@@ -149,9 +148,9 @@ body {
   
   &-tag {
     @apply text-xs px-3 py-1 rounded-full font-medium;
-    @apply bg-primary-100/80 dark:bg-primary-900/30;
-    @apply text-primary-700 dark:text-primary-300;
-    @apply border border-primary-200/50 dark:border-primary-700/30;
+    @apply bg-accent-gold/10 dark:bg-accent-gold/20;
+    @apply text-accent-gold;
+    @apply border border-accent-gold/30;
   }
 }
 
@@ -174,7 +173,7 @@ body {
   
   &-icon {
     @apply w-6 h-6;
-    @apply text-primary-600 dark:text-primary-400;
+    @apply text-accent-gold;
   }
   
   &-name {
@@ -191,12 +190,12 @@ body {
   
   &-line {
     @apply absolute left-8 top-0 bottom-0 w-0.5;
-    @apply bg-gradient-to-b from-primary-500 via-secondary-500 to-accent-500;
+    @apply bg-gradient-to-b from-accent-gold via-accent-violet to-accent-teal;
   }
   
   &-dot {
     @apply absolute left-4 w-8 h-8;
-    @apply bg-gradient-to-br from-primary-500 to-secondary-500;
+    @apply bg-gradient-to-br from-accent-gold to-accent-violet;
     @apply rounded-full;
     @apply border-4 border-white dark:border-neutral-900;
     @apply shadow-medium;
@@ -229,8 +228,8 @@ body {
     @apply border border-neutral-200/50 dark:border-neutral-700/50;
     @apply text-neutral-900 dark:text-neutral-100;
     @apply placeholder-neutral-500 dark:placeholder-neutral-400;
-    @apply focus:outline-none focus:ring-2 focus:ring-primary-500/50;
-    @apply focus:border-primary-500/50;
+    @apply focus:outline-none focus:ring-2 focus:ring-accent-gold/50;
+    @apply focus:border-accent-gold/50;
     @apply transition-all duration-200;
   }
   

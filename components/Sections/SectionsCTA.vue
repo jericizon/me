@@ -1,168 +1,110 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, computed } from 'vue';
-import { useContactForm } from '@/composables/useContactForm';
-import { useAnalytics } from '@/composables/useAnalytics';
+import { ref, onMounted } from 'vue'
+import { useContactForm } from '@/composables/useContactForm'
 
-// Calculate total time in industry (reactive even in static builds)
-// `now` updates on client to keep the value fresh after hydration
-const now = ref<Date | null>(null);
-let nowTimer: number | undefined;
+const { openContactForm } = useContactForm()
 
-const totalDaysInIndustry = computed(() => {
-  const startDate = new Date(2013, 11, 1); // December 1, 2013
-  const currentDate = now.value ?? new Date();
+const sectionRef = ref<HTMLElement | null>(null)
+const isVisible = ref(false)
 
-  let yearsDiff = currentDate.getFullYear() - startDate.getFullYear();
-  let monthsDiff = currentDate.getMonth() - startDate.getMonth();
-  let daysDiff = currentDate.getDate() - startDate.getDate();
-
-  if (monthsDiff < 0 || (monthsDiff === 0 && daysDiff < 0)) {
-    yearsDiff--;
-    monthsDiff += 12;
-  }
-  if (daysDiff < 0) {
-    monthsDiff--;
-    const tempDate = new Date(startDate);
-    tempDate.setMonth(tempDate.getMonth() + 1, 0);
-    daysDiff = tempDate.getDate() - startDate.getDate() + currentDate.getDate();
-  }
-
-  return `${yearsDiff}y ${monthsDiff}m ${daysDiff}d`;
-});
-
-// Stats data
-interface StatItem {
-  value: string | (() => string);
-  label: string;
-  icon: string;
-}
-
-const stats: StatItem[] = [
-  { value: () => totalDaysInIndustry.value, label: 'In Industry', icon: 'tabler:briefcase' },
-  { value: '100+', label: 'Projects Completed', icon: 'tabler:file-check' },
-  { value: '100+', label: 'Happy Clients', icon: 'tabler:mood-smile' },
-  { value: '500+', label: 'Cups of Coffee', icon: 'tabler:coffee' }
-];
-
-// Animation refs (container-level only)
-const statsRef = ref<HTMLElement | null>(null);
-const ctaRef = ref<HTMLElement | null>(null);
-const ctaContentRef = ref<HTMLElement | null>(null);
-
-// Initialize animations
 onMounted(() => {
-  // keep `now` updated hourly on client to ensure reactivity post-hydration
-  now.value = new Date();
-  nowTimer = window.setInterval(() => {
-    now.value = new Date();
-  }, 60 * 60 * 1000);
-
-  // Animate stats section
-  setTimeout(() => {
-    if (statsRef.value) {
-      statsRef.value.style.opacity = '1';
-      statsRef.value.style.transform = 'translateY(0)';
-    }
-  }, 200);
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          isVisible.value = true
+          observer.unobserve(entry.target)
+        }
+      })
+    },
+    { threshold: 0.3 }
+  )
   
-  // Animate CTA section
-  setTimeout(() => {
-    if (ctaRef.value) {
-      ctaRef.value.style.opacity = '1';
-    }
-  }, 600);
-  
-  // Animate CTA content
-  setTimeout(() => {
-    if (ctaContentRef.value) {
-      ctaContentRef.value.style.opacity = '1';
-      ctaContentRef.value.style.transform = 'translateY(0)';
-    }
-  }, 800);
-});
+  if (sectionRef.value) {
+    observer.observe(sectionRef.value)
+  }
+})
 
-onUnmounted(() => {
-  if (nowTimer) window.clearInterval(nowTimer);
-});
-
-const { openContactForm } = useContactForm();
-
-const { trackEvent } = useAnalytics();
-
-// Ensure asset URLs respect the app base URL (e.g., GitHub Pages subpath)
-const baseURL = useRuntimeConfig().app.baseURL;
+const stats = [
+  { value: '10+', label: 'Years Experience', icon: 'tabler:briefcase' },
+  { value: '100+', label: 'Projects Delivered', icon: 'tabler:file-check' },
+  { value: '50+', label: 'Happy Clients', icon: 'tabler:users' },
+]
 </script>
 
 <template>
-  <!-- Stats Section -->
-  <section id="stats-section" class="py-16 md:py-20 relative overflow-hidden" aria-label="Career statistics">
-    <div class="absolute -top-10 -left-10 w-72 h-72 bg-gradient-to-br from-primary-500/20 to-secondary-500/10 rounded-full blur-3xl" aria-hidden="true"></div>
-    
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <div 
-        ref="statsRef"
-        class="opacity-0 translate-y-8 transition-all duration-700 ease-out"
-      >
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+  <section 
+    ref="sectionRef"
+    id="cta-section" 
+    class="relative py-24 lg:py-32 overflow-hidden"
+  >
+    <!-- Background gradient -->
+    <div class="absolute inset-0" aria-hidden="true">
+      <div class="absolute inset-0 bg-gradient-to-b from-dark via-surface-elevated to-dark"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent-gold/10 rounded-full blur-[150px]"></div>
+      <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
+      <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
+    </div>
+
+    <div class="relative z-10 max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12">
+      <div class="text-center max-w-4xl mx-auto">
+        <!-- Stats -->
+        <div 
+          class="flex flex-wrap justify-center gap-8 md:gap-16 mb-16 transition-all duration-1000"
+          :class="{ 'opacity-0 translate-y-8': !isVisible, 'opacity-100 translate-y-0': isVisible }"
+        >
           <div 
-            v-for="stat in stats" 
+            v-for="(stat, index) in stats" 
             :key="stat.label"
-            class="transition-all duration-500 ease-out"
+            class="text-center"
+            :style="{ transitionDelay: `${index * 100}ms` }"
           >
-            <div class="p-6 md:p-8 text-center rounded-2xl h-full flex flex-col items-center justify-center bg-white/10/50 border border-white/10 shadow-xl backdrop-blur-xl hover:bg-white/10 hover:border-white/20">
-              <div class="stat-icon mb-4 p-3 rounded-full bg-gradient-to-br from-primary-500/15 to-secondary-500/10 ring-1 ring-white/10">
-                <Icon :name="stat.icon" class="w-8 h-8 text-primary-600" aria-hidden="true" />
-              </div>
-              <div class="stat-value text-2xl md:text-3xl font-extrabold tracking-tight mb-1">
-                {{ typeof stat.value === 'function' ? stat.value() : stat.value }}
-              </div>
-              <div class="stat-label text-xs md:text-sm">{{ stat.label }}</div>
+            <div class="font-display text-4xl md:text-5xl font-semibold gradient-text-gold mb-2">
+              {{ stat.value }}
             </div>
+            <div class="flex items-center justify-center gap-2 text-text-secondary text-sm">
+              <Icon :name="stat.icon" class="w-4 h-4" />
+              {{ stat.label }}
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA Content -->
+        <div 
+          class="transition-all duration-1000 delay-300"
+          :class="{ 'opacity-0 translate-y-8': !isVisible, 'opacity-100 translate-y-0': isVisible }"
+        >
+          <h2 class="font-display text-4xl md:text-5xl lg:text-6xl font-semibold text-text-primary mb-6 leading-tight">
+            Ready to build<br />
+            <span class="gradient-text-gold">something great?</span>
+          </h2>
+          
+          <p class="text-xl text-text-secondary mb-10 max-w-2xl mx-auto leading-relaxed">
+            I'm currently available for freelance projects and remote opportunities. 
+            Let's discuss how I can help bring your vision to life.
+          </p>
+
+          <div class="flex flex-wrap justify-center gap-4">
+            <button 
+              @click="openContactForm"
+              class="btn btn-primary text-lg px-8 py-4"
+            >
+              <span>Start a conversation</span>
+              <Icon name="tabler:arrow-right" class="w-5 h-5" />
+            </button>
+            
+            <a 
+              href="https://calendly.com/jericizon"
+              target="_blank"
+              rel="noopener"
+              class="btn btn-secondary text-lg px-8 py-4"
+            >
+              <Icon name="tabler:calendar" class="w-5 h-5" />
+              <span>Schedule a call</span>
+            </a>
           </div>
         </div>
       </div>
     </div>
   </section>
-  
-  <!-- CTA Section -->
-  <section 
-    ref="ctaRef"
-    class="py-20 md:py-24 relative overflow-hidden opacity-0 transition-all duration-1000 ease-out bg-cover bg-center"
-    :style="{ backgroundImage: `url(${baseURL}images/cta-bg.jpg)` }"
-  >
-    <!-- Overlay with blur -->
-    <div class="absolute inset-0 backdrop-blur-sm bg-gradient-to-b from-black/50 via-black/40 to-black/60"></div>
-    
-    <!-- Decorative elements -->
-    <div class="absolute bottom-0 right-0 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl" aria-hidden="true"></div>
-    
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <div 
-        ref="ctaContentRef"
-        class="max-w-3xl mx-auto text-center opacity-0 translate-y-8 transition-all duration-800 ease-out"
-      >
-        <div class="p-8 md:p-12 rounded-2xl backdrop-blur-xl bg-white/10 border border-white/15 shadow-2xl">
-          <h2 class="text-3xl md:text-4xl font-extrabold mb-6 tracking-tight text-white">
-            I'm <span class="text-primary-300">Available</span> for Freelancing
-          </h2>
-          
-          <p class="text-base md:text-lg mb-8 max-w-xl mx-auto text-white/90">
-            Embrace the opportunity to turn ideas into reality. Let's embark on
-            this freelance journey together and create something extraordinary.
-          </p>
-          
-          <a
-            href="#contact-section"
-            @click.prevent="() => { trackEvent('cta_click', { section: 'sections_cta', label: 'hire_me' }); openContactForm(); }"
-            class="btn btn-primary btn-lg"
-            aria-label="Hire me - Open contact form"
-          >
-            <span>Hire Me</span>
-            <Icon name="tabler:send" class="w-5 h-5" aria-hidden="true" />
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
 </template>
- 

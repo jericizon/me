@@ -1,291 +1,205 @@
 <script setup lang="ts">
-import { withBase } from 'ufo'
-import { useRuntimeConfig } from '#imports'
 import { useContactForm } from '@/composables/useContactForm'
-
-const baseURL = useRuntimeConfig().app.baseURL
-const iconSrc = (file: string) => withBase(`/icons/${file}`, baseURL)
+import { ref, onMounted } from 'vue'
 
 const { openContactForm } = useContactForm()
 
-const scrollToAbout = () => {
-  document.getElementById('about-section')?.scrollIntoView({ behavior: 'smooth' })
+const heroRef = ref<HTMLElement | null>(null)
+const isLoaded = ref(false)
+
+onMounted(() => {
+  // Trigger entrance animations
+  setTimeout(() => {
+    isLoaded.value = true
+  }, 100)
+})
+
+const scrollToWork = () => {
+  document.getElementById('projects-section')?.scrollIntoView({ behavior: 'smooth' })
 }
 </script>
 
 <template>
-  <section id="home-section" class="relative min-h-screen flex items-center justify-center overflow-hidden w-full pt-20">
-    <!-- Animated gradient mesh background -->
-    <div class="absolute inset-0 -z-10" aria-hidden="true">
+  <section 
+    ref="heroRef"
+    id="home-section" 
+    class="relative min-h-screen flex items-center overflow-hidden"
+  >
+    <!-- Dynamic background -->
+    <div class="absolute inset-0" aria-hidden="true">
       <!-- Gradient orbs -->
-      <div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary-500/30 dark:bg-primary-500/20 rounded-full blur-3xl animate-morph"></div>
-      <div class="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-secondary-500/25 dark:bg-secondary-500/15 rounded-full blur-3xl animate-morph" style="animation-delay: -4s;"></div>
-      <div class="absolute top-1/2 right-0 w-[300px] h-[300px] bg-accent-500/20 dark:bg-accent-500/10 rounded-full blur-3xl animate-pulse-slow"></div>
+      <div class="absolute top-1/4 -left-32 w-[600px] h-[600px] bg-accent-gold/10 rounded-full blur-[100px] animate-pulse-glow"></div>
+      <div class="absolute bottom-1/4 right-0 w-[500px] h-[500px] bg-accent-violet/10 rounded-full blur-[100px] animate-pulse-glow" style="animation-delay: 1s;"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent-teal/5 rounded-full blur-[120px]"></div>
+      
+      <!-- Grid pattern -->
+      <div class="absolute inset-0 grid-decoration opacity-50"></div>
+      
+      <!-- Noise texture -->
+      <div class="absolute inset-0 bg-noise opacity-[0.015]"></div>
     </div>
 
-    <!-- Floating tech icons -->
-    <div class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-      <div class="absolute top-20 left-[15%] w-12 h-12 opacity-20 dark:opacity-10 animate-float" style="animation-delay: 0.5s">
-        <Icon name="tabler:brand-nodejs" class="w-full h-full text-secondary-500" />
-      </div>
-      <div class="absolute top-1/4 right-[20%] w-10 h-10 opacity-15 dark:opacity-10 animate-float-slow" style="animation-delay: 1s">
-        <Icon name="tabler:brand-vue" class="w-full h-full text-primary-500" />
-      </div>
-      <div class="absolute bottom-1/3 left-[10%] w-14 h-14 opacity-15 dark:opacity-10 animate-float" style="animation-delay: 2s">
-        <Icon name="tabler:brand-laravel" class="w-full h-full text-accent-500" />
-      </div>
-      <div class="absolute bottom-1/4 right-[15%] w-10 h-10 opacity-20 dark:opacity-10 animate-float-slow" style="animation-delay: 3s">
-        <Icon name="tabler:brand-docker" class="w-full h-full text-primary-400" />
-      </div>
-    </div>
-
-    <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        <!-- Main content -->
-        <div class="text-center lg:text-left space-y-8">
-          <!-- Availability badge -->
-          <div class="inline-flex items-center gap-3 px-5 py-2.5 glass-badge animate-fade-in-up" style="animation-delay: 0.1s">
-            <span class="relative flex h-3 w-3">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary-400 opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-3 w-3 bg-secondary-500"></span>
+    <!-- Content container -->
+    <div class="relative z-10 w-full max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 py-32">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center min-h-[70vh]">
+        
+        <!-- Left content - Asymmetric text block -->
+        <div class="lg:col-span-7 space-y-8">
+          <!-- Status badge -->
+          <div 
+            class="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-accent-gold/30 bg-accent-gold/5 backdrop-blur-sm transition-all duration-700"
+            :class="{ 'opacity-0 translate-y-4': !isLoaded, 'opacity-100 translate-y-0': isLoaded }"
+          >
+            <span class="relative flex h-2.5 w-2.5">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-gold opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-accent-gold"></span>
             </span>
-            <span class="text-sm font-medium text-neutral-700 dark:text-neutral-300">Available for freelance & remote work</span>
+            <span class="text-sm font-medium text-accent-gold">Available for new projects</span>
           </div>
 
-          <!-- Main heading -->
-          <div class="space-y-4 animate-fade-in-up" style="animation-delay: 0.2s">
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display font-bold leading-tight tracking-tight">
-              <span class="block text-neutral-900 dark:text-white">Hi, I'm</span>
-              <span class="block text-gradient">Jeric Izon</span>
+          <!-- Main heading with character animation -->
+          <div class="space-y-2">
+            <p 
+              class="font-mono text-sm text-text-secondary uppercase tracking-widest transition-all duration-700 delay-100"
+              :class="{ 'opacity-0 translate-y-4': !isLoaded, 'opacity-100 translate-y-0': isLoaded }"
+            >
+              Full Stack Developer
+            </p>
+            
+            <h1 
+              class="font-display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-semibold tracking-tight leading-[0.95] transition-all duration-700 delay-200"
+              :class="{ 'opacity-0 translate-y-8': !isLoaded, 'opacity-100 translate-y-0': isLoaded }"
+            >
+              <span class="block text-text-primary">Jeric</span>
+              <span class="block gradient-text-gold">Izon</span>
             </h1>
-            <div class="flex flex-wrap justify-center lg:justify-start gap-x-3 gap-y-1 text-xl sm:text-2xl lg:text-3xl font-medium">
-              <span class="text-neutral-600 dark:text-neutral-400">Full Stack</span>
-              <span class="text-primary-600 dark:text-primary-400">Developer</span>
-              <span class="text-neutral-400 dark:text-neutral-500">&</span>
-              <span class="text-secondary-600 dark:text-secondary-400">Problem Solver</span>
-            </div>
+            
+            <p 
+              class="font-editorial text-xl sm:text-2xl lg:text-3xl text-text-secondary italic mt-6 transition-all duration-700 delay-300"
+              :class="{ 'opacity-0 translate-y-4': !isLoaded, 'opacity-100 translate-y-0': isLoaded }"
+            >
+              Crafting digital experiences<br class="hidden sm:block" />
+              that leave a lasting impression
+            </p>
           </div>
 
           <!-- Description -->
-          <p class="text-lg sm:text-xl text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-2xl animate-fade-in-up" style="animation-delay: 0.3s">
-            Building modern web applications with Vue.js, React, Node.js, PHP, Laravel, and Supabase. 
-            I focus on clean code, secure APIs, and exceptional user experiences.
+          <p 
+            class="text-lg text-text-tertiary max-w-xl leading-relaxed transition-all duration-700 delay-400"
+            :class="{ 'opacity-0 translate-y-4': !isLoaded, 'opacity-100 translate-y-0': isLoaded }"
+          >
+            With over a decade of experience, I transform complex problems into 
+            elegant, high-performance web applications. Specializing in Vue.js, 
+            React, Node.js, and cloud architecture.
           </p>
 
+          <!-- CTA buttons -->
+          <div 
+            class="flex flex-wrap gap-4 pt-4 transition-all duration-700 delay-500"
+            :class="{ 'opacity-0 translate-y-4': !isLoaded, 'opacity-100 translate-y-0': isLoaded }"
+          >
+            <button 
+              @click="openContactForm"
+              class="btn btn-primary group"
+            >
+              <span>Start a project</span>
+              <Icon name="tabler:arrow-up-right" class="w-5 h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </button>
+            
+            <button 
+              @click="scrollToWork"
+              class="btn btn-secondary"
+            >
+              <Icon name="tabler:eye" class="w-5 h-5" />
+              <span>View work</span>
+            </button>
+          </div>
+
           <!-- Stats -->
-          <div class="flex flex-wrap justify-center lg:justify-start gap-8 py-4 animate-fade-in-up" style="animation-delay: 0.4s">
-            <div class="text-center lg:text-left">
-              <div class="text-3xl sm:text-4xl font-bold text-gradient">10+</div>
-              <div class="text-sm text-neutral-500 dark:text-neutral-400">Years Experience</div>
+          <div 
+            class="flex flex-wrap gap-8 pt-8 border-t border-border transition-all duration-700 delay-600"
+            :class="{ 'opacity-0': !isLoaded, 'opacity-100': isLoaded }"
+          >
+            <div>
+              <div class="font-display text-3xl font-semibold text-text-primary">10+</div>
+              <div class="text-sm text-text-tertiary mt-1">Years Experience</div>
             </div>
-            <div class="text-center lg:text-left">
-              <div class="text-3xl sm:text-4xl font-bold text-gradient">100+</div>
-              <div class="text-sm text-neutral-500 dark:text-neutral-400">Projects Built</div>
+            <div>
+              <div class="font-display text-3xl font-semibold text-text-primary">100+</div>
+              <div class="text-sm text-text-tertiary mt-1">Projects Delivered</div>
             </div>
-            <div class="text-center lg:text-left">
-              <div class="text-3xl sm:text-4xl font-bold text-gradient">100%</div>
-              <div class="text-sm text-neutral-500 dark:text-neutral-400">Client Satisfaction</div>
+            <div>
+              <div class="font-display text-3xl font-semibold text-text-primary">50+</div>
+              <div class="text-sm text-text-tertiary mt-1">Happy Clients</div>
             </div>
-          </div>
-
-          <!-- CTA Buttons -->
-          <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-2 animate-fade-in-up" style="animation-delay: 0.5s">
-            <a
-              href="#contact-section"
-              @click.prevent="openContactForm"
-              class="btn btn-lg btn-primary group"
-            >
-              <span>Let's Work Together</span>
-              <Icon name="tabler:arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-            </a>
-            <a
-              href="#projects-section"
-              class="btn btn-lg btn-secondary group"
-            >
-              <Icon name="tabler:eye" class="w-5 h-5" aria-hidden="true" />
-              <span>View My Work</span>
-            </a>
-          </div>
-
-          <!-- Social links -->
-          <div class="flex justify-center lg:justify-start gap-3 pt-6 animate-fade-in-up" style="animation-delay: 0.6s">
-            <a 
-              href="https://github.com/jericizon" 
-              target="_blank" 
-              rel="noopener" 
-              class="group p-3 glass-card rounded-xl hover:scale-110 transition-all duration-300"
-              aria-label="GitHub Profile"
-            >
-              <Icon name="tabler:brand-github" class="w-6 h-6 text-neutral-600 dark:text-neutral-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors" aria-hidden="true" />
-            </a>
-            <a 
-              href="https://www.linkedin.com/in/jericizon" 
-              target="_blank" 
-              rel="noopener" 
-              class="group p-3 glass-card rounded-xl hover:scale-110 transition-all duration-300"
-              aria-label="LinkedIn Profile"
-            >
-              <Icon name="tabler:brand-linkedin" class="w-6 h-6 text-neutral-600 dark:text-neutral-400 group-hover:text-secondary-600 dark:group-hover:text-secondary-400 transition-colors" aria-hidden="true" />
-            </a>
-            <a 
-              href="#contact-section" 
-              @click.prevent="openContactForm" 
-              class="group p-3 glass-card rounded-xl hover:scale-110 transition-all duration-300"
-              aria-label="Contact Me"
-            >
-              <Icon name="tabler:mail" class="w-6 h-6 text-neutral-600 dark:text-neutral-400 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors" aria-hidden="true" />
-            </a>
           </div>
         </div>
 
-        <!-- Visual element - Profile Card -->
-        <div class="relative hidden lg:block animate-fade-in-up" style="animation-delay: 0.3s">
-          <div class="relative w-full max-w-md mx-auto">
-            <!-- Main glassmorphic card -->
-            <div class="glass-card p-8 rounded-3xl">
-              <div class="space-y-6">
-                <!-- Profile image -->
-                <div class="relative w-28 h-28 mx-auto">
-                  <div class="absolute inset-0 bg-gradient-to-br from-primary-500 via-secondary-500 to-accent-500 rounded-2xl animate-morph opacity-80"></div>
-                  <img
-                    src="/images/about.jpg"
-                    alt="Jeric Izon"
-                    class="relative w-full h-full object-cover rounded-2xl shadow-large"
-                    loading="eager"
-                  />
+        <!-- Right content - Visual element -->
+        <div 
+          class="lg:col-span-5 relative hidden lg:block transition-all duration-1000 delay-300"
+          :class="{ 'opacity-0 scale-95': !isLoaded, 'opacity-100 scale-100': isLoaded }"
+        >
+          <!-- Profile card with depth -->
+          <div class="relative">
+            <!-- Decorative elements behind -->
+            <div class="absolute -top-8 -left-8 w-32 h-32 border border-accent-gold/20 rounded-2xl"></div>
+            <div class="absolute -bottom-8 -right-8 w-32 h-32 border border-accent-violet/20 rounded-2xl"></div>
+            
+            <!-- Main image container -->
+            <div class="relative card p-2 overflow-hidden">
+              <div class="aspect-[4/5] rounded-xl overflow-hidden bg-gradient-to-br from-surface-elevated to-surface-higher">
+                <img
+                  src="/images/about.jpg"
+                  alt="Jeric Izon"
+                  class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                />
+              </div>
+              
+              <!-- Floating badge -->
+              <div class="absolute -bottom-4 -left-4 card px-4 py-3 flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-accent-gold/20 flex items-center justify-center">
+                  <Icon name="tabler:code" class="w-5 h-5 text-accent-gold" />
                 </div>
-                
-                <!-- Why hire me -->
-                <div class="space-y-3">
-                  <h3 class="text-lg font-semibold text-neutral-900 dark:text-white text-center">Why Work With Me</h3>
-                  <ul class="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
-                    <li class="flex items-center gap-2">
-                      <Icon name="tabler:circle-check-filled" class="w-4 h-4 text-secondary-500 flex-shrink-0" aria-hidden="true" />
-                      <span>Ship fast, iterate faster</span>
-                    </li>
-                    <li class="flex items-center gap-2">
-                      <Icon name="tabler:circle-check-filled" class="w-4 h-4 text-secondary-500 flex-shrink-0" aria-hidden="true" />
-                      <span>Clean, maintainable code</span>
-                    </li>
-                    <li class="flex items-center gap-2">
-                      <Icon name="tabler:circle-check-filled" class="w-4 h-4 text-secondary-500 flex-shrink-0" aria-hidden="true" />
-                      <span>Clear communication</span>
-                    </li>
-                  </ul>
+                <div>
+                  <div class="text-sm font-medium text-text-primary">Full Stack</div>
+                  <div class="text-xs text-text-tertiary">Developer</div>
                 </div>
-
-                <!-- CTA mini -->
-                <a 
-                  href="#contact-section"
-                  @click.prevent="openContactForm"
-                  class="block w-full text-center py-3 px-4 bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-semibold rounded-xl hover:opacity-90 transition-opacity"
-                >
-                  Let's Talk
-                </a>
               </div>
             </div>
 
-            <!-- Decorative floating elements -->
-            <div class="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-2xl shadow-glow-primary animate-float" style="animation-delay: 0.5s"></div>
-            <div class="absolute -bottom-4 -left-4 w-12 h-12 bg-gradient-to-br from-secondary-500 to-accent-500 rounded-xl shadow-glow-secondary animate-float-slow"></div>
-            <div class="absolute top-1/2 -right-8 w-8 h-8 bg-gradient-to-br from-accent-500 to-primary-500 rounded-lg shadow-glow-accent animate-float" style="animation-delay: 1s"></div>
+            <!-- Tech stack floating tags -->
+            <div class="absolute -right-4 top-1/4 tag tag-gold animate-float">
+              Vue.js
+            </div>
+            <div class="absolute -left-4 top-1/2 tag tag-violet animate-float" style="animation-delay: 1s;">
+              Node.js
+            </div>
+            <div class="absolute right-0 bottom-1/4 tag animate-float" style="animation-delay: 2s;">
+              TypeScript
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Scroll indicator -->
-    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-fade-in" style="animation-delay: 1s">
-      <button 
-        @click="scrollToAbout"
-        class="flex flex-col items-center gap-2 text-neutral-500 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors cursor-pointer group"
-      >
-        <span class="text-sm font-medium">Scroll to explore</span>
-        <div class="p-2 glass-card-subtle rounded-full group-hover:scale-110 transition-transform">
-          <Icon name="tabler:chevron-down" class="w-5 h-5 animate-bounce" aria-hidden="true" />
-        </div>
-      </button>
-    </div>
+    <!-- Bottom gradient fade -->
+    <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-dark to-transparent pointer-events-none"></div>
   </section>
 </template>
 
 <style scoped>
-/* Custom animations for the fresh design */
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
+/* Custom animations */
+@keyframes float {
+  0%, 100% {
     transform: translateY(0);
   }
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes bounceIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.3);
-  }
   50% {
-    opacity: 1;
-    transform: scale(1.05);
-  }
-  70% {
-    transform: scale(0.9);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
+    transform: translateY(-10px);
   }
 }
 
-@keyframes glow {
-  0%, 100% {
-    filter: drop-shadow(0 0 20px rgba(20, 184, 166, 0.4));
-  }
-  50% {
-    filter: drop-shadow(0 0 30px rgba(20, 184, 166, 0.6));
-  }
-}
-
-.animate-slide-up {
-  animation: slideUp 0.8s ease-out forwards;
-}
-
-.animate-slide-in-right {
-  animation: slideInRight 0.8s ease-out forwards;
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.8s ease-out forwards;
-}
-
-.animate-bounce-in {
-  animation: bounceIn 0.6s ease-out forwards;
-}
-
-.animate-glow {
-  animation: glow 2s ease-in-out infinite alternate;
+.animate-float {
+  animation: float 4s ease-in-out infinite;
 }
 </style>

@@ -38,7 +38,7 @@ export default defineNuxtConfig({
         { property: 'twitter:image', content: 'https://jericizon.github.io/me/images/banner.png' },
         
         // Theme color
-        { name: 'theme-color', content: '#111827' }
+        { name: 'theme-color', content: '#0a0a0b' }
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -66,14 +66,16 @@ export default defineNuxtConfig({
   // @ts-ignore - colorMode module configuration
   colorMode: {
     classSuffix: '',
-    preference: 'system',  // Adapts to device preference
-    fallback: 'light',
+    preference: 'system',  // Use browser's preferred color scheme
+    fallback: 'light',     // Default to light mode
     storageKey: 'nuxt-color-mode'
   },
   googleFonts: {
     families: {
-      Poppins: [100, 200, 300, 400, 500, 600, 700, 800, 900],
-      'Space+Grotesk': [300, 400, 500, 600, 700]
+      Inter: [300, 400, 500, 600, 700, 800],
+      'Playfair+Display': [400, 500, 600, 700],
+      'JetBrains+Mono': [400, 500],
+      ClashDisplay: [400, 500, 600, 700]
     },
     display: 'swap'
   },

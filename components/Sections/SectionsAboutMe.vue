@@ -1,174 +1,194 @@
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
+import { useContactForm } from '@/composables/useContactForm'
+
+const { openContactForm } = useContactForm()
+const sectionRef = ref<HTMLElement | null>(null)
+const isVisible = ref(false)
+
+onMounted(() => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          isVisible.value = true
+          observer.unobserve(entry.target)
+        }
+      })
+    },
+    { threshold: 0.2 }
+  )
+  
+  if (sectionRef.value) {
+    observer.observe(sectionRef.value)
+  }
+})
+
 // Calculate age dynamically
 const myAge = computed(() => {
-  const birthDate = new Date("2013-11-01");
-  const today = new Date();
-  let age = today.getFullYear() - birthDate.getFullYear();
-  const monthDiff = today.getMonth() - birthDate.getMonth();
-  if (
-    monthDiff < 0 ||
-    (monthDiff === 0 && today.getDate() < birthDate.getDate())
-  ) {
-    age--;
+  const birthDate = new Date("2013-11-01")
+  const today = new Date()
+  let age = today.getFullYear() - birthDate.getFullYear()
+  const monthDiff = today.getMonth() - birthDate.getMonth()
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+    age--
   }
-  return age;
-});
-
-// Removed on-scroll animations and related refs
+  return age
+})
 </script>
 
 <template>
-  <section id="about-section" class="py-24 md:py-32 relative overflow-hidden">
+  <section 
+    ref="sectionRef"
+    id="about-section" 
+    class="relative py-24 lg:py-32 overflow-hidden"
+  >
     <!-- Background decoration -->
     <div class="absolute inset-0" aria-hidden="true">
-      <div class="absolute top-20 right-20 w-64 h-64 bg-primary-500/10 dark:bg-primary-500/5 rounded-full blur-3xl"></div>
-      <div class="absolute bottom-20 left-20 w-96 h-96 bg-secondary-500/10 dark:bg-secondary-500/5 rounded-full blur-3xl"></div>
+      <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-accent-violet/5 rounded-full blur-[150px]"></div>
+      <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent-gold/5 rounded-full blur-[120px]"></div>
     </div>
 
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <!-- Section Header -->
-      <div class="text-center mb-16 md:mb-20">
-        <div class="inline-flex items-center gap-2 glass-badge mb-6 animate-fade-in-up">
-          <Icon name="tabler:user" class="w-4 h-4 text-primary-600 dark:text-primary-400" />
-          <span class="text-sm font-medium">About Me</span>
-        </div>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-neutral-900 dark:text-white mb-4 animate-fade-in-up" style="animation-delay: 0.1s">
-          Full-stack developer
-          <span class="text-gradient">available for new opportunities</span>
+    <div class="relative z-10 max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12">
+      <!-- Section header -->
+      <div 
+        class="max-w-3xl mb-20 transition-all duration-1000"
+        :class="{ 'opacity-0 translate-y-8': !isVisible, 'opacity-100 translate-y-0': isVisible }"
+      >
+        <span class="section-label">About Me</span>
+        <h2 class="section-title mb-6">
+          Developer by day,<br />
+          <span class="gradient-text-gold">problem solver</span> by nature
         </h2>
-        <p class="text-lg sm:text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto leading-relaxed animate-fade-in-up" style="animation-delay: 0.2s">
-          I'm a full-stack web developer, currently open to new roles, who loves turning complex problems into fast, secure, and user-friendly web applications.
+        <p class="text-xl text-text-secondary leading-relaxed">
+          I don't just write code—I craft solutions that balance technical excellence 
+          with human-centered design. Every project is an opportunity to create something meaningful.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-        <!-- Left Column - Personal Story -->
-        <div class="space-y-8 animate-fade-in-up" style="animation-delay: 0.3s">
-          <!-- Main intro card -->
-          <div class="glass-card p-8 rounded-3xl">
-            <div class="flex items-start gap-4 mb-6">
-              <div class="icon-box icon-box-md flex-shrink-0">
-                <Icon name="tabler:heart" class="w-6 h-6" />
-              </div>
-              <div>
-                <h3 class="text-2xl font-display font-bold text-neutral-900 dark:text-white mb-2">My Journey</h3>
-                <p class="text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                  Started coding {{ myAge }} years ago, and I've been hooked ever since. What began as curiosity has evolved into a career as a full-stack web developer crafting digital solutions that make a real difference for clients and teams.
-                </p>
-              </div>
+      <!-- Asymmetric grid layout -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+        
+        <!-- Left column - Large statement -->
+        <div 
+          class="lg:col-span-5 space-y-8 transition-all duration-1000 delay-200"
+          :class="{ 'opacity-0 translate-y-8': !isVisible, 'opacity-100 translate-y-0': isVisible }"
+        >
+          <div class="card p-8 lg:p-10 h-full flex flex-col">
+            <div class="flex-1">
+              <p class="font-editorial text-2xl lg:text-3xl text-text-primary leading-relaxed mb-8">
+                "Started coding {{ myAge }} years ago, and I've been hooked ever since. 
+                What began as curiosity has evolved into a passion for building 
+                <span class="text-accent-gold">digital experiences</span> that matter."
+              </p>
             </div>
-
-            <!-- Fun facts -->
-            <div class="grid grid-cols-2 gap-4">
-              <div class="stat-card text-center">
-                <div class="text-2xl font-bold text-gradient mb-1">10+</div>
-                <div class="text-sm text-neutral-600 dark:text-neutral-400">Years Coding</div>
-              </div>
-              <div class="stat-card text-center">
-                <div class="text-2xl font-bold text-gradient mb-1">100+</div>
-                <div class="text-sm text-neutral-600 dark:text-neutral-400">Projects Built</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Skills overview -->
-          <div class="glass-card p-8 rounded-3xl">
-            <h3 class="text-xl font-display font-bold text-neutral-900 dark:text-white mb-6">What I Bring to the Table</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div class="glass-card-subtle p-4 rounded-xl hover:scale-[1.02] transition-transform duration-300">
-                <div class="flex items-start gap-3">
-                  <Icon name="tabler:code" class="w-6 h-6 text-primary-600 dark:text-primary-400 mt-0.5" />
-                  <div>
-                    <div class="font-semibold text-neutral-900 dark:text-white">Clean Code</div>
-                    <div class="text-sm text-neutral-600 dark:text-neutral-400">Maintainable & scalable solutions</div>
-                  </div>
-                </div>
-              </div>
-              <div class="glass-card-subtle p-4 rounded-xl hover:scale-[1.02] transition-transform duration-300">
-                <div class="flex items-start gap-3">
-                  <Icon name="tabler:rocket" class="w-6 h-6 text-secondary-600 dark:text-secondary-400 mt-0.5" />
-                  <div>
-                    <div class="font-semibold text-neutral-900 dark:text-white">Performance</div>
-                    <div class="text-sm text-neutral-600 dark:text-neutral-400">Fast, optimized applications</div>
-                  </div>
-                </div>
-              </div>
-              <div class="glass-card-subtle p-4 rounded-xl hover:scale-[1.02] transition-transform duration-300">
-                <div class="flex items-start gap-3">
-                  <Icon name="tabler:users" class="w-6 h-6 text-accent-600 dark:text-accent-400 mt-0.5" />
-                  <div>
-                    <div class="font-semibold text-neutral-900 dark:text-white">User-Focused</div>
-                    <div class="text-sm text-neutral-600 dark:text-neutral-400">Intuitive, accessible experiences</div>
-                  </div>
-                </div>
-              </div>
-              <div class="glass-card-subtle p-4 rounded-xl hover:scale-[1.02] transition-transform duration-300">
-                <div class="flex items-start gap-3">
-                  <Icon name="tabler:brain" class="w-6 h-6 text-neutral-600 dark:text-neutral-400 mt-0.5" />
-                  <div>
-                    <div class="font-semibold text-neutral-900 dark:text-white">Problem Solver</div>
-                    <div class="text-sm text-neutral-600 dark:text-neutral-400">Creative solutions to challenges</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right Column - Visual -->
-        <div class="animate-fade-in-up" style="animation-delay: 0.4s">
-          <div class="relative">
-            <!-- Main profile card -->
-            <div class="glass-card p-8 rounded-3xl">
-              <div class="flex flex-col items-center text-center space-y-6">
-                <!-- Profile image -->
-                <div class="relative w-32 h-32 mx-auto">
-                  <div class="absolute inset-0 bg-gradient-to-br from-primary-500 via-secondary-500 to-accent-500 rounded-3xl animate-morph opacity-80"></div>
-                  <img
-                    src="/images/about.jpg"
-                    alt="Jeric Izon - Full Stack Developer"
-                    class="relative w-full h-full object-cover rounded-3xl shadow-large"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-
-                <!-- Name and title -->
+            
+            <div class="pt-8 border-t border-border">
+              <div class="flex items-center gap-4">
+                <img 
+                  src="/images/about.jpg" 
+                  alt="Jeric Izon" 
+                  class="w-14 h-14 rounded-full object-cover grayscale"
+                />
                 <div>
-                  <h3 class="text-2xl font-display font-bold text-neutral-900 dark:text-white mb-2">Jeric Izon</h3>
-                  <p class="text-lg text-neutral-600 dark:text-neutral-400">Full Stack Web Developer</p>
-                </div>
-
-                <!-- Tech stack badges -->
-                <div class="flex flex-wrap justify-center gap-2">
-                  <span class="tag tag-primary">Vue.js</span>
-                  <span class="tag tag-secondary">Node.js</span>
-                  <span class="tag tag-accent">TypeScript</span>
-                  <span class="tag tag-neutral">Laravel</span>
-                </div>
-
-                <!-- Fun quote -->
-                <div class="glass-card-subtle p-4 rounded-xl w-full">
-                  <p class="text-sm text-neutral-600 dark:text-neutral-400 italic">"Code is poetry in motion"</p>
+                  <div class="font-medium text-text-primary">Jeric Izon</div>
+                  <div class="text-sm text-text-tertiary">Full Stack Developer</div>
                 </div>
               </div>
             </div>
-
-            <!-- Floating elements -->
-            <div class="absolute -top-6 -right-6 w-20 h-20 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-2xl shadow-glow-primary animate-float"></div>
-            <div class="absolute -bottom-6 -left-6 w-16 h-16 bg-gradient-to-br from-secondary-500 to-accent-500 rounded-xl shadow-glow-secondary animate-float-slow"></div>
           </div>
         </div>
-      </div>
 
-      <!-- CTA Section -->
-      <div class="text-center mt-16 animate-fade-in-up" style="animation-delay: 0.5s">
-        <div class="flex flex-wrap justify-center gap-4">
-          <DownloadCV />
-          <a href="#contact-section" class="btn btn-lg btn-secondary group">
-            <Icon name="tabler:message" class="w-5 h-5" />
-            <span>Let's Chat</span>
-          </a>
+        <!-- Right column - Skills & approach -->
+        <div class="lg:col-span-7 space-y-8">
+          <!-- Philosophy cards -->
+          <div 
+            class="grid grid-cols-1 sm:grid-cols-2 gap-4 transition-all duration-1000 delay-300"
+            :class="{ 'opacity-0 translate-y-8': !isVisible, 'opacity-100 translate-y-0': isVisible }"
+          >
+            <div class="card p-6 group hover:border-accent-gold/30 transition-colors">
+              <div class="w-12 h-12 rounded-xl bg-accent-gold/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <Icon name="tabler:bulb" class="w-6 h-6 text-accent-gold" />
+              </div>
+              <h3 class="font-medium text-text-primary mb-2">Innovation First</h3>
+              <p class="text-sm text-text-tertiary">
+                I stay ahead of the curve, adopting new technologies that genuinely improve outcomes.
+              </p>
+            </div>
+
+            <div class="card p-6 group hover:border-accent-violet/30 transition-colors">
+              <div class="w-12 h-12 rounded-xl bg-accent-violet/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <Icon name="tabler:users" class="w-6 h-6 text-accent-violet" />
+              </div>
+              <h3 class="font-medium text-text-primary mb-2">User-Centered</h3>
+              <p class="text-sm text-text-tertiary">
+                Every line of code serves the people who will use the final product.
+              </p>
+            </div>
+
+            <div class="card p-6 group hover:border-accent-teal/30 transition-colors">
+              <div class="w-12 h-12 rounded-xl bg-accent-teal/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <Icon name="tabler:rocket" class="w-6 h-6 text-accent-teal" />
+              </div>
+              <h3 class="font-medium text-text-primary mb-2">Performance</h3>
+              <p class="text-sm text-text-tertiary">
+                Fast, optimized applications that deliver exceptional user experiences.
+              </p>
+            </div>
+
+            <div class="card p-6 group hover:border-accent-rose/30 transition-colors">
+              <div class="w-12 h-12 rounded-xl bg-accent-rose/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <Icon name="tabler:shield-check" class="w-6 h-6 text-accent-rose" />
+              </div>
+              <h3 class="font-medium text-text-primary mb-2">Reliability</h3>
+              <p class="text-sm text-text-tertiary">
+                Clean, maintainable code built to scale and stand the test of time.
+              </p>
+            </div>
+          </div>
+
+          <!-- Tech expertise -->
+          <div 
+            class="card p-8 transition-all duration-1000 delay-400"
+            :class="{ 'opacity-0 translate-y-8': !isVisible, 'opacity-100 translate-y-0': isVisible }"
+          >
+            <h3 class="font-medium text-text-primary mb-6">Technical Expertise</h3>
+            
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="tag tag-gold">Vue.js / Nuxt.js</span>
+              <span class="tag tag-violet">React / Next.js</span>
+              <span class="tag">Node.js</span>
+              <span class="tag tag-violet">TypeScript</span>
+              <span class="tag">PHP / Laravel</span>
+              <span class="tag tag-gold">Supabase</span>
+              <span class="tag tag-teal">AWS</span>
+              <span class="tag">Docker</span>
+              <span class="tag tag-violet">PostgreSQL</span>
+            </div>
+
+            <p class="text-text-tertiary text-sm">
+              My stack is always evolving, but my commitment to quality remains constant. 
+              I choose the right tools for each unique challenge.
+            </p>
+          </div>
+
+          <!-- CTA -->
+          <div 
+            class="flex flex-wrap gap-4 transition-all duration-1000 delay-500"
+            :class="{ 'opacity-0 translate-y-8': !isVisible, 'opacity-100 translate-y-0': isVisible }"
+          >
+            <button 
+              @click="openContactForm"
+              class="btn btn-primary"
+            >
+              <Icon name="tabler:message" class="w-5 h-5" />
+              <span>Let's collaborate</span>
+            </button>
+            <a href="#resume-section" class="btn btn-secondary">
+              <Icon name="tabler:file-text" class="w-5 h-5" />
+              <span>View experience</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
