@@ -1,193 +1,148 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { useContactForm } from '@/composables/useContactForm'
-
-const { openContactForm } = useContactForm()
-const sectionRef = ref<HTMLElement | null>(null)
-const isVisible = ref(false)
-
-onMounted(() => {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          isVisible.value = true
-          observer.unobserve(entry.target)
-        }
-      })
-    },
-    { threshold: 0.2 }
-  )
-  
-  if (sectionRef.value) {
-    observer.observe(sectionRef.value)
-  }
-})
-
-// Calculate age dynamically
 const myAge = computed(() => {
-  const birthDate = new Date("2013-11-01")
-  const today = new Date()
-  let age = today.getFullYear() - birthDate.getFullYear()
-  const monthDiff = today.getMonth() - birthDate.getMonth()
-  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-    age--
-  }
-  return age
-})
+  const birthDate = new Date("2013-11-01");
+  const today = new Date();
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const monthDiff = today.getMonth() - birthDate.getMonth();
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) age--;
+  return age;
+});
+
+const values = [
+  { icon: 'tabler:code', label: 'Clean Code', desc: 'Readable, maintainable, and built to scale.' },
+  { icon: 'tabler:rocket', label: 'Performance', desc: 'Fast load times and optimized user flows.' },
+  { icon: 'tabler:shield-check', label: 'Security', desc: 'Secure APIs, RLS policies, and best practices.' },
+  { icon: 'tabler:messages', label: 'Communication', desc: 'Clear, proactive, and async-friendly.' },
+]
 </script>
 
 <template>
-  <section 
-    ref="sectionRef"
-    id="about-section" 
-    class="relative py-24 lg:py-32 overflow-hidden"
-  >
-    <!-- Background decoration -->
-    <div class="absolute inset-0" aria-hidden="true">
-      <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-accent-violet/5 rounded-full blur-[150px]"></div>
-      <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent-gold/5 rounded-full blur-[120px]"></div>
-    </div>
+  <section id="about-section" class="py-24 md:py-32 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
 
-    <div class="relative z-10 max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12">
       <!-- Section header -->
-      <div 
-        class="max-w-3xl mb-20 transition-all duration-1000"
-        :class="{ 'opacity-0 translate-y-8': !isVisible, 'opacity-100 translate-y-0': isVisible }"
-      >
-        <span class="section-label">About Me</span>
-        <h2 class="section-title mb-6">
-          Developer by day,<br />
-          <span class="gradient-text-gold">problem solver</span> by nature
-        </h2>
-        <p class="text-xl text-text-secondary leading-relaxed">
-          I don't just write code—I craft solutions that balance technical excellence 
-          with human-centered design. Every project is an opportunity to create something meaningful.
+      <div class="mb-16 md:mb-20">
+        <p class="eyebrow mb-4 animate-fade-in-up">
+          <span class="eyebrow-line"></span>
+          About Me
         </p>
+        <h2 class="section-title max-w-3xl animate-fade-in-up" style="animation-delay: 0.08s">
+          A developer who cares about<br/>
+          <span class="text-gradient">craft and outcomes.</span>
+        </h2>
       </div>
 
-      <!-- Asymmetric grid layout -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-        
-        <!-- Left column - Large statement -->
-        <div 
-          class="lg:col-span-5 space-y-8 transition-all duration-1000 delay-200"
-          :class="{ 'opacity-0 translate-y-8': !isVisible, 'opacity-100 translate-y-0': isVisible }"
-        >
-          <div class="card p-8 lg:p-10 h-full flex flex-col">
-            <div class="flex-1">
-              <p class="font-editorial text-2xl lg:text-3xl text-text-primary leading-relaxed mb-8">
-                "Started coding {{ myAge }} years ago, and I've been hooked ever since. 
-                What began as curiosity has evolved into a passion for building 
-                <span class="text-accent-gold">digital experiences</span> that matter."
-              </p>
-            </div>
-            
-            <div class="pt-8 border-t border-border">
-              <div class="flex items-center gap-4">
-                <img 
-                  src="/images/about.jpg" 
-                  alt="Jeric Izon" 
-                  class="w-14 h-14 rounded-full object-cover grayscale"
-                />
-                <div>
-                  <div class="font-medium text-text-primary">Jeric Izon</div>
-                  <div class="text-sm text-text-tertiary">Full Stack Developer</div>
+      <!-- Main content grid — asymmetric -->
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-12 lg:gap-16">
+
+        <!-- Left: Narrative -->
+        <div class="space-y-10">
+
+          <!-- Story paragraphs -->
+          <div class="space-y-5 animate-fade-in-up" style="animation-delay: 0.1s">
+            <p class="text-xl text-neutral-700 dark:text-neutral-300 leading-relaxed">
+              I started writing code <strong class="text-neutral-900 dark:text-white font-semibold">{{ myAge }} years ago</strong> out of pure curiosity — and never stopped. Today I work as a full-stack developer, helping teams and founders build web products that are fast, secure, and genuinely enjoyable to use.
+            </p>
+            <p class="text-lg text-neutral-500 dark:text-neutral-400 leading-relaxed">
+              My background spans both frontend and backend — from crafting pixel-perfect Vue.js and React interfaces to architecting REST APIs with Laravel and NestJS, managing PostgreSQL schemas, and deploying on AWS. I've worked with Singapore-based product companies for over 7 years, shipping features for platforms used by thousands of users daily.
+            </p>
+            <p class="text-lg text-neutral-500 dark:text-neutral-400 leading-relaxed">
+              I'm currently open to <strong class="text-neutral-700 dark:text-neutral-300 font-medium">remote, freelance, and part-time roles</strong>. If you're building something meaningful, I'd love to be part of it.
+            </p>
+          </div>
+
+          <!-- Values grid -->
+          <div class="animate-fade-in-up" style="animation-delay: 0.18s">
+            <div class="rule-label mb-6">What I bring</div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div
+                v-for="v in values"
+                :key="v.label"
+                class="card-subtle p-5 rounded-xl group hover:border-primary-200 dark:hover:border-primary-800/50 transition-colors duration-200"
+              >
+                <div class="flex items-start gap-3">
+                  <div class="w-9 h-9 rounded-lg bg-primary-50 dark:bg-primary-950/50 flex items-center justify-center flex-shrink-0 group-hover:bg-primary-100 dark:group-hover:bg-primary-900/50 transition-colors">
+                    <Icon :name="v.icon" class="w-4.5 h-4.5 text-primary-600 dark:text-primary-400" />
+                  </div>
+                  <div>
+                    <div class="font-semibold text-neutral-900 dark:text-white text-sm mb-0.5">{{ v.label }}</div>
+                    <div class="text-sm text-neutral-500 dark:text-neutral-400">{{ v.desc }}</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+
+          <!-- CTA row -->
+          <div class="flex flex-wrap gap-3 pt-2 animate-fade-in-up" style="animation-delay: 0.24s">
+            <DownloadCV />
+            <a href="#contact-section" class="btn btn-secondary btn-md">
+              <Icon name="tabler:message" class="w-4 h-4" />
+              <span>Let's Chat</span>
+            </a>
+          </div>
         </div>
 
-        <!-- Right column - Skills & approach -->
-        <div class="lg:col-span-7 space-y-8">
-          <!-- Philosophy cards -->
-          <div 
-            class="grid grid-cols-1 sm:grid-cols-2 gap-4 transition-all duration-1000 delay-300"
-            :class="{ 'opacity-0 translate-y-8': !isVisible, 'opacity-100 translate-y-0': isVisible }"
-          >
-            <div class="card p-6 group hover:border-accent-gold/30 transition-colors">
-              <div class="w-12 h-12 rounded-xl bg-accent-gold/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <Icon name="tabler:bulb" class="w-6 h-6 text-accent-gold" />
-              </div>
-              <h3 class="font-medium text-text-primary mb-2">Innovation First</h3>
-              <p class="text-sm text-text-tertiary">
-                I stay ahead of the curve, adopting new technologies that genuinely improve outcomes.
-              </p>
-            </div>
+        <!-- Right: Visual sidebar -->
+        <div class="space-y-5 animate-fade-in-up" style="animation-delay: 0.15s">
 
-            <div class="card p-6 group hover:border-accent-violet/30 transition-colors">
-              <div class="w-12 h-12 rounded-xl bg-accent-violet/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <Icon name="tabler:users" class="w-6 h-6 text-accent-violet" />
+          <!-- Profile image card -->
+          <div class="card overflow-hidden rounded-2xl">
+            <div class="aspect-[4/5] relative">
+              <img
+                src="/images/about.jpg"
+                alt="Jeric Izon — Full Stack Developer"
+                class="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-neutral-900/50 via-transparent to-transparent"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-5">
+                <div class="font-display font-bold text-white text-lg tracking-tight">Jeric Izon</div>
+                <div class="text-white/70 text-sm">Full Stack Developer</div>
               </div>
-              <h3 class="font-medium text-text-primary mb-2">User-Centered</h3>
-              <p class="text-sm text-text-tertiary">
-                Every line of code serves the people who will use the final product.
-              </p>
-            </div>
-
-            <div class="card p-6 group hover:border-accent-teal/30 transition-colors">
-              <div class="w-12 h-12 rounded-xl bg-accent-teal/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <Icon name="tabler:rocket" class="w-6 h-6 text-accent-teal" />
-              </div>
-              <h3 class="font-medium text-text-primary mb-2">Performance</h3>
-              <p class="text-sm text-text-tertiary">
-                Fast, optimized applications that deliver exceptional user experiences.
-              </p>
-            </div>
-
-            <div class="card p-6 group hover:border-accent-rose/30 transition-colors">
-              <div class="w-12 h-12 rounded-xl bg-accent-rose/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <Icon name="tabler:shield-check" class="w-6 h-6 text-accent-rose" />
-              </div>
-              <h3 class="font-medium text-text-primary mb-2">Reliability</h3>
-              <p class="text-sm text-text-tertiary">
-                Clean, maintainable code built to scale and stand the test of time.
-              </p>
             </div>
           </div>
 
-          <!-- Tech expertise -->
-          <div 
-            class="card p-8 transition-all duration-1000 delay-400"
-            :class="{ 'opacity-0 translate-y-8': !isVisible, 'opacity-100 translate-y-0': isVisible }"
-          >
-            <h3 class="font-medium text-text-primary mb-6">Technical Expertise</h3>
-            
-            <div class="flex flex-wrap gap-2 mb-6">
-              <span class="tag tag-gold">Vue.js / Nuxt.js</span>
-              <span class="tag tag-violet">React / Next.js</span>
-              <span class="tag">Node.js</span>
-              <span class="tag tag-violet">TypeScript</span>
-              <span class="tag">PHP / Laravel</span>
-              <span class="tag tag-gold">Supabase</span>
-              <span class="tag tag-teal">AWS</span>
-              <span class="tag">Docker</span>
-              <span class="tag tag-violet">PostgreSQL</span>
+          <!-- Quick facts card -->
+          <div class="card p-5 space-y-4">
+            <div class="text-xs font-semibold tracking-widest uppercase text-neutral-400 dark:text-neutral-600">Quick Facts</div>
+            <div class="space-y-3">
+              <div class="flex items-center justify-between text-sm">
+                <span class="text-neutral-500 dark:text-neutral-400">Location</span>
+                <span class="font-medium text-neutral-900 dark:text-white">Philippines 🇵🇭</span>
+              </div>
+              <div class="flex items-center justify-between text-sm">
+                <span class="text-neutral-500 dark:text-neutral-400">Experience</span>
+                <span class="font-medium text-neutral-900 dark:text-white">10+ years</span>
+              </div>
+              <div class="flex items-center justify-between text-sm">
+                <span class="text-neutral-500 dark:text-neutral-400">Timezone</span>
+                <span class="font-medium text-neutral-900 dark:text-white">UTC+8 (PHT)</span>
+              </div>
+              <div class="flex items-center justify-between text-sm">
+                <span class="text-neutral-500 dark:text-neutral-400">Availability</span>
+                <span class="inline-flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-medium">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  Open to work
+                </span>
+              </div>
             </div>
-
-            <p class="text-text-tertiary text-sm">
-              My stack is always evolving, but my commitment to quality remains constant. 
-              I choose the right tools for each unique challenge.
-            </p>
           </div>
 
-          <!-- CTA -->
-          <div 
-            class="flex flex-wrap gap-4 transition-all duration-1000 delay-500"
-            :class="{ 'opacity-0 translate-y-8': !isVisible, 'opacity-100 translate-y-0': isVisible }"
-          >
-            <button 
-              @click="openContactForm"
-              class="btn btn-primary"
-            >
-              <Icon name="tabler:message" class="w-5 h-5" />
-              <span>Let's collaborate</span>
-            </button>
-            <a href="#resume-section" class="btn btn-secondary">
-              <Icon name="tabler:file-text" class="w-5 h-5" />
-              <span>View experience</span>
-            </a>
+          <!-- Stack tags -->
+          <div class="card p-5">
+            <div class="text-xs font-semibold tracking-widest uppercase text-neutral-400 dark:text-neutral-600 mb-3">Core Stack</div>
+            <div class="flex flex-wrap gap-2">
+              <span class="tag tag-primary">Vue.js</span>
+              <span class="tag tag-primary">React</span>
+              <span class="tag tag-neutral">Node.js</span>
+              <span class="tag tag-neutral">Laravel</span>
+              <span class="tag tag-secondary">TypeScript</span>
+              <span class="tag tag-neutral">Supabase</span>
+              <span class="tag tag-neutral">Docker</span>
+              <span class="tag tag-neutral">AWS</span>
+            </div>
           </div>
         </div>
       </div>

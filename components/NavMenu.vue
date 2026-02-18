@@ -1,118 +1,148 @@
 <script setup lang="ts">
 import { useContactForm } from '@/composables/useContactForm'
+import { useAnalytics } from '@/composables/useAnalytics'
 
 const props = defineProps<{
   hasScrolled?: boolean
 }>()
 
 const isMenuOpen = ref(false)
+const toggleMenu = () => { isMenuOpen.value = !isMenuOpen.value }
+const closeMenu = () => { isMenuOpen.value = false }
 
-const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value
-}
-
-const closeMenu = () => {
-  isMenuOpen.value = false
-}
-
-// Navigation links
 const navLinks = [
-  { name: 'Home', href: '#home-section' },
-  { name: 'About', href: '#about-section' },
-  { name: 'Resume', href: '#resume-section' },
-  { name: 'Tools', href: '#tools-section' },
-  { name: 'Projects', href: '#projects-section' },
+  { name: 'About',    href: '#about-section' },
+  { name: 'Resume',   href: '#resume-section' },
+  { name: 'Stack',    href: '#tools-section' },
+  { name: 'Work',     href: '#projects-section' },
+  { name: 'Contact',  href: '#contact-section' },
 ]
 
 const { openContactForm } = useContactForm()
+const { trackEvent } = useAnalytics()
 
 const handleNavClick = (link: { name: string; href: string }, e: Event) => {
-  closeMenu()
-}
-
-const handleContactClick = () => {
-  openContactForm()
+  if (link.name === 'Contact') {
+    e.preventDefault()
+    openContactForm()
+  }
   closeMenu()
 }
 </script>
 
 <template>
-  <nav 
-    class="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
-    :class="hasScrolled ? 'bg-dark/80 backdrop-blur-xl border-b border-border' : 'bg-transparent'"
+  <nav
+    :class="[
+      'fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500',
+      hasScrolled
+        ? 'bg-surface-light/90 dark:bg-surface-dark/90 backdrop-blur-2xl border-b border-neutral-200/50 dark:border-neutral-800/50 shadow-soft'
+        : 'bg-transparent'
+    ]"
     role="navigation"
     aria-label="Main navigation"
   >
-    <div class="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12">
-      <div class="flex items-center justify-between h-20">
+    <div class="w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="flex items-center justify-between h-[68px]">
+
         <!-- Logo -->
-        <a href="#home-section" class="flex items-center gap-2 group">
-          <span class="font-display text-xl font-semibold text-text-primary group-hover:text-accent-gold transition-colors">Jeric</span>
-          <span class="font-display text-xl font-semibold text-accent-gold">Izon</span>
+        <a
+          href="#home-section"
+          class="group flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded-lg"
+          aria-label="Jeric Izon — home"
+        >
+          <div class="w-9 h-9 rounded-xl bg-primary-600 flex items-center justify-center shadow-medium group-hover:shadow-glow-primary transition-all duration-300 group-hover:scale-105">
+            <span class="font-display font-bold text-white text-sm tracking-tight">JI</span>
+          </div>
+          <span class="hidden sm:block font-display font-semibold text-neutral-900 dark:text-white text-base tracking-tight group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-200">
+            Jeric Izon
+          </span>
         </a>
 
-        <!-- Desktop Navigation -->
-        <div class="hidden md:flex items-center gap-1">
-          <a 
-            v-for="link in navLinks" 
+        <!-- Desktop nav links -->
+        <div class="hidden lg:flex items-center gap-1" role="menubar">
+          <a
+            v-for="link in navLinks"
             :key="link.name"
             :href="link.href"
-            class="px-4 py-2 text-sm text-text-secondary hover:text-text-primary transition-colors rounded-lg hover:bg-surface-elevated"
-            @click="handleNavClick(link, $event)"
+            class="relative px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors duration-200 rounded-lg hover:bg-neutral-100/70 dark:hover:bg-neutral-800/60 group"
+            role="menuitem"
+            @click="(e) => handleNavClick(link, e)"
           >
             {{ link.name }}
+            <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-primary-500 rounded-full group-hover:w-4 transition-all duration-300"></span>
           </a>
-          <div class="ml-4 flex items-center gap-3">
-            <ThemeToggle />
-            <button 
-              @click="handleContactClick"
-              class="btn btn-primary py-2 px-4 text-sm"
-            >
-              Contact
-            </button>
-          </div>
         </div>
 
-        <!-- Mobile menu button -->
-        <button 
-          class="md:hidden w-10 h-10 flex items-center justify-center text-text-primary"
-          @click="toggleMenu"
-          :aria-expanded="isMenuOpen"
-          aria-label="Toggle menu"
-        >
-          <Icon 
-            :name="isMenuOpen ? 'tabler:x' : 'tabler:menu-2'" 
-            class="w-6 h-6" 
-          />
-        </button>
-      </div>
-    </div>
-
-    <!-- Mobile menu -->
-    <div 
-      class="md:hidden absolute top-full left-0 right-0 bg-surface/95 backdrop-blur-xl border-b border-border transition-all duration-300"
-      :class="isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'"
-    >
-      <div class="px-6 py-6 space-y-2">
-        <a 
-          v-for="link in navLinks" 
-          :key="link.name"
-          :href="link.href"
-          class="block py-3 px-4 text-text-secondary hover:text-text-primary hover:bg-surface-elevated rounded-xl transition-all"
-          @click="handleNavClick(link, $event)"
-        >
-          {{ link.name }}
-        </a>
-        <div class="pt-4 flex items-center justify-between">
+        <!-- Desktop right actions -->
+        <div class="hidden lg:flex items-center gap-3">
           <ThemeToggle />
-          <button 
-            @click="handleContactClick"
-            class="btn btn-primary py-3 px-6"
+          <a
+            href="#contact-section"
+            @click.prevent="() => { trackEvent('cta_click', { section: 'nav', label: 'hire_me' }); openContactForm(); }"
+            class="btn btn-primary btn-sm"
+            aria-label="Hire me — open contact form"
           >
-            Contact
+            <span>Hire Me</span>
+            <Icon name="tabler:arrow-up-right" class="w-3.5 h-3.5" aria-hidden="true" />
+          </a>
+        </div>
+
+        <!-- Mobile actions -->
+        <div class="lg:hidden flex items-center gap-2">
+          <ThemeToggle />
+          <button
+            @click="toggleMenu"
+            class="flex items-center justify-center w-9 h-9 rounded-lg text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors duration-200"
+            :aria-expanded="isMenuOpen"
+            aria-controls="mobile-menu"
+            aria-label="Toggle navigation menu"
+          >
+            <Icon :name="isMenuOpen ? 'tabler:x' : 'tabler:menu-2'" class="w-5 h-5" aria-hidden="true" />
           </button>
         </div>
       </div>
     </div>
+
+    <!-- Mobile menu -->
+    <Transition
+      enter-active-class="transition-all duration-300 ease-out"
+      enter-from-class="opacity-0 -translate-y-2"
+      enter-to-class="opacity-100 translate-y-0"
+      leave-active-class="transition-all duration-200 ease-in"
+      leave-from-class="opacity-100 translate-y-0"
+      leave-to-class="opacity-0 -translate-y-2"
+    >
+      <div
+        v-show="isMenuOpen"
+        id="mobile-menu"
+        class="lg:hidden absolute top-full left-0 right-0 bg-surface-light/98 dark:bg-surface-dark/98 backdrop-blur-2xl border-b border-neutral-200/50 dark:border-neutral-800/50 shadow-large"
+        role="menu"
+        aria-label="Mobile navigation menu"
+      >
+        <div class="max-w-7xl mx-auto px-5 sm:px-8 py-5 space-y-1">
+          <a
+            v-for="link in navLinks"
+            :key="link.name"
+            :href="link.href"
+            class="flex items-center justify-between px-4 py-3.5 text-base font-medium text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100/70 dark:hover:bg-neutral-800/60 rounded-xl transition-all duration-200 group"
+            role="menuitem"
+            @click="(e) => handleNavClick(link, e)"
+          >
+            <span>{{ link.name }}</span>
+            <Icon name="tabler:arrow-right" class="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-200 text-primary-500" aria-hidden="true" />
+          </a>
+          <div class="pt-3 border-t border-neutral-200/50 dark:border-neutral-800/50">
+            <a
+              href="#contact-section"
+              @click.prevent="() => { openContactForm(); closeMenu(); }"
+              class="btn btn-primary btn-md w-full justify-center"
+            >
+              <span>Hire Me</span>
+              <Icon name="tabler:arrow-up-right" class="w-4 h-4" aria-hidden="true" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </Transition>
   </nav>
 </template>
