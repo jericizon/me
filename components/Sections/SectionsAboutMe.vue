@@ -32,7 +32,7 @@ const values = [
         </h2>
       </div>
 
-      <!-- Main content grid — asymmetric -->
+      <!-- Main content grid -->
       <div class="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-12 lg:gap-16">
 
         <!-- Left: Narrative -->
@@ -83,26 +83,8 @@ const values = [
           </div>
         </div>
 
-        <!-- Right: Visual sidebar -->
+        <!-- Right: Info sidebar -->
         <div class="space-y-5 animate-fade-in-up" style="animation-delay: 0.15s">
-
-          <!-- Profile image card -->
-          <div class="card overflow-hidden rounded-2xl">
-            <div class="aspect-[4/5] relative">
-              <img
-                src="/images/about.jpg"
-                alt="Jeric Izon — Full Stack Developer"
-                class="w-full h-full object-cover"
-                loading="lazy"
-                decoding="async"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-neutral-900/50 via-transparent to-transparent"></div>
-              <div class="absolute bottom-0 left-0 right-0 p-5">
-                <div class="font-display font-bold text-white text-lg tracking-tight">Jeric Izon</div>
-                <div class="text-white/70 text-sm">Full Stack Developer</div>
-              </div>
-            </div>
-          </div>
 
           <!-- Quick facts card -->
           <div class="card p-5 space-y-4">

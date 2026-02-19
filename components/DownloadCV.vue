@@ -23,7 +23,7 @@ const props = withDefaults(defineProps<{
   label?: string
   download?: boolean
 }>(), {
-  href: 'https://drive.google.com/file/d/1n845sYvuU7txNPNTx8s69pOKPBAAqebH/view?usp=sharing',
+  href: 'https://drive.google.com/file/d/1wkw4vFjOgjhilkgHptbyQ3psOi3Rxpy5/view?usp=sharing',
   label: 'Download CV',
   download: false
 })

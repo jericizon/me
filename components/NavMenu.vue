@@ -38,7 +38,7 @@ const handleNavClick = (link: { name: string; href: string }, e: Event) => {
       'fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500',
       hasScrolled
         ? 'bg-surface-light/90 dark:bg-surface-dark/90 backdrop-blur-2xl border-b border-neutral-200/50 dark:border-neutral-800/50 shadow-soft'
-        : 'bg-transparent'
+        : 'lg:bg-transparent bg-surface-light/95 dark:bg-surface-dark/95 backdrop-blur-xl'
     ]"
     role="navigation"
     aria-label="Main navigation"
