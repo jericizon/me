@@ -18,5 +18,9 @@ export function useContactForm() {
     }
   }
 
-  return { contactFormOpen, openContactForm }
+  const closeContactForm = () => {
+    contactFormOpen.value = false
+  }
+
+  return { contactFormOpen, openContactForm, closeContactForm }
 }

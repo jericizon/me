@@ -8,7 +8,7 @@ const titleRef = ref<HTMLElement | null>(null);
 const formCardRef = ref<HTMLElement | null>(null);
 
 // UI state from global composable
-const { contactFormOpen } = useContactForm();
+const { contactFormOpen, openContactForm, closeContactForm } = useContactForm();
 
 const { trackEvent } = useAnalytics();
 
@@ -115,7 +115,7 @@ watchEffect(() => {
             v-if="!contactFormOpen"
             type="button"
             class="btn btn-primary btn-lg group"
-            @click="() => { contactFormOpen = true; trackEvent('contact_form_open', { section: 'contact_section', label: 'open_contact_form' }); }"
+            @click="() => { openContactForm(); trackEvent('contact_form_open', { section: 'contact_section', label: 'open_contact_form' }); }"
           >
             <span>Open Contact Form</span>
             <Icon name="tabler:send" class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />

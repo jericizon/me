@@ -120,25 +120,23 @@ const baseURL = useRuntimeConfig().app.baseURL;
   <!-- CTA Section -->
   <section
     ref="ctaRef"
-    class="py-24 md:py-32 relative overflow-hidden opacity-0 transition-all duration-700 ease-out"
+    class="py-24 md:py-32 relative overflow-hidden opacity-0 transition-all duration-700 ease-out bg-neutral-950 dark:bg-neutral-950"
   >
-    <!-- Background — dark editorial block -->
-    <div class="absolute inset-0 bg-neutral-950 dark:bg-neutral-950" aria-hidden="true">
-      <!-- Subtle ambient glow -->
-      <div class="absolute top-0 left-1/3 w-[600px] h-[600px] bg-primary-600/15 rounded-full blur-[120px]"></div>
-      <div class="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-secondary-500/10 rounded-full blur-[80px]"></div>
-      <!-- Grid overlay -->
-      <div class="absolute inset-0 opacity-[0.04]"
-        style="background-image: linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px); background-size: 60px 60px;">
-      </div>
+    <!-- Subtle ambient glow -->
+    <div class="absolute top-0 left-1/3 w-[600px] h-[600px] bg-primary-600/15 rounded-full blur-[120px]"></div>
+    <div class="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-secondary-500/10 rounded-full blur-[80px]"></div>
+    <!-- Grid overlay -->
+    <div class="absolute inset-0 opacity-[0.04]"
+      style="background-image: linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px); background-size: 60px 60px;">
     </div>
 
-    <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+    <div class="relative z-10">
+      <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
       <div
         ref="ctaContentRef"
         class="opacity-0 translate-y-8 transition-all duration-700 ease-out"
       >
-        <div class="max-w-4xl">
+        <div>
           <!-- Eyebrow -->
           <p class="eyebrow mb-6" style="color: rgba(255,255,255,0.5);">
             <span class="inline-block w-8 h-px bg-primary-500 mr-2 align-middle"></span>
@@ -178,6 +176,7 @@ const baseURL = useRuntimeConfig().app.baseURL;
             </a>
           </div>
         </div>
+      </div>
       </div>
     </div>
   </section>
