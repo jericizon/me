@@ -2,14 +2,16 @@
 import { onMounted } from 'vue';
 
 useSeoMeta({
-  title: 'Jeric Izon — Full Stack Developer',
-  ogTitle: 'Jeric Izon — Full Stack Developer',
-  description: 'Portfolio of Jeric Izon, a Full Stack Web Developer with 10+ years of experience building modern web applications using Vue.js, React, Node.js, PHP, and Laravel.',
-  ogDescription: 'Portfolio of Jeric Izon, a Full Stack Web Developer with 10+ years of experience building modern web applications using Vue.js, React, Node.js, PHP, and Laravel.',
+  title: 'Freelance Website Developer | Senior Full-Stack Developer for Hire',
+  ogTitle: 'Freelance Website Developer | Senior Full-Stack Developer for Hire',
+  description: 'Hire Jeric Izon, a senior freelance website developer with 10+ years of experience in custom website development, web app builds, and long-term freelance support.',
+  ogDescription: 'Senior freelance website developer offering custom website development, scalable web apps, and ongoing freelance projects for growth-focused businesses.',
   ogImage: 'https://jericizon.github.io/me/images/banner.png',
   ogType: 'website',
   ogUrl: 'https://jericizon.github.io/me/',
   twitterCard: 'summary_large_image',
+  twitterTitle: 'Freelance Website Developer | Senior Full-Stack Developer for Hire',
+  twitterDescription: 'Hire a senior freelance web developer for custom websites, modern web apps, and ongoing freelance development support.',
   twitterImage: 'https://jericizon.github.io/me/images/banner.png',
 })
 
@@ -27,10 +29,12 @@ useHead({
       '@context': 'https://schema.org',
       '@type': 'Person',
       name: 'Jeric Izon',
-      jobTitle: 'Full Stack Web Developer',
+      jobTitle: 'Senior Freelance Website Developer',
       url: 'https://jericizon.github.io/me/',
       image: 'https://jericizon.github.io/me/images/about.jpg',
-      description: 'Full Stack Web Developer with 10+ years of experience building modern web applications.',
+      description: 'Senior freelance website developer with 10+ years of experience in custom website development and scalable web applications.',
+      knowsAbout: ['Custom Website Development', 'Freelance Web Development', 'Senior Full-Stack Development', 'Vue.js', 'React', 'Node.js', 'Laravel'],
+      areaServed: ['Singapore', 'Australia', 'Philippines', 'United States', 'Europe'],
       sameAs: [
         'https://github.com/jericizon',
         'https://www.linkedin.com/in/jericizon',

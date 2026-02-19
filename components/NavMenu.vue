@@ -11,11 +11,13 @@ const toggleMenu = () => { isMenuOpen.value = !isMenuOpen.value }
 const closeMenu = () => { isMenuOpen.value = false }
 
 const navLinks = [
-  { name: 'About',    href: '#about-section' },
-  { name: 'Resume',   href: '#resume-section' },
-  { name: 'Stack',    href: '#tools-section' },
-  { name: 'Work',     href: '#projects-section' },
-  { name: 'Contact',  href: '#contact-section' },
+  { name: 'Services', href: '/services/custom-website-development' },
+  { name: 'Hire',     href: '/hire-freelance-web-developer' },
+  { name: 'About',    href: '/#about-section' },
+  { name: 'Resume',   href: '/#resume-section' },
+  { name: 'Stack',    href: '/#tools-section' },
+  { name: 'Work',     href: '/#projects-section' },
+  { name: 'Contact',  href: '/#contact-section' },
 ]
 
 const { openContactForm } = useContactForm()
@@ -45,8 +47,8 @@ const handleNavClick = (link: { name: string; href: string }, e: Event) => {
       <div class="flex items-center justify-between h-[68px]">
 
         <!-- Logo -->
-        <a
-          href="#home-section"
+        <NuxtLink
+          to="/"
           class="group flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded-lg"
           aria-label="Jeric Izon — home"
         >
@@ -56,21 +58,21 @@ const handleNavClick = (link: { name: string; href: string }, e: Event) => {
           <span class="hidden sm:block font-display font-semibold text-neutral-900 dark:text-white text-base tracking-tight group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-200">
             Jeric Izon
           </span>
-        </a>
+        </NuxtLink>
 
         <!-- Desktop nav links -->
         <div class="hidden lg:flex items-center gap-1" role="menubar">
-          <a
+          <NuxtLink
             v-for="link in navLinks"
             :key="link.name"
-            :href="link.href"
+            :to="link.href"
             class="relative px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors duration-200 rounded-lg hover:bg-neutral-100/70 dark:hover:bg-neutral-800/60 group"
             role="menuitem"
-            @click="(e) => handleNavClick(link, e)"
+            @click="handleNavClick(link, $event)"
           >
             {{ link.name }}
             <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-primary-500 rounded-full group-hover:w-4 transition-all duration-300"></span>
-          </a>
+          </NuxtLink>
         </div>
 
         <!-- Desktop right actions -->
@@ -120,17 +122,17 @@ const handleNavClick = (link: { name: string; href: string }, e: Event) => {
         aria-label="Mobile navigation menu"
       >
         <div class="max-w-7xl mx-auto px-5 sm:px-8 py-5 space-y-1">
-          <a
+          <NuxtLink
             v-for="link in navLinks"
             :key="link.name"
-            :href="link.href"
+            :to="link.href"
             class="flex items-center justify-between px-4 py-3.5 text-base font-medium text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100/70 dark:hover:bg-neutral-800/60 rounded-xl transition-all duration-200 group"
             role="menuitem"
-            @click="(e) => handleNavClick(link, e)"
+            @click="handleNavClick(link, $event)"
           >
             <span>{{ link.name }}</span>
             <Icon name="tabler:arrow-right" class="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-200 text-primary-500" aria-hidden="true" />
-          </a>
+          </NuxtLink>
           <div class="pt-3 border-t border-neutral-200/50 dark:border-neutral-800/50">
             <a
               href="#contact-section"

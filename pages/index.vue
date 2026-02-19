@@ -27,6 +27,31 @@
 </template>
 
 <script setup lang="ts">
+useSeoMeta({
+  title: 'Hire Freelance Website Developer | Senior Full-Stack Developer',
+  description: 'Need a custom website or web app? Hire Jeric Izon, a senior freelance web developer for custom website development, rebuilds, and ongoing freelance projects.',
+  ogTitle: 'Hire Freelance Website Developer | Senior Full-Stack Developer',
+  ogDescription: 'Senior freelance website developer for custom builds, website redesigns, and scalable web apps for businesses ready to ship.',
+  twitterTitle: 'Hire Freelance Website Developer | Senior Full-Stack Developer',
+  twitterDescription: 'Custom website development and freelance senior developer support for growth-focused businesses.',
+})
+
+useHead({
+  script: [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebPage',
+        name: 'Freelance Website Developer for Hire',
+        url: 'https://jericizon.github.io/me/',
+        description: 'Freelance website developer services including custom website development, senior engineering support, and long-term freelance projects.',
+        about: ['Website Developer', 'Freelance Web Developer', 'Senior Developer', 'Custom Website Development']
+      })
+    }
+  ]
+})
+
 const isNavFixed = ref(false)
 const isMobile = ref(false)
 const navOuterRef = ref<HTMLElement | null>(null)

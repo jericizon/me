@@ -3,6 +3,7 @@ import { defineNuxtConfig } from 'nuxt/config'
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  ssr: false,
   app: {
     baseURL: '/me/', // baseURL: '/<repository>/'
     buildAssetsDir: 'assets', // don't use "_" at the begining of the folder name to avoids nojkill conflict
@@ -10,31 +11,32 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: 'en'
       },
-      title: 'Jeric Izon - Full Stack Web Developer | Available for Work',
+      title: 'Freelance Website Developer | Senior Full-Stack Developer for Hire',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'format-detection', content: 'telephone=no' },
+        { name: 'robots', content: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' },
         
         // Primary Meta Tags
-        { name: 'title', content: 'Jeric Izon - Full Stack Web Developer | Available for Work' },
-        { name: 'description', content: 'Portfolio of Jeric Izon, a Full Stack Web Developer available for work with over 10 years of experience creating modern web applications using Vue.js, React, Node.js, PHP, and Laravel.' },
+        { name: 'title', content: 'Freelance Website Developer | Senior Full-Stack Developer for Hire' },
+        { name: 'description', content: 'Hire Jeric Izon, a senior freelance website developer with 10+ years of experience in custom website development, web app builds, and ongoing freelance projects for global clients.' },
         { name: 'author', content: 'Jeric Izon' },
-        { name: 'keywords', content: 'full stack developer available for hire, full stack web developer available for work, remote full stack developer, web developer, frontend developer, backend developer, vue.js, react.js, node.js, php, laravel, portfolio' },
+        { name: 'keywords', content: 'website developer, freelance web developer, senior developer for hire, hire freelance developer, custom website development, freelance website developer, full stack developer freelance, remote web developer, contract web developer, freelance projects' },
         { name: 'google-site-verification', content: 'kmTBng2HLaFg6QEQSMBmOAhOa8Ger8VtzcQsgLhURPU' },
         
         // Open Graph / Facebook
         { property: 'og:type', content: 'website' },
         { property: 'og:url', content: 'https://jericizon.github.io/me/' },
-        { property: 'og:title', content: 'Jeric Izon - Full Stack Web Developer | Available for Work' },
-        { property: 'og:description', content: 'Portfolio of Jeric Izon, a Full Stack Web Developer available for work with over 10 years of experience creating modern web applications using Vue.js, React, Node.js, PHP, and Laravel.' },
+        { property: 'og:title', content: 'Freelance Website Developer | Senior Full-Stack Developer for Hire' },
+        { property: 'og:description', content: 'Senior freelance website developer offering custom website development, scalable web apps, and long-term freelance support for growth-focused businesses.' },
         { property: 'og:image', content: 'https://jericizon.github.io/me/images/banner.png' },
         
         // Twitter
         { property: 'twitter:card', content: 'summary_large_image' },
         { property: 'twitter:url', content: 'https://jericizon.github.io/me/' },
-        { property: 'twitter:title', content: 'Jeric Izon - Full Stack Web Developer | Available for Work' },
-        { property: 'twitter:description', content: 'Portfolio of Jeric Izon, a Full Stack Web Developer available for work with over 10 years of experience creating modern web applications using Vue.js, React, Node.js, PHP, and Laravel.' },
+        { property: 'twitter:title', content: 'Freelance Website Developer | Senior Full-Stack Developer for Hire' },
+        { property: 'twitter:description', content: 'Hire a senior freelance web developer for custom websites, modern web apps, and ongoing freelance development projects.' },
         { property: 'twitter:image', content: 'https://jericizon.github.io/me/images/banner.png' },
         
         // Theme color
@@ -88,7 +90,12 @@ export default defineNuxtConfig({
   },
   nitro: {
     prerender: {
-      crawlLinks: true
+      crawlLinks: true,
+      routes: [
+        '/',
+        '/services/custom-website-development',
+        '/hire-freelance-web-developer'
+      ]
     }
   }
 })

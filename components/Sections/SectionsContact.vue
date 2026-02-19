@@ -8,7 +8,7 @@ const titleRef = ref<HTMLElement | null>(null);
 const formCardRef = ref<HTMLElement | null>(null);
 
 // UI state from global composable
-const { contactFormOpen, openContactForm, closeContactForm } = useContactForm();
+const { contactFormOpen, openContactForm } = useContactForm();
 
 const { trackEvent } = useAnalytics();
 

@@ -22,6 +22,20 @@ const year = new Date().getFullYear()
 
         <!-- Links -->
         <nav class="flex items-center gap-6" aria-label="Footer navigation">
+          <NuxtLink
+            to="/services/custom-website-development"
+            class="text-sm text-neutral-500 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors inline-flex items-center gap-1.5"
+            aria-label="Custom website development services"
+          >
+            Services
+          </NuxtLink>
+          <NuxtLink
+            to="/hire-freelance-web-developer"
+            class="text-sm text-neutral-500 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors inline-flex items-center gap-1.5"
+            aria-label="Hire freelance web developer"
+          >
+            Hire
+          </NuxtLink>
           <a
             href="https://github.com/jericizon"
             target="_blank"

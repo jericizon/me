@@ -164,16 +164,22 @@ const baseURL = useRuntimeConfig().app.baseURL;
               <span>Start a Conversation</span>
               <Icon name="tabler:arrow-up-right" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" aria-hidden="true" />
             </a>
-            <a
-              href="https://github.com/jericizon"
-              target="_blank"
-              rel="noopener"
+            <NuxtLink
+              to="/services/custom-website-development"
               class="btn btn-lg"
               style="background: transparent; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.8);"
             >
-              <Icon name="tabler:brand-github" class="w-4 h-4" />
-              <span>View GitHub</span>
-            </a>
+              <Icon name="tabler:briefcase" class="w-4 h-4" />
+              <span>View Services</span>
+            </NuxtLink>
+            <NuxtLink
+              to="/hire-freelance-web-developer"
+              class="btn btn-lg"
+              style="background: transparent; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.8);"
+            >
+              <Icon name="tabler:user-check" class="w-4 h-4" />
+              <span>Hire Me</span>
+            </NuxtLink>
           </div>
         </div>
       </div>
