@@ -1,7 +1,13 @@
 <script setup lang="ts">
-import { useContactForm } from '@/composables/useContactForm'
+import { useAnalytics } from '@/composables/useAnalytics'
 
-const { openContactForm } = useContactForm()
+const { trackEvent } = useAnalytics()
+const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdb9dnAFUolvGaSHco4QziKWRqojD8UfO5luLh6sMWKXPZO1w/viewform'
+
+const handleStartConversation = () => {
+  trackEvent('contact_form_open', { section: 'hire_page', label: 'start_conversation' })
+  window.open(googleFormUrl, '_blank')
+}
 
 useSeoMeta({
   title: 'Hire a Freelance Web Developer | Senior Developer for Projects',
@@ -59,7 +65,7 @@ useSeoMeta({
         </article>
 
         <div class="flex flex-wrap gap-3">
-          <button type="button" class="btn btn-primary btn-lg" @click="openContactForm">
+          <button type="button" class="btn btn-primary btn-lg" @click="handleStartConversation">
             Start a Conversation
           </button>
           <NuxtLink to="/services/custom-website-development" class="btn btn-secondary btn-lg">

@@ -1,16 +1,14 @@
 <script setup lang="ts">
-import { ref, onMounted, watchEffect } from 'vue';
-import { useContactForm } from '@/composables/useContactForm';
+import { ref, onMounted } from 'vue';
 import { useAnalytics } from '@/composables/useAnalytics';
 
 // Animation refs
 const titleRef = ref<HTMLElement | null>(null);
-const formCardRef = ref<HTMLElement | null>(null);
-
-// UI state from global composable
-const { contactFormOpen, openContactForm } = useContactForm();
 
 const { trackEvent } = useAnalytics();
+
+// Google Form URL
+const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdb9dnAFUolvGaSHco4QziKWRqojD8UfO5luLh6sMWKXPZO1w/viewform';
 
 // Initialize animations
 onMounted(() => {
@@ -20,21 +18,13 @@ onMounted(() => {
       titleRef.value.style.transform = 'translateY(0)';
     }
   }, 150);
-
-  setTimeout(() => {
-    if (formCardRef.value) {
-      formCardRef.value.style.opacity = '1';
-      formCardRef.value.style.transform = 'translateY(0)';
-    }
-  }, 350);
 });
 
-// Ensure form section is visible when open state becomes true
-watchEffect(() => {
-  if (contactFormOpen.value) {
-    // no-op here; actual scrolling is triggered in composable
-  }
-});
+// Handle form link click
+const handleContactFormClick = () => {
+  trackEvent('contact_form_open', { section: 'contact_section', label: 'open_contact_form' });
+  window.open(googleFormUrl, '_blank');
+};
 </script>
 
 <template>
@@ -112,35 +102,13 @@ watchEffect(() => {
         <!-- Form trigger -->
         <div class="mt-10 pt-8 border-t border-neutral-200/50 dark:border-neutral-800/50">
           <button
-            v-if="!contactFormOpen"
             type="button"
             class="btn btn-primary btn-lg group"
-            @click="() => { openContactForm(); trackEvent('contact_form_open', { section: 'contact_section', label: 'open_contact_form' }); }"
+            @click="handleContactFormClick"
           >
-            <span>Open Contact Form</span>
+            <span>Send a Message</span>
             <Icon name="tabler:send" class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
           </button>
-        </div>
-      </div>
-
-      <!-- Google Form embed -->
-      <div v-if="contactFormOpen" class="max-w-3xl">
-        <div ref="formCardRef" class="card overflow-hidden opacity-0 translate-y-3 transition duration-700 ease-out">
-          <div class="p-5 border-b border-neutral-200/50 dark:border-neutral-800/50">
-            <div class="text-sm font-semibold text-neutral-900 dark:text-white">Send a Message</div>
-            <div class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">I'll get back to you within 24 hours.</div>
-          </div>
-          <iframe
-            src="https://docs.google.com/forms/d/e/1FAIpQLSdb9dnAFUolvGaSHco4QziKWRqojD8UfO5luLh6sMWKXPZO1w/viewform?embedded=true"
-            width="100%"
-            height="900"
-            frameborder="0"
-            marginheight="0"
-            marginwidth="0"
-            title="Contact Form"
-            aria-label="Contact form to get in touch with Jeric Izon"
-            class="block w-full"
-          >Loading…</iframe>
         </div>
       </div>
     </div>
