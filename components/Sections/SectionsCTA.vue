@@ -95,8 +95,8 @@ const baseURL = useRuntimeConfig().app.baseURL;
 
 <template>
   <!-- Stats strip -->
-  <section id="stats-section" class="py-16 md:py-20 border-y border-neutral-200/50 dark:border-neutral-800/50" aria-label="Career statistics">
-    <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+  <section id="stats-section" class="py-16 md:py-20 border-y border-base-600/30" aria-label="Career statistics">
+    <div class="px-6 lg:px-16">
       <div
         ref="statsRef"
         class="opacity-0 translate-y-6 transition-all duration-700 ease-out"
@@ -107,10 +107,10 @@ const baseURL = useRuntimeConfig().app.baseURL;
             :key="stat.label"
             class="text-center md:text-left"
           >
-            <div class="font-display font-bold text-3xl md:text-4xl text-neutral-900 dark:text-white tracking-tight mb-1">
+            <div class="font-display font-bold text-3xl md:text-4xl text-coral-500 tracking-tight mb-1">
               {{ typeof stat.value === 'function' ? stat.value() : stat.value }}
             </div>
-            <div class="text-sm text-neutral-500 dark:text-neutral-400">{{ stat.label }}</div>
+            <div class="text-sm text-base-400">{{ stat.label }}</div>
           </div>
         </div>
       </div>
@@ -120,65 +120,51 @@ const baseURL = useRuntimeConfig().app.baseURL;
   <!-- CTA Section -->
   <section
     ref="ctaRef"
-    class="py-24 md:py-32 relative overflow-hidden opacity-0 transition-all duration-700 ease-out bg-neutral-950 dark:bg-neutral-950"
+    class="py-24 md:py-32 relative overflow-hidden opacity-0 transition-all duration-700 ease-out bg-surface"
   >
     <!-- Subtle ambient glow -->
-    <div class="absolute top-0 left-1/3 w-[600px] h-[600px] bg-primary-600/15 rounded-full blur-[120px]"></div>
-    <div class="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-secondary-500/10 rounded-full blur-[80px]"></div>
-    <!-- Grid overlay -->
-    <div class="absolute inset-0 opacity-[0.04]"
-      style="background-image: linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px); background-size: 60px 60px;">
-    </div>
+    <div class="absolute top-0 left-1/3 w-[600px] h-[600px] bg-coral-500/10 rounded-full blur-[120px]"></div>
+    <div class="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-gold-500/5 rounded-full blur-[80px]"></div>
 
     <div class="relative z-10">
-      <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="px-6 lg:px-16">
       <div
         ref="ctaContentRef"
         class="opacity-0 translate-y-8 transition-all duration-700 ease-out"
       >
         <div>
           <!-- Eyebrow -->
-          <p class="eyebrow mb-6" style="color: rgba(255,255,255,0.5);">
-            <span class="inline-block w-8 h-px bg-primary-500 mr-2 align-middle"></span>
-            Let's build something
-          </p>
+          <div class="flex items-center gap-4 mb-6">
+            <span class="w-8 h-px bg-coral-500"></span>
+            <span class="font-mono text-xs text-base-400 tracking-wider uppercase">Ready to build?</span>
+          </div>
 
           <!-- Headline -->
-          <h2 class="font-display font-bold text-white tracking-tighter mb-8 leading-[1.0]" style="font-size: clamp(2.5rem, 6vw, 5.5rem);">
-            Have a project<br/>
-            in mind? <span class="text-gradient">Let's talk.</span>
+          <h2 class="font-display font-bold text-base-50 tracking-tighter mb-8 leading-[0.95]" style="font-size: clamp(2.5rem, 6vw, 5rem);">
+            Let's turn your idea<br/>
+            into a <span class="text-coral-500">revenue-generating</span><br/>
+            system.
           </h2>
 
-          <p class="text-lg text-white/60 max-w-xl leading-relaxed mb-10">
-            I'm available for freelance, remote, and part-time roles. Whether you need a full product built from scratch or want to level up an existing codebase — I'm in.
+          <p class="text-lg text-base-300 max-w-xl leading-relaxed mb-10">
+            I'm a systems builder for serious founders. If you're looking for a partner who can architect, build, and scale your product — not just write code — let's talk.
           </p>
 
           <div class="flex flex-wrap gap-4">
-            <a
-              href="#contact-section"
-              @click.prevent="() => { trackEvent('cta_click', { section: 'sections_cta', label: 'hire_me' }); openContactForm(); }"
-              class="btn btn-lg group"
-              style="background: #7c3aed; color: white; box-shadow: 0 0 40px rgba(124,58,237,0.4);"
+            <button
+              @click="() => { trackEvent('cta_click', { section: 'sections_cta', label: 'hire_me' }); openContactForm(); }"
+              class="group flex items-center gap-3 px-8 py-4 bg-coral-500 text-surface font-semibold text-sm tracking-wide hover:bg-coral-400 transition-all duration-300"
               aria-label="Open contact form"
             >
-              <span>Start a Conversation</span>
+              <span>Let's Build Your System</span>
               <Icon name="tabler:arrow-up-right" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" aria-hidden="true" />
-            </a>
+            </button>
             <NuxtLink
-              to="/services/custom-website-development"
-              class="btn btn-lg"
-              style="background: transparent; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.8);"
+              to="/#services-section"
+              class="flex items-center gap-3 px-8 py-4 border border-base-600/50 text-base-300 hover:border-coral-500/50 hover:text-base-50 transition-all duration-300"
             >
               <Icon name="tabler:briefcase" class="w-4 h-4" />
-              <span>View Services</span>
-            </NuxtLink>
-            <NuxtLink
-              to="/hire-freelance-web-developer"
-              class="btn btn-lg"
-              style="background: transparent; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.8);"
-            >
-              <Icon name="tabler:user-check" class="w-4 h-4" />
-              <span>Hire Me</span>
+              <span>See What I Build</span>
             </NuxtLink>
           </div>
         </div>

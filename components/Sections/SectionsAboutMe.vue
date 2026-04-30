@@ -1,131 +1,117 @@
 <script setup lang="ts">
-const myAge = computed(() => {
-  const birthDate = new Date("2013-11-01");
-  const today = new Date();
-  let age = today.getFullYear() - birthDate.getFullYear();
-  const monthDiff = today.getMonth() - birthDate.getMonth();
-  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) age--;
-  return age;
-});
-
 const values = [
-  { icon: 'tabler:code', label: 'Clean Code', desc: 'Readable, maintainable, and built to scale.' },
-  { icon: 'tabler:rocket', label: 'Performance', desc: 'Fast load times and optimized user flows.' },
-  { icon: 'tabler:shield-check', label: 'Security', desc: 'Secure APIs, RLS policies, and best practices.' },
-  { icon: 'tabler:messages', label: 'Communication', desc: 'Clear, proactive, and async-friendly.' },
+  { 
+    title: 'Business First', 
+    desc: 'I solve business problems, not just write code. Every feature ties back to revenue or user outcomes.' 
+  },
+  { 
+    title: 'Ship Fast', 
+    desc: 'AI-assisted workflows let me deliver MVPs in weeks. Speed without technical debt.' 
+  },
+  { 
+    title: 'Scale Ready', 
+    desc: 'Architecture that grows from hundreds to millions of users without rebuilding.' 
+  },
+  { 
+    title: 'True Partner', 
+    desc: 'I challenge assumptions, suggest improvements, and own outcomes alongside you.' 
+  },
 ]
+
+const stack = ['Vue.js', 'React', 'Node.js', 'Laravel', 'Supabase', 'PostgreSQL', 'AWS', 'Docker']
 </script>
 
 <template>
-  <section id="about-section" class="py-24 md:py-32 relative overflow-hidden">
-    <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+  <section id="about-section" class="relative py-24 lg:py-32">
+    <!-- Section number watermark -->
+    <div class="absolute top-8 right-8 lg:right-16 font-display font-bold text-[12rem] lg:text-[16rem] text-base-50/[0.02] leading-none select-none pointer-events-none">
+      01
+    </div>
 
+    <div class="relative z-10 px-6 lg:px-16">
       <!-- Section header -->
-      <div class="mb-16 md:mb-20">
-        <p class="eyebrow mb-4 animate-fade-in-up">
-          <span class="eyebrow-line"></span>
-          About Me
-        </p>
-        <h2 class="section-title max-w-3xl animate-fade-in-up" style="animation-delay: 0.08s">
-          A developer who cares about<br/>
-          <span class="text-gradient">craft and outcomes.</span>
+      <div class="mb-16 lg:mb-24">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="font-mono text-xs text-coral-500">01</span>
+          <span class="w-12 h-px bg-coral-500"></span>
+          <span class="font-mono text-xs text-base-400 tracking-wider uppercase">About</span>
+        </div>
+        <h2 class="font-display font-bold text-4xl lg:text-6xl text-base-50 leading-tight tracking-tight max-w-3xl">
+          Engineering solutions that scale businesses
         </h2>
       </div>
 
-      <!-- Main content grid -->
-      <div class="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-12 lg:gap-16">
-
-        <!-- Left: Narrative -->
-        <div class="space-y-10">
-
-          <!-- Story paragraphs -->
-          <div class="space-y-5 animate-fade-in-up" style="animation-delay: 0.1s">
-            <p class="text-xl text-neutral-700 dark:text-neutral-300 leading-relaxed">
-              I started writing code <strong class="text-neutral-900 dark:text-white font-semibold">{{ myAge }} years ago</strong> out of pure curiosity — and never stopped. Today I work as a full-stack developer, helping teams and founders build web products that are fast, secure, and genuinely enjoyable to use.
+      <!-- Split content -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+        
+        <!-- Left: Story -->
+        <div class="space-y-8">
+          <div class="space-y-6 text-base-300 leading-relaxed text-lg">
+            <p>
+              I've spent <strong class="text-base-50">10+ years</strong> building production systems for startups and scale-ups. From architecting video rendering pipelines processing thousands of exports daily to launching AI platforms with enterprise-grade security.
             </p>
-            <p class="text-lg text-neutral-500 dark:text-neutral-400 leading-relaxed">
-              My background spans both frontend and backend — from crafting pixel-perfect Vue.js and React interfaces to architecting REST APIs with Laravel and NestJS, managing PostgreSQL schemas, and deploying on AWS. I've worked with Singapore-based product companies for over 7 years, shipping features for platforms used by thousands of users daily.
+            <p>
+              My approach is simple: understand the business problem first, then build the most elegant technical solution. I specialize in SaaS platforms, admin dashboards, and API systems that need to scale.
             </p>
-            <p class="text-lg text-neutral-500 dark:text-neutral-400 leading-relaxed">
-              I'm currently open to <strong class="text-neutral-700 dark:text-neutral-300 font-medium">remote, freelance, and part-time roles</strong>. If you're building something meaningful, I'd love to be part of it.
+            <p>
+              7+ years with Singapore-based tech companies taught me how to ship under pressure, communicate across time zones, and deliver systems that handle real user load.
             </p>
-          </div>
-
-          <!-- Values grid -->
-          <div class="animate-fade-in-up" style="animation-delay: 0.18s">
-            <div class="rule-label mb-6">What I bring</div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div
-                v-for="v in values"
-                :key="v.label"
-                class="card-subtle p-5 rounded-xl group hover:border-primary-200 dark:hover:border-primary-800/50 transition-colors duration-200"
-              >
-                <div class="flex items-start gap-3">
-                  <div class="w-9 h-9 rounded-lg bg-primary-50 dark:bg-primary-950/50 flex items-center justify-center flex-shrink-0 group-hover:bg-primary-100 dark:group-hover:bg-primary-900/50 transition-colors">
-                    <Icon :name="v.icon" class="w-4.5 h-4.5 text-primary-600 dark:text-primary-400" />
-                  </div>
-                  <div>
-                    <div class="font-semibold text-neutral-900 dark:text-white text-sm mb-0.5">{{ v.label }}</div>
-                    <div class="text-sm text-neutral-500 dark:text-neutral-400">{{ v.desc }}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- CTA row -->
-          <div class="flex flex-wrap gap-3 pt-2 animate-fade-in-up" style="animation-delay: 0.24s">
-            <DownloadCV />
-            <a href="#contact-section" class="btn btn-secondary btn-md">
-              <Icon name="tabler:message" class="w-4 h-4" />
-              <span>Let's Chat</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- Right: Info sidebar -->
-        <div class="space-y-5 animate-fade-in-up" style="animation-delay: 0.15s">
-
-          <!-- Quick facts card -->
-          <div class="card p-5 space-y-4">
-            <div class="text-xs font-semibold tracking-widest uppercase text-neutral-400 dark:text-neutral-600">Quick Facts</div>
-            <div class="space-y-3">
-              <div class="flex items-center justify-between text-sm">
-                <span class="text-neutral-500 dark:text-neutral-400">Location</span>
-                <span class="font-medium text-neutral-900 dark:text-white">Philippines 🇵🇭</span>
-              </div>
-              <div class="flex items-center justify-between text-sm">
-                <span class="text-neutral-500 dark:text-neutral-400">Experience</span>
-                <span class="font-medium text-neutral-900 dark:text-white">10+ years</span>
-              </div>
-              <div class="flex items-center justify-between text-sm">
-                <span class="text-neutral-500 dark:text-neutral-400">Timezone</span>
-                <span class="font-medium text-neutral-900 dark:text-white">UTC+8 (PHT)</span>
-              </div>
-              <div class="flex items-center justify-between text-sm">
-                <span class="text-neutral-500 dark:text-neutral-400">Availability</span>
-                <span class="inline-flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-medium">
-                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                  Open to work
-                </span>
-              </div>
-            </div>
           </div>
 
           <!-- Stack tags -->
-          <div class="card p-5">
-            <div class="text-xs font-semibold tracking-widest uppercase text-neutral-400 dark:text-neutral-600 mb-3">Core Stack</div>
+          <div class="pt-6 border-t border-base-600/50">
+            <div class="font-mono text-xs text-base-400 mb-4 tracking-wider">STACK</div>
             <div class="flex flex-wrap gap-2">
-              <span class="tag tag-primary">Vue.js</span>
-              <span class="tag tag-primary">React</span>
-              <span class="tag tag-neutral">Node.js</span>
-              <span class="tag tag-neutral">Laravel</span>
-              <span class="tag tag-secondary">TypeScript</span>
-              <span class="tag tag-neutral">Supabase</span>
-              <span class="tag tag-neutral">Docker</span>
-              <span class="tag tag-neutral">AWS</span>
+              <span 
+                v-for="tech in stack" 
+                :key="tech"
+                class="px-3 py-1.5 text-xs text-base-300 border border-base-600/50 hover:border-coral-500/50 hover:text-coral-500 transition-colors cursor-default"
+              >
+                {{ tech }}
+              </span>
             </div>
           </div>
+        </div>
+
+        <!-- Right: Values grid -->
+        <div class="space-y-6">
+          <div 
+            v-for="(value, index) in values" 
+            :key="value.title"
+            class="group p-6 border border-base-600/30 hover:border-coral-500/30 transition-all duration-300 hover:bg-surface-elevated/50"
+          >
+            <div class="flex items-start gap-4">
+              <span class="font-mono text-xs text-coral-500">0{{ index + 1 }}</span>
+              <div>
+                <h3 class="font-display font-semibold text-lg text-base-50 mb-2 group-hover:text-coral-500 transition-colors">
+                  {{ value.title }}
+                </h3>
+                <p class="text-sm text-base-400 leading-relaxed">
+                  {{ value.desc }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom stats -->
+      <div class="mt-20 lg:mt-32 grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+        <div class="space-y-2">
+          <div class="font-display font-bold text-5xl lg:text-6xl text-coral-500">10+</div>
+          <div class="text-sm text-base-400">Years shipping production systems</div>
+        </div>
+        <div class="space-y-2">
+          <div class="font-display font-bold text-5xl lg:text-6xl text-coral-500">100+</div>
+          <div class="text-sm text-base-400">SaaS platforms delivered</div>
+        </div>
+        <div class="space-y-2">
+          <div class="font-display font-bold text-5xl lg:text-6xl text-coral-500">6+</div>
+          <div class="text-sm text-base-400">Countries — APAC to Europe</div>
+        </div>
+        <div class="space-y-2">
+          <div class="font-display font-bold text-5xl lg:text-6xl text-coral-500">50+</div>
+          <div class="text-sm text-base-400">Happy clients</div>
         </div>
       </div>
     </div>

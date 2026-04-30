@@ -30,7 +30,7 @@ const nextMode = computed(() => {
 <template>
   <button
     @click="toggleTheme"
-    class="theme-toggle group relative"
+    class="relative cursor-pointer group"
     :aria-label="`Switch to ${nextMode} mode`"
     :title="`Switch to ${nextMode} mode`"
   >
@@ -84,9 +84,3 @@ const nextMode = computed(() => {
     "></span>
   </button>
 </template>
-
-<style scoped>
-.theme-toggle {
-  @apply relative cursor-pointer;
-}
-</style>

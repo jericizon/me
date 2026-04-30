@@ -223,35 +223,31 @@ onMounted(() => {
 </script>
 
 <template>
-  <section id="tools-section" class="py-24 md:py-32 relative overflow-hidden">
-    <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+  <section id="tools-section" class="relative py-24 lg:py-32">
+    <div class="relative z-10 px-6 lg:px-16">
 
       <!-- Section header -->
-      <div class="mb-14 md:mb-16">
-        <p class="eyebrow mb-4 animate-fade-in-up">
-          <span class="eyebrow-line"></span>
-          Tech Stack
-        </p>
-        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
-          <h2 class="section-title animate-fade-in-up" style="animation-delay: 0.08s">
-            Tools &amp; <span class="text-gradient">technologies.</span>
-          </h2>
-          <p class="text-neutral-500 dark:text-neutral-400 max-w-xs text-sm leading-relaxed animate-fade-in-up" style="animation-delay: 0.12s">
-            A decade of hands-on experience across the full stack — from UI to infrastructure.
-          </p>
+      <div class="mb-16 lg:mb-24">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="font-mono text-xs text-coral-500">TECH</span>
+          <span class="w-12 h-px bg-coral-500"></span>
+          <span class="font-mono text-xs text-base-400 tracking-wider uppercase">Stack</span>
         </div>
+        <h2 class="font-display font-bold text-4xl lg:text-6xl text-base-50 leading-tight tracking-tight">
+          Tools & technologies
+        </h2>
       </div>
 
-      <!-- Category filter pills -->
-      <div class="flex flex-wrap gap-2 mb-10 animate-fade-in-up" style="animation-delay: 0.14s" role="tablist" aria-label="Filter tools by category">
+      <!-- Category filter -->
+      <div class="flex flex-wrap gap-2 mb-12" role="tablist" aria-label="Filter tools by category">
         <button
           v-for="category in categories"
           :key="category"
           @click="activeFilter = category"
-          class="px-4 py-1.5 text-sm font-medium rounded-full border transition-all duration-200"
+          class="px-4 py-2 text-sm font-medium border transition-all duration-200"
           :class="activeFilter === category
-            ? 'bg-primary-600 border-primary-600 text-white shadow-glow-primary'
-            : 'bg-transparent border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hover:border-neutral-400 dark:hover:border-neutral-600 hover:text-neutral-900 dark:hover:text-white'"
+            ? 'bg-coral-500/20 border-coral-500 text-coral-500'
+            : 'bg-transparent border-base-600/50 text-base-400 hover:border-base-500 hover:text-base-200'"
           role="tab"
           :aria-selected="activeFilter === category"
           aria-controls="tools-grid"
@@ -271,16 +267,16 @@ onMounted(() => {
         <div
           v-for="tool in filteredTools"
           :key="tool.name"
-          class="group flex flex-col items-center gap-2.5 p-4 rounded-xl border border-neutral-200/60 dark:border-neutral-800/60 bg-white dark:bg-neutral-900 hover:border-primary-300 dark:hover:border-primary-700/50 hover:shadow-card hover:-translate-y-0.5 transition-all duration-200 cursor-default"
+          class="group flex flex-col items-center gap-2.5 p-4 border border-base-600/30 hover:border-coral-500/50 hover:bg-surface-elevated/30 transition-all duration-200 cursor-default"
         >
-          <div class="w-10 h-10 flex items-center justify-center rounded-lg bg-neutral-50 dark:bg-neutral-800 group-hover:bg-primary-50 dark:group-hover:bg-primary-950/40 transition-colors duration-200">
+          <div class="w-10 h-10 flex items-center justify-center bg-surface-elevated group-hover:bg-coral-500/10 transition-colors duration-200">
             <Icon
               :name="tool.icon"
-              class="w-6 h-6 text-neutral-600 dark:text-neutral-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-200"
+              class="w-6 h-6 text-base-400 group-hover:text-coral-500 transition-colors duration-200"
               aria-hidden="true"
             />
           </div>
-          <span class="text-xs font-medium text-neutral-600 dark:text-neutral-400 text-center leading-tight group-hover:text-neutral-900 dark:group-hover:text-white transition-colors duration-200">{{ tool.name }}</span>
+          <span class="text-xs font-medium text-base-400 text-center leading-tight group-hover:text-base-200 transition-colors duration-200">{{ tool.name }}</span>
         </div>
       </div>
     </div>

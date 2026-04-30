@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { useContactForm } from '@/composables/useContactForm'
-import { useAnalytics } from '@/composables/useAnalytics'
-
 const props = defineProps<{
   hasScrolled?: boolean
 }>()
@@ -11,140 +8,167 @@ const toggleMenu = () => { isMenuOpen.value = !isMenuOpen.value }
 const closeMenu = () => { isMenuOpen.value = false }
 
 const navLinks = [
-  { name: 'Services', href: '/services/custom-website-development' },
-  { name: 'Hire',     href: '/hire-freelance-web-developer' },
-  { name: 'About',    href: '/#about-section' },
-  { name: 'Resume',   href: '/#resume-section' },
-  { name: 'Stack',    href: '/#tools-section' },
-  { name: 'Work',     href: '/#projects-section' },
-  { name: 'Contact',  href: '/#contact-section' },
+  { id: 'about', label: 'About', number: '01' },
+  { id: 'services', label: 'Services', number: '02' },
+  { id: 'work', label: 'Work', number: '03' },
+  { id: 'process', label: 'Process', number: '04' },
+  { id: 'contact', label: 'Contact', number: '05' },
 ]
 
 const { openContactForm } = useContactForm()
-const { trackEvent } = useAnalytics()
 
-const handleNavClick = (link: { name: string; href: string }, e: Event) => {
-  if (link.name === 'Contact') {
-    e.preventDefault()
-    openContactForm()
-  }
+const activeSection = ref('')
+
+const scrollToSection = (id: string) => {
   closeMenu()
+  if (id === 'contact') {
+    openContactForm()
+    return
+  }
+  const sectionMap: Record<string, string> = {
+    'about': 'about-section',
+    'services': 'services-section',
+    'work': 'projects-section',
+    'process': 'how-i-work'
+  }
+  const sectionId = sectionMap[id]
+  if (sectionId) {
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
+  }
 }
+
+// Track active section on scroll
+onMounted(() => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const idMap: Record<string, string> = {
+            'about-section': 'about',
+            'services-section': 'services',
+            'projects-section': 'work',
+            'how-i-work': 'process'
+          }
+          activeSection.value = idMap[entry.target.id] || ''
+        }
+      })
+    },
+    { threshold: 0.3 }
+  )
+
+  navLinks.forEach(link => {
+    const sectionMap: Record<string, string> = {
+      'about': 'about-section',
+      'services': 'services-section',
+      'work': 'projects-section',
+      'process': 'how-i-work'
+    }
+    const el = document.getElementById(sectionMap[link.id])
+    if (el) observer.observe(el)
+  })
+})
 </script>
 
 <template>
-  <nav
-    :class="[
-      'fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500',
-      hasScrolled
-        ? 'bg-surface-light/90 dark:bg-surface-dark/90 backdrop-blur-2xl border-b border-neutral-200/50 dark:border-neutral-800/50 shadow-soft'
-        : 'lg:bg-transparent bg-surface-light/95 dark:bg-surface-dark/95 backdrop-blur-xl'
-    ]"
-    role="navigation"
-    aria-label="Main navigation"
-  >
-    <div class="w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
-      <div class="flex items-center justify-between h-[68px]">
-
-        <!-- Logo -->
-        <NuxtLink
-          to="/"
-          class="group flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded-lg"
-          aria-label="Jeric Izon — home"
+  <!-- Desktop Vertical Navigation -->
+  <nav class="hidden lg:flex fixed left-8 top-1/2 -translate-y-1/2 z-50 flex-col items-start gap-6" role="navigation" aria-label="Main navigation">
+    <div class="flex flex-col gap-4">
+      <button
+        v-for="link in navLinks"
+        :key="link.id"
+        @click="scrollToSection(link.id)"
+        class="group flex items-center gap-3 text-left"
+        :class="activeSection === link.id ? 'opacity-100' : 'opacity-40 hover:opacity-70'"
+      >
+        <span 
+          class="font-mono text-xs transition-all duration-300"
+          :class="activeSection === link.id ? 'text-coral-500' : 'text-base-300 group-hover:text-base-100'"
         >
-          <div class="w-9 h-9 rounded-xl bg-primary-600 flex items-center justify-center shadow-medium group-hover:shadow-glow-primary transition-all duration-300 group-hover:scale-105">
-            <span class="font-display font-bold text-white text-sm tracking-tight">JI</span>
-          </div>
-          <span class="hidden sm:block font-display font-semibold text-neutral-900 dark:text-white text-base tracking-tight group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-200">
-            Jeric Izon
-          </span>
-        </NuxtLink>
+          {{ link.number }}
+        </span>
+        <span 
+          class="text-sm font-medium tracking-wide transition-all duration-300"
+          :class="activeSection === link.id ? 'text-base-50 translate-x-1' : 'text-base-300 group-hover:text-base-100'"
+        >
+          {{ link.label }}
+        </span>
+        <span 
+          class="h-px bg-coral-500 transition-all duration-300"
+          :class="activeSection === link.id ? 'w-8 opacity-100' : 'w-0 opacity-0'"
+        ></span>
+      </button>
+    </div>
+  </nav>
 
-        <!-- Desktop nav links -->
-        <div class="hidden lg:flex items-center gap-1" role="menubar">
-          <NuxtLink
-            v-for="link in navLinks"
-            :key="link.name"
-            :to="link.href"
-            class="relative px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors duration-200 rounded-lg hover:bg-neutral-100/70 dark:hover:bg-neutral-800/60 group"
-            role="menuitem"
-            @click="handleNavClick(link, $event)"
-          >
-            {{ link.name }}
-            <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-primary-500 rounded-full group-hover:w-4 transition-all duration-300"></span>
-          </NuxtLink>
-        </div>
+  <!-- Mobile Navigation -->
+  <nav class="lg:hidden fixed top-0 left-0 right-0 z-50 px-4 py-4" role="navigation" aria-label="Mobile navigation">
+    <div class="flex items-center justify-between">
+      <!-- Logo -->
+      <NuxtLink to="/" class="text-lg font-display font-bold text-base-50 tracking-tight">
+        JI
+      </NuxtLink>
 
-        <!-- Desktop right actions -->
-        <div class="hidden lg:flex items-center gap-3">
-          <ThemeToggle />
-          <a
-            href="#contact-section"
-            @click.prevent="() => { trackEvent('cta_click', { section: 'nav', label: 'hire_me' }); openContactForm(); }"
-            class="btn btn-primary btn-sm"
-            aria-label="Hire me — open contact form"
-          >
-            <span>Hire Me</span>
-            <Icon name="tabler:arrow-up-right" class="w-3.5 h-3.5" aria-hidden="true" />
-          </a>
+      <!-- Menu Toggle -->
+      <button
+        @click="toggleMenu"
+        class="w-10 h-10 flex items-center justify-center text-base-50"
+        :aria-expanded="isMenuOpen"
+        aria-controls="mobile-menu"
+        aria-label="Toggle menu"
+      >
+        <div class="relative w-6 h-5">
+          <span 
+            class="absolute left-0 w-full h-0.5 bg-current transition-all duration-300"
+            :class="isMenuOpen ? 'top-1/2 -translate-y-1/2 rotate-45' : 'top-0'"
+          ></span>
+          <span 
+            class="absolute left-0 top-1/2 -translate-y-1/2 w-full h-0.5 bg-current transition-all duration-300"
+            :class="isMenuOpen ? 'opacity-0' : 'opacity-100'"
+          ></span>
+          <span 
+            class="absolute left-0 w-full h-0.5 bg-current transition-all duration-300"
+            :class="isMenuOpen ? 'top-1/2 -translate-y-1/2 -rotate-45' : 'bottom-0'"
+          ></span>
         </div>
-
-        <!-- Mobile actions -->
-        <div class="lg:hidden flex items-center gap-2">
-          <ThemeToggle />
-          <button
-            @click="toggleMenu"
-            class="flex items-center justify-center w-9 h-9 rounded-lg text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors duration-200"
-            :aria-expanded="isMenuOpen"
-            aria-controls="mobile-menu"
-            aria-label="Toggle navigation menu"
-          >
-            <Icon :name="isMenuOpen ? 'tabler:x' : 'tabler:menu-2'" class="w-5 h-5" aria-hidden="true" />
-          </button>
-        </div>
-      </div>
+      </button>
     </div>
 
-    <!-- Mobile menu -->
+    <!-- Mobile Menu Overlay -->
     <Transition
-      enter-active-class="transition-all duration-300 ease-out"
-      enter-from-class="opacity-0 -translate-y-2"
-      enter-to-class="opacity-100 translate-y-0"
-      leave-active-class="transition-all duration-200 ease-in"
-      leave-from-class="opacity-100 translate-y-0"
-      leave-to-class="opacity-0 -translate-y-2"
+      enter-active-class="transition-all duration-500 ease-out"
+      enter-from-class="opacity-0"
+      enter-to-class="opacity-100"
+      leave-active-class="transition-all duration-300 ease-in"
+      leave-from-class="opacity-100"
+      leave-to-class="opacity-0"
     >
       <div
         v-show="isMenuOpen"
         id="mobile-menu"
-        class="lg:hidden absolute top-full left-0 right-0 bg-surface-light/98 dark:bg-surface-dark/98 backdrop-blur-2xl border-b border-neutral-200/50 dark:border-neutral-800/50 shadow-large"
-        role="menu"
-        aria-label="Mobile navigation menu"
+        class="fixed inset-0 top-0 bg-surface z-40 flex flex-col justify-center px-8"
       >
-        <div class="max-w-7xl mx-auto px-5 sm:px-8 py-5 space-y-1">
-          <NuxtLink
-            v-for="link in navLinks"
-            :key="link.name"
-            :to="link.href"
-            class="flex items-center justify-between px-4 py-3.5 text-base font-medium text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100/70 dark:hover:bg-neutral-800/60 rounded-xl transition-all duration-200 group"
-            role="menuitem"
-            @click="handleNavClick(link, $event)"
+        <div class="flex flex-col gap-6">
+          <button
+            v-for="(link, index) in navLinks"
+            :key="link.id"
+            @click="scrollToSection(link.id)"
+            class="group flex items-baseline gap-4 text-left animate-fade-in-up"
+            :style="{ animationDelay: `${index * 0.1}s` }"
           >
-            <span>{{ link.name }}</span>
-            <Icon name="tabler:arrow-right" class="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-200 text-primary-500" aria-hidden="true" />
-          </NuxtLink>
-          <div class="pt-3 border-t border-neutral-200/50 dark:border-neutral-800/50">
-            <a
-              href="#contact-section"
-              @click.prevent="() => { openContactForm(); closeMenu(); }"
-              class="btn btn-primary btn-md w-full justify-center"
-            >
-              <span>Hire Me</span>
-              <Icon name="tabler:arrow-up-right" class="w-4 h-4" aria-hidden="true" />
-            </a>
-          </div>
+            <span class="font-mono text-sm text-coral-500">{{ link.number }}</span>
+            <span class="font-display text-4xl font-bold text-base-50 tracking-tight group-hover:text-coral-500 transition-colors">
+              {{ link.label }}
+            </span>
+          </button>
         </div>
       </div>
     </Transition>
   </nav>
+
+  <!-- Desktop Logo (fixed top-left) -->
+  <div class="hidden lg:block fixed top-8 left-8 z-50">
+    <NuxtLink to="/" class="font-display font-bold text-xl text-base-50 tracking-tight hover:text-coral-500 transition-colors">
+      JI
+    </NuxtLink>
+  </div>
 </template>
