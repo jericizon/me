@@ -38,14 +38,14 @@ const nextMode = computed(() => {
     <span class="
       relative flex items-center justify-center
       w-10 h-10 rounded-xl
-      bg-white/60 dark:bg-neutral-800/60
+      bg-white/60 dark:bg-surface-card/60
       backdrop-blur-md
-      border border-white/30 dark:border-white/10
-      shadow-soft dark:shadow-glass-dark-sm
+      border border-light-300 dark:border-white/10
+      shadow-soft
       transition-all duration-300 ease-out
       group-hover:scale-110
-      group-hover:shadow-medium dark:group-hover:shadow-glass-dark
-      group-hover:border-primary-500/30 dark:group-hover:border-primary-400/30
+      group-hover:shadow-medium
+      group-hover:border-coral-500/30
       group-active:scale-95
     ">
       <!-- Sun icon (light mode) -->
@@ -65,7 +65,7 @@ const nextMode = computed(() => {
         name="tabler:moon-filled"
         class="
           absolute w-5 h-5
-          text-primary-400
+          text-coral-400
           transition-all duration-300
           dark:opacity-100 dark:rotate-0 dark:scale-100
           opacity-0 -rotate-90 scale-0
@@ -76,8 +76,8 @@ const nextMode = computed(() => {
     <!-- Glow effect on hover -->
     <span class="
       absolute inset-0 rounded-xl
-      bg-gradient-to-r from-amber-500/20 to-primary-500/20
-      dark:from-primary-500/20 dark:to-secondary-500/20
+      bg-gradient-to-r from-amber-500/20 to-coral-500/20
+      dark:from-coral-500/20 dark:to-gold-500/20
       opacity-0 group-hover:opacity-100
       blur-xl transition-opacity duration-300
       -z-10

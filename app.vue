@@ -44,12 +44,17 @@ useHead({
 
 onMounted(() => {
   document.documentElement.setAttribute('lang', 'en');
-  document.documentElement.classList.add('dark');
+  // Check system preference or use dark mode as default
+  if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+  }
 });
 </script>
 
 <template>
-  <div class="app-wrapper min-h-screen bg-surface text-base-50 font-sans antialiased selection:bg-coral-500/30 selection:text-base-50">
+  <div class="app-wrapper min-h-screen bg-surface-light dark:bg-surface text-light-800 dark:text-base-50 font-sans antialiased selection:bg-coral-500/30 selection:text-base-50 transition-colors duration-300">
     <!-- Film grain overlay -->
     <div class="fixed inset-0 pointer-events-none z-50 opacity-[0.03] mix-blend-overlay" aria-hidden="true">
       <div class="absolute inset-0 bg-grain animate-grain"></div>
@@ -71,12 +76,24 @@ onMounted(() => {
 :root {
   --color-coral: #ff6b57;
   --color-gold: #d4a574;
+}
+
+.dark {
   --color-surface: #0d0d0d;
   --color-elevated: #141414;
   --color-card: #1a1a1a;
   --color-text: #f5f5f0;
   --color-text-muted: #888888;
   --border-subtle: rgba(255, 255, 255, 0.06);
+}
+
+.light {
+  --color-surface: #faf9f6;
+  --color-elevated: #f5f3ef;
+  --color-card: #e8e6df;
+  --color-text: #2a2822;
+  --color-text-muted: #6b6758;
+  --border-subtle: rgba(0, 0, 0, 0.06);
 }
 
 /* Smooth scrolling */
@@ -90,10 +107,10 @@ html {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0d0d0d;
+  background: var(--color-surface);
 }
 ::-webkit-scrollbar-thumb {
-  background: #333;
+  background: var(--color-text-muted);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
@@ -101,7 +118,7 @@ html {
 }
 * {
   scrollbar-width: thin;
-  scrollbar-color: #333 #0d0d0d;
+  scrollbar-color: var(--color-text-muted) var(--color-surface);
 }
 
 /* Focus styles */
@@ -158,9 +175,13 @@ html {
   font-size: clamp(8rem, 20vw, 16rem);
   font-weight: 700;
   line-height: 0.8;
-  color: rgba(255, 255, 255, 0.02);
+  color: rgba(0, 0, 0, 0.02);
   user-select: none;
   pointer-events: none;
+}
+
+.dark .section-number {
+  color: rgba(255, 255, 255, 0.02);
 }
 
 /* Horizontal scroll snap */

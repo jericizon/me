@@ -95,7 +95,7 @@ const baseURL = useRuntimeConfig().app.baseURL;
 
 <template>
   <!-- Stats strip -->
-  <section id="stats-section" class="py-16 md:py-20 border-y border-base-600/30" aria-label="Career statistics">
+  <section id="stats-section" class="py-16 md:py-20 border-y border-light-300 dark:border-base-600/30" aria-label="Career statistics">
     <div class="px-6 lg:px-16">
       <div
         ref="statsRef"
@@ -110,7 +110,7 @@ const baseURL = useRuntimeConfig().app.baseURL;
             <div class="font-display font-bold text-3xl md:text-4xl text-coral-500 tracking-tight mb-1">
               {{ typeof stat.value === 'function' ? stat.value() : stat.value }}
             </div>
-            <div class="text-sm text-base-400">{{ stat.label }}</div>
+            <div class="text-sm text-light-500 dark:text-base-400">{{ stat.label }}</div>
           </div>
         </div>
       </div>
@@ -120,7 +120,7 @@ const baseURL = useRuntimeConfig().app.baseURL;
   <!-- CTA Section -->
   <section
     ref="ctaRef"
-    class="py-24 md:py-32 relative overflow-hidden opacity-0 transition-all duration-700 ease-out bg-surface"
+    class="py-24 md:py-32 relative overflow-hidden opacity-0 transition-all duration-700 ease-out bg-surface-light dark:bg-surface"
   >
     <!-- Subtle ambient glow -->
     <div class="absolute top-0 left-1/3 w-[600px] h-[600px] bg-coral-500/10 rounded-full blur-[120px]"></div>
@@ -136,17 +136,17 @@ const baseURL = useRuntimeConfig().app.baseURL;
           <!-- Eyebrow -->
           <div class="flex items-center gap-4 mb-6">
             <span class="w-8 h-px bg-coral-500"></span>
-            <span class="font-mono text-xs text-base-400 tracking-wider uppercase">Ready to build?</span>
+            <span class="font-mono text-xs text-light-500 dark:text-base-400 tracking-wider uppercase">Ready to build?</span>
           </div>
 
           <!-- Headline -->
-          <h2 class="font-display font-bold text-base-50 tracking-tighter mb-8 leading-[0.95]" style="font-size: clamp(2.5rem, 6vw, 5rem);">
+          <h2 class="font-display font-bold text-light-900 dark:text-base-50 tracking-tighter mb-8 leading-[0.95]" style="font-size: clamp(2.5rem, 6vw, 5rem);">
             Let's turn your idea<br/>
             into a <span class="text-coral-500">revenue-generating</span><br/>
             system.
           </h2>
 
-          <p class="text-lg text-base-300 max-w-xl leading-relaxed mb-10">
+          <p class="text-lg text-light-600 dark:text-base-300 max-w-xl leading-relaxed mb-10">
             I'm a systems builder for serious founders. If you're looking for a partner who can architect, build, and scale your product — not just write code — let's talk.
           </p>
 
@@ -161,7 +161,7 @@ const baseURL = useRuntimeConfig().app.baseURL;
             </button>
             <NuxtLink
               to="/#services-section"
-              class="flex items-center gap-3 px-8 py-4 border border-base-600/50 text-base-300 hover:border-coral-500/50 hover:text-base-50 transition-all duration-300"
+              class="flex items-center gap-3 px-8 py-4 border border-light-300 dark:border-base-600/50 text-light-600 dark:text-base-300 hover:border-coral-500/50 hover:text-light-900 dark:hover:text-base-50 transition-all duration-300"
             >
               <Icon name="tabler:briefcase" class="w-4 h-4" />
               <span>See What I Build</span>

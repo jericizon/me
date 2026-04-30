@@ -45,7 +45,7 @@ export default {
           900: '#5a3927',
           950: '#321e15',
         },
-        // Base: Deep Charcoal
+        // Base: Deep Charcoal (dark mode)
         base: {
           50:  '#f5f5f0',  // Off-white text
           100: '#e8e8e0',
@@ -58,6 +58,20 @@ export default {
           800: '#0d0d0d',  // Background
           900: '#080808',
           950: '#000000',
+        },
+        // Light mode palette
+        light: {
+          50:  '#faf9f6',  // Cream white background
+          100: '#f5f3ef',
+          200: '#e8e6df',
+          300: '#d3d0c5',  // Secondary text
+          400: '#a8a495',
+          500: '#6b6758',
+          600: '#4a4739',  // Surface
+          700: '#3a372d',  // Elevated
+          800: '#2a2822',  // Text
+          900: '#1a1916',
+          950: '#0f0e0c',
         },
         // Legacy compatibility (mapped to new palette)
         primary: {
@@ -106,7 +120,13 @@ export default {
           DEFAULT: '#0d0d0d',
           elevated: '#141414',
           card: '#1a1a1a',
-        }
+        },
+        // Light mode surface tokens
+        'surface-light': {
+          DEFAULT: '#faf9f6',
+          elevated: '#f5f3ef',
+          card: '#e8e6df',
+        },
       },
       boxShadow: {
         'card': '0 0 0 1px rgba(255,255,255,0.06)',

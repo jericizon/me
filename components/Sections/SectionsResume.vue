@@ -327,7 +327,7 @@ const toggleExpand = (key: number) => {
 
 <template>
   <section id="resume-section" class="relative py-24 lg:py-32">
-    <div class="absolute top-8 right-8 lg:right-16 font-display font-bold text-[12rem] lg:text-[16rem] text-base-50/[0.02] leading-none select-none pointer-events-none">
+    <div class="absolute top-8 right-8 lg:right-16 font-display font-bold text-[12rem] lg:text-[16rem] text-light-900/[0.02] dark:text-base-50/[0.02] leading-none select-none pointer-events-none">
       EXP
     </div>
     <div class="relative z-10 px-6 lg:px-16">
@@ -337,9 +337,9 @@ const toggleExpand = (key: number) => {
         <div class="flex items-center gap-4 mb-6">
           <span class="font-mono text-xs text-coral-500">EXP</span>
           <span class="w-12 h-px bg-coral-500"></span>
-          <span class="font-mono text-xs text-base-400 tracking-wider uppercase">Experience</span>
+          <span class="font-mono text-xs text-light-500 dark:text-base-400 tracking-wider uppercase">Experience</span>
         </div>
-        <h2 class="font-display font-bold text-4xl lg:text-6xl text-base-50 leading-tight tracking-tight">
+        <h2 class="font-display font-bold text-4xl lg:text-6xl text-light-900 dark:text-base-50 leading-tight tracking-tight">
           Professional journey
         </h2>
       </div>
@@ -347,7 +347,7 @@ const toggleExpand = (key: number) => {
       <!-- Timeline -->
       <div class="relative">
         <!-- Vertical line -->
-        <div class="absolute left-0 top-2 bottom-2 w-px bg-base-600/30 hidden md:block" aria-hidden="true"></div>
+        <div class="absolute left-0 top-2 bottom-2 w-px bg-light-300 dark:bg-base-600/30 hidden md:block" aria-hidden="true"></div>
 
         <div class="space-y-10">
           <div
@@ -357,18 +357,18 @@ const toggleExpand = (key: number) => {
             :style="{ animationDelay: `${0.1 + groupIndex * 0.08}s` }"
           >
             <!-- Timeline dot (desktop) -->
-            <div class="absolute -left-[5px] top-6 w-[11px] h-[11px] bg-coral-500 border-2 border-surface hidden md:block z-10" aria-hidden="true"></div>
+            <div class="absolute -left-[5px] top-6 w-[11px] h-[11px] bg-coral-500 border-2 border-surface-light dark:border-surface hidden md:block z-10" aria-hidden="true"></div>
 
             <!-- Card -->
-            <div class="md:ml-10 p-7 md:p-8 border border-base-600/30 hover:border-coral-500/30 transition-colors group">
+            <div class="md:ml-10 p-7 md:p-8 border border-light-300 dark:border-base-600/30 hover:border-coral-500/30 transition-colors group">
 
               <!-- Header row -->
               <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-4 mb-5">
                 <div>
-                  <h3 class="font-display font-bold text-xl md:text-2xl text-base-50 tracking-tight mb-1 group-hover:text-coral-500 transition-colors duration-200">
+                  <h3 class="font-display font-bold text-xl md:text-2xl text-light-900 dark:text-base-50 tracking-tight mb-1 group-hover:text-coral-500 transition-colors duration-200">
                     {{ group.items.length > 1 ? 'Singapore Tech Group' : group.label }}
                   </h3>
-                  <p class="text-sm text-base-400" v-if="group.items.length > 1">
+                  <p class="text-sm text-light-500 dark:text-base-400" v-if="group.items.length > 1">
                     Multiple roles across the same company group
                   </p>
                   <p class="text-base font-medium text-coral-500" v-else>
@@ -377,7 +377,7 @@ const toggleExpand = (key: number) => {
                 </div>
 
                 <div class="flex flex-wrap items-center gap-2 flex-shrink-0">
-                  <span class="text-sm text-base-400 font-mono">
+                  <span class="text-sm text-light-500 dark:text-base-400 font-mono">
                     {{ convertToMonthYear(group.start) }} — {{ convertToMonthYear(group.end) }}
                   </span>
                   <ClientOnly>
@@ -390,7 +390,7 @@ const toggleExpand = (key: number) => {
 
               <!-- Single role -->
               <div v-if="group.items.length === 1">
-                <p class="text-base-300 leading-relaxed text-sm md:text-base mb-5">
+                <p class="text-light-600 dark:text-base-300 leading-relaxed text-sm md:text-base mb-5">
                   {{ expandedKeys.has(group.items[0].originalIndex as number)
                     ? group.items[0].description
                     : (group.items[0].description.length > 220 ? group.items[0].description.slice(0, 220) + '…' : group.items[0].description) }}
@@ -407,12 +407,12 @@ const toggleExpand = (key: number) => {
                 </button>
 
                 <div>
-                  <div class="text-xs font-semibold tracking-widest uppercase text-base-500 mb-3">Stack</div>
+                  <div class="text-xs font-semibold tracking-widest uppercase text-light-600 dark:text-base-500 mb-3">Stack</div>
                   <div class="flex flex-wrap gap-1.5">
                     <span
                       v-for="(tool, toolKey) in group.items[0].tools.slice(0, expandedKeys.has(group.items[0].originalIndex as number) ? group.items[0].tools.length : 10)"
                       :key="toolKey"
-                      class="px-2 py-1 text-xs text-base-400 border border-base-600/30"
+                      class="px-2 py-1 text-xs text-light-500 dark:text-base-400 border border-light-300 dark:border-base-600/30"
                     >{{ tool.toLowerCase() }}</span>
                     <button
                       v-if="!expandedKeys.has(group.items[0].originalIndex as number) && group.items[0].tools.length > 10"

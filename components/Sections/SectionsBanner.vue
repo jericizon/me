@@ -11,7 +11,7 @@ const scrollToAbout = () => {
     
     <!-- Background name (massive outlined text) -->
     <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
-      <span class="font-display font-bold text-stroke-2 text-transparent text-[25vw] lg:text-[20vw] tracking-tighter leading-none opacity-[0.03]">
+      <span class="font-display font-bold text-stroke-2 text-transparent text-[25vw] lg:text-[20vw] tracking-tighter leading-none opacity-[0.08] dark:opacity-[0.03] text-light-900 dark:text-base-50">
         JERIC
       </span>
     </div>
@@ -26,12 +26,12 @@ const scrollToAbout = () => {
       <!-- Top meta line -->
       <div class="flex items-center gap-4 mb-8 animate-fade-in-up" style="animation-delay: 0.2s">
         <span class="w-12 h-px bg-coral-500"></span>
-        <span class="font-mono text-xs text-base-300 tracking-wider uppercase">Available for select projects</span>
+        <span class="font-mono text-xs text-light-500 dark:text-base-300 tracking-wider uppercase">Available for select projects</span>
       </div>
 
       <!-- Giant headline -->
       <div class="max-w-[1400px]">
-        <h1 class="font-display font-bold text-base-50 leading-[0.95] tracking-tighter animate-fade-in-up" style="font-size: clamp(3rem, 12vw, 10rem); animation-delay: 0.3s">
+        <h1 class="font-display font-bold text-light-900 dark:text-base-50 leading-[0.95] tracking-tighter animate-fade-in-up" style="font-size: clamp(3rem, 12vw, 10rem); animation-delay: 0.3s">
           Senior<br/>
           <span class="text-coral-500">Full Stack</span><br/>
           Engineer
@@ -40,7 +40,7 @@ const scrollToAbout = () => {
 
       <!-- Supporting text -->
       <div class="mt-8 lg:mt-12 max-w-xl animate-fade-in-up" style="animation-delay: 0.5s">
-        <p class="text-lg lg:text-xl text-base-300 leading-relaxed">
+        <p class="text-lg lg:text-xl text-light-600 dark:text-base-300 leading-relaxed">
           Building production SaaS platforms, scalable APIs, and internal tools that drive business growth. 10+ years shipping systems for startups worldwide.
         </p>
       </div>
@@ -57,7 +57,7 @@ const scrollToAbout = () => {
         
         <button
           @click="scrollToAbout"
-          class="group flex items-center gap-3 text-base-300 hover:text-base-50 transition-colors"
+          class="group flex items-center gap-3 text-light-600 dark:text-base-300 hover:text-light-900 dark:hover:text-base-50 transition-colors"
         >
           <span class="text-sm tracking-wide">Learn more</span>
           <Icon name="tabler:arrow-down" class="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
@@ -65,19 +65,19 @@ const scrollToAbout = () => {
       </div>
 
       <!-- Bottom stats strip -->
-      <div class="mt-16 lg:mt-24 pt-8 border-t border-base-600/50 animate-fade-in-up" style="animation-delay: 0.7s">
+      <div class="mt-16 lg:mt-24 pt-8 border-t border-light-300 dark:border-base-600/50 animate-fade-in-up" style="animation-delay: 0.7s">
         <div class="grid grid-cols-3 gap-8 lg:gap-16 max-w-3xl">
           <div>
-            <div class="font-display font-bold text-3xl lg:text-4xl text-base-50">10+</div>
-            <div class="text-xs text-base-400 mt-1">Years experience</div>
+            <div class="font-display font-bold text-3xl lg:text-4xl text-light-900 dark:text-base-50">10+</div>
+            <div class="text-xs text-light-500 dark:text-base-400 mt-1">Years experience</div>
           </div>
           <div>
-            <div class="font-display font-bold text-3xl lg:text-4xl text-base-50">100+</div>
-            <div class="text-xs text-base-400 mt-1">Projects shipped</div>
+            <div class="font-display font-bold text-3xl lg:text-4xl text-light-900 dark:text-base-50">100+</div>
+            <div class="text-xs text-light-500 dark:text-base-400 mt-1">Projects shipped</div>
           </div>
           <div>
-            <div class="font-display font-bold text-3xl lg:text-4xl text-base-50">6+</div>
-            <div class="text-xs text-base-400 mt-1">Countries served</div>
+            <div class="font-display font-bold text-3xl lg:text-4xl text-light-900 dark:text-base-50">6+</div>
+            <div class="text-xs text-light-500 dark:text-base-400 mt-1">Countries served</div>
           </div>
         </div>
       </div>
@@ -85,8 +85,8 @@ const scrollToAbout = () => {
 
     <!-- Scroll indicator -->
     <div class="absolute bottom-8 right-8 hidden lg:flex flex-col items-center gap-2 animate-fade-in" style="animation-delay: 1s">
-      <span class="font-mono text-xs text-base-400 tracking-wider uppercase" style="writing-mode: vertical-rl">Scroll</span>
-      <div class="w-px h-16 bg-base-600 relative overflow-hidden">
+      <span class="font-mono text-xs text-light-500 dark:text-base-400 tracking-wider uppercase" style="writing-mode: vertical-rl">Scroll</span>
+      <div class="w-px h-16 bg-light-300 dark:bg-base-600 relative overflow-hidden">
         <div class="absolute top-0 left-0 w-full h-1/2 bg-coral-500 animate-slide-down"></div>
       </div>
     </div>

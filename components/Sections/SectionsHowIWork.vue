@@ -30,7 +30,7 @@ const steps = [
 <template>
   <section id="how-i-work" class="relative py-24 lg:py-32">
     <!-- Section number watermark -->
-    <div class="absolute top-8 right-8 lg:right-16 font-display font-bold text-[12rem] lg:text-[16rem] text-base-50/[0.02] leading-none select-none pointer-events-none">
+    <div class="absolute top-8 right-8 lg:right-16 font-display font-bold text-[12rem] lg:text-[16rem] text-light-900/[0.02] dark:text-base-50/[0.02] leading-none select-none pointer-events-none">
       04
     </div>
 
@@ -40,9 +40,9 @@ const steps = [
         <div class="flex items-center gap-4 mb-6">
           <span class="font-mono text-xs text-coral-500">04</span>
           <span class="w-12 h-px bg-coral-500"></span>
-          <span class="font-mono text-xs text-base-400 tracking-wider uppercase">Process</span>
+          <span class="font-mono text-xs text-light-500 dark:text-base-400 tracking-wider uppercase">Process</span>
         </div>
-        <h2 class="font-display font-bold text-4xl lg:text-6xl text-base-50 leading-tight tracking-tight max-w-2xl">
+        <h2 class="font-display font-bold text-4xl lg:text-6xl text-light-900 dark:text-base-50 leading-tight tracking-tight max-w-2xl">
           How I deliver high-impact systems
         </h2>
       </div>
@@ -50,7 +50,7 @@ const steps = [
       <!-- Timeline -->
       <div class="relative">
         <!-- Vertical line -->
-        <div class="absolute left-[19px] lg:left-[23px] top-0 bottom-0 w-px bg-base-600/30"></div>
+        <div class="absolute left-[19px] lg:left-[23px] top-0 bottom-0 w-px bg-light-300 dark:bg-base-600/30"></div>
 
         <!-- Steps -->
         <div class="space-y-12 lg:space-y-16">
@@ -60,7 +60,7 @@ const steps = [
             class="relative pl-16 lg:pl-20"
           >
             <!-- Number circle -->
-            <div class="absolute left-0 top-0 w-10 h-10 lg:w-12 lg:h-12 border border-coral-500 bg-surface flex items-center justify-center">
+            <div class="absolute left-0 top-0 w-10 h-10 lg:w-12 lg:h-12 border border-coral-500 bg-surface-light dark:bg-surface flex items-center justify-center">
               <span class="font-mono text-sm lg:text-base text-coral-500">{{ step.number }}</span>
             </div>
 
@@ -68,14 +68,14 @@ const steps = [
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-12 pt-2">
               <!-- Title -->
               <div class="lg:col-span-1">
-                <h3 class="font-display font-bold text-2xl lg:text-3xl text-base-50">
+                <h3 class="font-display font-bold text-2xl lg:text-3xl text-light-900 dark:text-base-50">
                   {{ step.title }}
                 </h3>
               </div>
 
               <!-- Description -->
               <div class="lg:col-span-1">
-                <p class="text-base-300 leading-relaxed">
+                <p class="text-light-600 dark:text-base-300 leading-relaxed">
                   {{ step.description }}
                 </p>
               </div>
@@ -94,20 +94,20 @@ const steps = [
 
       <!-- Trust signals -->
       <div class="mt-20 lg:mt-32 grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div class="p-6 border border-base-600/30">
+        <div class="p-6 border border-light-300 dark:border-base-600/30">
           <Icon name="tabler:clock" class="w-6 h-6 text-coral-500 mb-4" />
-          <h4 class="font-display font-semibold text-lg text-base-50 mb-2">Timezone Flexible</h4>
-          <p class="text-sm text-base-400">APAC, US, EU — I adapt to your schedule with async updates and clear documentation.</p>
+          <h4 class="font-display font-semibold text-lg text-light-900 dark:text-base-50 mb-2">Timezone Flexible</h4>
+          <p class="text-sm text-light-500 dark:text-base-400">APAC, US, EU — I adapt to your schedule with async updates and clear documentation.</p>
         </div>
-        <div class="p-6 border border-base-600/30">
+        <div class="p-6 border border-light-300 dark:border-base-600/30">
           <Icon name="tabler:shield-check" class="w-6 h-6 text-coral-500 mb-4" />
-          <h4 class="font-display font-semibold text-lg text-base-50 mb-2">IP Protection</h4>
-          <p class="text-sm text-base-400">NDA-friendly with clear ownership transfer. Your code, your IP, period.</p>
+          <h4 class="font-display font-semibold text-lg text-light-900 dark:text-base-50 mb-2">IP Protection</h4>
+          <p class="text-sm text-light-500 dark:text-base-400">NDA-friendly with clear ownership transfer. Your code, your IP, period.</p>
         </div>
-        <div class="p-6 border border-base-600/30">
+        <div class="p-6 border border-light-300 dark:border-base-600/30">
           <Icon name="tabler:file-check" class="w-6 h-6 text-coral-500 mb-4" />
-          <h4 class="font-display font-semibold text-lg text-base-50 mb-2">Clear Deliverables</h4>
-          <p class="text-sm text-base-400">Milestone-based payments with detailed SOWs. No surprises, no scope creep.</p>
+          <h4 class="font-display font-semibold text-lg text-light-900 dark:text-base-50 mb-2">Clear Deliverables</h4>
+          <p class="text-sm text-light-500 dark:text-base-400">Milestone-based payments with detailed SOWs. No surprises, no scope creep.</p>
         </div>
       </div>
     </div>

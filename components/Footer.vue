@@ -3,13 +3,13 @@ const year = new Date().getFullYear()
 </script>
 
 <template>
-  <footer class="border-t border-base-600/30 py-12 px-6 lg:px-16" role="contentinfo">
+  <footer class="border-t border-light-300 dark:border-base-600/30 py-12 px-6 lg:px-16" role="contentinfo">
     <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
       
       <!-- Brand -->
       <div class="space-y-2">
-        <div class="font-display font-bold text-xl text-base-50">Jeric Izon</div>
-        <div class="text-sm text-base-400">Senior Full Stack Engineer</div>
+        <div class="font-display font-bold text-xl text-light-900 dark:text-base-50">Jeric Izon</div>
+        <div class="text-sm text-light-500 dark:text-base-400">Senior Full Stack Engineer</div>
       </div>
 
       <!-- Links -->
@@ -18,7 +18,7 @@ const year = new Date().getFullYear()
           href="https://github.com/jericizon"
           target="_blank"
           rel="noopener"
-          class="text-sm text-base-400 hover:text-coral-500 transition-colors"
+          class="text-sm text-light-500 dark:text-base-400 hover:text-coral-500 transition-colors"
         >
           GitHub
         </a>
@@ -26,13 +26,13 @@ const year = new Date().getFullYear()
           href="https://www.linkedin.com/in/jericizon"
           target="_blank"
           rel="noopener"
-          class="text-sm text-base-400 hover:text-coral-500 transition-colors"
+          class="text-sm text-light-500 dark:text-base-400 hover:text-coral-500 transition-colors"
         >
           LinkedIn
         </a>
         <a
           href="#contact-section"
-          class="text-sm text-base-400 hover:text-coral-500 transition-colors"
+          class="text-sm text-light-500 dark:text-base-400 hover:text-coral-500 transition-colors"
         >
           Contact
         </a>
@@ -45,7 +45,7 @@ const year = new Date().getFullYear()
       </nav>
 
       <!-- Copyright -->
-      <div class="text-xs text-base-500 font-mono">
+      <div class="text-xs text-light-600 dark:text-base-500 font-mono">
         © {{ year }} · Built with Nuxt & Tailwind
       </div>
     </div>

@@ -82,13 +82,13 @@ onMounted(() => {
       >
         <span 
           class="font-mono text-xs transition-all duration-300"
-          :class="activeSection === link.id ? 'text-coral-500' : 'text-base-300 group-hover:text-base-100'"
+          :class="activeSection === link.id ? 'text-coral-500' : 'text-light-400 dark:text-base-300 group-hover:text-light-600 dark:group-hover:text-base-100'"
         >
           {{ link.number }}
         </span>
         <span 
           class="text-sm font-medium tracking-wide transition-all duration-300"
-          :class="activeSection === link.id ? 'text-base-50 translate-x-1' : 'text-base-300 group-hover:text-base-100'"
+          :class="activeSection === link.id ? 'text-light-900 dark:text-base-50 translate-x-1' : 'text-light-600 dark:text-base-300 group-hover:text-light-800 dark:group-hover:text-base-100'"
         >
           {{ link.label }}
         </span>
@@ -104,14 +104,17 @@ onMounted(() => {
   <nav class="lg:hidden fixed top-0 left-0 right-0 z-50 px-4 py-4" role="navigation" aria-label="Mobile navigation">
     <div class="flex items-center justify-between">
       <!-- Logo -->
-      <NuxtLink to="/" class="text-lg font-display font-bold text-base-50 tracking-tight">
+      <NuxtLink to="/" class="text-lg font-display font-bold text-light-900 dark:text-base-50 tracking-tight">
         JI
       </NuxtLink>
+
+      <!-- Theme Toggle -->
+      <ThemeToggle />
 
       <!-- Menu Toggle -->
       <button
         @click="toggleMenu"
-        class="w-10 h-10 flex items-center justify-center text-base-50"
+        class="w-10 h-10 flex items-center justify-center text-light-900 dark:text-base-50"
         :aria-expanded="isMenuOpen"
         aria-controls="mobile-menu"
         aria-label="Toggle menu"
@@ -145,7 +148,7 @@ onMounted(() => {
       <div
         v-show="isMenuOpen"
         id="mobile-menu"
-        class="fixed inset-0 top-0 bg-surface z-40 flex flex-col justify-center px-8"
+        class="fixed inset-0 top-0 bg-surface-light dark:bg-surface z-40 flex flex-col justify-center px-8"
       >
         <div class="flex flex-col gap-6">
           <button
@@ -156,7 +159,7 @@ onMounted(() => {
             :style="{ animationDelay: `${index * 0.1}s` }"
           >
             <span class="font-mono text-sm text-coral-500">{{ link.number }}</span>
-            <span class="font-display text-4xl font-bold text-base-50 tracking-tight group-hover:text-coral-500 transition-colors">
+            <span class="font-display text-4xl font-bold text-light-900 dark:text-base-50 tracking-tight group-hover:text-coral-500 transition-colors">
               {{ link.label }}
             </span>
           </button>
@@ -167,8 +170,13 @@ onMounted(() => {
 
   <!-- Desktop Logo (fixed top-left) -->
   <div class="hidden lg:block fixed top-8 left-8 z-50">
-    <NuxtLink to="/" class="font-display font-bold text-xl text-base-50 tracking-tight hover:text-coral-500 transition-colors">
+    <NuxtLink to="/" class="font-display font-bold text-xl text-light-900 dark:text-base-50 tracking-tight hover:text-coral-500 transition-colors">
       JI
     </NuxtLink>
+  </div>
+
+  <!-- Theme Toggle (fixed top-right) -->
+  <div class="hidden lg:block fixed top-8 right-8 z-50">
+    <ThemeToggle />
   </div>
 </template>

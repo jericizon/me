@@ -16,6 +16,12 @@ useSeoMeta({
 <template>
   <div>
     <NavMenu :has-scrolled="true" />
+    <div class="hidden lg:block fixed top-8 right-8 z-50">
+      <ThemeToggle />
+    </div>
+    <div class="lg:hidden fixed top-4 right-4 z-50">
+      <ThemeToggle />
+    </div>
 
     <section class="pt-28 pb-16 md:pt-32 md:pb-20">
       <div class="max-w-5xl mx-auto">

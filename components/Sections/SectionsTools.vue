@@ -231,9 +231,9 @@ onMounted(() => {
         <div class="flex items-center gap-4 mb-6">
           <span class="font-mono text-xs text-coral-500">TECH</span>
           <span class="w-12 h-px bg-coral-500"></span>
-          <span class="font-mono text-xs text-base-400 tracking-wider uppercase">Stack</span>
+          <span class="font-mono text-xs text-light-500 dark:text-base-400 tracking-wider uppercase">Stack</span>
         </div>
-        <h2 class="font-display font-bold text-4xl lg:text-6xl text-base-50 leading-tight tracking-tight">
+        <h2 class="font-display font-bold text-4xl lg:text-6xl text-light-900 dark:text-base-50 leading-tight tracking-tight">
           Tools & technologies
         </h2>
       </div>
@@ -247,7 +247,7 @@ onMounted(() => {
           class="px-4 py-2 text-sm font-medium border transition-all duration-200"
           :class="activeFilter === category
             ? 'bg-coral-500/20 border-coral-500 text-coral-500'
-            : 'bg-transparent border-base-600/50 text-base-400 hover:border-base-500 hover:text-base-200'"
+            : 'bg-transparent border-light-300 dark:border-base-600/50 text-light-500 dark:text-base-400 hover:border-light-400 dark:hover:border-base-500 hover:text-light-700 dark:hover:text-base-200'"
           role="tab"
           :aria-selected="activeFilter === category"
           aria-controls="tools-grid"
@@ -267,16 +267,16 @@ onMounted(() => {
         <div
           v-for="tool in filteredTools"
           :key="tool.name"
-          class="group flex flex-col items-center gap-2.5 p-4 border border-base-600/30 hover:border-coral-500/50 hover:bg-surface-elevated/30 transition-all duration-200 cursor-default"
+          class="group flex flex-col items-center gap-2.5 p-4 border border-light-300 dark:border-base-600/30 hover:border-coral-500/50 hover:bg-surface-light-elevated/30 dark:hover:bg-surface-elevated/30 transition-all duration-200 cursor-default"
         >
-          <div class="w-10 h-10 flex items-center justify-center bg-surface-elevated group-hover:bg-coral-500/10 transition-colors duration-200">
+          <div class="w-10 h-10 flex items-center justify-center bg-surface-light-elevated dark:bg-surface-elevated group-hover:bg-coral-500/10 transition-colors duration-200">
             <Icon
               :name="tool.icon"
-              class="w-6 h-6 text-base-400 group-hover:text-coral-500 transition-colors duration-200"
+              class="w-6 h-6 text-light-500 dark:text-base-400 group-hover:text-coral-500 transition-colors duration-200"
               aria-hidden="true"
             />
           </div>
-          <span class="text-xs font-medium text-base-400 text-center leading-tight group-hover:text-base-200 transition-colors duration-200">{{ tool.name }}</span>
+          <span class="text-xs font-medium text-light-500 dark:text-base-400 text-center leading-tight group-hover:text-light-700 dark:group-hover:text-base-200 transition-colors duration-200">{{ tool.name }}</span>
         </div>
       </div>
     </div>

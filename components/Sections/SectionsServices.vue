@@ -50,7 +50,7 @@ const activeService = ref<string | null>(null)
 <template>
   <section id="services-section" class="relative py-24 lg:py-32">
     <!-- Section number watermark -->
-    <div class="absolute top-8 right-8 lg:right-16 font-display font-bold text-[12rem] lg:text-[16rem] text-base-50/[0.02] leading-none select-none pointer-events-none">
+    <div class="absolute top-8 right-8 lg:right-16 font-display font-bold text-[12rem] lg:text-[16rem] text-light-900/[0.02] dark:text-base-50/[0.02] leading-none select-none pointer-events-none">
       02
     </div>
 
@@ -60,13 +60,13 @@ const activeService = ref<string | null>(null)
         <div class="flex items-center gap-4 mb-6">
           <span class="font-mono text-xs text-coral-500">02</span>
           <span class="w-12 h-px bg-coral-500"></span>
-          <span class="font-mono text-xs text-base-400 tracking-wider uppercase">Services</span>
+          <span class="font-mono text-xs text-light-500 dark:text-base-400 tracking-wider uppercase">Services</span>
         </div>
         <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-          <h2 class="font-display font-bold text-4xl lg:text-6xl text-base-50 leading-tight tracking-tight max-w-2xl">
+          <h2 class="font-display font-bold text-4xl lg:text-6xl text-light-900 dark:text-base-50 leading-tight tracking-tight max-w-2xl">
             What I can build for you
           </h2>
-          <p class="text-base-400 max-w-md">
+          <p class="text-light-500 dark:text-base-400 max-w-md">
             End-to-end systems, not just code. Every engagement includes architecture, implementation, deployment, and documentation.
           </p>
         </div>
@@ -77,7 +77,7 @@ const activeService = ref<string | null>(null)
         <div
           v-for="(service, index) in services"
           :key="service.number"
-          class="group border-t border-base-600/30 last:border-b"
+          class="group border-t border-light-300 dark:border-base-600/30 last:border-b"
           @mouseenter="activeService = service.number"
           @mouseleave="activeService = null"
         >
@@ -89,7 +89,7 @@ const activeService = ref<string | null>(null)
               <!-- Content -->
               <div class="flex-1">
                 <div class="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-8">
-                  <h3 class="font-display font-bold text-2xl lg:text-4xl text-base-50 group-hover:text-coral-500 transition-colors duration-300">
+                  <h3 class="font-display font-bold text-2xl lg:text-4xl text-light-900 dark:text-base-50 group-hover:text-coral-500 transition-colors duration-300">
                     {{ service.title }}
                   </h3>
                   
@@ -109,7 +109,7 @@ const activeService = ref<string | null>(null)
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 pb-4">
                       <!-- Description -->
                       <div class="lg:col-span-2">
-                        <p class="text-base-300 leading-relaxed max-w-xl">
+                        <p class="text-light-600 dark:text-base-300 leading-relaxed max-w-xl">
                           {{ service.description }}
                         </p>
                       </div>
@@ -117,19 +117,19 @@ const activeService = ref<string | null>(null)
                       <!-- Meta -->
                       <div class="space-y-4">
                         <div>
-                          <div class="font-mono text-xs text-base-500 mb-2">DELIVERABLES</div>
+                          <div class="font-mono text-xs text-light-600 dark:text-base-500 mb-2">DELIVERABLES</div>
                           <div class="flex flex-wrap gap-2">
                             <span 
                               v-for="item in service.deliverables" 
                               :key="item"
-                              class="text-xs text-base-400"
+                              class="text-xs text-light-500 dark:text-base-400"
                             >
-                              {{ item }}<span class="text-base-600">,</span>
+                              {{ item }}<span class="text-light-600 dark:text-base-600">,</span>
                             </span>
                           </div>
                         </div>
                         <div>
-                          <div class="font-mono text-xs text-base-500 mb-1">TIMELINE</div>
+                          <div class="font-mono text-xs text-light-600 dark:text-base-500 mb-1">TIMELINE</div>
                           <div class="text-sm text-coral-500">{{ service.timeline }}</div>
                         </div>
                       </div>
@@ -143,10 +143,10 @@ const activeService = ref<string | null>(null)
       </div>
 
       <!-- Bottom CTA -->
-      <div class="mt-16 lg:mt-24 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 p-8 border border-base-600/30 bg-surface-elevated/30">
+      <div class="mt-16 lg:mt-24 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 p-8 border border-light-300 dark:border-base-600/30 bg-surface-light-elevated/30 dark:bg-surface-elevated/30">
         <div>
           <div class="font-mono text-xs text-amber-500 mb-2">LIMITED AVAILABILITY</div>
-          <p class="text-base-300">Currently accepting select projects. Partner with 2-3 clients at a time for focused attention.</p>
+          <p class="text-light-600 dark:text-base-300">Currently accepting select projects. Partner with 2-3 clients at a time for focused attention.</p>
         </div>
         <button
           @click="useContactForm().openContactForm()"
