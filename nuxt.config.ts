@@ -48,6 +48,11 @@ export default defineNuxtConfig({
       ],
       script: [
         {
+          // Initialize dataLayer BEFORE the external GA script loads
+          innerHTML: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-TZV9SR0KHH');`,
+          type: 'text/javascript'
+        },
+        {
           src: 'https://www.googletagmanager.com/gtag/js?id=G-TZV9SR0KHH',
           async: true
         }
