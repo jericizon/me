@@ -1,0 +1,361 @@
+- generic [ref=e3]:
+  - link "Skip to main content" [ref=e4] [cursor=pointer]:
+    - /url: "#main-content"
+  - alert [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - text: ExpresswayPH for Android is in
+        - strong [ref=e8]: closed beta
+      - link "Apply — get notified" [ref=e9] [cursor=pointer]:
+        - /url: https://forms.gle/TgiESVpDFSxs4pch8
+    - button "Dismiss banner" [ref=e10] [cursor=pointer]
+  - banner [ref=e13]:
+    - navigation "Main navigation" [ref=e14]:
+      - link "ExpresswayPH Home" [ref=e16] [cursor=pointer]:
+        - /url: /
+        - img "ExpresswayPH" [ref=e17]
+      - generic [ref=e18]:
+        - link "Toll Calculator" [ref=e19] [cursor=pointer]:
+          - /url: /
+        - link "Matrix" [ref=e20] [cursor=pointer]:
+          - /url: /matrix
+        - link "Gas Calculator" [ref=e21] [cursor=pointer]:
+          - /url: /gas-calculator
+        - link "Trip Planner New" [ref=e24] [cursor=pointer]:
+          - /url: /trip-planner
+          - text: Trip Planner
+          - generic [ref=e25]: New
+        - link "Blog" [ref=e26] [cursor=pointer]:
+          - /url: /blog
+      - generic [ref=e27]:
+        - link "Report Issue" [ref=e28] [cursor=pointer]:
+          - /url: https://forms.gle/TgiESVpDFSxs4pch8
+        - 'button "Theme: System. Click to switch." [ref=e31] [cursor=pointer]':
+          - generic [ref=e32]: A
+  - main [ref=e34]:
+    - generic [ref=e35]:
+      - region [ref=e36]:
+        - generic [ref=e37]:
+          - heading "ExpresswayPH" [level=1] [ref=e38]
+          - paragraph [ref=e39]: Free toll and fuel cost calculator for major Philippine expressways. Enter your entry and exit points to get an estimate.
+          - generic [ref=e40]:
+            - generic [ref=e41]: Updated 2026 Rates
+            - generic [ref=e42]: Multi-Expressway
+            - generic [ref=e43]: RFID Ready
+          - generic [ref=e44]:
+            - link [ref=e45] [cursor=pointer]:
+              - /url: /trip-planner
+            - button "Install App" [ref=e51] [cursor=pointer]
+      - generic [ref=e55]:
+        - generic [ref=e56]:
+          - region [ref=e57]:
+            - generic [ref=e58]:
+              - generic [ref=e59]: "Last synced with TRB: 2 months 7 days ago"
+              - generic [ref=e64]:
+                - heading [level=2] [ref=e65]
+                - paragraph [ref=e69]: Configure your route details
+              - radiogroup "Vehicle Class" [ref=e70]:
+                - generic [ref=e74]:
+                  - generic [ref=e75] [cursor=pointer]:
+                    - radio "Class 1 Cars, vans, SUVs, motorcycles (400cc+)" [checked] [ref=e76]
+                    - generic [ref=e80]:
+                      - generic [ref=e81]: Class 1
+                      - generic [ref=e82]: Cars, vans, SUVs, motorcycles (400cc+)
+                  - generic [ref=e83] [cursor=pointer]:
+                    - radio "Class 2 Buses, jeepneys, light trucks" [ref=e84]
+                    - generic [ref=e89]:
+                      - generic [ref=e90]: Class 2
+                      - generic [ref=e91]: Buses, jeepneys, light trucks
+                  - generic [ref=e92] [cursor=pointer]:
+                    - radio "Class 3 Large trucks, trailers (3+ axles)" [ref=e93]
+                    - generic [ref=e98]:
+                      - generic [ref=e99]: Class 3
+                      - generic [ref=e100]: Large trucks, trailers (3+ axles)
+              - generic [ref=e101]:
+                - generic [ref=e102]:
+                  - generic [ref=e103]: Entry Point
+                  - textbox "Search entry point" [ref=e108]:
+                    - /placeholder: Search entry point...
+                - button "Swap entry and exit points" [disabled] [ref=e110]
+                - generic [ref=e113]:
+                  - generic [ref=e114]: Exit Point
+                  - textbox "Search exit point" [ref=e119]:
+                    - /placeholder: Search exit point...
+              - button "Calculate Toll Fee" [disabled] [ref=e120]
+              - paragraph [ref=e124]: Estimates may vary from actual rates
+              - generic [ref=e125]:
+                - paragraph [ref=e126]: Popular Routes
+                - generic [ref=e127]:
+                  - button "Manila → Baguio (TPLEX) Balintawak → Rosario Class 1" [ref=e128] [cursor=pointer]:
+                    - generic [ref=e129]: Manila → Baguio (TPLEX)
+                    - generic [ref=e130]:
+                      - generic [ref=e131]: Balintawak → Rosario
+                      - generic [ref=e133]: Class 1
+                  - button "Manila → Subic (NLEX-SCTEX) Balintawak → Tipo/SFEX Class 1" [ref=e134] [cursor=pointer]:
+                    - generic [ref=e135]: Manila → Subic (NLEX-SCTEX)
+                    - generic [ref=e136]:
+                      - generic [ref=e137]: Balintawak → Tipo/SFEX
+                      - generic [ref=e139]: Class 1
+                  - button "Makati → Calamba (SLEX) Magallanes (SLEX) → Calamba Class 1" [ref=e140] [cursor=pointer]:
+                    - generic [ref=e141]: Makati → Calamba (SLEX)
+                    - generic [ref=e142]:
+                      - generic [ref=e143]: Magallanes (SLEX) → Calamba
+                      - generic [ref=e145]: Class 1
+                  - button "Manila → Batangas Pier Balintawak → Batangas Class 1" [ref=e146] [cursor=pointer]:
+                    - generic [ref=e147]: Manila → Batangas Pier
+                    - generic [ref=e148]:
+                      - generic [ref=e149]: Balintawak → Batangas
+                      - generic [ref=e151]: Class 1
+          - region [ref=e152]:
+            - generic [ref=e153]:
+              - generic [ref=e156]:
+                - paragraph [ref=e157]: Total Toll Fee
+                - generic [ref=e158]: ₱0.00
+                - generic [ref=e159]: Class 1
+              - generic [ref=e164]:
+                - generic [ref=e165]:
+                  - paragraph [ref=e166]: From
+                  - paragraph [ref=e167]: "-"
+                  - paragraph [ref=e168]: "-"
+                - generic [ref=e174]:
+                  - paragraph [ref=e175]: To
+                  - paragraph [ref=e176]: "-"
+                  - paragraph [ref=e177]: "-"
+              - generic [ref=e179]:
+                - paragraph [ref=e184]: Built solo and kept free for every driver. If it's ever helped you out, a coffee is appreciated — never expected.
+                - button "Support on Ko-fi" [ref=e186] [cursor=pointer]
+        - region "Install ExpresswayPH" [ref=e194]:
+          - generic [ref=e196]:
+            - generic [ref=e197]:
+              - paragraph [ref=e198]: Take ExpresswayPH on the go
+              - paragraph [ref=e199]:
+                - text: Android app in
+                - strong [ref=e200]: closed beta
+                - text: — leave your Gmail and we'll notify you when you can download.
+            - generic [ref=e201]:
+              - button "Download ExpresswayPH on Google Play" [ref=e202] [cursor=pointer]:
+                - generic [ref=e203]: Beta
+                - generic [ref=e209]:
+                  - generic [ref=e210]: Get it on
+                  - generic [ref=e211]: Google Play
+              - button "Install App" [ref=e212] [cursor=pointer]
+      - region [ref=e215]:
+        - generic [ref=e216]:
+          - generic [ref=e217]:
+            - generic [ref=e218]:
+              - heading "Browse by expressway" [level=2] [ref=e219]
+              - paragraph [ref=e220]: View toll matrices and entry/exit points for each route.
+            - link "View all" [ref=e221] [cursor=pointer]:
+              - /url: /matrix
+              - text: View all
+              - generic [aria-hidden] [ref=e222]: →
+          - generic [ref=e223]:
+            - link "Skyway-SLEX-MCX View toll rates Autosweep" [ref=e224] [cursor=pointer]:
+              - /url: /expressways/skyway-slex-mcx
+              - generic [ref=e226]:
+                - generic [ref=e231]:
+                  - heading "Skyway-SLEX-MCX" [level=3] [ref=e232]
+                  - paragraph [ref=e233]: View toll rates
+                - generic [ref=e234]: Autosweep
+            - link "TPLEX View toll rates Easytrip" [ref=e235] [cursor=pointer]:
+              - /url: /expressways/tplex
+              - generic [ref=e237]:
+                - generic [ref=e242]:
+                  - heading "TPLEX" [level=3] [ref=e243]
+                  - paragraph [ref=e244]: View toll rates
+                - generic [ref=e245]: Easytrip
+            - link "STAR Tollway View toll rates Autosweep" [ref=e246] [cursor=pointer]:
+              - /url: /expressways/star
+              - generic [ref=e248]:
+                - generic [ref=e253]:
+                  - heading "STAR Tollway" [level=3] [ref=e254]
+                  - paragraph [ref=e255]: View toll rates
+                - generic [ref=e256]: Autosweep
+            - link "NLEX-SCTEX View toll rates Easytrip" [ref=e257] [cursor=pointer]:
+              - /url: /expressways/nlex-sctex
+              - generic [ref=e259]:
+                - generic [ref=e264]:
+                  - heading "NLEX-SCTEX" [level=3] [ref=e265]
+                  - paragraph [ref=e266]: View toll rates
+                - generic [ref=e267]: Easytrip
+            - link "CALAX View toll rates Easytrip" [ref=e268] [cursor=pointer]:
+              - /url: /expressways/calax
+              - generic [ref=e270]:
+                - generic [ref=e275]:
+                  - heading "CALAX" [level=3] [ref=e276]
+                  - paragraph [ref=e277]: View toll rates
+                - generic [ref=e278]: Easytrip
+            - link "CAVITEX View toll rates Easytrip" [ref=e279] [cursor=pointer]:
+              - /url: /expressways/cavitex
+              - generic [ref=e281]:
+                - generic [ref=e286]:
+                  - heading "CAVITEX" [level=3] [ref=e287]
+                  - paragraph [ref=e288]: View toll rates
+                - generic [ref=e289]: Easytrip
+            - link "NLEX-SLEX Connector View toll rates Easytrip" [ref=e290] [cursor=pointer]:
+              - /url: /expressways/nlex-slex-connector
+              - generic [ref=e292]:
+                - generic [ref=e297]:
+                  - heading "NLEX-SLEX Connector" [level=3] [ref=e298]
+                  - paragraph [ref=e299]: View toll rates
+                - generic [ref=e300]: Easytrip
+      - generic [ref=e302]:
+        - region [ref=e303]:
+          - heading "Toll calculator for Philippine expressways" [level=2] [ref=e304]
+          - paragraph [ref=e305]: ExpresswayPH is a free Philippines toll calculator that helps you estimate toll fees and get a sense of travel time across major expressways in the Philippines. Choose your vehicle class, entry, and exit points to quickly see a breakdown of toll costs per expressway and RFID provider.
+          - paragraph [ref=e306]: The tool currently supports popular expressways including SLEX, Skyway, NLEX-SCTEX, TPLEX, CALAX, MCX, CAVITEX, and STAR Tollway. Coverage may expand over time based on data availability and user feedback.
+        - region "Additional information" [ref=e307]:
+          - article [ref=e308]:
+            - heading "Supported toll roads" [level=3] [ref=e309]
+            - paragraph [ref=e310]: ExpresswayPH focuses on major Philippine expressways that use RFID systems like Autosweep and Easytrip. Toll fees are grouped by expressway so you can clearly see how much you pay on each segment of your route across different expressways in the Philippines.
+            - list [ref=e311]:
+              - listitem [ref=e312]: SLEX & Skyway network
+              - listitem [ref=e313]: NLEX-SCTEX & TPLEX
+              - listitem [ref=e314]: CALAX, MCX, CAVITEX & STAR Tollway
+          - article [ref=e315]:
+            - heading "Important disclaimer" [level=3] [ref=e316]
+            - paragraph [ref=e317]: ExpresswayPH is an independent tool and is not affiliated with, endorsed by, or officially connected to any expressway operator or government agency. Toll fees shown here are estimates based on the latest publicly available information and may differ from the actual amount you pay at the toll plaza.
+            - paragraph [ref=e318]: Always refer to official advisories and on-site signage for final toll rates and traffic conditions before you travel.
+        - region [ref=e319]:
+          - generic [ref=e320]:
+            - heading "Your Guide to Philippine Expressways" [level=2] [ref=e321]
+            - paragraph [ref=e322]: Everything you need to know before hitting the road.
+          - generic [ref=e323]:
+            - article [ref=e324]:
+              - generic [ref=e325]: 💳
+              - heading "RFID Systems" [level=3] [ref=e326]
+              - paragraph [ref=e327]:
+                - text: Philippine expressways use two main RFID systems.
+                - strong [ref=e328]: Autosweep
+                - text: works on SLEX, Skyway, NAIAx, STAR, MCX, and TPLEX.
+                - strong [ref=e329]: Easytrip
+                - text: is used for NLEX-SCTEX, CAVITEX, CALAX, and C5 South Link.
+            - article [ref=e330]:
+              - generic [ref=e331]: 🚗
+              - heading "Vehicle Classes" [level=3] [ref=e332]
+              - paragraph [ref=e333]:
+                - strong [ref=e334]: "Class 1:"
+                - text: Cars, jeepneys, vans, and motorcycles (400cc+).
+                - strong [ref=e335]: "Class 2:"
+                - text: Buses and light trucks.
+                - strong [ref=e336]: "Class 3:"
+                - text: Large trucks (3+ axles). Rates vary significantly by class, so ensure you select the correct one.
+            - article [ref=e337]:
+              - generic [ref=e338]: 🛣️
+              - heading "Travel Tips" [level=3] [ref=e339]
+              - paragraph [ref=e340]: Always maintain sufficient load in your RFID account to avoid penalties. Check your tire pressure and fuel/battery level before entering long expressways like TPLEX or NLEX-SCTEX where exits can be far apart.
+        - region [ref=e341]:
+          - heading "ExpresswayPH FAQs" [level=2] [ref=e342]
+          - generic [ref=e343]:
+            - article [ref=e344]:
+              - heading "What is the ExpresswayPH toll calculator?" [level=3] [ref=e345]
+              - paragraph [ref=e346]: ExpresswayPH is a free Philippines toll calculator and travel time estimator for major expressways. It helps drivers quickly understand approximate costs for their trips so they can plan budgets and routes more confidently.
+            - article [ref=e347]:
+              - heading "Is this an official toll calculator?" [level=3] [ref=e348]
+              - paragraph [ref=e349]: No. ExpresswayPH is not an official calculator and is not connected to any toll operator. It is a community-built tool that provides estimates for convenience only.
+            - article [ref=e350]:
+              - heading "Which expressways are supported?" [level=3] [ref=e351]
+              - paragraph [ref=e352]: The app currently covers SLEX, Skyway, NLEX-SCTEX, TPLEX, CALAX, MCX, CAVITEX, and STAR Tollway.
+            - article [ref=e353]:
+              - heading "Do you support RFID like Autosweep and Easytrip?" [level=3] [ref=e354]
+              - paragraph [ref=e355]:
+                - text: "No, the app does not support RFID as of now. For RFID balance checking, please use the main apps:"
+                - link "MPT Hub" [ref=e356] [cursor=pointer]:
+                  - /url: https://play.google.com/store/apps/details?id=com.outsystemsenterprise.mptc.DriveHubProd&hl=en
+                - text: (Android) or
+                - link "MPT Hub" [ref=e357] [cursor=pointer]:
+                  - /url: https://apps.apple.com/ph/app/mpt-drivehub/id1600499395
+                - text: (iOS), and
+                - link "Autosweep" [ref=e358] [cursor=pointer]:
+                  - /url: https://play.google.com/store/apps/details?id=com.balanceinquiry&hl=en
+                - text: (Android) or
+                - link "Autosweep" [ref=e359] [cursor=pointer]:
+                  - /url: https://apps.apple.com/ph/app/autosweep-rfid-mobile-app/id6446928297
+                - text: (iOS).
+            - article [ref=e360]:
+              - heading "Is the Philippines toll calculator free to use?" [level=3] [ref=e361]
+              - paragraph [ref=e362]: Yes. The ExpresswayPH Philippines toll calculator is completely free to use and does not require you to create an account.
+  - contentinfo [ref=e363]:
+    - contentinfo [ref=e364]:
+      - generic [ref=e365]:
+        - generic [ref=e366]:
+          - generic [ref=e367]:
+            - paragraph [ref=e370]: ExpresswayPH
+            - paragraph [ref=e371]:
+              - text: Toll estimates based on latest
+              - link "Toll Regulatory Board (TRB)" [ref=e372] [cursor=pointer]:
+                - /url: https://trb.gov.ph/
+              - text: rates
+            - paragraph [ref=e373]: For guidance only. Confirm with official advisories.
+            - paragraph [ref=e374]:
+              - text: Built by
+              - link "Jeric" [ref=e375] [cursor=pointer]:
+                - /url: https://jericizon.github.io/me
+          - generic [ref=e376]:
+            - heading "Quick Links" [level=3] [ref=e377]
+            - navigation "Footer navigation" [ref=e378]:
+              - link "Toll Calculator" [ref=e379] [cursor=pointer]:
+                - /url: /
+              - link "Skyway Toll Fee" [ref=e380] [cursor=pointer]:
+                - /url: /skyway-toll-fee
+              - link "SLEX Toll Calculator" [ref=e381] [cursor=pointer]:
+                - /url: /toll-calculator-slex
+              - link "NLEX-SCTEX Rates" [ref=e382] [cursor=pointer]:
+                - /url: /expressways/nlex-sctex
+              - link "TPLEX Rates" [ref=e383] [cursor=pointer]:
+                - /url: /expressways/tplex
+              - link "Toll PH Guide" [ref=e384] [cursor=pointer]:
+                - /url: /toll-ph
+              - link "Toll Fee Calculator" [ref=e385] [cursor=pointer]:
+                - /url: /toll-fee-calculator
+              - link "Gas Calculator" [ref=e386] [cursor=pointer]:
+                - /url: /gas-calculator
+              - link "Toll Matrix" [ref=e387] [cursor=pointer]:
+                - /url: /matrix
+              - link "About" [ref=e388] [cursor=pointer]:
+                - /url: /about
+              - link "Contact" [ref=e389] [cursor=pointer]:
+                - /url: /contact
+              - link "Roadmap" [ref=e390] [cursor=pointer]:
+                - /url: /roadmap
+              - link "Route Guides" [ref=e391] [cursor=pointer]:
+                - /url: /guides
+              - link "Trip Planner" [ref=e392] [cursor=pointer]:
+                - /url: /trip-planner
+              - link "Blog" [ref=e393] [cursor=pointer]:
+                - /url: /blog
+              - link "Privacy" [ref=e394] [cursor=pointer]:
+                - /url: /privacy-policy
+              - button "Privacy settings" [ref=e395] [cursor=pointer]
+              - link "Terms" [ref=e396] [cursor=pointer]:
+                - /url: /terms
+              - link "Feedback" [ref=e397] [cursor=pointer]:
+                - /url: https://forms.gle/TgiESVpDFSxs4pch8
+          - generic [ref=e398]:
+            - heading "Connect With Us" [level=3] [ref=e399]
+            - generic [ref=e400]:
+              - link "Facebook Page" [ref=e401] [cursor=pointer]:
+                - /url: https://www.facebook.com/profile.php?id=61586285445790
+              - link "Support on Ko-fi" [ref=e405] [cursor=pointer]:
+                - /url: https://ko-fi.com/jericizon
+            - generic [ref=e410]:
+              - heading "Get the app" [level=3] [ref=e411]
+              - button "Download ExpresswayPH on Google Play" [ref=e412] [cursor=pointer]:
+                - generic [ref=e413]: Beta
+                - generic [ref=e419]:
+                  - generic [ref=e420]: Get it on
+                  - generic [ref=e421]: Google Play
+        - paragraph [ref=e423]: © 2026 ExpresswayPH. All rights reserved.
+  - dialog [ref=e424]:
+    - generic [ref=e425]:
+      - generic [ref=e427]:
+        - heading "Privacy choices" [level=2] [ref=e428]
+        - paragraph [ref=e429]:
+          - text: We use optional analytics and, when enabled, advertising technologies to understand and support ExpresswayPH. Required local storage keeps the app working. Read our
+          - link "Privacy Policy" [ref=e430] [cursor=pointer]:
+            - /url: /privacy-policy
+          - text: for details.
+      - generic [ref=e431]:
+        - button "Decline optional" [ref=e432] [cursor=pointer]
+        - button "Manage choices" [ref=e433] [cursor=pointer]
+        - button "Accept all" [ref=e434] [cursor=pointer]

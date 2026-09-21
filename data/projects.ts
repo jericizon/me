@@ -16,7 +16,7 @@ export const projects: Project[] = [
       label: 'active users in 15 days',
       footnote: 'ExpresswayPH peak 15-day holiday surge',
     },
-    image: '/images/projects/expresswayph.png',
+    image: '/images/projects/expresswayph.webp',
     liveUrl: 'https://expresswayph.com',
     architecture: [
       { id: 'client', label: 'Traveler', description: 'Mobile / Web' },
@@ -65,8 +65,8 @@ export const projects: Project[] = [
     description:
       'Multi-tenant enterprise platform connecting corporate teams, meal allowances and food preparation workflows.',
     stack: ['Nuxt 4', 'NestJS', 'PostgreSQL', 'Stripe', 'AWS', 'Docker'],
-    image: '/images/projects/lunchonline.png',
-    gallery: ['/images/projects/lunchonline-admin.png'],
+    image: '/images/projects/lunchonline.webp',
+    gallery: ['/images/projects/lunchonline-admin.webp'],
     liveUrl: 'https://lunchonline.us',
     architecture: [
       { id: 'client', label: 'Corporate Client', description: 'Teams & stipends' },
@@ -120,7 +120,7 @@ export const projects: Project[] = [
       value: '10k+',
       label: 'care sessions facilitated',
     },
-    image: '/images/projects/alaganow.png',
+    image: '/images/projects/alaganow.webp',
     liveUrl: 'https://alaganow.pages.dev',
     architecture: [
       { id: 'client', label: 'Pet Owner', description: 'Mobile-first booking' },
