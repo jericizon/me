@@ -1,9 +1,5 @@
-// Main SCSS file for modern glassmorphic portfolio
-// Supports light/dark mode with system preference detection
+// Global base styles - dark-only design foundation (spec Section 2)
 
-// ============================================
-// BASE STYLES
-// ============================================
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
@@ -11,362 +7,52 @@ html {
 
 body {
   @apply min-h-screen antialiased;
-  @apply text-neutral-900 dark:text-neutral-100;
-  @apply bg-surface;
-  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: #0a0a0a;
+  color: #a1a1aa;
+  font-family: 'Inter', system-ui, sans-serif;
 }
 
-// ============================================
-// DECORATIVE BLOB ELEMENTS
-// ============================================
-.blob {
-  @apply absolute rounded-full pointer-events-none;
-  filter: blur(80px);
-  
-  &-primary {
-    @apply bg-primary-500/25 dark:bg-primary-500/15;
-  }
-  
-  &-secondary {
-    @apply bg-secondary-500/25 dark:bg-secondary-500/15;
-  }
-  
-  &-accent {
-    @apply bg-accent-500/20 dark:bg-accent-500/10;
-  }
+// Selection highlight
+::selection {
+  background-color: rgba(163, 230, 53, 0.2);
+  color: #a3e635;
 }
 
-// ============================================
-// SECTION STYLES
-// ============================================
-.section {
-  @apply py-20 md:py-28 lg:py-32 relative;
-  
-  &-header {
-    @apply text-center mb-16 md:mb-20;
-  }
+// Custom scrollbar
+::-webkit-scrollbar {
+  width: 6px;
 }
 
-// ============================================
-// GLASSMORPHIC CARD VARIANTS
-// ============================================
-.glass-panel {
-  @apply relative overflow-hidden;
-  @apply bg-white/60 dark:bg-neutral-900/40;
-  @apply backdrop-blur-xl;
-  @apply border border-white/30 dark:border-white/10;
-  @apply rounded-2xl;
-  @apply shadow-glass;
-  
-  &::before {
-    content: '';
-    @apply absolute inset-0 -z-10;
-    @apply bg-gradient-to-br from-white/50 to-transparent dark:from-white/5;
-    @apply rounded-2xl;
-  }
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
 }
 
-// Stat card with gradient border
-.stat-card {
-  @apply relative p-6 rounded-2xl overflow-hidden;
-  @apply bg-white/50 dark:bg-neutral-900/30;
-  @apply backdrop-blur-lg;
-  
-  &::before {
-    content: '';
-    @apply absolute inset-0 rounded-2xl;
-    @apply bg-gradient-to-br from-primary-500/20 via-transparent to-secondary-500/20;
-    @apply dark:from-primary-500/10 dark:to-secondary-500/10;
-    z-index: -1;
-  }
-  
-  &::after {
-    content: '';
-    @apply absolute inset-[1px] rounded-2xl;
-    @apply bg-white/70 dark:bg-neutral-900/50;
-    z-index: -1;
-  }
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 3px;
 }
 
-// ============================================
-// PROJECT CARD STYLES
-// ============================================
-.project-card {
-  @apply relative overflow-hidden rounded-2xl;
-  @apply bg-white/60 dark:bg-neutral-900/40;
-  @apply backdrop-blur-lg;
-  @apply border border-white/20 dark:border-white/10;
-  @apply shadow-glass;
-  @apply transition-all duration-500 ease-out;
-  
-  &:hover {
-    @apply -translate-y-2;
-    @apply shadow-glass-lg;
-  }
-  
-  &-image {
-    @apply relative overflow-hidden aspect-video;
-    
-    img {
-      @apply w-full h-full object-cover transition-transform duration-700 ease-out;
-    }
-    
-    &::after {
-      content: '';
-      @apply absolute inset-0;
-      @apply bg-gradient-to-t from-black/50 to-transparent;
-      @apply opacity-0 transition-opacity duration-300;
-    }
-  }
-  
-  &:hover &-image {
-    img {
-      @apply scale-110;
-    }
-    
-    &::after {
-      @apply opacity-100;
-    }
-  }
-  
-  &-content {
-    @apply p-6;
-  }
-  
-  &-title {
-    @apply text-xl font-bold mb-2;
-    @apply text-neutral-900 dark:text-white;
-  }
-  
-  &-description {
-    @apply text-neutral-600 dark:text-neutral-400 mb-4 line-clamp-2;
-  }
-  
-  &-tags {
-    @apply flex flex-wrap gap-2;
-  }
-  
-  &-tag {
-    @apply text-xs px-3 py-1 rounded-full font-medium;
-    @apply bg-primary-100/80 dark:bg-primary-900/30;
-    @apply text-primary-700 dark:text-primary-300;
-    @apply border border-primary-200/50 dark:border-primary-700/30;
-  }
+::-webkit-scrollbar-thumb:hover {
+  background: #71717a;
 }
 
-// ============================================
-// SKILL/TOOL BADGE
-// ============================================
-.skill-badge {
-  @apply flex items-center gap-3 px-4 py-3;
-  @apply rounded-xl;
-  @apply bg-white/50 dark:bg-neutral-900/30;
-  @apply backdrop-blur-md;
-  @apply border border-white/20 dark:border-white/10;
-  @apply transition-all duration-300;
-  
-  &:hover {
-    @apply scale-105;
-    @apply bg-white/70 dark:bg-neutral-900/50;
-    @apply shadow-soft;
-  }
-  
-  &-icon {
-    @apply w-6 h-6;
-    @apply text-primary-600 dark:text-primary-400;
-  }
-  
-  &-name {
-    @apply text-sm font-medium;
-    @apply text-neutral-700 dark:text-neutral-300;
-  }
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #27272a #0a0a0a;
 }
 
-// ============================================
-// TIMELINE STYLES
-// ============================================
-.timeline {
-  @apply relative;
-  
-  &-line {
-    @apply absolute left-8 top-0 bottom-0 w-0.5;
-    @apply bg-gradient-to-b from-primary-500 via-secondary-500 to-accent-500;
-  }
-  
-  &-dot {
-    @apply absolute left-4 w-8 h-8;
-    @apply bg-gradient-to-br from-primary-500 to-secondary-500;
-    @apply rounded-full;
-    @apply border-4 border-white dark:border-neutral-900;
-    @apply shadow-medium;
-    @apply flex items-center justify-center;
-    @apply z-10;
-  }
-  
-  &-card {
-    @apply ml-20;
-    @apply glass-card p-6 md:p-8;
-    @apply mb-8 last:mb-0;
-  }
+// Keyboard focus ring
+:focus-visible {
+  outline: 2px solid #a3e635;
+  outline-offset: 2px;
 }
 
-// ============================================
-// CONTACT FORM STYLES
-// ============================================
-.form-group {
-  @apply mb-6;
-  
-  label {
-    @apply block mb-2 text-sm font-medium;
-    @apply text-neutral-700 dark:text-neutral-300;
-  }
-  
-  input, textarea {
-    @apply w-full px-4 py-3 rounded-xl;
-    @apply bg-white/60 dark:bg-neutral-800/60;
-    @apply backdrop-blur-md;
-    @apply border border-neutral-200/50 dark:border-neutral-700/50;
-    @apply text-neutral-900 dark:text-neutral-100;
-    @apply placeholder-neutral-500 dark:placeholder-neutral-400;
-    @apply focus:outline-none focus:ring-2 focus:ring-primary-500/50;
-    @apply focus:border-primary-500/50;
-    @apply transition-all duration-200;
-  }
-  
-  textarea {
-    @apply min-h-[150px] resize-none;
-  }
-}
-
-// ============================================
-// ANIMATION UTILITIES
-// ============================================
-.animate {
-  &-float {
-    animation: float 6s ease-in-out infinite;
-  }
-  
-  &-float-slow {
-    animation: float 8s ease-in-out infinite;
-  }
-  
-  &-float-delayed {
-    animation: float 6s ease-in-out infinite 2s;
-  }
-  
-  &-pulse-slow {
-    animation: pulse-glow 4s ease-in-out infinite;
-  }
-  
-  &-fade-in {
-    animation: fadeIn 0.8s ease-out forwards;
-  }
-  
-  &-slide-up {
-    animation: slideUp 0.8s ease-out forwards;
-  }
-  
-  &-slide-in-left {
-    animation: slideInLeft 0.8s ease-out forwards;
-  }
-  
-  &-slide-in-right {
-    animation: slideInRight 0.8s ease-out forwards;
-  }
-  
-  &-bounce-in {
-    animation: bounceIn 0.6s ease-out forwards;
-  }
-}
-
-// ============================================
-// KEYFRAME ANIMATIONS
-// ============================================
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
-@keyframes pulse-glow {
-  0%, 100% {
-    opacity: 0.6;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.9;
-    transform: scale(1.02);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes bounceIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.3);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  70% {
-    transform: scale(0.9);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-// ============================================
-// RESPONSIVE HELPERS
-// ============================================
-@media (max-width: 768px) {
-  .glass-card, .glass-panel, .project-card {
-    @apply backdrop-blur-lg;
+// Reduced motion
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

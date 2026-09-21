@@ -79,8 +79,9 @@ export default defineNuxtConfig({
   },
   googleFonts: {
     families: {
-      Poppins: [100, 200, 300, 400, 500, 600, 700, 800, 900],
-      'Space+Grotesk': [300, 400, 500, 600, 700]
+      'Space Grotesk': [400, 500, 600, 700],
+      Inter: [300, 400, 500, 600],
+      'JetBrains Mono': [400, 500]
     },
     display: 'swap'
   },
