@@ -2,9 +2,9 @@
   <div class="min-h-screen flex flex-col items-center justify-center p-4 text-center">
     <div class="glass-card max-w-lg p-8 mx-auto">
       <div class="mb-6">
-        <h1 class="text-4xl font-bold text-primary-400 mb-2">Oops!</h1>
-        <h2 class="text-2xl font-medium text-white mb-4">{{ error.statusCode === 404 ? 'Page not found' : 'Something went wrong' }}</h2>
-        <p class="text-slate-300 mb-6">
+        <h1 class="text-4xl font-bold text-accent mb-2">Oops!</h1>
+        <h2 class="text-2xl font-medium text-text-primary mb-4">{{ error.statusCode === 404 ? 'Page not found' : 'Something went wrong' }}</h2>
+        <p class="text-text-secondary mb-6">
           {{ error.statusCode === 404 
             ? 'The page you are looking for might have been removed or is temporarily unavailable.' 
             : 'We apologize for the inconvenience. Please try again later.' 

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Jeric L. Izon — Senior Full-Stack Engineer</title>
+<style>
+  @page {
+    size: Letter;
+    margin: 18mm 16mm 16mm 16mm;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-size: 9.5pt;
+    line-height: 1.45;
+    color: #1c2430;
+  }
+
+  /* Header */
+  header { text-align: center; margin-bottom: 10pt; }
+  h1 {
+    font-size: 20pt;
+    letter-spacing: 2.5pt;
+    font-weight: 700;
+    color: #0f1a2b;
+  }
+  .title {
+    font-size: 11pt;
+    font-weight: 600;
+    color: #2456a6;
+    margin-top: 2pt;
+    letter-spacing: 0.6pt;
+  }
+  .contact {
+    margin-top: 5pt;
+    font-size: 8.5pt;
+    color: #4a5568;
+  }
+  .contact span + span::before { content: "  ·  "; color: #9aa5b1; }
+  .contact a { color: #2456a6; text-decoration: none; }
+
+  /* Sections */
+  section { margin-top: 11pt; }
+  h2 {
+    font-size: 10pt;
+    letter-spacing: 1.6pt;
+    text-transform: uppercase;
+    color: #0f1a2b;
+    border-bottom: 1.4pt solid #2456a6;
+    padding-bottom: 2.5pt;
+    margin-bottom: 6pt;
+    break-after: avoid-page;
+    page-break-after: avoid;
+  }
+
+  /* Summary */
+  .summary p { margin-bottom: 5pt; text-align: justify; }
+
+  /* Skills */
+  .skills { display: table; width: 100%; border-spacing: 0; }
+  .skill-row { display: table-row; }
+  .skill-row > div { display: table-cell; padding: 1.5pt 0; vertical-align: top; }
+  .skill-label { width: 158pt; font-weight: 700; color: #0f1a2b; padding-right: 8pt; }
+  .skill-values { color: #333d4a; }
+
+  /* Jobs & projects */
+  .job { margin-bottom: 9pt; page-break-inside: avoid; }
+  .job-head { display: flex; justify-content: space-between; align-items: baseline; }
+  .job-role { font-size: 10.5pt; font-weight: 700; color: #0f1a2b; }
+  .job-date { font-size: 8.5pt; color: #4a5568; white-space: nowrap; margin-left: 10pt; }
+  .job-company { font-size: 9.5pt; font-weight: 600; color: #2456a6; margin-top: 1pt; }
+  .job-tagline { font-style: italic; color: #4a5568; margin-top: 2pt; }
+  ul { margin: 4pt 0 0 0; list-style: none; }
+  li {
+    position: relative;
+    padding-left: 11pt;
+    margin-bottom: 2.5pt;
+    text-align: justify;
+  }
+  li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: #2456a6;
+    font-size: 8pt;
+  }
+  li li { padding-left: 11pt; margin-bottom: 1.5pt; }
+  li li::before { content: "–"; font-size: 9.5pt; }
+  li ul { margin-top: 2pt; }
+
+  /* Projects */
+  .project { margin-bottom: 9pt; page-break-inside: avoid; }
+  .project-head { display: flex; justify-content: space-between; align-items: baseline; }
+  .project-name { font-size: 10.5pt; font-weight: 700; color: #0f1a2b; }
+  .project-name a { color: #2456a6; text-decoration: none; font-weight: 600; font-size: 8.5pt; margin-left: 6pt; }
+  .project-positioning { font-size: 8.5pt; color: #4a5568; white-space: nowrap; margin-left: 10pt; }
+  .project-tagline { font-style: italic; color: #4a5568; margin-top: 2pt; }
+  .metric {
+    display: inline-block;
+    font-weight: 700;
+    color: #0f1a2b;
+  }
+
+  footer {
+    margin-top: 12pt;
+    text-align: center;
+    font-size: 8pt;
+    color: #9aa5b1;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>JERIC L. IZON</h1>
+  <div class="title">Senior Full-Stack Engineer</div>
+  <div class="contact">
+    <span>Santa Rosa, Laguna, Philippines</span>
+    <span>+63 970 215 1592</span>
+    <span>im.jericizon@gmail.com</span>
+    <span><a href="https://jericizon.github.io/me/">jericizon.github.io/me</a></span>
+  </div>
+</header>
+
+<section class="summary">
+  <h2>Professional Summary</h2>
+  <p>Senior Full-Stack Engineer with 10+ years of professional software engineering
+  experience, including 10+ years specializing in Laravel/PHP and 7+ years building
+  production applications with Vue.js/Nuxt.js.</p>
+  <p>Experienced in designing, building, optimizing, and operating SaaS platforms, backend
+  systems, REST APIs, internal tools, dashboards, and data-driven applications. Strong
+  backend focus across Laravel, NestJS, Node.js, MySQL/MariaDB, PostgreSQL, Redis,
+  Docker, and AWS.</p>
+  <p>Hands-on experience owning systems from architecture and database design through
+  implementation, testing, deployment, infrastructure, and production support.
+  Experienced working with distributed teams and Singapore- and Australia-based
+  companies in fully remote environments.</p>
+  <p>Strong focus on maintainable architecture, performance, security, automated testing,
+  API design, database optimization, and reliable production delivery.</p>
+</section>
+
+<section>
+  <h2>Core Engineering Skills</h2>
+  <div class="skills">
+    <div class="skill-row">
+      <div class="skill-label">Backend &amp; Architecture</div>
+      <div class="skill-values">Laravel, PHP, NestJS, Node.js, REST APIs, WebSockets, Redis, Queues, Background Jobs, API Architecture, Service-Oriented Systems</div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-label">Frontend</div>
+      <div class="skill-values">Vue.js, Nuxt.js, JavaScript/TypeScript, React, Next.js, Tailwind CSS, HTML5, CSS3, SCSS</div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-label">Databases</div>
+      <div class="skill-values">MySQL, MariaDB, PostgreSQL, Database Design, Schema Design, Indexing, Query Optimization, Data Modeling</div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-label">Cloud &amp; Infrastructure</div>
+      <div class="skill-values">AWS EC2, RDS, S3, CloudFront, Lambda, ECR, ECS, Docker, Linux, Cloudflare, DigitalOcean, Terraform</div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-label">DevOps &amp; Delivery</div>
+      <div class="skill-values">CI/CD, GitHub Actions, Bitbucket Pipelines, GitLab CI, Docker-based deployments, Production Releases, Infrastructure Management</div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-label">Testing &amp; Practices</div>
+      <div class="skill-values">TDD, PHPUnit, Vitest, Automated Testing, Code Reviews, API Testing, Debugging, Performance Optimization</div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-label">Payments &amp; Platforms</div>
+      <div class="skill-values">Stripe Billing, Webhook Processing, Supabase, Row-Level Security, WordPress</div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-label">Other</div>
+      <div class="skill-values">FFmpeg, Electron.js, WebSocket Systems, Video Processing Pipelines</div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-label">AI-Assisted Engineering</div>
+      <div class="skill-values">ChatGPT, Claude Code, Codex CLI, Gemini, OpenAI APIs, AI-assisted development and debugging workflows</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Professional Experience</h2>
+
+  <div class="job">
+    <div class="job-head">
+      <div class="job-role">Senior Laravel Developer</div>
+      <div class="job-date">April 2024 – Present</div>
+    </div>
+    <div class="job-company">Confidential Client — Australia · Remote</div>
+    <div class="job-tagline">Senior engineer supporting multiple SLA-driven and greenfield projects across backend development, frontend integration, infrastructure, and production delivery.</div>
+    <ul>
+      <li>Design, develop, and maintain production applications using Laravel/PHP, with supporting frontend development using Vue.js, Next.js, and Gatsby.</li>
+      <li>Own backend implementation across multiple projects, from technical design and development through deployment and production support.</li>
+      <li>Develop and maintain REST APIs, business logic, database integrations, background processes, and administrative functionality.</li>
+      <li>Work across multiple concurrent projects while maintaining delivery commitments and production reliability.</li>
+      <li>Manage application infrastructure across AWS, Kinsta, and Ploi, including deployments, server configuration, troubleshooting, and operational support.</li>
+      <li>Collaborate with distributed teams in an Australia-based remote environment, working independently across asynchronous workflows.</li>
+      <li>Contribute to architecture decisions, code reviews, debugging, and technical problem solving across projects.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-head">
+      <div class="job-role">Senior Full-Stack Developer</div>
+      <div class="job-date">April 2025 – December 2025</div>
+    </div>
+    <div class="job-company">Bubio — Singapore · Remote</div>
+    <div class="job-tagline">Focused on secure backend systems, database access control, APIs, and internal administration tooling.</div>
+    <ul>
+      <li>Designed and implemented REST API functionality and backend services supporting product features and internal workflows.</li>
+      <li>Developed and maintained admin dashboard functionality and backend-driven features.</li>
+      <li>Implemented Supabase Edge Functions for backend processing and automation.</li>
+      <li>Designed and configured Row Level Security (RLS) policies to enforce database-level access control.</li>
+      <li>Worked on database security, permissions, data access patterns, and backend integration.</li>
+      <li>Collaborated with product and frontend teams in a distributed Singapore-based environment.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-head">
+      <div class="job-role">Senior Full-Stack Developer</div>
+      <div class="job-date">January 2024 – December 2025</div>
+    </div>
+    <div class="job-company">Imaginary Ones — Singapore · Remote</div>
+    <div class="job-tagline">Focused on backend architecture, API development, performance, and cloud infrastructure.</div>
+    <ul>
+      <li>Designed and developed scalable REST APIs using NestJS and Laravel.</li>
+      <li>Optimized database queries, backend data flows, and API processing to improve application performance and reliability.</li>
+      <li>Built and maintained Dockerized backend services with automated CI/CD pipelines using Bitbucket.</li>
+      <li>Designed and managed application deployments across AWS EC2, RDS, S3, Lambda, and ECR.</li>
+      <li>Worked across backend architecture, infrastructure, debugging, and production deployment.</li>
+      <li>Collaborated with frontend, design, and product teams within a fully remote Singapore-based environment.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-head">
+      <div class="job-role">Senior Full-Stack Developer</div>
+      <div class="job-date">April 2018 – December 2025</div>
+    </div>
+    <div class="job-company">OFFEO — Singapore · Remote</div>
+    <div class="job-tagline">Owned and evolved backend architecture for a production SaaS platform involving media processing, asynchronous workloads, real-time systems, and cloud infrastructure.</div>
+    <ul>
+      <li>Owned and evolved the core backend architecture of a production SaaS platform.</li>
+      <li>Designed and optimized MariaDB schemas, relational data models, indexes, and complex queries.</li>
+      <li>Architected and maintained a distributed video rendering and export pipeline combining:
+        <ul>
+          <li>Node.js for rendering and preview generation</li>
+          <li>FFmpeg for video and audio processing</li>
+          <li>Laravel for job orchestration and backend workflows</li>
+          <li>AWS S3 for media storage</li>
+        </ul>
+      </li>
+      <li>Implemented asynchronous processing using queues and background jobs for resource-intensive workloads.</li>
+      <li>Built real-time export progress tracking using WebSockets and Redis.</li>
+      <li>Developed backend services supporting Nuxt.js dashboards and user-facing applications.</li>
+      <li>Built and maintained Electron.js desktop applications for Windows and macOS.</li>
+      <li>Automated application deployments and managed production infrastructure across AWS and Ubuntu servers.</li>
+      <li>Investigated production issues, optimized backend performance, and improved system reliability.</li>
+      <li>Performed code reviews and provided technical guidance and mentoring to other developers.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-head">
+      <div class="job-role">Senior Developer / Team Lead</div>
+      <div class="job-date">January 2016 – January 2018</div>
+    </div>
+    <div class="job-company">Skubbs Inc. — Philippines</div>
+    <ul>
+      <li>Led development of custom web applications, dashboards, and e-commerce platforms.</li>
+      <li>Designed application architecture and deployment strategies for multiple client projects.</li>
+      <li>Translated business requirements and UI/UX designs into production web applications.</li>
+      <li>Gathered requirements, defined project scope, and communicated technical solutions with clients.</li>
+      <li>Managed multiple projects simultaneously while coordinating development priorities.</li>
+      <li>Delegated development tasks and mentored junior developers.</li>
+      <li>Managed cloud deployments, production releases, troubleshooting, and application maintenance.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-head">
+      <div class="job-role">Web Developer</div>
+      <div class="job-date">May 2014 – January 2016</div>
+    </div>
+    <div class="job-company">Open Access BPO — Philippines</div>
+    <ul>
+      <li>Developed and maintained WordPress-based internal and corporate web platforms.</li>
+      <li>Developed custom WordPress themes and plugins.</li>
+      <li>Worked directly with the CTO on web platform development and technical improvements.</li>
+      <li>Managed website content, maintenance, and performance optimization.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-head">
+      <div class="job-role">Web Developer</div>
+      <div class="job-date">November 2013 – April 2014</div>
+    </div>
+    <div class="job-company">AGR Operations — Manila, Philippines</div>
+    <ul>
+      <li>Converted Photoshop designs into responsive HTML/CSS websites.</li>
+      <li>Developed and maintained client-facing websites and web interfaces.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Selected Projects</h2>
+
+  <div class="project">
+    <div class="project-head">
+      <div class="project-name">ExpresswayPH<a href="https://expresswayph.com">expresswayph.com</a></div>
+      <div class="project-positioning">Independent Product · Founder &amp; Lead Developer</div>
+    </div>
+    <div class="job-tagline">Production web platform for Philippine expressway travelers with route calculation and real-time toll estimation.</div>
+    <ul>
+      <li>Independently designed, built, deployed, and operate a mobile-first Nuxt.js application with custom toll-matrix computation logic.</li>
+      <li>Built features including toll-fee information, route planning, fuel-cost calculations, expressway updates, and sharing functionality.</li>
+      <li>Designed offline-friendly data structures and decoupled JSON feeds so toll rates update instantly without redeploying.</li>
+      <li>Delivered high-performance static edge distribution via Cloudflare with zero-downtime deploys and global caching.</li>
+      <li><span class="metric">Reached 10,000+ active users over a 15-day holiday travel surge</span> while maintaining 99.9% uptime; operate the product independently including infrastructure, analytics, and monetization.</li>
+    </ul>
+  </div>
+
+  <div class="project">
+    <div class="project-head">
+      <div class="project-name">LunchOnline<a href="https://lunchonline.us">lunchonline.us</a></div>
+      <div class="project-positioning">B2B Lunch &amp; Catering Platform</div>
+    </div>
+    <div class="job-tagline">Multi-tenant enterprise platform connecting corporate teams, meal allowances, and food preparation workflows.</div>
+    <ul>
+      <li>Built using Nuxt 4, NestJS, PostgreSQL, Sequelize, Stripe, and Tailwind CSS.</li>
+      <li>Designed backend APIs and business workflows for wallets, loyalty, user roles, and food-service operations across multi-tenant corporate accounts.</li>
+      <li>Implemented idempotent Stripe billing webhooks so retried payment events never double-charge a corporate wallet.</li>
+      <li>Automated daily order cutoffs, provider aggregation, and reconciliation jobs producing consolidated, auditable monthly billing per corporate account.</li>
+      <li>Worked with AWS infrastructure, Docker, PostgreSQL, and production deployment workflows.</li>
+    </ul>
+  </div>
+
+  <div class="project">
+    <div class="project-head">
+      <div class="project-name">AlagaNow<a href="https://alaganow.pages.dev">alaganow.pages.dev</a></div>
+      <div class="project-positioning">Pet Service Booking Platform</div>
+    </div>
+    <div class="job-tagline">Dual-sided marketplace connecting pet owners with verified providers for grooming, boarding, consultations, and vaccinations.</div>
+    <ul>
+      <li>Designed the platform architecture for connecting pet owners with service providers, built on Node/NestJS, Nuxt.js, PostgreSQL, and API-driven services.</li>
+      <li>Designed workflows for real-time scheduling with timezone-aware conflict avoidance, preventing double-bookings across providers, services, and time windows.</li>
+      <li>Built automated vaccination reminder pipelines, dedicated provider portals, and an asynchronous notification queue for booking updates.</li>
+      <li><span class="metric">Facilitated 10,000+ care sessions</span> and reduced provider scheduling overhead by 90%.</li>
+    </ul>
+  </div>
+
+  <div class="project">
+    <div class="project-head">
+      <div class="project-name">Better Santa Rosa</div>
+      <div class="project-positioning">Civic Transparency Platform</div>
+    </div>
+    <div class="job-tagline">Open-access civic data portal making municipal budgets, public information, and project records searchable and understandable.</div>
+    <ul>
+      <li>Built a high-density data and search portal with Nuxt static generation, TypeScript, and Tailwind CSS, aggregating municipal records into structured, searchable schemas.</li>
+      <li>Added Schema.org JSON-LD structured data so civic records are indexable and discoverable through natural search.</li>
+      <li>Designed an accessible, high-contrast, non-partisan interface for a diverse civic demographic on low-end devices and weak networks.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>Jeric L. Izon — Senior Full-Stack Engineer — im.jericizon@gmail.com</footer>
+
+</body>
+</html>

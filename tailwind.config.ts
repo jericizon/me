@@ -18,26 +18,27 @@ export default {
       // Scoped to backgroundColor so `bg-base` works without colliding
       // with the built-in `text-base` font-size utility
       backgroundColor: {
-        base: '#0A0A0A',
+        base: 'rgb(var(--color-base) / <alpha-value>)',
       },
       colors: {
-        // Dark-only palette (spec Section 2.2)
+        // Theme tokens — channel vars defined in assets/css/tailwind.css
+        // (:root = light, .dark = dark)
         surface: {
-          DEFAULT: '#111111',
-          elevated: '#171717',
-          border: '#27272A',
+          DEFAULT: 'rgb(var(--color-surface) / <alpha-value>)',
+          elevated: 'rgb(var(--color-surface-elevated) / <alpha-value>)',
+          border: 'rgb(var(--color-surface-border) / <alpha-value>)',
         },
         text: {
-          primary: '#F5F5F5',
-          secondary: '#A1A1AA',
-          muted: '#8E8E98',
+          primary: 'rgb(var(--color-text-primary) / <alpha-value>)',
+          secondary: 'rgb(var(--color-text-secondary) / <alpha-value>)',
+          muted: 'rgb(var(--color-text-muted) / <alpha-value>)',
         },
         accent: {
-          DEFAULT: '#A3E635',
-          dim: 'rgba(163, 230, 53, 0.12)',
+          DEFAULT: 'rgb(var(--color-accent) / <alpha-value>)',
+          dim: 'rgb(var(--color-accent) / 0.12)',
         },
         // Text/icons sitting on accent fills
-        ink: '#0A0A0A',
+        ink: 'rgb(var(--color-ink) / <alpha-value>)',
       },
       animation: {
         'fade-in': 'fadeIn 0.8s ease-out forwards',

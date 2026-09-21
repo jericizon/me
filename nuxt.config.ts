@@ -40,7 +40,7 @@ export default defineNuxtConfig({
         { property: 'twitter:image', content: 'https://jericizon.github.io/me/images/banner.png' },
 
         // Theme color
-        { name: 'theme-color', content: '#0A0A0A' }
+        { name: 'theme-color', content: '#FAFAF9' }
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -75,8 +75,8 @@ export default defineNuxtConfig({
   // @ts-ignore - colorMode module configuration
   colorMode: {
     classSuffix: '',
-    preference: 'dark',  // Dark-only design system
-    fallback: 'dark',
+    preference: 'light',
+    fallback: 'light',
     storageKey: 'nuxt-color-mode'
   },
   googleFonts: {

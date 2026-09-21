@@ -41,7 +41,7 @@ const year = new Date().getFullYear()
           </li>
           <li>
             <a
-              href="mailto:jericizon@gmail.com"
+              href="mailto:im.jericizon@gmail.com"
               class="text-sm text-text-secondary transition-colors hover:text-text-primary"
             >
               Email

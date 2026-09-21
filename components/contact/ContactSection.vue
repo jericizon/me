@@ -1,8 +1,8 @@
 <script setup lang="ts">
 const RESUME_URL =
-  'https://drive.google.com/file/d/1wkw4vFjOgjhilkgHptbyQ3psOi3Rxpy5/view?usp=sharing'
+  'https://drive.google.com/file/d/1Ap6DL7NR7G9-ZzfFGag_CEcJ5hvutAcC/view?usp=sharing'
 const EMAIL_URL =
-  'mailto:jericizon@gmail.com?subject=Senior%20Full-Stack%20Engineering%20Opportunity'
+  'mailto:im.jericizon@gmail.com?subject=Senior%20Full-Stack%20Engineering%20Opportunity'
 
 const { trackEvent } = useAnalytics()
 </script>

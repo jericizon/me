@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useHead({
-  htmlAttrs: { lang: 'en', class: 'dark' },
+  htmlAttrs: { lang: 'en' },
 })
 </script>
 

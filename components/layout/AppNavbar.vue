@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const RESUME_URL =
-  'https://drive.google.com/file/d/1wkw4vFjOgjhilkgHptbyQ3psOi3Rxpy5/view?usp=sharing'
+  'https://drive.google.com/file/d/1Ap6DL7NR7G9-ZzfFGag_CEcJ5hvutAcC/view?usp=sharing'
 
 const links = [
   { label: 'Work', href: '#work' },
@@ -66,6 +66,7 @@ onBeforeUnmount(() => {
       </ul>
 
       <div class="hidden items-center gap-4 md:flex">
+        <ThemeToggle />
         <a
           href="https://github.com/jericizon"
           target="_blank"
@@ -86,20 +87,23 @@ onBeforeUnmount(() => {
         <BaseButton href="#contact" variant="primary">Let's Talk</BaseButton>
       </div>
 
-      <button
-        type="button"
-        class="inline-flex h-11 w-11 items-center justify-center text-text-primary md:hidden"
-        :aria-expanded="isOpen"
-        aria-controls="mobile-nav"
-        :aria-label="isOpen ? 'Close navigation menu' : 'Open navigation menu'"
-        @click="isOpen = !isOpen"
-      >
-        <Icon
-          :name="isOpen ? 'tabler:x' : 'tabler:menu-2'"
-          class="h-6 w-6"
-          aria-hidden="true"
-        />
-      </button>
+      <div class="flex items-center md:hidden">
+        <ThemeToggle />
+        <button
+          type="button"
+          class="inline-flex h-11 w-11 items-center justify-center text-text-primary"
+          :aria-expanded="isOpen"
+          aria-controls="mobile-nav"
+          :aria-label="isOpen ? 'Close navigation menu' : 'Open navigation menu'"
+          @click="isOpen = !isOpen"
+        >
+          <Icon
+            :name="isOpen ? 'tabler:x' : 'tabler:menu-2'"
+            class="h-6 w-6"
+            aria-hidden="true"
+          />
+        </button>
+      </div>
     </nav>
 
     <div
