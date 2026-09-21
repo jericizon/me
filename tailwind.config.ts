@@ -30,7 +30,7 @@ export default {
         text: {
           primary: '#F5F5F5',
           secondary: '#A1A1AA',
-          muted: '#71717A',
+          muted: '#8E8E98',
         },
         accent: {
           DEFAULT: '#A3E635',

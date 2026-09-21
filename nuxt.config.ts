@@ -3,7 +3,7 @@ import { defineNuxtConfig } from 'nuxt/config'
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  ssr: false,
+  ssr: true,
   app: {
     baseURL: '/me/', // baseURL: '/<repository>/'
     buildAssetsDir: 'assets', // don't use "_" at the begining of the folder name to avoids nojkill conflict
@@ -59,6 +59,9 @@ export default defineNuxtConfig({
       ]
     }
   },
+  components: [
+    { path: '~/components', pathPrefix: false }
+  ],
   modules: [
     '@nuxtjs/tailwindcss',
     '@nuxtjs/color-mode',
