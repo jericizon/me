@@ -67,8 +67,7 @@ export default defineNuxtConfig({
     'nuxt-icon'
   ],
   css: [
-    '~/assets/css/tailwind.css',
-    '~/assets/css/main.scss'
+    '~/assets/css/tailwind.css'
   ],
   // @ts-ignore - colorMode module configuration
   colorMode: {
