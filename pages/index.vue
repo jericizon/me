@@ -1,29 +1,19 @@
-<template>
-  <div>
-    <!-- Fixed vertical nav (desktop) + mobile nav handled in component -->
-    <NavMenu />
-    
-    <SectionsBanner />
-    <SectionsAboutMe />
-    <SectionsServices />
-    <SectionsProjects />
-    <SectionsHowIWork />
-    <SectionsResume />
-    <SectionsTools />
-    <SectionsCTA />
-    <SectionsContact />
-    <Footer />
-  </div>
-</template>
-
 <script setup lang="ts">
 useSeoMeta({
-  title: 'Jeric Izon | Senior Full Stack Engineer for SaaS & Startups',
-  description: 'Senior Full Stack Engineer with 10+ years experience building production SaaS platforms, admin dashboards, and scalable systems. Available for select projects.',
-  ogTitle: 'Jeric Izon | Senior Full Stack Engineer for SaaS & Startups',
-  ogDescription: 'I help startups and scale-ups build revenue-generating systems. 10+ years shipping production SaaS platforms, APIs, and dashboards.',
-  twitterTitle: 'Jeric Izon | Senior Full Stack Engineer for SaaS & Startups',
-  twitterDescription: 'Systems builder for serious founders. SaaS platforms, admin dashboards, and scalable APIs that drive business growth.',
+  title: 'Jeric Izon - Senior Full-Stack Engineer',
+  description:
+    'Jeric Izon is a senior full-stack engineer specializing in Laravel, Vue/Nuxt, NestJS, AWS and production web systems.',
+  ogTitle: 'Jeric Izon - Senior Full-Stack Engineer',
+  ogDescription:
+    'Building production web systems from architecture to deployment.',
+  ogType: 'website',
+  ogUrl: 'https://jericizon.github.io/me/',
+  ogImage: 'https://jericizon.github.io/me/images/banner.png',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Jeric Izon - Senior Full-Stack Engineer',
+  twitterDescription:
+    'Building production web systems from architecture to deployment.',
+  twitterImage: 'https://jericizon.github.io/me/images/banner.png',
 })
 
 useHead({
@@ -32,13 +22,52 @@ useHead({
       type: 'application/ld+json',
       innerHTML: JSON.stringify({
         '@context': 'https://schema.org',
-        '@type': 'WebPage',
-        name: 'Senior Full Stack Engineer for SaaS & Startup Systems',
-        url: 'https://jericizon.github.io/me/',
-        description: 'Senior Full Stack Engineer specializing in SaaS platforms, admin dashboards, and scalable API systems for startups and growth-stage companies.',
-        about: ['Full Stack Engineer', 'SaaS Development', 'System Architecture', 'Startup Engineering', 'API Development']
-      })
-    }
-  ]
+        '@graph': [
+          {
+            '@type': 'Person',
+            name: 'Jeric Izon',
+            jobTitle: 'Senior Full-Stack Engineer',
+            url: 'https://jericizon.github.io/me/',
+            image: 'https://jericizon.github.io/me/images/about.jpg',
+            description:
+              'Senior full-stack engineer specializing in Laravel, Vue/Nuxt, NestJS, AWS and production web systems.',
+            knowsAbout: [
+              'Laravel',
+              'Vue.js',
+              'Nuxt',
+              'NestJS',
+              'AWS',
+              'PostgreSQL',
+              'System Architecture',
+            ],
+            sameAs: [
+              'https://github.com/jericizon',
+              'https://www.linkedin.com/in/jericizon',
+            ],
+          },
+          {
+            '@type': 'WebSite',
+            name: 'Jeric Izon - Senior Full-Stack Engineer',
+            url: 'https://jericizon.github.io/me/',
+          },
+        ],
+      }),
+    },
+  ],
 })
 </script>
+
+<template>
+  <div>
+    <HeroSection />
+    <ProofMetrics />
+    <SelectedWork />
+    <WhatIBuild />
+    <EngineeringPhilosophy />
+    <ExperienceTimeline />
+    <TechStackMatrix />
+    <AIWorkflowSection />
+    <AboutSection />
+    <ContactSection />
+  </div>
+</template>
