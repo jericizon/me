@@ -1,58 +1,60 @@
 // Global base styles - dark-only design foundation (spec Section 2)
 
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 80px;
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+  }
 
-body {
-  @apply min-h-screen antialiased;
-  background-color: #0a0a0a;
-  color: #a1a1aa;
-  font-family: 'Inter', system-ui, sans-serif;
-}
+  body {
+    @apply min-h-screen antialiased;
+    background-color: #0a0a0a;
+    color: #a1a1aa;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
 
-// Selection highlight
-::selection {
-  background-color: rgba(163, 230, 53, 0.2);
-  color: #a3e635;
-}
+  // Selection highlight
+  ::selection {
+    background-color: rgba(163, 230, 53, 0.2);
+    color: #a3e635;
+  }
 
-// Custom scrollbar
-::-webkit-scrollbar {
-  width: 6px;
-}
+  // Custom scrollbar
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
 
-::-webkit-scrollbar-track {
-  background: #0a0a0a;
-}
+  ::-webkit-scrollbar-track {
+    background: #0a0a0a;
+  }
 
-::-webkit-scrollbar-thumb {
-  background: #27272a;
-  border-radius: 3px;
-}
+  ::-webkit-scrollbar-thumb {
+    background: #27272a;
+    border-radius: 3px;
+  }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #71717a;
-}
+  ::-webkit-scrollbar-thumb:hover {
+    background: #71717a;
+  }
 
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #27272a #0a0a0a;
-}
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #27272a #0a0a0a;
+  }
 
-// Keyboard focus ring
-:focus-visible {
-  outline: 2px solid #a3e635;
-  outline-offset: 2px;
-}
+  // Keyboard focus ring
+  :focus-visible {
+    outline: 2px solid #a3e635;
+    outline-offset: 2px;
+  }
 
-// Reduced motion
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+  // Reduced motion
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }

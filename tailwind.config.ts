@@ -15,9 +15,13 @@ export default {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace']
       },
+      // Scoped to backgroundColor so `bg-base` works without colliding
+      // with the built-in `text-base` font-size utility
+      backgroundColor: {
+        base: '#0A0A0A',
+      },
       colors: {
         // Dark-only palette (spec Section 2.2)
-        base: '#0A0A0A',
         surface: {
           DEFAULT: '#111111',
           elevated: '#171717',
