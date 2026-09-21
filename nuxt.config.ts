@@ -77,7 +77,7 @@ export default defineNuxtConfig({
     classSuffix: '',
     preference: 'light',
     fallback: 'light',
-    storageKey: 'nuxt-color-mode'
+    storageKey: 'me-theme'
   },
   googleFonts: {
     families: {
