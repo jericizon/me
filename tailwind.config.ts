@@ -36,6 +36,8 @@ export default {
           DEFAULT: '#A3E635',
           dim: 'rgba(163, 230, 53, 0.12)',
         },
+        // Text/icons sitting on accent fills
+        ink: '#0A0A0A',
       },
       animation: {
         'fade-in': 'fadeIn 0.8s ease-out forwards',
