@@ -1,7 +1,4 @@
 <script setup lang="ts">
-const RESUME_URL =
-  'https://drive.google.com/file/d/1Ap6DL7NR7G9-ZzfFGag_CEcJ5hvutAcC/view?usp=sharing'
-
 const links = [
   { label: 'Work', href: '#work' },
   { label: 'Engineering', href: '#engineering' },
@@ -75,15 +72,13 @@ onBeforeUnmount(() => {
         >
           GitHub
         </a>
-        <a
-          :href="RESUME_URL"
-          target="_blank"
-          rel="noopener noreferrer"
+        <NuxtLink
+          to="/resume"
           class="inline-flex items-center gap-1.5 text-sm text-text-secondary transition-colors hover:text-text-primary"
         >
           Resume
-          <Icon name="tabler:download" class="h-4 w-4" aria-hidden="true" />
-        </a>
+          <Icon name="tabler:file-text" class="h-4 w-4" aria-hidden="true" />
+        </NuxtLink>
         <BaseButton href="#contact" variant="primary">Let's Talk</BaseButton>
       </div>
 
@@ -136,15 +131,14 @@ onBeforeUnmount(() => {
             >
               GitHub
             </a>
-            <a
-              :href="RESUME_URL"
-              target="_blank"
-              rel="noopener noreferrer"
+            <NuxtLink
+              to="/resume"
               class="inline-flex min-h-[44px] items-center gap-1.5 text-sm text-text-secondary"
+              @click="close"
             >
               Resume
-              <Icon name="tabler:download" class="h-4 w-4" aria-hidden="true" />
-            </a>
+              <Icon name="tabler:file-text" class="h-4 w-4" aria-hidden="true" />
+            </NuxtLink>
           </div>
         </div>
       </nav>

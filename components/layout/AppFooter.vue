@@ -12,9 +12,9 @@ const year = new Date().getFullYear()
           <span class="font-display text-sm font-bold tracking-tight text-text-primary">
             JERIC IZON
           </span>
-          <span class="text-sm text-text-secondary">Senior Full-Stack Engineer</span>
+          <span class="text-sm text-text-secondary">Senior AI &amp; Full-Stack Engineer</span>
           <span class="font-mono text-xs tracking-wide text-text-muted">
-            Laravel - Vue/Nuxt - NestJS - AWS
+            Laravel - Node.js - NestJS - Vue/Nuxt - AWS
           </span>
         </div>
 
@@ -38,6 +38,14 @@ const year = new Date().getFullYear()
             >
               LinkedIn
             </a>
+          </li>
+          <li>
+            <NuxtLink
+              to="/resume"
+              class="text-sm text-text-secondary transition-colors hover:text-text-primary"
+            >
+              Resume
+            </NuxtLink>
           </li>
           <li>
             <a

@@ -11,7 +11,7 @@ export const resumeData: ResumeData = {
     email: 'im.jericizon@gmail.com',
     portfolioUrl: 'https://jericizon.github.io/me/',
     githubUrl: 'https://github.com/jericizon',
-    linkedinUrl: 'https://www.linkedin.com/in/jeric-izon/',
+    linkedinUrl: 'https://www.linkedin.com/in/jericizon',
   },
   summary:
     'Senior AI & Full-Stack Engineer with 10+ years of professional software engineering experience, including 10+ years architecting enterprise Laravel/PHP systems, 7+ years building reactive Vue/Nuxt applications, and extensive production experience developing AI agents, LLM integrations, and automated SaaS pipelines.\n\nDemonstrated expertise owning distributed architectures, REST APIs, asynchronous media processing pipelines (FFmpeg, WebSockets, Redis), and cloud infrastructure across AWS (EC2, RDS, Lambda, S3, Docker). Proven history driving high-availability systems with 99.9% uptime for Australia, Singapore, and US tech companies in fast-paced, asynchronous remote environments. Passionate about leveraging autonomous AI agents and workflow automation to eliminate operational friction and accelerate engineering velocity.',
