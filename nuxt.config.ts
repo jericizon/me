@@ -101,6 +101,7 @@ export default defineNuxtConfig({
       crawlLinks: true,
       routes: [
         '/',
+        '/resume',
         '/services/custom-website-development',
         '/hire-freelance-web-developer'
       ]
