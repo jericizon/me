@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const RESUME_URL =
-  'https://drive.google.com/file/d/1Ap6DL7NR7G9-ZzfFGag_CEcJ5hvutAcC/view?usp=sharing'
 const EMAIL_URL =
   'mailto:im.jericizon@gmail.com?subject=Senior%20Full-Stack%20Engineering%20Opportunity'
 
@@ -53,7 +51,7 @@ const { trackEvent } = useAnalytics()
             GitHub
           </BaseButton>
           <BaseButton
-            :href="RESUME_URL"
+            href="/me/jeric-izon-resume.pdf"
             external
             variant="ghost"
             @click="trackEvent('download_cv', { section: 'contact' })"
