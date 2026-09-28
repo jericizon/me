@@ -11,7 +11,7 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: 'en'
       },
-      title: 'Jeric Izon - Senior Full-Stack Engineer',
+      title: 'Jeric Izon - Senior AI & Full-Stack Engineer',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -19,23 +19,23 @@ export default defineNuxtConfig({
         { name: 'robots', content: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' },
 
         // Primary Meta Tags
-        { name: 'title', content: 'Jeric Izon - Senior Full-Stack Engineer' },
-        { name: 'description', content: 'Jeric Izon is a senior full-stack engineer specializing in Laravel, Vue/Nuxt, NestJS, AWS and production web systems.' },
+        { name: 'title', content: 'Jeric Izon - Senior AI & Full-Stack Engineer' },
+        { name: 'description', content: 'Jeric Izon is a senior AI and full-stack engineer specializing in Laravel, Vue/Nuxt, NestJS, AWS, AI agents, and production SaaS systems.' },
         { name: 'author', content: 'Jeric Izon' },
-        { name: 'keywords', content: 'senior full-stack engineer, laravel, vue, nuxt, nestjs, aws, postgresql, production web systems, backend architecture' },
+        { name: 'keywords', content: 'senior full-stack engineer, ai engineer, laravel, vue, nuxt, nestjs, aws, postgresql, ai agents, llm integration, ai engineering, production web systems, backend architecture' },
         { name: 'google-site-verification', content: 'kmTBng2HLaFg6QEQSMBmOAhOa8Ger8VtzcQsgLhURPU' },
 
         // Open Graph / Facebook
         { property: 'og:type', content: 'website' },
         { property: 'og:url', content: 'https://jericizon.github.io/me/' },
-        { property: 'og:title', content: 'Jeric Izon - Senior Full-Stack Engineer' },
+        { property: 'og:title', content: 'Jeric Izon - Senior AI & Full-Stack Engineer' },
         { property: 'og:description', content: 'Building production web systems from architecture to deployment.' },
         { property: 'og:image', content: 'https://jericizon.github.io/me/images/banner.png' },
 
         // Twitter
         { property: 'twitter:card', content: 'summary_large_image' },
         { property: 'twitter:url', content: 'https://jericizon.github.io/me/' },
-        { property: 'twitter:title', content: 'Jeric Izon - Senior Full-Stack Engineer' },
+        { property: 'twitter:title', content: 'Jeric Izon - Senior AI & Full-Stack Engineer' },
         { property: 'twitter:description', content: 'Building production web systems from architecture to deployment.' },
         { property: 'twitter:image', content: 'https://jericizon.github.io/me/images/banner.png' },
 

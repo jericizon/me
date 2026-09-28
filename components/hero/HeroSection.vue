@@ -15,7 +15,7 @@ const stack = ['Laravel', 'Vue / Nuxt', 'NestJS', 'AWS']
           :enter="{ opacity: 1, y: 0, transition: { duration: 500 } }"
           class="font-mono text-xs uppercase tracking-widest text-accent"
         >
-          Senior Full-Stack Engineer
+          Senior AI & Full-Stack Engineer
         </p>
 
         <h1

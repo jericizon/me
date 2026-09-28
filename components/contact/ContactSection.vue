@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const EMAIL_URL =
-  'mailto:im.jericizon@gmail.com?subject=Senior%20Full-Stack%20Engineering%20Opportunity'
+  'mailto:im.jericizon@gmail.com?subject=Senior%20AI%20%26%20Full-Stack%20Engineering%20Opportunity'
 
 const { trackEvent } = useAnalytics()
 </script>
