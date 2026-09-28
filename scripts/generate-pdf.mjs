@@ -8,9 +8,12 @@ import {
   createReadStream,
   existsSync,
   mkdirSync,
+  mkdtempSync,
+  rmSync,
   statSync
 } from 'node:fs'
-import { extname, join, normalize } from 'node:path'
+import { tmpdir } from 'node:os'
+import { extname, join, normalize, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
@@ -73,7 +76,7 @@ const main = async () => {
     else if (path.startsWith('/me/')) path = path.slice(3)
     if (path.endsWith('/')) path += 'index.html'
     const file = normalize(join(outDir, path))
-    if (!file.startsWith(outDir) || !statSync(file, { throwIfNoEntry: false })?.isFile()) {
+    if (!file.startsWith(outDir + sep) || !statSync(file, { throwIfNoEntry: false })?.isFile()) {
       res.writeHead(404)
       res.end('not found')
       return
@@ -87,19 +90,28 @@ const main = async () => {
   mkdirSync(join(root, 'public'), { recursive: true })
 
   // spawn must stay async: spawnSync would freeze the server above and deadlock Chrome
+  const profileDir = mkdtempSync(join(tmpdir(), 'chrome-pdf-'))
   const print = headlessFlag => new Promise(done => {
     const child = spawn(chrome, [
       headlessFlag,
       '--disable-gpu',
+      '--no-first-run',
+      `--user-data-dir=${profileDir}`,
       '--no-pdf-header-footer',
       '--virtual-time-budget=10000',
       `--print-to-pdf=${pdfPath}`,
       url
     ], { stdio: ['ignore', 'ignore', 'pipe'] })
     let stderr = ''
+    let timedOut = false
+    // virtual-time-budget bounds virtual time only; cap wall-clock so a hung browser cannot wedge the script
+    const timer = setTimeout(() => {
+      timedOut = true
+      child.kill('SIGKILL')
+    }, 60_000)
     child.stderr.on('data', chunk => { stderr += chunk })
-    child.on('error', err => done({ status: -1, stderr: String(err) }))
-    child.on('close', status => done({ status, stderr }))
+    child.on('error', err => { clearTimeout(timer); done({ status: -1, timedOut, stderr: String(err) }) })
+    child.on('close', status => { clearTimeout(timer); done({ status, timedOut, stderr }) })
   })
 
   let result = await print('--headless=new')
@@ -107,10 +119,12 @@ const main = async () => {
     result = await print('--headless') // older Chrome lacks --headless=new
   }
   server.close()
+  rmSync(profileDir, { recursive: true, force: true })
 
   const size = existsSync(pdfPath) ? statSync(pdfPath).size : 0
   if (result.status !== 0 || size < MIN_PDF_BYTES) {
-    console.error(`PDF export failed (exit ${result.status}, ${size} bytes).\n${(result.stderr || '').trim()}`)
+    const reason = result.timedOut ? 'timed out after 60s' : `exit ${result.status}`
+    console.error(`PDF export failed (${reason}, ${size} bytes).\n${(result.stderr || '').trim()}`)
     process.exit(1)
   }
   console.log(`Wrote public/jeric-izon-resume.pdf (${(size / 1024).toFixed(1)} KB)`)
