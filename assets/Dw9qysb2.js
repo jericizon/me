@@ -1,0 +1,1 @@
+const n="aW0uamVyaWNpem9uQGdtYWlsLmNvbQ==",a="KzYzIDk3MCAyMTUgMTU5Mg==",t=o=>typeof atob=="function"?atob(o):Buffer.from(o,"base64").toString(),c=()=>t(n),s=()=>t(a),e=o=>`mailto:${t(n)}${o?`?subject=${encodeURIComponent(o)}`:""}`;export{s as a,c as b,e as c};
