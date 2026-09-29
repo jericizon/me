@@ -1,10 +1,10 @@
 <script setup lang="ts">
 const links = [
-  { label: 'Work', href: '#work' },
-  { label: 'Engineering', href: '#engineering' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'About', href: '#about' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Work', to: '/#work' },
+  { label: 'Engineering', to: '/#engineering' },
+  { label: 'Experience', to: '/#experience' },
+  { label: 'About', to: '/#about' },
+  { label: 'Contact', to: '/#contact' },
 ]
 
 const isOpen = ref(false)
@@ -40,25 +40,25 @@ onBeforeUnmount(() => {
       aria-label="Primary"
     >
       <div class="flex items-center gap-3">
-        <a
-          href="#top"
+        <NuxtLink
+          to="/"
           class="font-display text-sm font-bold tracking-tight text-text-primary"
         >
           JERIC IZON
-        </a>
+        </NuxtLink>
         <BaseBadge variant="outline" dot class="hidden sm:inline-flex">
           Available
         </BaseBadge>
       </div>
 
       <ul class="hidden items-center gap-6 md:flex">
-        <li v-for="link in links" :key="link.href">
-          <a
-            :href="link.href"
+        <li v-for="link in links" :key="link.to">
+          <NuxtLink
+            :to="link.to"
             class="text-sm text-text-secondary transition-colors hover:text-text-primary"
           >
             {{ link.label }}
-          </a>
+          </NuxtLink>
         </li>
       </ul>
 
@@ -79,7 +79,7 @@ onBeforeUnmount(() => {
           Resume
           <Icon name="tabler:file-text" class="h-4 w-4" aria-hidden="true" />
         </NuxtLink>
-        <BaseButton href="#contact" variant="primary">Let's Talk</BaseButton>
+        <BaseButton to="/#contact" variant="primary">Let's Talk</BaseButton>
       </div>
 
       <div class="flex items-center md:hidden">
@@ -108,18 +108,18 @@ onBeforeUnmount(() => {
     >
       <nav aria-label="Mobile">
         <ul class="flex flex-col px-4 py-6 sm:px-6">
-          <li v-for="link in links" :key="link.href">
-            <a
-              :href="link.href"
+          <li v-for="link in links" :key="link.to">
+            <NuxtLink
+              :to="link.to"
               class="flex min-h-[44px] items-center border-b border-surface-border/60 py-3 font-display text-lg text-text-primary"
               @click="close"
             >
               {{ link.label }}
-            </a>
+            </NuxtLink>
           </li>
         </ul>
         <div class="flex flex-col gap-3 px-4 pt-4 sm:px-6">
-          <BaseButton href="#contact" variant="primary" @click="close">
+          <BaseButton to="/#contact" variant="primary" @click="close">
             Let's Talk
           </BaseButton>
           <div class="flex items-center gap-6 pt-2">

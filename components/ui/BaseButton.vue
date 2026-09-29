@@ -2,12 +2,14 @@
 const props = withDefaults(defineProps<{
   variant?: 'primary' | 'secondary' | 'ghost'
   href?: string
+  to?: string
   external?: boolean
   type?: 'button' | 'submit' | 'reset'
   ariaLabel?: string
 }>(), {
   variant: 'primary',
   href: undefined,
+  to: undefined,
   external: false,
   type: 'button',
   ariaLabel: undefined,
@@ -29,8 +31,16 @@ const linkAttrs = computed(() =>
 </script>
 
 <template>
+  <NuxtLink
+    v-if="props.to"
+    :to="props.to"
+    :class="[baseClasses, variantClasses[props.variant]]"
+    :aria-label="props.ariaLabel"
+  >
+    <slot />
+  </NuxtLink>
   <a
-    v-if="props.href"
+    v-else-if="props.href"
     :href="props.href"
     :class="[baseClasses, variantClasses[props.variant]]"
     :aria-label="props.ariaLabel"

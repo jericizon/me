@@ -49,10 +49,10 @@ const stack = ['Laravel', 'Vue / Nuxt', 'NestJS', 'AWS']
           </ul>
 
           <div class="flex flex-wrap items-center gap-3">
-            <BaseButton href="#work" variant="primary">
+            <BaseButton to="/#work" variant="primary">
               View selected work
             </BaseButton>
-            <BaseButton href="#contact" variant="secondary">
+            <BaseButton to="/#contact" variant="secondary">
               Let's talk
             </BaseButton>
           </div>
