@@ -7,8 +7,6 @@ export const resumeData: ResumeData = {
     headline:
       'Laravel • Node.js • NestJS • Vue/Nuxt • AWS | AI Agents • LLMs • Automation | SaaS',
     location: 'Santa Rosa, Laguna, Philippines',
-    phone: '+63 970 215 1592',
-    email: 'im.jericizon@gmail.com',
     portfolioUrl: 'https://jericizon.github.io/me/',
     githubUrl: 'https://github.com/jericizon',
     linkedinUrl: 'https://www.linkedin.com/in/jericizon',

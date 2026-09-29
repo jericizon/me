@@ -3,8 +3,6 @@ export interface ResumeHeader {
   roleTitle: string
   headline: string
   location: string
-  phone: string
-  email: string
   portfolioUrl: string
   githubUrl: string
   linkedinUrl: string

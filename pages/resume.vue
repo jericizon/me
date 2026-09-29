@@ -4,7 +4,6 @@ import type { ResumeData } from '~/types/resume'
 
 const { header } = resumeData
 const summaryParagraphs = resumeData.summary.split('\n\n')
-const telHref = `tel:${header.phone.replace(/\s/g, '')}`
 
 // Derive a machine-readable start date ("April 2024" -> "2024-04") for <time datetime>
 const MONTHS: Record<string, string> = {
@@ -69,7 +68,7 @@ const formatResumePlaintext = (data: ResumeData): string => {
       header.name,
       header.roleTitle,
       header.headline,
-      `${header.location} | ${header.phone} | ${header.email}`,
+      `${header.location} | ${contactPhone()} | ${contactEmail()}`,
       `Portfolio: ${header.portfolioUrl}`,
       `GitHub: ${header.githubUrl}`,
       `LinkedIn: ${header.linkedinUrl}`,
@@ -206,16 +205,22 @@ const printResume = () => {
         {{ header.headline }}
       </p>
       <p class="resume-contact mt-5 text-sm text-text-muted">
-        {{ header.location }} ·
-        <a
-          :href="telHref"
-          class="text-text-secondary underline underline-offset-2 transition-colors hover:text-accent"
-        >{{ header.phone }}</a>
-        ·
-        <a
-          :href="`mailto:${header.email}`"
-          class="text-text-secondary underline underline-offset-2 transition-colors hover:text-accent"
-        >{{ header.email }}</a>
+        {{ header.location }}
+        <ClientOnly>
+          ·
+          <a
+            :href="`tel:${contactPhone().replace(/\s/g, '')}`"
+            class="text-text-secondary underline underline-offset-2 transition-colors hover:text-accent"
+          >{{ contactPhone() }}</a>
+          ·
+          <a
+            :href="contactMailto()"
+            class="text-text-secondary underline underline-offset-2 transition-colors hover:text-accent"
+          >{{ contactEmail() }}</a>
+          <template #fallback>
+            · Email and phone are included in the PDF resume.
+          </template>
+        </ClientOnly>
       </p>
       <p class="resume-links mt-3 text-sm">
         <a

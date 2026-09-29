@@ -1,6 +1,8 @@
 <script setup lang="ts">
-const EMAIL_URL =
-  'mailto:im.jericizon@gmail.com?subject=Senior%20AI%20%26%20Full-Stack%20Engineering%20Opportunity'
+const emailHref = ref<string>()
+onMounted(() => {
+  emailHref.value = contactMailto('Senior AI & Full-Stack Engineering Opportunity')
+})
 
 const { trackEvent } = useAnalytics()
 </script>
@@ -29,7 +31,7 @@ const { trackEvent } = useAnalytics()
 
         <div class="flex flex-wrap items-center gap-3 pt-2">
           <BaseButton
-            :href="EMAIL_URL"
+            :href="emailHref"
             variant="primary"
             @click="trackEvent('contact_email_click', { section: 'contact' })"
           >

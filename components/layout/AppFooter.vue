@@ -1,5 +1,10 @@
 <script setup lang="ts">
 const year = new Date().getFullYear()
+
+const emailHref = ref<string>()
+onMounted(() => {
+  emailHref.value = contactMailto()
+})
 </script>
 
 <template>
@@ -49,7 +54,7 @@ const year = new Date().getFullYear()
           </li>
           <li>
             <a
-              href="mailto:im.jericizon@gmail.com"
+              :href="emailHref"
               class="text-sm text-text-secondary transition-colors hover:text-text-primary"
             >
               Email
