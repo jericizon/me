@@ -42,14 +42,10 @@ A modern, responsive portfolio website built with Nuxt 3, Vue.js, and Tailwind C
 
 ## Setup
 
-Make sure to install the dependencies:
+This project strictly uses [pnpm](https://pnpm.io/) as its package manager (enforced via `preinstall`).
 
 ```bash
-# Using yarn (recommended)
-yarn install
-
-# Using npm
-npm install
+pnpm install
 ```
 
 ## Development
@@ -57,11 +53,7 @@ npm install
 Start the development server on `http://localhost:3000`:
 
 ```bash
-# Using yarn
-yarn dev
-
-# Using npm
-npm run dev
+pnpm dev
 ```
 
 ## Production
@@ -69,27 +61,22 @@ npm run dev
 Build the application for production:
 
 ```bash
-# Using yarn
-yarn generate
-
-# Using npm
-npm run generate
+pnpm generate
 ```
 
 This will generate a static version of the site in the `.output/public` directory.
 
 ## Deployment
 
-The portfolio is configured for GitHub Pages deployment using GitHub Actions. When you push to the main branch, the site will automatically build and deploy.
+Deploy to GitHub Pages with:
 
-The deployment workflow is defined in `.github/workflows/deploy.yml`.
+```bash
+pnpm run deploy
+```
 
-### Manual Deployment
+(Use `run` — bare `pnpm deploy` is a built-in pnpm workspace command.)
 
-You can also deploy manually:
-
-1. Generate the static site: `yarn generate`
-2. Deploy the `.output/public` directory to your hosting provider
+This generates the static site, rebuilds the resume PDF from the fresh build (`scripts/generate-pdf.mjs` via headless Chrome), copies it into `.output/public`, and publishes that directory to the `gh-pages` branch. The PDF is regenerated on every deploy, so content changes never ship with a stale resume.
 
 ## Customization
 

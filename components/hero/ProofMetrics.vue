@@ -1,9 +1,9 @@
 <script setup lang="ts">
 const metrics = [
-  { value: '10+', label: 'Years Engineering' },
-  { value: '10+', label: 'Years Laravel' },
-  { value: '7+', label: 'Years Vue / Nuxt' },
-  { value: '10k+', label: 'Product Users', footnote: true },
+  { value: `${yearsSince(CAREER_START)}+`, label: 'Years Engineering' },
+  { value: `${yearsSince(LARAVEL_START)}+`, label: 'Years Laravel' },
+  { value: `${yearsSince(VUE_START)}+`, label: 'Years Vue / Nuxt' },
+  { value: '26k+', label: 'Product Users' },
 ]
 </script>
 
@@ -21,16 +21,13 @@ const metrics = [
           <dd
             class="order-first font-display text-4xl font-bold tracking-tight text-text-primary"
           >
-            {{ metric.value }}<span v-if="metric.footnote" class="text-accent">*</span>
+            {{ metric.value }}
           </dd>
           <dt class="font-mono text-xs uppercase tracking-widest text-text-muted">
             {{ metric.label }}
           </dt>
         </div>
       </dl>
-      <p class="py-4 font-mono text-xs text-text-muted">
-        * ExpresswayPH peak 15-day holiday surge
-      </p>
     </AppContainer>
   </section>
 </template>

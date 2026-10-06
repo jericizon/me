@@ -1,10 +1,12 @@
 // Exports the prerendered /resume page to public/jeric-izon-resume.pdf via headless Chrome.
 // Serves .output/public on an ephemeral port so absolute /me/ asset URLs resolve.
+// Requires pnpm (the project's package manager) when a prerender must be built first.
 import { spawn, spawnSync } from 'node:child_process'
 import { createServer } from 'node:http'
 import {
   accessSync,
   constants,
+  copyFileSync,
   createReadStream,
   existsSync,
   mkdirSync,
@@ -53,10 +55,10 @@ const mime = {
 
 const main = async () => {
   if (!existsSync(resumeHtml)) {
-    console.log('Prerendered resume missing, running `npm run generate`...')
-    const gen = spawnSync('npm', ['run', 'generate'], { cwd: root, stdio: 'inherit' })
+    console.log('Prerendered resume missing, running `pnpm run generate`...')
+    const gen = spawnSync('pnpm', ['run', 'generate'], { cwd: root, stdio: 'inherit' })
     if (gen.status !== 0 || !existsSync(resumeHtml)) {
-      console.error('Static build failed. Run `npm run generate` manually and retry.')
+      console.error('Static build failed. Run `pnpm run generate` manually and retry.')
       process.exit(1)
     }
   }
@@ -127,6 +129,8 @@ const main = async () => {
     console.error(`PDF export failed (${reason}, ${size} bytes).\n${(result.stderr || '').trim()}`)
     process.exit(1)
   }
+  // Refresh the copy inside the generated site so deploys never ship a stale PDF
+  copyFileSync(pdfPath, join(outDir, 'jeric-izon-resume.pdf'))
   console.log(`Wrote public/jeric-izon-resume.pdf (${(size / 1024).toFixed(1)} KB)`)
 }
 

@@ -12,7 +12,7 @@ import { buildPillars } from '~/data/skills'
       <SectionHeader
         eyebrow="Capabilities"
         title="What I Build"
-        subtitle="End-to-end engineering across product, backend, frontend, data and quality."
+        subtitle="End-to-end engineering across product, backend, frontend, data, quality and AI."
       />
 
       <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

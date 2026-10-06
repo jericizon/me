@@ -2,8 +2,16 @@ import type { BuildPillar, SkillGroup } from '~/types/content'
 
 export const buildPillars: BuildPillar[] = [
   {
-    id: 'product-engineering',
+    id: 'ai-engineering',
     index: '01',
+    title: 'AI Engineering',
+    description:
+      'Working with AI agents and coding assistants to accelerate development, turning around features faster while raising the quality bar through generated tests, reviews and automation.',
+    stack: ['Claude Code', 'OpenAI Codex', 'MCP', 'Agentic Workflows', 'LLM Integration'],
+  },
+  {
+    id: 'product-engineering',
+    index: '02',
     title: 'Product Engineering',
     description:
       'Turning complex business requirements into production-ready web applications.',
@@ -11,7 +19,7 @@ export const buildPillars: BuildPillar[] = [
   },
   {
     id: 'backend-apis',
-    index: '02',
+    index: '03',
     title: 'Backend & APIs',
     description:
       'Scalable REST APIs, authentication and authorization, third-party integrations, webhook handling and data integrity.',
@@ -19,7 +27,7 @@ export const buildPillars: BuildPillar[] = [
   },
   {
     id: 'frontend',
-    index: '03',
+    index: '04',
     title: 'Frontend Engineering',
     description:
       'High-performance, responsive interfaces for dashboards, internal tools and client-facing platforms.',
@@ -27,7 +35,7 @@ export const buildPillars: BuildPillar[] = [
   },
   {
     id: 'data-infrastructure',
-    index: '04',
+    index: '05',
     title: 'Data & Cloud Infrastructure',
     description:
       'Reliable architectures designed to run smoothly beyond the local development environment.',
@@ -35,7 +43,7 @@ export const buildPillars: BuildPillar[] = [
   },
   {
     id: 'engineering-quality',
-    index: '05',
+    index: '06',
     title: 'Engineering Quality',
     description:
       'Maintainable codebases backed by automated testing, security reviews and observability.',

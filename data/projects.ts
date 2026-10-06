@@ -10,13 +10,13 @@ export const projects: Project[] = [
     year: '2025',
     description:
       'Production web platform for Philippine expressway travelers with route calculation and real-time toll estimation.',
-    stack: ['Nuxt', 'Cloudflare', 'Dynamic Toll APIs', 'Plausible Analytics'],
+    stack: ['Nuxt', 'Cloudflare', 'Dynamic Toll APIs', 'Google Analytics'],
     metric: {
-      value: '10k+',
-      label: 'active users in 15 days',
-      footnote: 'ExpresswayPH peak 15-day holiday surge',
+      value: '26k+',
+      label: 'peak monthly active users',
     },
     image: '/images/projects/expresswayph.webp',
+    gallery: ['/images/projects/expresswayph-analytics.webp'],
     liveUrl: 'https://expresswayph.com',
     architecture: [
       { id: 'client', label: 'Traveler', description: 'Mobile / Web' },
@@ -51,7 +51,8 @@ export const projects: Project[] = [
         },
       ],
       outcomes: [
-        '10k+ active users over a 15-day holiday window',
+        '26K monthly active users at peak (February 2026, Google Analytics)',
+        '30.7% bounce rate, outperforming the Traffic & Route Planners peer median',
         '99.9% uptime during nationwide holiday travel surges',
       ],
     },
@@ -111,15 +112,11 @@ export const projects: Project[] = [
     id: 'alaganow',
     slug: 'alaganow',
     title: 'AlagaNow',
-    positioning: 'Pet Service Booking Platform',
-    year: '2024',
+    positioning: 'Pet Service Booking Platform · In Development',
+    year: '2024 - Present',
     description:
-      'Dual-sided marketplace connecting pet owners with verified providers for grooming, boarding, consultations and vaccinations.',
+      'Dual-sided marketplace in active development, connecting pet owners with verified providers for grooming, boarding, consultations and vaccinations.',
     stack: ['Vue / Nuxt', 'Node.js / Laravel', 'PostgreSQL', 'Tailwind CSS', 'Cloudflare'],
-    metric: {
-      value: '10k+',
-      label: 'care sessions facilitated',
-    },
     image: '/images/projects/alaganow.webp',
     liveUrl: 'https://alaganow.pages.dev',
     architecture: [
@@ -156,8 +153,7 @@ export const projects: Project[] = [
         },
       ],
       outcomes: [
-        '10,000+ care sessions facilitated',
-        '90% reduction in provider scheduling overhead',
+        'In active development (pre-launch, no public users yet)',
       ],
     },
   },
@@ -170,6 +166,8 @@ export const projects: Project[] = [
     description:
       'Open-access civic data portal making municipal budgets, public information and project records searchable and understandable.',
     stack: ['Nuxt', 'TypeScript', 'Tailwind CSS', 'Structured JSON-LD'],
+    image: '/images/projects/better-santa-rosa.webp',
+    liveUrl: 'https://bettersantarosacity.pages.dev',
     architecture: [
       { id: 'src', label: 'Public Records', description: 'Budgets / Projects' },
       { id: 'etl', label: 'Data Engine', description: 'Structured Schemas' },
