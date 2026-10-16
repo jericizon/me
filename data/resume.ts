@@ -100,7 +100,7 @@ export const resumeData: ResumeData = {
   experience: [
     {
       id: 'cloudstaff',
-      role: 'Senior Laravel Developer',
+      role: 'Senior Software Engineer',
       company: 'Cloudstaff',
       location: 'Remote · Confidential Australian Client',
       period: 'April 2024 - Present',
@@ -112,18 +112,6 @@ export const resumeData: ResumeData = {
         'Apply AI-assisted engineering workflows (Claude Code, OpenAI Codex, MCP) to accelerate feature delivery, testing, and issue triage.',
       ],
       stack: ['Laravel', 'PHP', 'Vue.js', 'Next.js', 'Gatsby', 'AWS', 'Azure', 'Docker'],
-    },
-    {
-      id: 'expresswayph',
-      role: 'Founder & Lead Developer',
-      company: 'ExpresswayPH',
-      location: 'Philippines · Remote',
-      period: 'November 2025 - Present',
-      highlights: [
-        'Founded and solo-built a web platform that helps drivers navigate Philippine expressway exits, owning end-to-end delivery from system architecture and backend logic to frontend UI/UX and deployment.',
-        'Built for usability, performance, and real-world routing accuracy under local road conditions.',
-      ],
-      stack: ['Nuxt.js', 'Vue.js', 'Node.js', 'Tailwind CSS', 'Netlify', 'Docker'],
     },
     {
       id: 'imaginary-ones-bubio',

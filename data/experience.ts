@@ -3,7 +3,7 @@ import type { Experience } from '~/types/content'
 export const experiences: Experience[] = [
   {
     id: 'cloudstaff',
-    role: 'Senior Laravel Developer',
+    role: 'Senior Software Engineer',
     company: 'Cloudstaff',
     period: 'Apr 2024 - Present',
     summary:
@@ -15,19 +15,6 @@ export const experiences: Experience[] = [
       'Apply AI-assisted engineering workflows (Claude Code, Codex, MCP)',
     ],
     stack: ['Laravel', 'AWS', 'Azure', 'Vue.js', 'Gatsby'],
-  },
-  {
-    id: 'expresswayph',
-    role: 'Founder & Lead Developer',
-    company: 'ExpresswayPH',
-    period: 'Nov 2025 - Present',
-    summary:
-      'Web platform helping drivers navigate Philippine expressway exits, built end to end from architecture to deployment.',
-    highlights: [
-      'Solo-built the platform from system architecture and backend logic to frontend UI/UX and deployment',
-      'Focused on usability, performance, and real-world routing accuracy for local road conditions',
-    ],
-    stack: ['Nuxt.js', 'Vue.js', 'Node.js', 'Tailwind CSS', 'Netlify'],
   },
   {
     id: 'imaginary-ones',
